@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<simiklarnaadmin_adminhtml_simiklarna_index>
+		<reference name="content">
+			<block type="simiklarna/adminhtml_simiklarna" name="simiklarna" />
+		</reference>
+	</simiklarnaadmin_adminhtml_simiklarna_index>
+</layout>

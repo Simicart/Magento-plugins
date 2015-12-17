@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Simiipay88
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simiipay88>
+            <version>0.1.0</version>
+        </Simi_Simiipay88>
+    </modules>
+    <frontend>
+        <routers>
+            <simiipay88>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simiipay88</module>
+                    <frontName>simiipay88</frontName>
+                </args>
+            </simiipay88>
+        </routers>
+        <layout>
+            <updates>
+                <simiipay88>
+                    <file>simiipay88.xml</file>
+                </simiipay88>
+            </updates>
+        </layout>
+		<translate>
+            <modules>
+                <Simi_Simiipay88>
+                    <files>
+                        <default>Simi_Simiipay88.csv</default>
+                    </files>
+                </Simi_Simiipay88>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+			<simiipay88admin>
+				<use>admin</use>
+				<args>
+					<module>Simi_Simiipay88</module>
+					<frontName>simiipay88admin</frontName>
+				</args>
+			</simiipay88admin>
+        </routers>
+    </admin>
+    <adminhtml>
+		<layout>
+			<updates>
+				<simiipay88>
+					<file>simiipay88.xml</file>
+				</simiipay88>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <Simi_Simiipay88>
+                    <files>
+                        <default>Simi_Simiipay88.csv</default>
+                    </files>
+                </Simi_Simiipay88>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simiipay88>
+                <class>Simi_Simiipay88_Model</class>
+                <resourceModel>simiipay88_mysql4</resourceModel>
+            </simiipay88>
+            <simiipay88_mysql4>
+                <class>Simi_Simiipay88_Model_Mysql4</class>
+                <entities>
+                    <simiipay88>
+                        <table>simiipay88</table>
+                    </simiipay88>
+                </entities>
+            </simiipay88_mysql4>
+        </models>
+        <resources>
+            <simiipay88_setup>
+                <setup>
+                    <module>Simi_Simiipay88</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </simiipay88_setup>
+            <simiipay88_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </simiipay88_write>
+            <simiipay88_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </simiipay88_read>
+        </resources>
+        <blocks>
+            <simiipay88>
+                <class>Simi_Simiipay88_Block</class>
+            </simiipay88>
+        </blocks>
+        <helpers>
+            <simiipay88>
+                <class>Simi_Simiipay88_Helper</class>
+            </simiipay88>
+        </helpers>
+		<events>						
+			<payment_method_is_active>
+                <observers>
+                    <simiipay88_paypal_observers>
+                        <type>singleton</type>
+                        <class>simiipay88/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </simiipay88_paypal_observers>
+                </observers>
+            </payment_method_is_active>
+			<simicart_change_payment_detail>
+                <observers>
+                    <simiipay88_change_payment_detail>
+                        <type>singleton</type>
+                        <class>simiipay88/observer</class>
+                        <method>changePayment</method>
+                    </simiipay88_change_payment_detail>
+                </observers>
+            </simicart_change_payment_detail>
+			<simi_add_payment_method>
+				<observers>
+					<simiipay88_add_payment_method>
+						<class>simiipay88/observer</class>
+						<method>addPayment</method>
+					</simiipay88_add_payment_method>
+				</observers>
+            </simi_add_payment_method>
+			<simicart_after_place_order>
+                <observers>
+                    <simiipay88_after_place_order>
+                        <type>singleton</type>
+                        <class>simiipay88/observer</class>
+                        <method>afterPlaceOrder</method>
+                    </simiipay88_after_place_order>
+                </observers>
+            </simicart_after_place_order>
+      	</events>
+    </global>
+	<default>
+        <payment>             
+            <simiipay88>
+                <active>0</active>                  
+                <order_status>pending</order_status>       
+                <model>simiipay88/payment</model>     
+                <title>iPay88</title>
+                <allowspecific>0</allowspecific>
+                <merchant_key backend_model="adminhtml/system_config_backend_encrypted"/>                    
+                <merchant_code backend_model="adminhtml/system_config_backend_encrypted"/>
+                <is_sandbox>0</is_sandbox>           
+            </simiipay88>          
+        </payment>       
+    </default>
+</config>

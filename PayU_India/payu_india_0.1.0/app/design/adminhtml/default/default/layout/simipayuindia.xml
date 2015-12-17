@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<simipayuindiaadmin_adminhtml_simipayuindia_index>
+		<reference name="content">
+			<block type="simipayuindia/adminhtml_simipayuindia" name="simipayuindia" />
+		</reference>
+	</simipayuindiaadmin_adminhtml_simipayuindia_index>
+</layout>

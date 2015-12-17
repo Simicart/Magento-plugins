@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Simifblogin
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        <connector>
+            <children>
+                <simi_user_experience>
+                    <children>
+                        <simifblogin module="simifblogin" translate="title">
+                            <title>Facebook Connector</title>
+                            <sort_order>5</sort_order>
+                            <action>adminhtml/system_config/edit/section/simifblogin</action>
+                        </simifblogin>
+                    </children>
+                </simi_user_experience>
+            </children>
+        </connector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simifblogin module="simifblogin" translate="title">
+                                        <title>Facebook Login</title>
+                                        <sort_order>71</sort_order>
+                                    </simifblogin>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <connector>
+                        <children>
+                            <simi_user_experience>
+                                <children>
+                                    <simifblogin module="simifblogin" translate="title">
+                                        <title>Manage Items</title>
+                                        <sort_order>0</sort_order>
+                                    </simifblogin>
+                                    <settings module="simifblogin" translate="title">
+                                        <title>Settings</title>
+                                        <sort_order>1000</sort_order>
+                                    </settings>
+                                </children>
+                            </simi_user_experience>
+                        </children>
+                    </connector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

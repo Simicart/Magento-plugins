@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Simi_Simivideo
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        <connector>
+            <children>
+                <simi_rich_content>
+                    <children>
+                        <simivideo module="simivideo" translate="title">
+                            <title>Videos</title>
+                            <sort_order>200</sort_order>
+                            <action>simivideoadmin/adminhtml_Simivideo</action>
+                        </simivideo>
+                    </children>
+                </simi_rich_content>
+            </children>
+        </connector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simivideo module="simivideo" translate="title">
+                                        <title>Videos</title>
+                                        <sort_order>71</sort_order>
+                                    </simivideo>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <connector>
+                        <children>
+                            <simi_rich_content>
+                                <children>
+                                    <simivideo module="simivideo" translate="title">
+                                        <title>Videos</title>
+                                        <sort_order>200</sort_order>
+                                    </simivideo>
+                                </children>
+                            </simi_rich_content>
+                        </children>
+                    </connector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

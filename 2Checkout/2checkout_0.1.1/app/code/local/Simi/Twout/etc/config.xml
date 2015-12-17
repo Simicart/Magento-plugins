@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Twout
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Twout>
+            <version>0.1.0</version>
+        </Simi_Twout>
+    </modules>
+    <frontend>
+        <routers>
+            <twout>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Twout</module>
+                    <frontName>twout</frontName>
+                </args>
+            </twout>
+        </routers>
+        <layout>
+            <updates>
+                <twout>
+                    <file>twout.xml</file>
+                </twout>
+            </updates>
+        </layout>
+		<translate>
+            <modules>
+                <Simi_Twout>
+                    <files>
+                        <default>Simi_Twout.csv</default>
+                    </files>
+                </Simi_Twout>
+            </modules>
+        </translate>
+		<events>
+            <payment_method_is_active>
+                <observers>
+                    <twout_payment_observers>
+                        <type>singleton</type>
+                        <class>twout/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </twout_payment_observers>
+                </observers>
+            </payment_method_is_active>
+			<simicart_after_place_order>
+                <observers>
+                    <twout_after_place_order>
+                        <type>singleton</type>
+                        <class>twout/observer</class>
+                        <method>afterPlaceOrder</method>
+                    </twout_after_place_order>
+                </observers>
+            </simicart_after_place_order>
+			<simicart_change_payment_detail>
+                <observers>
+                    <twout_change_payment_detail>
+                        <type>singleton</type>
+                        <class>twout/observer</class>
+                        <method>changePayment</method>
+                    </twout_change_payment_detail>
+                </observers>
+            </simicart_change_payment_detail>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+			<twoutadmin>
+				<use>admin</use>
+				<args>
+					<module>Simi_Twout</module>
+					<frontName>twoutadmin</frontName>
+				</args>
+			</twoutadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+		<layout>
+			<updates>
+				<twout>
+					<file>twout.xml</file>
+				</twout>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <Simi_Twout>
+                    <files>
+                        <default>Simi_Twout.csv</default>
+                    </files>
+                </Simi_Twout>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <twout>
+                <class>Simi_Twout_Model</class>
+                <resourceModel>twout_mysql4</resourceModel>
+            </twout>
+            <twout_mysql4>
+                <class>Simi_Twout_Model_Mysql4</class>
+                <entities>
+                    <twout>
+                        <table>twout</table>
+                    </twout>
+                </entities>
+            </twout_mysql4>
+        </models>
+        <resources>
+            <twout_setup>
+                <setup>
+                    <module>Simi_Twout</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </twout_setup>
+            <twout_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </twout_write>
+            <twout_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </twout_read>
+        </resources>
+        <blocks>
+            <twout>
+                <class>Simi_Twout_Block</class>
+            </twout>
+        </blocks>
+        <helpers>
+            <twout>
+                <class>Simi_Twout_Helper</class>
+            </twout>
+        </helpers>
+		<events>
+			<simi_add_payment_method>
+				<observers>
+					<twout_add_payment_method>
+						<class>twout/observer</class>
+						<method>addPayment</method>
+					</twout_add_payment_method>
+				</observers>
+            </simi_add_payment_method>
+      	</events>
+		<!-- <events>
+			<controller_action_predispatch>
+				<observers>
+					<twout_observers>
+						<class>twout/observer</class>
+						<method>controllerActionPredispatch</method>
+					</twout_observers>
+				</observers>
+			</controller_action_predispatch>
+		</events> -->
+    </global>
+	<default>
+        <payment>             
+            <twout>
+                <active>0</active> 
+				<order_status>pending</order_status>       
+                <model>twout/payment</model>     
+                <title>2Checkout</title>
+                <allowspecific>0</allowspecific>				
+				<send_id backend_model="adminhtml/system_config_backend_encrypted"/>
+				<url_back></url_back>
+				<is_sandbox>0</is_sandbox>
+			</twout>
+		</payment>       
+    </default>
+</config>

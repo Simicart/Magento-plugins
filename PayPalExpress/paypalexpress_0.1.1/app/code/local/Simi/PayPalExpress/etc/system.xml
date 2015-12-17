@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_PayPalExpress
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+	<tabs>
+		<simi translate="label">
+			<label>Simi Extension</label>
+			<sort_order>400</sort_order>
+		</simi>
+	</tabs>
+	<sections>
+		<paypalexpress translate="label" module="paypalexpress">
+			<class>separator-top</class>
+			<label>PayPal Express</label>
+			<tab>simi</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>299</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general translate="label">
+					<label>General Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>	
+						<enable_app translate="label">
+							<label>Enable in App</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>1</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>You can configure all features in System/Configuration/Payment Methods/ PayPal Express Checkout</comment>
+						</enable_app>								
+						<enable translate="label">
+							<label>Enable Address Confirmation</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>2</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Require buyers to confirm their address </comment>
+						</enable>	
+						<product_detail translate="label">
+							<label>Shortcut on Product Screen</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>3</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_detail>		
+						<cart translate="label">
+							<label>Shortcut on Shopping Cart Screen</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>4</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>	
+						</cart>					
+					</fields>				
+				</general>
+			</groups>
+		</paypalexpress>
+	</sections>
+</config>

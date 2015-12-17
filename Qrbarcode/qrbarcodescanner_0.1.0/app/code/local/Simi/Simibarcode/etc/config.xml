@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Simibarcode
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simibarcode>
+            <version>0.1.0</version>
+        </Simi_Simibarcode>
+    </modules>
+    <frontend>
+        <routers>
+            <simibarcode>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simibarcode</module>
+                    <frontName>simibarcode</frontName>
+                </args>
+            </simibarcode>
+        </routers>
+        <layout>
+            <updates>
+                <simibarcode>
+                    <file>simibarcode.xml</file>
+                </simibarcode>
+            </updates>
+        </layout>
+		<translate>
+            <modules>
+                <Simi_Simibarcode>
+                    <files>
+                        <default>Simi_Simibarcode.csv</default>
+                    </files>
+                </Simi_Simibarcode>
+            </modules>
+        </translate>
+        <events>
+            <connector_config_get_plugins_return>
+                <observers>
+                    <simibarcode_observers>
+                        <class>simibarcode/observer</class>
+                        <method>connectorConfigGetPluginsReturn</method>
+                    </simibarcode_observers>
+                </observers>
+            </connector_config_get_plugins_return>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml> 
+                <args> 
+                    <modules> 
+                        <Simi_Simibarcode after="Mage_Adminhtml">Simi_Simibarcode_Adminhtml</Simi_Simibarcode>
+                    </modules> 
+                </args> 
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+		<layout>
+			<updates>
+				<simibarcode>
+					<file>simibarcode.xml</file>
+				</simibarcode>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <Simi_Simibarcode>
+                    <files>
+                        <default>Simi_Simibarcode.csv</default>
+                    </files>
+                </Simi_Simibarcode>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simibarcode>
+                <class>Simi_Simibarcode_Model</class>
+                <resourceModel>simibarcode_mysql4</resourceModel>
+            </simibarcode>
+            <simibarcode_mysql4>
+                <class>Simi_Simibarcode_Model_Mysql4</class>
+                <entities>
+                    <simibarcode>
+                        <table>simibarcode</table>
+                    </simibarcode>
+                    <barcodetemplate>
+                        <table>simibarcode_template</table>
+                    </barcodetemplate>
+                    <qrcodetemplate>
+                        <table>simiqrcode_template</table>
+                    </qrcodetemplate>
+                </entities>
+            </simibarcode_mysql4>
+        </models>
+        <resources>
+            <simibarcode_setup>
+                <setup>
+                    <module>Simi_Simibarcode</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </simibarcode_setup>
+            <simibarcode_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </simibarcode_write>
+            <simibarcode_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </simibarcode_read>
+        </resources>
+        <blocks>
+            <simibarcode>
+                <class>Simi_Simibarcode_Block</class>
+            </simibarcode>
+        </blocks>
+        <helpers>
+            <simibarcode>
+                <class>Simi_Simibarcode_Helper</class>
+            </simibarcode>
+        </helpers>
+		<!-- <events>
+			<controller_action_predispatch>
+				<observers>
+					<simibarcode_observers>
+						<class>simibarcode/observer</class>
+						<method>controllerActionPredispatch</method>
+					</simibarcode_observers>
+				</observers>
+			</controller_action_predispatch>
+		</events> -->
+    </global>
+    <default>
+        <simibarcode>
+            <barcode>
+                <barcode_type>code39</barcode_type>
+                <pattern>BAR[A.4][AN.6]</pattern>
+                <qrcode_type>H</qrcode_type>
+                <qrcode_pattern>QR[A.4][AN.6]</qrcode_pattern>                
+            </barcode>
+        </simibarcode>
+    </default>
+    <!-- <stores>
+        <admin>
+            <dev>
+                <debug>
+                    <template_hints>1</template_hints>
+                    <template_hints_blocks>1</template_hints_blocks>
+                </debug>
+            </dev>
+        </admin>
+    </stores> -->
+</config>

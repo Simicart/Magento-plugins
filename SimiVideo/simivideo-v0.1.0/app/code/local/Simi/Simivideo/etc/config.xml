@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Simi_Simivideo
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simivideo>
+            <version>0.1.0</version>
+        </Simi_Simivideo>
+    </modules>
+    <frontend>
+        <routers>
+            <simivideo>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simivideo</module>
+                    <frontName>simivideo</frontName>
+                </args>
+            </simivideo>
+        </routers>
+        <layout>
+            <updates>
+                <simivideo>
+                    <file>simivideo.xml</file>
+                </simivideo>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simivideo>
+                    <files>
+                        <default>Simi_Simivideo.csv</default>
+                    </files>
+                </Simi_Simivideo>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <simivideoadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Simivideo</module>
+                    <frontName>simivideoadmin</frontName>
+                </args>
+            </simivideoadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simivideo>
+                    <file>simivideo.xml</file>
+                </simivideo>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simivideo>
+                    <files>
+                        <default>Simi_Simivideo.csv</default>
+                    </files>
+                </Simi_Simivideo>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simivideo>
+                <class>Simi_Simivideo_Model</class>
+                <resourceModel>simivideo_mysql4</resourceModel>
+            </simivideo>
+            <simivideo_mysql4>
+                <class>Simi_Simivideo_Model_Mysql4</class>
+                <entities>
+                    <simivideo>
+                        <table>simivideo_videos</table>
+                    </simivideo>
+                </entities>
+            </simivideo_mysql4>
+        </models>
+        <resources>
+            <simivideo_setup>
+                <setup>
+                    <module>Simi_Simivideo</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </simivideo_setup>
+            <simivideo_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </simivideo_write>
+            <simivideo_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </simivideo_read>
+        </resources>
+        <blocks>
+            <simivideo>
+                <class>Simi_Simivideo_Block</class>
+            </simivideo>
+        </blocks>
+        <helpers>
+            <simivideo>
+                <class>Simi_Simivideo_Helper</class>
+            </simivideo>
+        </helpers>
+        <events> 
+            <connector_catalog_get_product_detail_return>                    
+                <observers>   
+                    <simivideo_observers>
+                        <type>singleton</type>
+                        <class>simivideo/observer</class>
+                        <method>connectorCatalogGetProductDetailReturn</method>
+                    </simivideo_observers>  
+                </observers>
+            </connector_catalog_get_product_detail_return>
+            <connector_config_get_plugins_return>
+                <observers>
+                    <simivideo_observers>
+                        <class>simivideo/observer</class>
+                        <method>connectorConfigGetPluginsReturn</method>
+                    </simivideo_observers>
+                </observers>
+            </connector_config_get_plugins_return>
+        </events>
+    </global>
+	<default>                
+        <simivideo>
+            <general>                                               
+                <enable>1</enable>
+            </general>           
+        </simivideo>     
+    </default>
+</config>

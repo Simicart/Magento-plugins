@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Appwishlist
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Appwishlist>
+            <version>0.1.0</version>
+        </Simi_Appwishlist>
+    </modules>
+    <frontend>
+        <routers>
+            <appwishlist>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Appwishlist</module>
+                    <frontName>appwishlist</frontName>
+                </args>
+            </appwishlist>
+        </routers>       
+        <translate>
+            <modules>
+                <Simi_Appwishlist>
+                    <files>
+                        <default>Simi_Appwishlist.csv</default>
+                    </files>
+                </Simi_Appwishlist>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <appwishlistadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Appwishlist</module>
+                    <frontName>appwishlistadmin</frontName>
+                </args>
+            </appwishlistadmin>
+        </routers>
+    </admin>
+    <adminhtml>       
+        <translate>
+            <modules>
+                <Simi_Appwishlist>
+                    <files>
+                        <default>Simi_Appwishlist.csv</default>
+                    </files>
+                </Simi_Appwishlist>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <appwishlist>
+                <class>Simi_Appwishlist_Model</class>                
+            </appwishlist>            
+        </models>
+        <resources>            
+        </resources>        
+        <helpers>
+            <appwishlist>
+                <class>Simi_Appwishlist_Helper</class>
+            </appwishlist>
+        </helpers>
+        <events> 
+            <connector_catalog_get_product_detail_return>                    
+                <observers>   
+                    <appwishlist_observers>
+                        <type>singleton</type>
+                        <class>appwishlist/observer</class>
+                        <method>connectorCatalogGetProductDetailReturn</method>
+                    </appwishlist_observers>  
+                </observers>
+            </connector_catalog_get_product_detail_return>
+            <connector_config_get_plugins_return>
+                <observers>
+                    <appwishlist_observers>
+                        <class>appwishlist/observer</class>
+                        <method>connectorConfigGetPluginsReturn</method>
+                    </appwishlist_observers>
+                </observers>
+            </connector_config_get_plugins_return>
+			<connector_customer_sign_in_return>
+                <observers>
+                    <appwishlist_observers>
+                        <class>appwishlist/observer</class>
+                        <method>connectorCustomerSignInReturn</method>
+                    </appwishlist_observers>
+                </observers>
+            </connector_customer_sign_in_return>
+        </events>
+        <!-- <events>
+            <controller_action_predispatch>
+                <observers>
+                    <appwishlist_observers>
+                        <class>appwishlist/observer</class>
+                        <method>controllerActionPredispatch</method>
+                    </appwishlist_observers>
+                </observers>
+            </controller_action_predispatch>
+        </events> -->
+    </global>
+    <default>                
+        <appwishlist>
+            <general>                                               
+                <enable>1</enable>
+                <sharing_message></sharing_message>
+                <product_sharing_message></product_sharing_message>
+            </general>           
+        </appwishlist>                
+    </default>
+</config>

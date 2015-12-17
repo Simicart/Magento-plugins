@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_PayPalExpress
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_PayPalExpress>
+            <version>0.1.0</version>
+        </Simi_PayPalExpress>
+    </modules>
+    <frontend>
+        <routers>
+            <paypalexpress>
+                <use>standard</use>
+                <args>
+                    <module>Simi_PayPalExpress</module>
+                    <frontName>paypalexpress</frontName>
+                </args>
+            </paypalexpress>
+        </routers>
+        <layout>
+            <updates>
+                <paypalexpress>
+                    <file>paypalexpress.xml</file>
+                </paypalexpress>
+            </updates>
+        </layout>
+		<translate>
+            <modules>
+                <Simi_PayPalExpress>
+                    <files>
+                        <default>Simi_PayPalExpress.csv</default>
+                    </files>
+                </Simi_PayPalExpress>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+			<paypalexpressadmin>
+				<use>admin</use>
+				<args>
+					<module>Simi_PayPalExpress</module>
+					<frontName>paypalexpressadmin</frontName>
+				</args>
+			</paypalexpressadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+		<layout>
+			<updates>
+				<paypalexpress>
+					<file>paypalexpress.xml</file>
+				</paypalexpress>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <Simi_PayPalExpress>
+                    <files>
+                        <default>Simi_PayPalExpress.csv</default>
+                    </files>
+                </Simi_PayPalExpress>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <paypalexpress>
+                <class>Simi_PayPalExpress_Model</class>
+                <resourceModel>paypalexpress_mysql4</resourceModel>
+            </paypalexpress>
+            <!--paypalexpress_mysql4>
+                <class>Simi_PayPalExpress_Model_Mysql4</class>
+                <entities>
+                    <paypalexpress>
+                        <table>paypalexpress</table>
+                    </paypalexpress>
+                </entities>
+            </paypalexpress_mysql4-->
+            <connector>
+                <rewrite>
+                    <checkout>Simi_PayPalExpress_Model_Checkout</checkout>
+                </rewrite>
+            </connector>
+        </models>
+        <resources>
+            <paypalexpress_setup>
+                <setup>
+                    <module>Simi_PayPalExpress</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </paypalexpress_setup>
+            <paypalexpress_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </paypalexpress_write>
+            <paypalexpress_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </paypalexpress_read>
+        </resources>
+        <blocks>
+            <paypalexpress>
+                <class>Simi_PayPalExpress_Block</class>
+            </paypalexpress>
+        </blocks>
+        <helpers>
+            <paypalexpress>
+                <class>Simi_PayPalExpress_Helper</class>
+            </paypalexpress>
+        </helpers>
+		<events>
+            <connector_catalog_get_product_detail_product_detail>
+                <observers>
+                    <simi_paypalexpress_add_config>
+                        <class>paypalexpress/observer</class>
+                        <method>addConfig</method> 
+                    </simi_paypalexpress_add_config>
+                </observers>
+            </connector_catalog_get_product_detail_product_detail>
+            <connector_customer_get_cart_return>
+                <observers>
+                    <simi_paypalexpress_add_cart_config>
+                        <class>paypalexpress/observer</class>
+                        <method>addCartConfig</method> 
+                    </simi_paypalexpress_add_cart_config>
+                </observers>
+            </connector_customer_get_cart_return>
+            <simi_add_payment_method>
+                <observers>
+                    <simi_paypalexpress_add_payment_method>
+                        <class>paypalexpress/observer</class>
+                        <method>addPayment</method>
+                    </simi_paypalexpress_add_payment_method>
+                </observers>
+            </simi_add_payment_method>
+        </events>
+    </global>
+	<default>
+        <paypalexpress>             
+            <general>
+				<enable_app>1</enable_app>
+				<enable>1</enable>
+                <product_detail>1</product_detail>
+                <cart>1</cart>
+			</general>
+		</paypalexpress>       
+    </default>
+</config>

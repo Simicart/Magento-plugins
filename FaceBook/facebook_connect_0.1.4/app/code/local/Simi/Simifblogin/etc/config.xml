@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Simifblogin
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simifblogin>
+            <version>0.1.0</version>
+        </Simi_Simifblogin>
+    </modules>
+    <frontend>
+        <routers>
+            <simifblogin>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simifblogin</module>
+                    <frontName>simifblogin</frontName>
+                </args>
+            </simifblogin>
+        </routers>
+        <layout>
+            <updates>
+                <simifblogin>
+                    <file>simifblogin.xml</file>
+                </simifblogin>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simifblogin>
+                    <files>
+                        <default>Simi_Simifblogin.csv</default>
+                    </files>
+                </Simi_Simifblogin>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <simifbloginadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Simifblogin</module>
+                    <frontName>simifbloginadmin</frontName>
+                </args>
+            </simifbloginadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simifblogin>
+                    <file>simifblogin.xml</file>
+                </simifblogin>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simifblogin>
+                    <files>
+                        <default>Simi_Simifblogin.csv</default>
+                    </files>
+                </Simi_Simifblogin>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simifblogin>
+                <class>Simi_Simifblogin_Model</class>                
+            </simifblogin>           
+        </models>
+        <resources>
+            <simifblogin_setup>
+                <setup>
+                    <module>Simi_Simifblogin</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </simifblogin_setup>
+            <simifblogin_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </simifblogin_write>
+            <simifblogin_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </simifblogin_read>
+        </resources>
+        <blocks>
+            <simifblogin>
+                <class>Simi_Simifblogin_Block</class>
+            </simifblogin>
+        </blocks>
+        <helpers>
+            <simifblogin>
+                <class>Simi_Simifblogin_Helper</class>
+            </simifblogin>
+        </helpers>
+        <events>
+            <connector_catalog_get_product_detail_product_detail>
+                <observers>
+                    <simi_facebook_add_link>
+                        <class>simifblogin/observer</class>
+                        <method>addLink</method> 
+                    </simi_facebook_add_link>
+                </observers>
+            </connector_catalog_get_product_detail_product_detail>
+            <connector_config_get_plugins_return>
+                <observers>
+                    <simi_facebook__observers>
+                        <class>simifblogin/observer</class>
+                        <method>connectorConfigGetPluginsReturn</method>
+                    </simi_facebook__observers>
+                </observers>
+            </connector_config_get_plugins_return>
+      	</events>
+    </global>
+    
+    <default>        
+        <simifblogin>
+            <general>
+                <enable>1</enable>
+            </general>            
+        </simifblogin>
+    </default>
+</config>

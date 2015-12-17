@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Simibarcode
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+	<adminhtml_simibarcode_simibarcode_index>
+		<reference name="content">
+			<block type="simibarcode/adminhtml_simibarcode" name="simibarcode" />
+		</reference>
+	</adminhtml_simibarcode_simibarcode_index>
+
+	<adminhtml_simibarcode_simibarcode_products>
+        <block type="core/text_list" name="root">                 
+            <!-- <block type="simibarcode/adminhtml_simibarcode" name="barcode_informarion" template="simibarcode/barcode/information.phtml" />        -->
+            <block type="simibarcode/adminhtml_simibarcode_edit_tab_products" name="barcode.edit.tab.products"/>            
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>barcode.edit.tab.products</grid_block_name>
+                    <data_callback>getSelectedProducts</data_callback>
+                    <hidden_input_name>barcode_products</hidden_input_name>
+                    <reload_param_name>barcode_products</reload_param_name>
+                </action>     
+                     
+            </block>
+        </block>
+    </adminhtml_simibarcode_simibarcode_products>
+    
+    <adminhtml_simibarcode_simibarcode_productsgrid>
+        <block type="core/text_list" name="root">
+            <block type="simibarcode/adminhtml_simibarcode_edit_tab_products" name="barcode.edit.tab.products"/>
+        </block>
+    </adminhtml_simibarcode_simibarcode_productsgrid>
+</layout>

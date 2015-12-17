@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Manalytics
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Manalytics>
+            <version>0.1.0</version>
+        </Simi_Manalytics>
+    </modules>
+    <frontend>
+        <routers>
+            <manalytics>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Manalytics</module>
+                    <frontName>manalytics</frontName>
+                </args>
+            </manalytics>
+        </routers>
+        <layout>
+            <updates>
+                <manalytics>
+                    <file>manalytics.xml</file>
+                </manalytics>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Manalytics>
+                    <files>
+                        <default>Simi_Manalytics.csv</default>
+                    </files>
+                </Simi_Manalytics>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <manalyticsadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Manalytics</module>
+                    <frontName>manalyticsadmin</frontName>
+                </args>
+            </manalyticsadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <manalytics>
+                    <file>manalytics.xml</file>
+                </manalytics>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Manalytics>
+                    <files>
+                        <default>Simi_Manalytics.csv</default>
+                    </files>
+                </Simi_Manalytics>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <manalytics>
+                <class>Simi_Manalytics_Model</class>
+                <resourceModel>manalytics_mysql4</resourceModel>
+            </manalytics>                
+        </models>
+        <resources>
+            <manalytics_setup>
+                <setup>
+                    <module>Simi_Manalytics</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </manalytics_setup>
+            <manalytics_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </manalytics_write>
+            <manalytics_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </manalytics_read>
+        </resources>
+        <blocks>
+            <manalytics>
+                <class>Simi_Manalytics_Block</class>
+            </manalytics>
+        </blocks>
+        <helpers>
+            <manalytics>
+                <class>Simi_Manalytics_Helper</class>
+            </manalytics>
+        </helpers>       
+        <!-- <events>
+                <controller_action_predispatch>
+                        <observers>
+                                <manalytics_observers>
+                                        <class>manalytics/observer</class>
+                                        <method>controllerActionPredispatch</method>
+                                </manalytics_observers>
+                        </observers>
+                </controller_action_predispatch>
+        </events> -->
+    </global>
+    <default>                
+        <manalytics>          
+            <general>                                               
+                <enable>1</enable>
+                <ga_id></ga_id>
+            </general>           
+        </manalytics>  
+    </default>
+</config>

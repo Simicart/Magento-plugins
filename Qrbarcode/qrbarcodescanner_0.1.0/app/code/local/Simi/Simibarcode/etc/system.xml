@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Simibarcode
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+	<tabs>
+        <simi translate="label">
+            <label>Simi Extension</label>
+            <sort_order>600</sort_order>
+        </simi>
+    </tabs>
+	<sections>
+		<simibarcode translate="label" module="simibarcode">
+			<class>separator-top</class>
+			<label>Simi Codes</label>
+			<tab>simi</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>299</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+                <barcode translate="label">
+					<label>Barcode Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>		
+						<enable translate="label">
+							<label>Enable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>1</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment></comment>
+						</enable>        
+                        <barcode_type translate="label">
+                            <label>Barcode Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>simibarcode/barcodetypes</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Sellect the type of barcode you want to generate]]></comment>
+                        </barcode_type>
+                        <pattern translate="label comment">
+                            <label>Barcode pattern</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Enter the pattern you want to generate barcodes. For Example:<br/><strong>[A.8] : 8 alpha<br/>[N.4] : 4 numeric<br/>[AN.6] : 6 alphanumeric<br/>BAR[A.4][AN.6] : BARADFA12NF0O</strong>]]></comment>
+                        </pattern>
+                        <qrcode_type translate="label">
+                            <label>QR Code Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>simibarcode/qrcodetypes</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Sellect the type of QR Code you want to generate]]></comment>
+                        </qrcode_type>
+                        <qrcode_pattern translate="label comment">
+                            <label>QR code pattern</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Enter the pattern you want to generate QR codes. For Example:<br/><strong>[A.8] : 8 alpha<br/>[N.4] : 4 numeric<br/>[AN.6] : 6 alphanumeric<br/>QR[A.4][AN.6] : QRADFA12NF0O</strong>]]></comment>
+                        </qrcode_pattern>
+                    </fields>
+                </barcode>
+            </groups>
+		</simibarcode>
+	</sections>
+</config>
