@@ -253,7 +253,7 @@
 </style>
 
 <?php $barcode = Mage::getModel('simibarcode/simibarcode')->load($this->getRequest()->getParam('barcode')); ?>
-<form id="printbarcode_form" action="<?php echo Mage::helper("adminhtml")->getUrl('simibarcodeadmin/adminhtml_printbarcode/printBarcode/'); ?>" name="printbarcode_form" method="post">
+<form id="printbarcode_form" action="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/simibarcode_printbarcode/printBarcode/'); ?>" name="printbarcode_form" method="post">
     <input type="hidden" name="form_key" value="<?php echo $this->getFormKey() ?>" />
     <input type="hidden" name="barcodeId" value="<?php echo $this->getRequest()->getParam('barcode') ?>" />
     <input type="hidden" id="image_width" name="image_width" value="" />

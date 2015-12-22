@@ -63,12 +63,12 @@ class Simi_Simibarcode_Block_Adminhtml_Simibarcode_Edit extends Mage_Adminhtml_B
 
 		$this->_formScripts[] = "
 			function createBarcode(){
-                var url = '" . $this->getUrl('simibarcodeadmin/adminhtml_printbarcode/selecttemplate', array('barcode' => $this->getRequest()->getParam('id'))) . "';
+                var url = '" . $this->getUrl('adminhtml/simibarcode_printbarcode/selecttemplate', array('barcode' => $this->getRequest()->getParam('id'))) . "';
                 window.open(url,'_blank', 'scrollbars=yes, resizable=yes, width=700, height=700, left=80, menubar=yes');                
             }
 
             function createQrcode(){
-                var url = '" . $this->getUrl('simibarcodeadmin/adminhtml_printqrcode/selecttemplate', array('barcode' => $this->getRequest()->getParam('id'))) . "';
+                var url = '" . $this->getUrl('adminhtml/simibarcode_printqrcode/selecttemplate', array('barcode' => $this->getRequest()->getParam('id'))) . "';
                 window.open(url,'_blank', 'scrollbars=yes, resizable=yes, width=700, height=700, left=80, menubar=yes');                
             }
             
