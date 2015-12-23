@@ -25,6 +25,6 @@
 		<Simi_Twout>
 			<active>true</active>
 			<codePool>local</codePool>   
-		</Simi_Twout>
+		</Simi_Twout>  <!----->
 	</modules>
 </config>
