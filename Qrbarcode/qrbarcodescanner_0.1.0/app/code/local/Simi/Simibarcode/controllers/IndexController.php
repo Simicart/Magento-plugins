@@ -137,6 +137,66 @@ class Simi_Simibarcode_IndexController extends Mage_Core_Controller_Front_Action
 				PRIMARY KEY  (`qrcode_template_id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 		");
+		
+		$data = array();
+		$data[] = array('barcode_template_name' => 'Barcode',
+			'html' => '<div style="width: 220px; text-align: center;">
+						<img style="width: 200px;" src="{{media url="/simibarcode/source/barcode.jpg"}}"/>
+						<span style="float: left; text-align: center; width: 100%; font-size: 17px;">010091930191421</span>
+					   </div>',
+			'template' => 'image_barcode.phtml',
+			'status' => 1);
+
+		$data[] = array('barcode_template_name' => 'Product Name & Barcode',
+			'html' => '<div style="width: 220px; text-align: center;">
+							<span style="float: left; width: 100%; font-size: 17px; text-align: left; margin-left: 14px;">Product Name</span>
+							<img style="width: 200px;" src="{{media url="/simibarcode/source/barcode.jpg"}}"/>
+							<span style="float: left; text-align: center; width: 100%; font-size: 17px;">010091930191421</span>
+					   </div>',
+			'template' => 'name_barcode.phtml',
+			'status' => 1);
+
+		$data[] = array('barcode_template_name' => 'Product Name & Price & Barcode',
+			'html' => '<div style="width: 220px; text-align: center;">
+							<span style="float: left; font-size: 17px; text-align: left; width: 47%; margin-left: 13px;">Product Name</span>
+							<span style="font-size: 17px; float: left; text-align: left; margin-left: 55px; width: 20%;">Price</span>
+							<img style="width: 200px;" src="{{media url="/simibarcode/source/barcode.jpg"}}"/>
+							<span style="float: left; text-align: center; width: 100%; font-size: 17px;">010091930191421</span>
+					   </div>',
+			'template' => 'name_price_barcode.phtml',
+			'status' => 1);
+		foreach ($data as $template) {
+			Mage::getModel('simibarcode/barcodetemplate')->addData($template)->save();
+		}
+
+		// add Qrcode Templates
+		$dataQr = array();
+		$dataQr[] = array('qrcode_template_name' => 'QR code',
+			'html' => '<div style="width: 220px; text-align: center;">
+						 <img style="width: 200px;" src="{{media url="/simibarcode/source/qrcode.jpg"}}"/>
+					   </div>',
+			'template' => 'image_qrcode.phtml',
+			'status' => 1);
+
+		$dataQr[] = array('qrcode_template_name' => 'Product Name & QR code',
+			'html' => '<div style="width: 220px; text-align: center;">
+							<span style="float: left; width: 100%; font-size: 17px; text-align: left; margin-left: 14px;">Product Name</span>
+							<img style="width: 200px;" src="{{media url="/simibarcode/source/qrcode.jpg"}}"/>
+					   </div>',
+			'template' => 'name_qrcode.phtml',
+			'status' => 1);
+
+		$dataQr[] = array('qrcode_template_name' => 'Product Name & Price & QR code',
+			'html' => '<div style="width: 220px; text-align: center;">
+						   <span style="float: left; font-size: 17px; text-align: left; width: 47%; margin-left: 13px;">Product Name</span>
+						   <span style="font-size: 17px; float: left; text-align: left; margin-left: 55px; width: 20%;">Price</span>
+						   <img style="width: 200px;" src="{{media url="/simibarcode/source/qrcode.jpg"}}"/>
+					   </div>',
+			'template' => 'name_price_qrcode.phtml',
+			'status' => 1);
+		foreach ($dataQr as $template) {
+			Mage::getModel('simibarcode/qrcodetemplate')->addData($template)->save();
+		}
         $installer->endSetup();
         echo "success";
 	}
