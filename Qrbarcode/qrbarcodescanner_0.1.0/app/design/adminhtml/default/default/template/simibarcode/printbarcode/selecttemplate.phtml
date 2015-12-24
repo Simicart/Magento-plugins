@@ -393,7 +393,7 @@
     function getImage() {
         $('output').show();
 //        var url = '<?php  echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'barcode.jpg';?>';
-        var url = '<?php echo Mage::helper("adminhtml")->getUrl('simibarcodeadmin/adminhtml_printbarcode/getImage/'); ?>?' + $('printbarcode_form').serialize();
+        var url = '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/simibarcode_printbarcode/getImage/'); ?>?' + $('printbarcode_form').serialize();
     
         var printHtml = '';
         var border = '';
