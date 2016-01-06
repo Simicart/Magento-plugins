@@ -79,7 +79,7 @@ class Simi_Simivideo_Block_Adminhtml_Simivideo_Grid extends Mage_Adminhtml_Block
                 array(
                     'caption' => Mage::helper('simivideo')->__('Edit'),
                     'url' => array('base' => '*/*/edit'),
-                    'field' => 'id'
+                    'field' => 'video_id'
             )),
             'filter' => false,
             'sortable' => false,
