@@ -106,7 +106,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
         if ($data = $this->getRequest()->getPost()) {
             if (isset($_FILES['banner_name']['name']) && $_FILES['banner_name']['name'] != '') {
                 try {
-                    /* Starting upload */    
+                    / Starting upload /    
                     $uploader = new Varien_File_Uploader('banner_name');
                     
                     // Any extention would work
@@ -132,11 +132,11 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
                             
                         }
                     }
-                    
-                    $result = $uploader->save($path, $_FILES['banner_name']['name'] );
+     $banner_name="ztheme".uniqid().$_FILES['banner_name']['name'];
+                    $result = $uploader->save($path,$banner_name );
                     $data['banner_name'] = $result['file'];
                 } catch (Exception $e) {
-                    $data['banner_name'] = $_FILES['banner_name']['name'];
+                    $data['banner_name'] ="ztheme".uniqid().$_FILES['banner_name']['name'];;
                 }
             }
             else {
@@ -147,7 +147,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
             
             if (isset($_FILES['banner_name_tablet']['name']) && $_FILES['banner_name_tablet']['name'] != '') {
                 try {
-                    /* Starting upload */    
+                    / Starting upload /    
                     $uploader = new Varien_File_Uploader('banner_name_tablet');
                     
                     // Any extention would work
@@ -173,11 +173,11 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
                             
                         }
                     }
-                    
-                    $result = $uploader->save($path, $_FILES['banner_name_tablet']['name'] );
+                    $banner_tablet_name="ztheme".uniqid().$_FILES['banner_name_tablet']['name'];
+                    $result = $uploader->save($path,$banner_tablet_name);
                     $data['banner_name_tablet'] = $result['file'];
                 } catch (Exception $e) {
-                    $data['banner_name_tablet'] = $_FILES['banner_name_tablet']['name'];
+                    $data['banner_name_tablet'] = $banner_tablet_name;
                 }
             }
             else {
