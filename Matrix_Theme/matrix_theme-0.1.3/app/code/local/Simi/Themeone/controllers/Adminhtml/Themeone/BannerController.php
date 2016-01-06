@@ -90,7 +90,7 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
         if ($data = $this->getRequest()->getPost()) {
             if (isset($_FILES['banner_name_co']['name']) && $_FILES['banner_name_co']['name'] != '') {
                 try {
-                    /* Starting upload */
+                    / Starting upload /
                     $uploader = new Varien_File_Uploader('banner_name_co');
 
                     // Any extention would work
@@ -100,7 +100,7 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
                     // Set the file upload mode 
                     // false -> get the file directly in the specified folder
                     // true -> get the file in the product like folders 
-                    //	(file.jpg will go in something like /media/f/i/file.jpg)
+                    // (file.jpg will go in something like /media/f/i/file.jpg)
                     $uploader->setFilesDispersion(false);
 
                     // We set media as the upload dir
@@ -116,10 +116,11 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
                             
                         }
                     }
-                    $result = $uploader->save($path, $_FILES['banner_name_co']['name']);
+     $banner_name="themeone".uniqid().$_FILES['banner_name_co']['name'];
+                    $result = $uploader->save($path,$banner_name);
                     $data['banner_name'] = $result['file'];
                 } catch (Exception $e) {
-                    $data['banner_name'] = $_FILES['banner_name_co']['name'];
+                    $data['banner_name'] = "themeone".uniqid().$_FILES['banner_name_co']['name'];
                 }
             }            
             if (isset($data['banner_name_co']['delete']) && $data['banner_name_co']['delete'] == 1) {                
@@ -152,6 +153,25 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
             }
         }
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('themeone')->__('Unable to find item to save'));
+        $this->_redirect('*/*/');
+    }
+
+    /**
+     * delete item action
+     */
+    public function deleteAction() {
+        if ($this->getRequest()->getParam('id') > 0) {
+            try {
+                $model = Mage::getModel('themeone/banner');
+                $model->setId($this->getRequest()->getParam('id'))
+                        ->delete();
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Banner was successfully deleted'));
+                $this->_redirect('*/*/');
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+            }
+        }
         $this->_redirect('*/*/');
     }
 
