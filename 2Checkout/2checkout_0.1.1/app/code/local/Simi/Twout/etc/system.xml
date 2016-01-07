@@ -100,7 +100,7 @@
 								<show_in_website>1</show_in_website>
 								<show_in_store>0</show_in_store>
 								<comment><![CDATA[<font color="red">* Required. It's a URL for your customers to be directed to after a successful purchase.</font>]]></comment>
-							</url_back> 
+							</url_back>
 							<is_sandbox translate="label">
 								<label>Sandbox Mode</label>
 								<frontend_type>select</frontend_type>

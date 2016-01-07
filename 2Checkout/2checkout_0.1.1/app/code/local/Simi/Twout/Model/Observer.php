@@ -26,7 +26,7 @@
  * @package 	Magestore_Twout
  * @author  	Magestore Developer
  */
-class Simi_Twout_Model_Observer extends Simi_Paypalmobile_Model_Observer
+class Simi_Twout_Model_Observer 
 {
 	/**
 	 * process controller_action_predispatch event
@@ -35,19 +35,15 @@ class Simi_Twout_Model_Observer extends Simi_Paypalmobile_Model_Observer
 	 */
 	public function addPayment($observer) 
 	{		
-		// die("xxxxxxxx");
         $object = $observer->getObject();	
         $object->addMethod('twout', 3);
 		//$object->addMethod('paypal_mobile', 2);		
-		 // $object = $observer->getObject();	
-		 // $object->addMethod('twout', 3);
         return;
     }
 
     public function paymentMethodIsActive($observer) {
         $result = $observer['result'];
-        $method = $observer['method_instance'];
-        //$store = $quote ? $quote->getStoreId() : null;            
+        $method = $observer['method_instance'];           
         if ($method->getCode() == 'twout' || $method->getCode() == 'paypal_mobile' ) {			
             if (Mage::app()->getRequest()->getControllerModule() != 'Simi_Connector' 
 				&& Mage::app()->getRequest()->getControllerModule() != 'Simi_Hideaddress') {
@@ -80,7 +76,7 @@ class Simi_Twout_Model_Observer extends Simi_Paypalmobile_Model_Observer
 		}
 		if($check){			
 			$data[$i]['url_action'] = "twout/api/update_payment";		
-			$data[$i]['url_back'] = Mage::getStoreConfig("payment/twout/url_back");					
+			$data[$i]['url_back'] = Mage::getStoreConfig("payment/twout/url_back") == null ? "" : Mage::getStoreConfig("payment/twout/url_back");
 			$data[$i]['is_sandbox'] = Mage::getStoreConfig("payment/twout/is_sandbox");
 		}		
 		$object->setCacheData($data, "simi_connector");

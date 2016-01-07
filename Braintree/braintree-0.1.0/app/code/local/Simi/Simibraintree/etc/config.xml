@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.simicart.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Simi
+ * @package 	Simi_Simibraintree
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.simicart.com/)
+ * @license 	http://www.simicart.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simibraintree>
+            <version>0.1.0</version>
+        </Simi_Simibraintree>
+    </modules>
+    <frontend>
+        <routers>
+            <simibraintree>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simibraintree</module>
+                    <frontName>simibraintree</frontName>
+                </args>
+            </simibraintree>
+        </routers>
+        <translate>
+            <modules>
+                <Simi_Simibraintree>
+                    <files>
+                        <default>Simi_Simibraintree.csv</default>
+                    </files>
+                </Simi_Simibraintree>
+            </modules>
+        </translate>
+        <events>
+            <payment_method_is_active>
+                <observers>
+                    <simibraintree_payment_observers>
+                        <type>singleton</type>
+                        <class>simibraintree/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </simibraintree_payment_observers>
+                </observers>
+            </payment_method_is_active>
+            <simicart_change_payment_detail>
+                <observers>
+                    <simibraintree_change_payment_detail>
+                        <type>singleton</type>
+                        <class>simibraintree/observer</class>
+                        <method>changePayment</method>
+                    </simibraintree_change_payment_detail>
+                </observers>
+            </simicart_change_payment_detail>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <simibraintreeadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Simibraintree</module>
+                    <frontName>simibraintreeadmin</frontName>
+                </args>
+            </simibraintreeadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simibraintree>
+                    <file>simibraintree.xml</file>
+                </simibraintree>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simibraintree>
+                    <files>
+                        <default>Simi_Simibraintree.csv</default>
+                    </files>
+                </Simi_Simibraintree>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simibraintree>
+                <class>Simi_Simibraintree_Model</class>
+                <resourceModel>simibraintree_mysql4</resourceModel>
+            </simibraintree>
+            <simibraintree_mysql4>
+                <class>Simi_Simibraintree_Model_Mysql4</class>
+                <entities>
+                    <simibraintree>
+                        <table>simibraintree</table>
+                    </simibraintree>
+                </entities>
+            </simibraintree_mysql4>
+        </models>
+        <resources>
+            <simibraintree_setup>
+                <setup>
+                    <module>Simi_Simibraintree</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </simibraintree_setup>
+            <simibraintree_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </simibraintree_write>
+            <simibraintree_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </simibraintree_read>
+        </resources>
+        <blocks>
+            <simibraintree>
+                <class>Simi_Simibraintree_Block</class>
+            </simibraintree>
+        </blocks>
+        <helpers>
+            <simibraintree>
+                <class>Simi_Simibraintree_Helper</class>
+            </simibraintree>
+        </helpers>
+        <events>
+			<simi_add_payment_method>
+				<observers>
+					<simibraintree_add_payment_method>
+						<class>simibraintree/observer</class>
+						<method>addPayment</method>
+					</simibraintree_add_payment_method>
+				</observers>
+            </simi_add_payment_method>
+      	</events>
+    </global>
+    <default>
+        <payment>             
+            <simibraintree>
+                <active>0</active>    
+                <merchant_id></merchant_id>                               
+                <order_status>pending</order_status>       
+                <payment_list>paypal,creditcard</payment_list>       
+                <model>simibraintree/braintree</model>     
+                <title>Braintree</title>
+                <allowspecific>0</allowspecific>                
+                <is_sandbox>0</is_sandbox> 
+                <type>1</type> 
+            </simibraintree>            
+        </payment>       
+    </default>
+</config>

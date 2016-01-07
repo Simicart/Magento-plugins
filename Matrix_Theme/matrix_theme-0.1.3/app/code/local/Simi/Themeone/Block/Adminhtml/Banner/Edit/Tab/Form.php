@@ -66,7 +66,7 @@ class Simi_Themeone_Block_Adminhtml_Banner_Edit_Tab_Form extends Mage_Adminhtml_
             $data['banner_name'] = Mage::getBaseUrl('media') . 'simi/themeone/banner/' . $data['website_id'] . '/' . $data['banner_name'];
         }
         $fieldset->addField('banner_name', 'image', array(
-            'label' => Mage::helper('themeone')->__('Image (width:640px, height:330px)'),
+            'label' => Mage::helper('themeone')->__('Image (width:640px, height:340px)'),
             'required' => FALSE,
             'name' => 'banner_name_co',
         ));
