@@ -22,7 +22,7 @@
 -->
 <config>
     <modules>
-        <Simi_Twout>
+        <Simi_Twout>  
             <version>0.1.0</version>
         </Simi_Twout>
     </modules>
