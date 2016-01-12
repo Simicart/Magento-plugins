@@ -38,6 +38,7 @@ class Simi_Simibarcode_Model_Simibarcode extends Simi_Connector_Model_Abstract
 	{
 		$code = $data->code;
 		$type = $data->type;
+		$arrayReturn = array();
 		$information = $this->statusError(array('No Product matching the code'));
 		if(isset($code) && $code != ''){
 			if($type == '1'){
@@ -48,7 +49,8 @@ class Simi_Simibarcode_Model_Simibarcode extends Simi_Connector_Model_Abstract
 					$product = Mage::getModel('catalog/product')->load($productId);
 					if($product->getStatus() == '1'){
 						$information = $this->statusSuccess();
-						$information['data'] = array('product_id' => $productId);
+						$arrayReturn[] = array('product_id' => $productId);
+						$information['data'] = $arrayReturn;
 					}
 				}	
 			}else{
@@ -58,7 +60,8 @@ class Simi_Simibarcode_Model_Simibarcode extends Simi_Connector_Model_Abstract
 					$product = Mage::getModel('catalog/product')->load($productId);
 					if($product->getStatus() == '1'){
 						$information = $this->statusSuccess();
-						$information['data'] = array('product_id' => $productId);
+						$arrayReturn[] = array('product_id' => $productId);
+						$information['data'] = $arrayReturn;
 					}
 				}
 			}
