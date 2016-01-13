@@ -107,40 +107,40 @@ class Simi_Hideaddress_Model_Observer extends Simi_Connector_Model_Observer{
                 $data->billingAddress->name = "name";
             }
             if ($data->billingAddress->prefix == null) {
-                $data->billingAddress->prefix = "prefix";
+                $data->billingAddress->prefix = "";
             }
              if ($data->billingAddress->suffix == null) {
-                $data->billingAddress->suffix = "suffix";
+                $data->billingAddress->suffix = "";
             }
              if ($data->billingAddress->email == null) {
-                $data->billingAddress->email = "email@email.com";
+                $data->billingAddress->email = "";
             }
             if ($data->billingAddress->street == null) {
-                $data->billingAddress->street = "street";
+                $data->billingAddress->street = "";
             }
             if ($data->billingAddress->phone == null) {
-                $data->billingAddress->phone = "123456";
+                $data->billingAddress->phone = "N/A";
             }
             if ($data->billingAddress->city == null) {
-                $data->billingAddress->city = "city";
+                $data->billingAddress->city = "N/A";
             }
             if ($data->billingAddress->country_code == null) {
                 $data->billingAddress->country_code = "US";
             }
             if ($data->billingAddress->zip == null) {
-                $data->billingAddress->zip = "123";
+                $data->billingAddress->zip = "N/A";
             }
             if ($data->billingAddress->state_name == null) {
-                $data->billingAddress->state_name = "state_name";
+                $data->billingAddress->state_name = "";
             }
             if ($data->billingAddress->state_id == null) {
-                $data->billingAddress->state_id = "state_id";
+                $data->billingAddress->state_id = "";
             }
             if ($data->billingAddress->company == null) {
-                $data->billingAddress->company = "company";
+                $data->billingAddress->company = "";
             }
             if ($data->billingAddress->fax == null) {
-                $data->billingAddress->fax = "fax";
+                $data->billingAddress->fax = "";
             }
 
             // Shipping Address
@@ -148,34 +148,34 @@ class Simi_Hideaddress_Model_Observer extends Simi_Connector_Model_Observer{
                 $data->shippingAddress->name = "name";
             }
             if ($data->shippingAddress->prefix == null) {
-                $data->shippingAddress->prefix = "prefix";
+                $data->shippingAddress->prefix = "";
             }
              if ($data->shippingAddress->suffix == null) {
-                $data->shippingAddress->suffix = "suffix";
+                $data->shippingAddress->suffix = "";
             }
              if ($data->shippingAddress->email == null) {
-                $data->shippingAddress->email = "email@email.com";
+                $data->shippingAddress->email = "";
             }
             if ($data->shippingAddress->street == null) {
-                $data->shippingAddress->street = "street";
+                $data->shippingAddress->street = "";
             }
             if ($data->shippingAddress->phone == null) {
-                $data->shippingAddress->phone = "phone";
+                $data->shippingAddress->phone = "N/A";
             }
             if ($data->shippingAddress->city == null) {
-                $data->shippingAddress->city = "city";
+                $data->shippingAddress->city = "N/A";
             }
             if ($data->shippingAddress->country_code == null) {
                 $data->shippingAddress->country_code = "US";
             }
             if ($data->shippingAddress->zip == null) {
-                $data->shippingAddress->zip = "123";
+                $data->shippingAddress->zip = "N/A";
             }
             if ($data->shippingAddress->state_name == null) {
-                $data->shippingAddress->state_name = "state_name";
+                $data->shippingAddress->state_name = "";
             }
             if ($data->shippingAddress->state_id == null) {
-                $data->shippingAddress->state_id = "state_id";
+                $data->shippingAddress->state_id = "";
             }
         }
                 
@@ -189,27 +189,27 @@ class Simi_Hideaddress_Model_Observer extends Simi_Connector_Model_Observer{
         
         if (Mage::getStoreConfig('hideaddress/general/enable') == 1) {
             $data->address_id =  isset($data->address_id) == true ? $data->address_id : 0;
-            $data->name = isset($data->name) == true ? $data->name : 'name';
-            $data->street = isset($data->street) == true ? $data->street : 'street';// array($data->street, 'N/A');
-            $data->city = isset($data->city) == true ? $data->city : 'city';
-            $data->company = isset($data->company) == true ? $data->company : 'company';
-            $data->state_code = isset($data->state_code) == true ? $data->state_code : 'AL';
+            $data->name = isset($data->name) == true ? $data->name : 'N/A';
+            $data->street = isset($data->street) == true ? $data->street : 'N/A';// array($data->street, 'N/A');
+            $data->city = isset($data->city) == true ? $data->city : 'N/A';
+            $data->company = isset($data->company) == true ? $data->company : '';
+            $data->state_code = isset($data->state_code) == true ? $data->state_code : 'N/A';
             $data->state_id = isset($data->state_id) == true ? $data->state_id : 0;
-            $data->state_name = isset($data->state_name) == true ? $data->state_name : 'state_name';
-            $data->zip = isset($data->zip) == true ? $data->zip : '123';
-            $data->country_code = isset($data->country_code) == true ? $data->country_code : 'US';
+            $data->state_name = isset($data->state_name) == true ? $data->state_name : '';
+            $data->zip = isset($data->zip) == true ? $data->zip : 'N/A';
+            $data->country_code = isset($data->country_code) == true ? $data->country_code : 'N/A';
             $data->country_name = isset($data->country_name) == true ? $data->country_name : 'N/A';
-            $data->phone = isset($data->phone) == true ? $data->phone : '12345';
-            $data->email = isset($data->email) == true ? $data->email : 'email@email.com';
-            $data->suffix = isset($data->suffix) == true ? $data->suffix : 'suffix';
-            $data->prefix = isset($data->prefix) == true ? $data->prefix : 'prefix';
-            $data->dob = isset($data->dob) == true ? $data->dob : 'dob';
-            $data->taxvat = isset($data->taxvat) == true ? $data->taxvax : 'taxvax';
+            $data->phone = isset($data->phone) == true ? $data->phone : 'N/A';
+            $data->email = isset($data->email) == true ? $data->email : '';
+            $data->suffix = isset($data->suffix) == true ? $data->suffix : '';
+            $data->prefix = isset($data->prefix) == true ? $data->prefix : '';
+            $data->dob = isset($data->dob) == true ? $data->dob : '';
+            $data->taxvat = isset($data->taxvat) == true ? $data->taxvax : '';
             $data->gender = isset($data->gender) == true ? $data->gender : Mage::getResourceSingleton('customer/customer')->getAttribute('gender')->getSource()->getOptionId('Male');
-            $data->month = isset($data->month) == true ? $data->month : 'mm';
-            $data->day = isset($data->day) == true ? $data->day : 'dd';
-            $data->year = isset($data->year) == true ? $data->year : 'yyyy';
-            $data->fax = isset($data->fax) == true ? $data->fax : 'fax';
+            $data->month = isset($data->month) == true ? $data->month : '';
+            $data->day = isset($data->day) == true ? $data->day : '';
+            $data->year = isset($data->year) == true ? $data->year : '';
+            $data->fax = isset($data->fax) == true ? $data->fax : '';
         }                
         $observer->setData($data);
     }
