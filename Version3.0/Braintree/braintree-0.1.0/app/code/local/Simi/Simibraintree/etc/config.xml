@@ -156,8 +156,10 @@
             <simibraintree>
                 <active>0</active>    
                 <merchant_id></merchant_id>                               
+                <apple_merchant>merchant.SimiCart</apple_merchant>                               
+                <google_merchant>merchant.SimiCart</google_merchant>                               
                 <order_status>pending</order_status>       
-                <payment_list>paypal,creditcard</payment_list>       
+                <payment_list>braintree_paypal,braintree_applepay</payment_list>       
                 <model>simibraintree/braintree</model>     
                 <title>Braintree</title>
                 <allowspecific>0</allowspecific>                

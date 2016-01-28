@@ -115,7 +115,7 @@ class Simi_Simibraintree_Helper_Data extends Mage_Core_Helper_Abstract {
             'options' => array(
                 'submitForSettlement' => $status
             ),
-        ));   
+        ));     
         return $result;             
     }
 
@@ -174,6 +174,24 @@ class Simi_Simibraintree_Helper_Data extends Mage_Core_Helper_Abstract {
      */
     public function getPaymentType(){
         return $this->getConfigBraintree('type');
+    }
+
+    /**
+     * get apple merchant
+     * 
+     * @return boolean
+     */
+    public function getAppleMerchant(){
+        return $this->getConfigBraintree('apple_merchant');
+    }
+
+    /**
+     * get gootle merchant
+     * 
+     * @return boolean
+     */
+    public function getGoogleMerchant(){
+        return $this->getConfigBraintree('google_merchant');
     }
 
     

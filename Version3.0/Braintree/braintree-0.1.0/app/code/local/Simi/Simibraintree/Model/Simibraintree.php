@@ -40,8 +40,8 @@ class Simi_Simibraintree_Model_Simibraintree extends Simi_Connector_Model_Abstra
         );
     }
 
-    public function updateBraintreePayment($data) {        
-        $result = Mage::helper('simibraintree')->createTransaction($data);  
+    public function updateBraintreePayment($data) {                
+        $result = Mage::helper('simibraintree')->createTransaction($data);    
         if (isset($result->success) && $result->success == 1) {
             $transaction = $result->transaction;
             $transaction = array(

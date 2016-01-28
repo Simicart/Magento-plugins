@@ -40,10 +40,10 @@ class Simi_Simibraintree_Model_Payment_List extends Varien_Object
 	 */
 	static public function getOptionArray(){
 		return array(			
-			self::BRAINTREE_CREDITCARD   => Mage::helper('simibraintree')->__('Creditcard'),
+			// self::BRAINTREE_CREDITCARD   => Mage::helper('simibraintree')->__('Creditcard'),
+			// self::BRAINTREE_GOOGLEPAY   => Mage::helper('simibraintree')->__('Google Pay'),
 			self::BRAINTREE_PAYPAL   => Mage::helper('simibraintree')->__('Paypal'),
-			self::BRAINTREE_APPLE_PAY	=> Mage::helper('simibraintree')->__('Apple Pay'),
-			self::BRAINTREE_GOOGLEPAY   => Mage::helper('simibraintree')->__('Google Pay')
+			self::BRAINTREE_APPLE_PAY	=> Mage::helper('simibraintree')->__('Apple Pay')			
 		);
 	}
 	

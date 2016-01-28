@@ -74,6 +74,8 @@ class Simi_Simibraintree_Model_Observer {
             $data[$i]['is_sandbox'] = $helper->getEnviroment();
             $data[$i]['type'] = $helper->getPaymentType();
             $data[$i]['payment_list'] = $helper->getPaymentList();            
+            $data[$i]['apple_merchant'] = $helper->getAppleMerchant();            
+            $data[$i]['google_merchant'] = $helper->getGoogleMerchant();            
         }       
         $object->setCacheData($data, "simi_connector");
     }

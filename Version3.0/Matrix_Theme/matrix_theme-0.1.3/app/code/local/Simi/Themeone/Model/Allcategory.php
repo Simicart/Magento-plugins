@@ -18,7 +18,7 @@ class Simi_Themeone_Model_Allcategory {
         if (!$this->_options) {
             $this->_options = array();
             $categories = Mage::getModel('catalog/category')->getCollection()
-                    ->addAttributeToSelect('id')
+                    ->addAttributeToSelect('entity_id')
                     ->addAttributeToSelect('name')
                     ->addAttributeToSelect('is_active');
            

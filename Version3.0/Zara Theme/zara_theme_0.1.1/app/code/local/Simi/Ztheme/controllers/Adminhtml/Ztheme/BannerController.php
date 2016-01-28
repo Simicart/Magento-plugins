@@ -106,7 +106,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
         if ($data = $this->getRequest()->getPost()) {
             if (isset($_FILES['banner_name']['name']) && $_FILES['banner_name']['name'] != '') {
                 try {
-                    / Starting upload /    
+                    // Starting upload 
                     $uploader = new Varien_File_Uploader('banner_name');
                     
                     // Any extention would work
@@ -147,7 +147,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
             
             if (isset($_FILES['banner_name_tablet']['name']) && $_FILES['banner_name_tablet']['name'] != '') {
                 try {
-                    / Starting upload /    
+                    // Starting upload 
                     $uploader = new Varien_File_Uploader('banner_name_tablet');
                     
                     // Any extention would work

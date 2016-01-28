@@ -35,7 +35,7 @@
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>1</sort_order>
+                            <sort_order>0</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -52,7 +52,7 @@
                             <label>New order status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status_new</source_model>
-                            <sort_order>3</sort_order>
+                            <sort_order>4</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -61,7 +61,7 @@
                             <label>New order status</label>
                             <frontend_type>multiselect</frontend_type>
                             <source_model>simibraintree/payment_list</source_model>
-                            <sort_order>3</sort_order>
+                            <sort_order>6</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -69,7 +69,7 @@
                         <allowspecific translate="label">
                             <label>Payment from Applicable Countries</label>
                             <frontend_type>allowspecific</frontend_type>
-                            <sort_order>4</sort_order>
+                            <sort_order>8</sort_order>
                             <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -78,7 +78,7 @@
                         <specificcountry translate="label">
                             <label>Payment from Specific Countries</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>5</sort_order>
+                            <sort_order>10</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -89,37 +89,53 @@
                             <label>Merchant ID</label>                          
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <sort_order>6</sort_order>
+                            <sort_order>12</sort_order>
                             <show_in_store>0</show_in_store>                            
                         </merchant_id>                     
                         <public_key translate="label">
                             <label>Public Key</label>                                                              
-                            <sort_order>7</sort_order>
+                            <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </public_key>
                         <private_key translate="label">
                             <label>Private Key</label>                           
-                            <sort_order>8</sort_order>
+                            <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </private_key>     
-                        <type translate="label">
+                        </private_key> 
+                        <apple_merchant translate="label comment">
+                            <label>Apple Merchant</label>                           
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                            
+                            <comment><![CDATA[Registration from <a href="https://developer.apple.com/account/overview.action" target="_blank">Apple</a>]]></comment>
+                        </apple_merchant> 
+                        <google_merchant translate="label comment">
+                            <label>Google Merchant</label>                           
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                            
+                            <comment><![CDATA[Registration from <a href="https://support.google.com/payments/merchant/answer/1387902?hl=en" target="_blank">Google</a>]]></comment>
+                        </google_merchant>     
+                        <!-- <type translate="label">
                             <label>Type</label>
                             <frontend_type>select</frontend_type>
                             <source_model>simibraintree/type</source_model>
-                            <sort_order>9</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </type>                                                       
+                        </type> -->                                                       
                         <is_sandbox translate="label">
                             <label>Sandbox Mode</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>10</sort_order>
+                            <sort_order>22</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>

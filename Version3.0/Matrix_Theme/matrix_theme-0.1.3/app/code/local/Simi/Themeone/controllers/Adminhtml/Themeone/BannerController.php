@@ -90,7 +90,7 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
         if ($data = $this->getRequest()->getPost()) {
             if (isset($_FILES['banner_name_co']['name']) && $_FILES['banner_name_co']['name'] != '') {
                 try {
-                    / Starting upload /
+                     // Starting upload 
                     $uploader = new Varien_File_Uploader('banner_name_co');
 
                     // Any extention would work
@@ -153,25 +153,6 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
             }
         }
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('themeone')->__('Unable to find item to save'));
-        $this->_redirect('*/*/');
-    }
-
-    /**
-     * delete item action
-     */
-    public function deleteAction() {
-        if ($this->getRequest()->getParam('id') > 0) {
-            try {
-                $model = Mage::getModel('themeone/banner');
-                $model->setId($this->getRequest()->getParam('id'))
-                        ->delete();
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Banner was successfully deleted'));
-                $this->_redirect('*/*/');
-            } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
-            }
-        }
         $this->_redirect('*/*/');
     }
 
