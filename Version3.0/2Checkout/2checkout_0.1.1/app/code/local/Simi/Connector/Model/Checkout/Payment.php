@@ -1,12 +1,5 @@
 <?php
 /**
- * Magestore
- * 
- * NOTICE OF LICENSE
- * 
- * This source file is subject to the Magestore.com license that is
- * available through the world-wide-web at this URL:
- * http://www.magestore.com/license-agreement.html
  * 
  * DISCLAIMER
  * 
@@ -15,16 +8,16 @@
  * 
  * @category 	Simi
  * @package 	Simi_Connector
- * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
- * @license 	http://www.magestore.com/license-agreement.html
+ * @copyright 	Copyright (c) 2012 
+ * @license 	
  */
 
 /**
  * Simi Model
  * 
- * @category 	Simi
- * @package 	Simi_Connector
- * @author  	Simi Developer
+ * @category 	
+ * @package 	Connector
+ * @author  	Developer
  */
 class Simi_Connector_Model_Checkout_Payment extends Simi_Connector_Model_Checkout {
 

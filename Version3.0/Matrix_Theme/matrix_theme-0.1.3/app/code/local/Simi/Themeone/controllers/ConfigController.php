@@ -1,31 +1,23 @@
 <?php
-
 /**
- * Magestore
- * 
- * NOTICE OF LICENSE
- * 
- * This source file is subject to the Magestore.com license that is
- * available through the world-wide-web at this URL:
- * http://www.magestore.com/license-agreement.html
  * 
  * DISCLAIMER
  * 
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  * 
- * @category 	Simi
- * @package 	Simi_Connector
- * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
- * @license 	http://www.magestore.com/license-agreement.html
+ * @category    
+ * @package     Themeone
+ * @copyright   Copyright (c) 2012 
+ * @license     
  */
 
 /**
- * Connector Config Controller
+ * Themeone Controller
  * 
- * @category 	Simi
- * @package 	Simi_Connector
- * @author  	Simi Developer
+ * @category    
+ * @package     Themeone
+ * @author      Developer
  */
 class Simi_Themeone_ConfigController extends Simi_Connector_ConfigController {
 

@@ -1,18 +1,23 @@
 <?php
 /**
- * Magestore
- * 
- * NOTICE OF LICENSE
- * 
- * This source file is subject to the Magestore.com license that is
- * available through the world-wide-web at this URL:
- * http://www.magestore.com/license-agreement.html
  * 
  * DISCLAIMER
  * 
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  * 
+ * @category    
+ * @package     Ztheme
+ * @copyright   Copyright (c) 2012 
+ * @license     
+ */
+
+/**
+ * Ztheme Controller
+ * 
+ * @category    
+ * @package     Ztheme
+ * @author      Developer
  */
 class Simi_Ztheme_Adminhtml_Ztheme_SpotproductController extends Mage_Adminhtml_Controller_Action
 {
@@ -114,7 +119,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_SpotproductController extends Mage_Adminhtml_
                     $website = $data['website_id'];
                     $website= $data['website_id'];
                    if($website==null) $website=0;
-                    $path = Mage::getBaseDir('media') . DS . 'simi' . DS . 'ztheme' . DS . 'spotbanner';
+                    $path = Mage::getBaseDir('media') . DS . 'simi' . DS . 'ztheme' . DS . 'spotbanner' . DS . $website;
                     if (!is_dir($path)) {
                         try {
                             mkdir($path, 0777, TRUE);
@@ -155,7 +160,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_SpotproductController extends Mage_Adminhtml_
                     $website = $data['website_id'];
                     $website= $data['website_id'];
                    if($website==null) $website=0;
-                    $path = Mage::getBaseDir('media') . DS . 'simi' . DS . 'ztheme' . DS . 'spotbanner_tab';
+                    $path = Mage::getBaseDir('media') . DS . 'simi' . DS . 'ztheme' . DS . 'spotbanner_tab' . DS . $website;
                     if (!is_dir($path)) {
                         try {
                             mkdir($path, 0777, TRUE);

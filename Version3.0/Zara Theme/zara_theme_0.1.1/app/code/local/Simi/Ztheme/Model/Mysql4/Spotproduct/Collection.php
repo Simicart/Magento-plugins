@@ -1,30 +1,23 @@
 <?php
 /**
- * Magestore
- * 
- * NOTICE OF LICENSE
- * 
- * This source file is subject to the Magestore.com license that is
- * available through the world-wide-web at this URL:
- * http://www.magestore.com/license-agreement.html
  * 
  * DISCLAIMER
  * 
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  * 
- * @category    Magestore
- * @package     Magestore_ThemeOne
- * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
- * @license     http://www.magestore.com/license-agreement.html
+ * @category    
+ * @package     Ztheme
+ * @copyright   Copyright (c) 2012 
+ * @license     
  */
 
 /**
- * Themeone Resource Collection Model
+ * Ztheme Resource Collection Model
  * 
- * @category    Magestore
- * @package     Magestore_ThemeOne
- * @author      Magestore Developer
+ * @category    
+ * @package     Ztheme
+ * @author      Developer
  */
 class Simi_Ztheme_Model_Mysql4_Spotproduct_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {

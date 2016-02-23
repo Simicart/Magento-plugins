@@ -1,31 +1,23 @@
 <?php
-
 /**
- * Simicart
- * 
- * NOTICE OF LICENSE
- * 
- * This source file is subject to the simicart.com license that is
- * available through the world-wide-web at this URL:
- * http://www.simicart.com/license-agreement.html
- * 
+ *
  * DISCLAIMER
  * 
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  * 
- * @category 	Simicart
- * @package 	Simi_Simibraintree
- * @copyright 	Copyright (c) 2012 Simicart (http://www.simicart.com/)
- * @license 	http://www.simicart.com/license-agreement.html
+ * @category    
+ * @package     Simibraintree
+ * @copyright   Copyright (c) 2012 
+ * @license    
  */
 
 /**
- * Simibraintree Observer Model
+ * Simibraintree Model
  * 
- * @category 	Simi
- * @package 	Simi_Simibraintree
- * @author  	Simi Developer
+ * @category    
+ * @package     Simibraintree
+ * @author      Developer
  */
 class Simi_Simibraintree_Model_Observer {
 

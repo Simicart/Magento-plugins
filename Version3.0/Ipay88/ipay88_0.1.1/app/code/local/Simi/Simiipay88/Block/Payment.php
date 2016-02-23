@@ -1,30 +1,23 @@
 <?php
 /**
- * Magestore
- * 
- * NOTICE OF LICENSE
- * 
- * This source file is subject to the Magestore.com license that is
- * available through the world-wide-web at this URL:
- * http://www.magestore.com/license-agreement.html
  * 
  * DISCLAIMER
  * 
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  * 
- * @category 	Magestore
- * @package 	Magestore_Simiipay88
- * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
- * @license 	http://www.magestore.com/license-agreement.html
+ * @category    
+ * @package     Simiipay88
+ * @copyright   Copyright (c) 2012 
+ * @license     
  */
 
  /**
  * Simiipay88 Block
  * 
- * @category 	Magestore
- * @package 	Magestore_Simiipay88
- * @author  	Magestore Developer
+ * @category    
+ * @package     Simiipay88
+ * @author      Developer
  */
 class Simi_Simiipay88_Block_Payment extends Mage_Payment_Block_Info_Cc
 {

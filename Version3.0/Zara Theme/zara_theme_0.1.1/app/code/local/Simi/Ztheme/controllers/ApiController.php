@@ -1,5 +1,24 @@
 <?php
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Ztheme
+ * @copyright   Copyright (c) 2012 
+ * @license     
+ */
 
+/**
+ * Ztheme Controller
+ * 
+ * @category    
+ * @package     Ztheme
+ * @author      Developer
+ */
 class Simi_Ztheme_ApiController extends Simi_Connector_Controller_Action {
 
     public function get_bannersAction() {
