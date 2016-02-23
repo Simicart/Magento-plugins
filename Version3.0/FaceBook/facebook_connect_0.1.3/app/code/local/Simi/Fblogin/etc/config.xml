@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	Magestore
+ * @package 	Magestore_Fblogin
+ * @copyright 	Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license 	http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Simi_Fblogin>
+            <version>0.1.0</version>
+        </Simi_Fblogin>
+    </modules>
+    <frontend>
+        <routers>
+            <fblogin>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Fblogin</module>
+                    <frontName>fblogin</frontName>
+                </args>
+            </fblogin>
+        </routers>
+        <layout>
+            <updates>
+                <fblogin>
+                    <file>fblogin.xml</file>
+                </fblogin>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Fblogin>
+                    <files>
+                        <default>Simi_Fblogin.csv</default>
+                    </files>
+                </Simi_Fblogin>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <fbloginadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Fblogin</module>
+                    <frontName>fbloginadmin</frontName>
+                </args>
+            </fbloginadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <fblogin>
+                    <file>fblogin.xml</file>
+                </fblogin>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Fblogin>
+                    <files>
+                        <default>Simi_Fblogin.csv</default>
+                    </files>
+                </Simi_Fblogin>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <fblogin>
+                <class>Simi_Fblogin_Model</class>
+                <resourceModel>fblogin_mysql4</resourceModel>
+            </fblogin>
+            <fblogin_mysql4>
+                <class>Simi_Fblogin_Model_Mysql4</class>
+                <entities>
+                    <fblogin>
+                        <table>fblogin</table>
+                    </fblogin>
+                </entities>
+            </fblogin_mysql4>
+        </models>
+        <resources>
+            <fblogin_setup>
+                <setup>
+                    <module>Simi_Fblogin</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </fblogin_setup>
+            <fblogin_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </fblogin_write>
+            <fblogin_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </fblogin_read>
+        </resources>
+        <blocks>
+            <fblogin>
+                <class>Simi_Fblogin_Block</class>
+            </fblogin>
+        </blocks>
+        <helpers>
+            <fblogin>
+                <class>Simi_Fblogin_Helper</class>
+            </fblogin>
+        </helpers>
+        <events>
+            <connector_catalog_get_product_detail_product_detail>
+                <observers>
+                    <simi_facebook_add_link>
+                        <class>fblogin/observer</class>
+                        <method>addLink</method> 
+                    </simi_facebook_add_link>
+                </observers>
+            </connector_catalog_get_product_detail_product_detail>
+      	</events>
+    </global>
+    
+    <default>        
+        <fblogin>
+            <general>
+                <enable>1</enable>
+            </general>            
+        </fblogin>
+    </default>
+</config>
