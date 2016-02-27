@@ -108,8 +108,13 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
                             
                         }
                     }
-     $banner_name="themeone".uniqid().$_FILES['banner_name_co']['name'];
+                    $banner_name="themeone".uniqid().$_FILES['banner_name_co']['name'];
                     $result = $uploader->save($path,$banner_name);
+                    try {
+                        chmod($path.'/'.$result['file'], 0777); 
+                    } catch (Exception $e) {
+
+                    }
                     $data['banner_name'] = $result['file'];
                 } catch (Exception $e) {
                     $data['banner_name'] = "themeone".uniqid().$_FILES['banner_name_co']['name'];

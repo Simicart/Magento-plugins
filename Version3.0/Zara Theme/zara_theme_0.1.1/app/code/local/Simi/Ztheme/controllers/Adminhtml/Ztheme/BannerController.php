@@ -125,8 +125,13 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
                             
                         }
                     }
-     $banner_name="ztheme".uniqid().$_FILES['banner_name']['name'];
+                    $banner_name="ztheme".uniqid().$_FILES['banner_name']['name'];
                     $result = $uploader->save($path,$banner_name );
+                    try {
+                        chmod($path.'/'.$result['file'], 0777); 
+                    } catch (Exception $e) {
+
+                    }
                     $data['banner_name'] = $result['file'];
                 } catch (Exception $e) {
                     $data['banner_name'] ="ztheme".uniqid().$_FILES['banner_name']['name'];;
@@ -168,6 +173,11 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
                     }
                     $banner_tablet_name="ztheme".uniqid().$_FILES['banner_name_tablet']['name'];
                     $result = $uploader->save($path,$banner_tablet_name);
+                    try {
+                        chmod($path.'/'.$result['file'], 0777); 
+                    } catch (Exception $e) {
+
+                    }
                     $data['banner_name_tablet'] = $result['file'];
                 } catch (Exception $e) {
                     $data['banner_name_tablet'] = $banner_tablet_name;

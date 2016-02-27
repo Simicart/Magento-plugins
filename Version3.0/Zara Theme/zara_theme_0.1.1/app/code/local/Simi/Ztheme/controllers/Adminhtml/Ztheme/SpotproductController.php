@@ -126,9 +126,13 @@ class Simi_Ztheme_Adminhtml_Ztheme_SpotproductController extends Mage_Adminhtml_
                         } catch (Exception $e) {
                             
                         }
-                    }
-                    
+                    }                    
                     $result = $uploader->save($path, $_FILES['spotproduct_banner_name']['name'] );
+                    try {
+                        chmod($path.'/'.$result['file'], 0777); 
+                    } catch (Exception $e) {
+
+                    }
                     $data['spotproduct_banner_name'] = $result['file'];
                 } catch (Exception $e) {
                     $data['spotproduct_banner_name'] = $_FILES['spotproduct_banner_name']['name'];
@@ -167,9 +171,13 @@ class Simi_Ztheme_Adminhtml_Ztheme_SpotproductController extends Mage_Adminhtml_
                         } catch (Exception $e) {
                             
                         }
-                    }
-                    
+                    }                    
                     $result = $uploader->save($path, $_FILES['spotproduct_banner_name_tablet']['name'] );
+                    try {
+                        chmod($path.'/'.$result['file'], 0777); 
+                    } catch (Exception $e) {
+
+                    }
                     $data['spotproduct_banner_name_tablet'] = $result['file'];
                 } catch (Exception $e) {
                     $data['spotproduct_banner_name_tablet'] = $_FILES['spotproduct_banner_name_tablet']['name'];

@@ -120,7 +120,19 @@ class Simi_Themeone_Adminhtml_Themeone_SpotproductController extends Mage_Adminh
                             
                     // We set media as the upload dir
                     $path = Mage::getBaseDir('media') . DS ;
+                    if (!is_dir($path)) {
+                        try {
+                            mkdir($path, 0777, TRUE);
+                        } catch (Exception $e) {
+                            
+                        }
+                    }
                     $result = $uploader->save($path, $_FILES['filename']['name'] );
+                    try {
+                        chmod($path.'/'.$result['file'], 0777); 
+                    } catch (Exception $e) {
+
+                    }
                     $data['filename'] = $result['file'];
                 } catch (Exception $e) {
                     $data['filename'] = $_FILES['filename']['name'];

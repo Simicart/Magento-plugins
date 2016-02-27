@@ -42,10 +42,12 @@ class Simi_Ztheme_IndexController extends Mage_Core_Controller_Front_Action {
           `banner_id` int(11) unsigned NOT NULL auto_increment,
           `banner_title` varchar(255) NOT NULL default '',
           `banner_name` varchar(255) NOT NULL default '',
+          `banner_name_tablet` varchar(255) NOT NULL default '',
           `banner_content` text NOT NULL default '',
           `status` smallint(6) NOT NULL default '0',
           `website_id` smallint(5) default '0',
           `category_id` smallint(5) default '0',
+          `banner_position` smallint(5) default '0',
           
           PRIMARY KEY (`banner_id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
