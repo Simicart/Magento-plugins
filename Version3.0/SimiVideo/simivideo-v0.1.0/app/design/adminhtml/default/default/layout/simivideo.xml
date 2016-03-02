@@ -14,9 +14,9 @@
  */
 -->
 <layout version="0.1.0">
-    <simivideoadmin_adminhtml_simivideo_index>
+    <adminhtml_simivideo_simivideo_index>
         <reference name="content">
             <block type="simivideo/adminhtml_simivideo" name="simivideo" />
         </reference>
-    </simivideoadmin_adminhtml_simivideo_index>
+    </adminhtml_simivideo_simivideo_index>
 </layout>

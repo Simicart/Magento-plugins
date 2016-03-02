@@ -48,13 +48,13 @@
     </frontend>
     <admin>
         <routers>
-            <simivideoadmin>
-                <use>admin</use>
-                <args>
-                    <module>Simi_Simivideo</module>
-                    <frontName>simivideoadmin</frontName>
-                </args>
-            </simivideoadmin>
+            <adminhtml> 
+                <args> 
+                    <modules> 
+                        <Simi_Simivideo after="Mage_Adminhtml">Simi_Simivideo_Adminhtml</Simi_Simivideo>
+                    </modules> 
+                </args> 
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>

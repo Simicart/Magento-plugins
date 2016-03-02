@@ -19,7 +19,7 @@
  * @package     Simivideo
  * @author      Developer
  */
-class Simi_Simivideo_Adminhtml_SimivideoController extends Mage_Adminhtml_Controller_Action {
+class Simi_Simivideo_Adminhtml_Simivideo_SimivideoController extends Mage_Adminhtml_Controller_Action {
 
     /**
      * init layout and set active for current menu
@@ -203,7 +203,7 @@ class Simi_Simivideo_Adminhtml_SimivideoController extends Mage_Adminhtml_Contro
     }
 
     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('simivideo');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
     
     public function chooserMainProductsAction() {        
