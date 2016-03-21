@@ -26,7 +26,7 @@ class Simi_Themeone_Block_Adminhtml_Grid_Renderer_Storeimage extends Mage_Adminh
             if($this->_image_type=="category" && ($this->_image_type_id ==2 or $this->_image_type_id==3))
                 return $this->__('Recommended size: Width = 2 * Height'.'Base image is the main image for this category. Other images will slide in turn');
             else
-                return $this->__('Recommended size: Width =   Height''Base image is the main image for this category. Other images will slide in turn');
+                return $this->__('Recommended size: Width =   Height'.'Base image is the main image for this category. Other images will slide in turn');
         }
                 /**
 	 * get and set element
