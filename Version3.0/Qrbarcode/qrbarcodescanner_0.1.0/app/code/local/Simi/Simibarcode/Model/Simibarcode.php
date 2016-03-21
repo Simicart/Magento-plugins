@@ -32,7 +32,7 @@ class Simi_Simibarcode_Model_Simibarcode extends Simi_Connector_Model_Abstract
 		$code = $data->code;
 		$type = $data->type;
 		$arrayReturn = array();
-		$information = $this->statusError(array(Mage::helper('simibarcode')->__('No Product matching the code')));
+		$information = $this->statusError(array(Mage::helper('simibarcode')->__('No product matching code')));
 		if(isset($code) && $code != ''){
 			if($type == '1'){
 				$qrcode = Mage::getModel('simibarcode/simibarcode')->load($code, 'qrcode');

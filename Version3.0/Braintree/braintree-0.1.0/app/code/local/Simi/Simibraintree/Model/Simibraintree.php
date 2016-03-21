@@ -49,7 +49,7 @@ class Simi_Simibraintree_Model_Simibraintree extends Simi_Connector_Model_Abstra
             try {
                 if ($this->_initInvoice($data->order_id, $transaction)){
                     $informtaion = $this->statusSuccess();                                    
-                    $informtaion['message'] = array(Mage::helper('core')->__('Your order has been received.   Thank you for your purchase!'));
+                    $informtaion['message'] = array(Mage::helper('core')->__('Thank you for your purchase!'));
                     return $informtaion;
                 }            
                     else{

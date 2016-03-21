@@ -55,7 +55,7 @@ class Simi_Paypalmobile_Model_Paypalmobile extends Simi_Connector_Model_Abstract
         try {
             if ($this->_initInvoice($data['invoice_number'], $data)){
 				$informtaion = $this->statusSuccess();				
-				$informtaion['message'] = array(Mage::helper('core')->__('Your order has been received.   Thank you for your purchase!'));
+				$informtaion['message'] = array(Mage::helper('core')->__('Thank you for your purchase!'));
 				return $informtaion;
 			}            
             else{
