@@ -222,6 +222,6 @@ class Simi_Simiipay88_Adminhtml_Simiipay88Controller extends Mage_Adminhtml_Cont
 	}
 	
 	protected function _isAllowed(){
-		return Mage::getSingleton('admin/session')->isAllowed('simiipay88');
+		return Mage::getSingleton('admin/session')->isAllowed('connector');
 	}
 }
