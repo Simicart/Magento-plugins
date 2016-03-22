@@ -176,5 +176,9 @@ class Magestore_Storelocator_Adminhtml_Storelocator_HolidayController extends Ma
         $response->sendResponse();
         die;
     }
+    
+     protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
+    }
 
 }
