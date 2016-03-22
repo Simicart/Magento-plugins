@@ -156,7 +156,8 @@
                 <allowspecific>0</allowspecific>
                 <client_id backend_model="adminhtml/system_config_backend_encrypted"/>                    
                 <secret backend_model="adminhtml/system_config_backend_encrypted"/>
-                <is_sandbox>0</is_sandbox>           
+                <is_sandbox>0</is_sandbox>    
+                <use_credit_cart>0</use_credit_cart>
             </paypal_mobile>          
         </payment>       
     </default>
