@@ -338,15 +338,15 @@ class Simi_Ztheme_Model_Spotproduct extends Simi_Ztheme_Model_Abstract {
 
 }
 
-function cmpNameASC($a, $b) {
+function cmpZNameASC($a, $b) {
     return strcmp($a->getName(), $b->getName());
 }
 
-function cmpNameDesc($a, $b) {
+function cmpZNameDesc($a, $b) {
     return -strcmp($a->getName(), $b->getName());
 }
 
-function cmpPriceDESC($a, $b) {
+function cmpZPriceDESC($a, $b) {
     $ap = $a->getPrice();
     $bp = $b->getPrice();
     $result = 0;
@@ -357,7 +357,7 @@ function cmpPriceDESC($a, $b) {
     return $result;
 }
 
-function cmpPriceASC($a, $b) {
+function cmpZPriceASC($a, $b) {
     $ap = $a->getPrice();
     $bp = $b->getPrice();
     $result = 0;
@@ -371,13 +371,13 @@ function cmpPriceASC($a, $b) {
 function sortCustom(&$array, $sort_option) {
     switch ($sort_option) {
         case 0: return false;
-        case 1: usort($array, "cmpPriceASC");
+        case 1: usort($array, "cmpZPriceASC");
             return true;
-        case 2: usort($array, "cmpPriceDESC");
+        case 2: usort($array, "cmpZPriceDESC");
             return true;
-        case 3: usort($array, "cmpNameASC");
+        case 3: usort($array, "cmpZNameASC");
             return true;
-        case 4: usort($array, "cmpNameDESC");
+        case 4: usort($array, "cmpZNameDESC");
             return true;
     }
 }
