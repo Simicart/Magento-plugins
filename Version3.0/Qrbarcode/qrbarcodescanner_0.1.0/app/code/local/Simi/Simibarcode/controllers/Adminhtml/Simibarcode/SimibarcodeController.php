@@ -459,7 +459,7 @@ class Simi_Simibarcode_Adminhtml_Simibarcode_SimibarcodeController extends Mage_
 	}
 	
 	protected function _isAllowed(){
-		return Mage::getSingleton('admin/session')->isAllowed('simibarcode');
+		return Mage::getSingleton('admin/session')->isAllowed('connector');
 	}
 
 	/**
