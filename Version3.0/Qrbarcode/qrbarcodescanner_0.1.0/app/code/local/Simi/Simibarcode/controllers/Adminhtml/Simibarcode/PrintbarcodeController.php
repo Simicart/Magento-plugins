@@ -32,6 +32,10 @@ class Simi_Simibarcode_Adminhtml_Simibarcode_PrintbarcodeController extends Mage
         // $function = Mage::getModel('simibarcode/printbarcode_function');
         echo $this->getLayout()->createBlock('simibarcode/adminhtml_printbarcode')->setTemplate('simibarcode/printbarcode/selecttemplate.phtml')->toHtml();
     }
+    
+     protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
+    }
 
     public function getImageAction() 
     {
