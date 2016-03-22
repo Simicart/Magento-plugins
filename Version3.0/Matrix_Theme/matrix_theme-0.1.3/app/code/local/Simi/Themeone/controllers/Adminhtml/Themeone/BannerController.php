@@ -238,7 +238,7 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
     }
 
     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('themeone');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
 
     public function chooserMainCategoriesAction(){
