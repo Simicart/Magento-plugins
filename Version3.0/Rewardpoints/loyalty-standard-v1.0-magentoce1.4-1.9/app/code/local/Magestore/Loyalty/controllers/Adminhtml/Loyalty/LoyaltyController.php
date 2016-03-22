@@ -257,6 +257,6 @@ class Magestore_Loyalty_Adminhtml_Loyalty_LoyaltyController extends Mage_Adminht
     
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('loyalty');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
 }
