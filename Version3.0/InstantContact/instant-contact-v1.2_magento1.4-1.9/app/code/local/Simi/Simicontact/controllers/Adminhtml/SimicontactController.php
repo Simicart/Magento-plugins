@@ -222,6 +222,6 @@ class Simi_Simicontact_Adminhtml_SimicontactController extends Mage_Adminhtml_Co
 	}
 	
 	protected function _isAllowed(){
-		return Mage::getSingleton('admin/session')->isAllowed('simicontact');
+		return Mage::getSingleton('admin/session')->isAllowed('connector');
 	}
 }
