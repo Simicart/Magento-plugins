@@ -8,4 +8,7 @@ class Magestore_Storelocator_Adminhtml_Storelocator_GuideController extends Mage
         $this->getLayout()->getBlock('head')->setTitle($this->__('Store Locator Guide'));
         $this->renderLayout();
     }
+     protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
+    }
 }

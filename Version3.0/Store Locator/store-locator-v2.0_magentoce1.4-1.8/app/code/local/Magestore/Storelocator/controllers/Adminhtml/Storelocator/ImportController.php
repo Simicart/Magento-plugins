@@ -35,6 +35,9 @@ class Magestore_Storelocator_Adminhtml_Storelocator_Importcontroller extends Mag
 
 		$this->renderLayout();
     }
+     protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
+    }
 
     public function saveAction() {
        $overwrite_option = $this->getRequest()->getPost('overwrite_store');

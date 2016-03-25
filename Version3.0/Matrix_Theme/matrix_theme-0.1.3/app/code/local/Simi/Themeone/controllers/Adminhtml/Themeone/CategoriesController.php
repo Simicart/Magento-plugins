@@ -292,7 +292,7 @@ class Simi_Themeone_Adminhtml_Themeone_CategoriesController extends Mage_Adminht
 //    }
 //    
     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('themeone');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
 
 }

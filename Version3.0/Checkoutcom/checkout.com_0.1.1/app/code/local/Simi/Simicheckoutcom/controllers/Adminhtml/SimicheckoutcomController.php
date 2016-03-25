@@ -222,6 +222,6 @@ class Simi_Simicheckoutcom_Adminhtml_SimicheckoutcomController extends Mage_Admi
 	}
 	
 	protected function _isAllowed(){
-		return Mage::getSingleton('admin/session')->isAllowed('simicheckoutcom');
+		return Mage::getSingleton('admin/session')->isAllowed('connector');
 	}
 }

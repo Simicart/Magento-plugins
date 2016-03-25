@@ -359,7 +359,7 @@ class Magestore_Productlabel_Adminhtml_Productlabel_ProductlabelController exten
     }
 
     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('productlabel');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
 
 }

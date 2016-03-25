@@ -257,6 +257,6 @@ class Simi_Hideaddress_Adminhtml_HideaddressController extends Mage_Adminhtml_Co
     
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('hideaddress');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
 }

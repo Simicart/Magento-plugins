@@ -272,6 +272,6 @@ class Magestore_Storelocator_Adminhtml_Storelocator_StorelocatorController exten
         die;
     }
 	protected function _isAllowed(){
-		return Mage::getSingleton('admin/session')->isAllowed('storelocator');
+		return Mage::getSingleton('admin/session')->isAllowed('connector');
 	}   
 }

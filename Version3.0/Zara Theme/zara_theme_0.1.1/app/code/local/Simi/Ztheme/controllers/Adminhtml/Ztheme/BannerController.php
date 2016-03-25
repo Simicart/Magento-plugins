@@ -327,6 +327,6 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
     
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('ztheme');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
 }

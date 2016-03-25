@@ -288,6 +288,6 @@ class Simi_Themeone_Adminhtml_Themeone_SpotproductController extends Mage_Adminh
 //    
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('themeone');
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
     }
 }

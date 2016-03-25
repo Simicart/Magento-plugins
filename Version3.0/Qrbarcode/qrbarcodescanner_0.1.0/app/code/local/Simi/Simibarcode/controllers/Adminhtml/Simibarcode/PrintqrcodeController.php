@@ -108,5 +108,9 @@ class Simi_Simibarcode_Adminhtml_Simibarcode_PrintqrcodeController extends Mage_
 
         $mpdf->Output();
     }
+    
+     protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('connector');
+    }
 
 }

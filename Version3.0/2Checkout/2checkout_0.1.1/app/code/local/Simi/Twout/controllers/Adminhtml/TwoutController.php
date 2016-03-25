@@ -222,6 +222,6 @@ class Simi_Twout_Adminhtml_TwoutController extends Mage_Adminhtml_Controller_Act
 	}
 	
 	protected function _isAllowed(){
-		return Mage::getSingleton('admin/session')->isAllowed('twout');
+		return Mage::getSingleton('admin/session')->isAllowed('connector');
 	}
 }
