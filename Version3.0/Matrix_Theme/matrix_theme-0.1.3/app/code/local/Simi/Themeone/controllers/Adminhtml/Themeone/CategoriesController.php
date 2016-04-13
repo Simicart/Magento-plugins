@@ -111,7 +111,7 @@ class Simi_Themeone_Adminhtml_Themeone_CategoriesController extends Mage_Adminht
                     // true -> get the file in the product like folders 
                     //    (file.jpg will go in something like /media/f/i/file.jpg)
                     $uploader->setFilesDispersion(false);
-
+                    $_FILES['filename']['name'] = str_replace(" ", "_", $_FILES['filename']['name']); 
                     // We set media as the upload dir
                     $path = Mage::getBaseDir('media') . DS;
                     if (!is_dir($path)) {

@@ -66,7 +66,7 @@ class Simi_SimiAvenue_ApiController extends Simi_Connector_Controller_Action
 			{
 				$order = Mage::getModel( 'sales/order' );
 				$order->loadByIncrementId( $order_id );
-				$f_passed_status = Mage::getStoreConfig('payment/ccavenuepay/payment_success_status');
+				$f_passed_status = Mage::getStoreConfig('payment/simiavenue/payment_success_status');
 				$order->setState( $f_passed_status, true, 'CCAvenue has authorized the payment.' );
 				
 				$order->sendNewOrderEmail();

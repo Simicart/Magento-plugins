@@ -20,7 +20,7 @@
                 <simi_theme>
                     <children>
                         <themeone module="themeone" translate="title">
-                            <title>Manage Matrix Theme</title>
+                            <title>Matrix Theme</title>
                             <children>
                                 <banner module="themeone" translate="title">
                                     <title>Manage Banners</title>

@@ -50,7 +50,7 @@ class Simi_Ztheme_Model_Observer {
             $productId = $product['product_id'];
             if ($productId) {
                 $my_product = Mage::getModel('catalog/product')->load($productId);
-                $product['product_url'] = $my_product->getProductUrl();
+                $product['product_url'] = str_replace(' ', '%20',$my_product->getProductUrl());
                 $observerData['data'][$index] = $product;
                 break;
             }

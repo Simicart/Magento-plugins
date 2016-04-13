@@ -126,7 +126,10 @@ class Simi_Paypalmobile_Model_Paypalmobile extends Simi_Connector_Model_Abstract
 
     protected function setOrderCancel($orderIncrementId) {
         $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
-        $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true)->save();
+        // $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true)->save();
+        if ($order->getId()) {
+            $order->cancel()->save();
+        }
     }
 
 }

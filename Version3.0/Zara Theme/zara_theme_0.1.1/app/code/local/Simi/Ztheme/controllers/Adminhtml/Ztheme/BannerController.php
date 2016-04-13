@@ -113,7 +113,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
                     $uploader->setFilesDispersion(false);
                     
                     // We set media as the upload dir
-                    str_replace(" ", "_", $_FILES['banner_name']['name']);                    
+                    $_FILES['banner_name']['name'] = str_replace(" ", "_", $_FILES['banner_name']['name']);                    
                     $website = $data['website_id'];
                     $website= $data['website_id'];
                    if($website==null) $website=0;
@@ -159,7 +159,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_BannerController extends Mage_Adminhtml_Contr
                     $uploader->setFilesDispersion(false);
                     
                     // We set media as the upload dir
-                    str_replace(" ", "_", $_FILES['banner_name_tablet']['name']);                    
+                    $_FILES['banner_name_tablet']['name'] = str_replace(" ", "_", $_FILES['banner_name_tablet']['name']);                    
                     $website = $data['website_id'];
                     $website= $data['website_id'];
                    if($website==null) $website=0;
