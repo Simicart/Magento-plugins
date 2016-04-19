@@ -115,7 +115,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_SpotproductController extends Mage_Adminhtml_
                     $uploader->setFilesDispersion(false);
                     
                     // We set media as the upload dir
-                    str_replace(" ", "_", $_FILES['spotproduct_banner_name']['name']);                    
+                    $_FILES['spotproduct_banner_name']['name'] = str_replace(" ", "_", $_FILES['spotproduct_banner_name']['name']);                    
                     $website = $data['website_id'];
                     $website= $data['website_id'];
                    if($website==null) $website=0;
@@ -160,7 +160,7 @@ class Simi_Ztheme_Adminhtml_Ztheme_SpotproductController extends Mage_Adminhtml_
                     $uploader->setFilesDispersion(false);
                     
                     // We set media as the upload dir
-                    str_replace(" ", "_", $_FILES['spotproduct_banner_name_tablet']['name']);                    
+                     $_FILES['spotproduct_banner_name_tablet']['name'] = str_replace(" ", "_", $_FILES['spotproduct_banner_name_tablet']['name']);                    
                     $website = $data['website_id'];
                     $website= $data['website_id'];
                    if($website==null) $website=0;

@@ -349,7 +349,7 @@ class Simi_Appwishlist_Model_Appwishlist extends Simi_Connector_Model_Catalog_Pr
                 }
             }
 
-            $productSharingMessage = Mage::getStoreConfig('appwishlist/general/product_sharing_message') . ' ' . $product->getProductUrl();
+            $productSharingMessage = Mage::getStoreConfig('appwishlist/general/product_sharing_message') . ' ' . str_replace(' ', '%20',$product->getProductUrl());
 
             $info_product = array(
                 'product_id' => $product->getId(),
@@ -368,7 +368,7 @@ class Simi_Appwishlist_Model_Appwishlist extends Simi_Connector_Model_Catalog_Pr
                 'selected_all_required_options' => $this->_checkIfSelectedAllRequiredOptions($item, $options),
                 'product_qty' => $item->getQty(),
                 'product_sharing_message' => $productSharingMessage,
-                'product_sharing_url' => $product->getProductUrl(),
+                'product_sharing_url' => str_replace(' ', '%20',$product->getProductUrl()),
             );
             if ($prices) {
                 $info_product = array_merge($info_product, $prices);

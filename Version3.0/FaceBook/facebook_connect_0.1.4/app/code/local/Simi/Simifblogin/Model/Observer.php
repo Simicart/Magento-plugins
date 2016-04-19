@@ -29,7 +29,7 @@ class Simi_Simifblogin_Model_Observer
 	public function addLink($observer){
 		$object = $observer->getObject();
 		$data = $object->getCacheData();
-		$data["product_url"] = $observer->getProduct()->getProductUrl();
+		$data["product_url"] = str_replace(' ', '%20',$observer->getProduct()->getProductUrl());
 		$object->setCacheData($data, "simi_connector");		
 	}
 

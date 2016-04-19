@@ -96,7 +96,7 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
                     $uploader->setFilesDispersion(false);
 
                     // We set media as the upload dir
-                    str_replace(" ", "_", $_FILES['banner_name_co']['name']);                    
+                    $_FILES['banner_name_co']['name'] = str_replace(" ", "_", $_FILES['banner_name_co']['name']);                    
                     $website = $data['website_id'];
                     $website=$data['website_id'];
                    if($website==null) $website=0;
@@ -124,6 +124,9 @@ class Simi_Themeone_Adminhtml_Themeone_BannerController extends Mage_Adminhtml_C
                 Mage::helper('connector')->deleteBanner($data['banner_name_co']['value']);
                 $data['banner_name'] = '';
             }         
+            if(isset($data['type']) && $data['type'] != 2 && $data['type'] != 3){
+                $data['type'] = 1;
+            } 
             $model = Mage::getModel('themeone/banner');
             $model->setData($data)
                     ->setId($this->getRequest()->getParam('id'));
