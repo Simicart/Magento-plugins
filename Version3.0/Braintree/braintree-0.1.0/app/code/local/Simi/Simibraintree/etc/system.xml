@@ -84,7 +84,14 @@
                             <show_in_website>1</show_in_website>
                             <sort_order>12</sort_order>
                             <show_in_store>0</show_in_store>                            
-                        </merchant_id>                     
+                        </merchant_id>
+                        <merchant_account_id translate="label comment tooltip">
+                            <label>Merchant Account ID</label>                          
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>13</sort_order>
+                            <show_in_store>0</show_in_store>                            
+                        </merchant_account_id>                     
                         <public_key translate="label">
                             <label>Public Key</label>                                                              
                             <sort_order>14</sort_order>
