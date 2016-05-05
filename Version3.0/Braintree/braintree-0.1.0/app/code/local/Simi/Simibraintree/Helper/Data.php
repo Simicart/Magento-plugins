@@ -75,7 +75,7 @@ class Simi_Simibraintree_Helper_Data extends Mage_Core_Helper_Abstract {
                 $customerExists = false;
             }
         }        
-        $params = array("merchantAccountId" => $this->getMerchantId());
+        $params = array("merchantAccountId" => $this->getMerchantAccountId());
         if ($customerExists) {
             $params['customerId'] = $customerId;
         }
@@ -139,6 +139,15 @@ class Simi_Simibraintree_Helper_Data extends Mage_Core_Helper_Abstract {
      */
     public function getMerchantId(){
         return $this->getConfigBraintree('merchant_id');
+    } 
+
+    /**
+     * get merchant Id
+     * 
+     * @return boolean
+     */
+    public function getMerchantAccountId(){
+        return $this->getConfigBraintree('merchant_account_id');
     }
 
     /**
