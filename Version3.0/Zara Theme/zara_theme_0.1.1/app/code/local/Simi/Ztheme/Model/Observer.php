@@ -68,23 +68,23 @@ class Simi_Ztheme_Model_Observer {
         //var_dump($producIdArray);die;
     }
 
-    public function simiConnectorGetProductListAfter($observer) {
-        if ($this->getConfig('enable') != 0) {
-            $observerObject = $observer->getObject();
-            $information = $observerObject->information;
-            $collection = $observerObject->collection;
-            if ($information['message'][0]!=null) {
-                $collection->setPageSize($information['message'][0]);
-            }
-            $producIdArray = array();
-            foreach ($collection->getData() as $key => $product) {
-                $producIdArray[] = $product['entity_id'];
-            }
-            $information['other'][0] = array('product_id_array' => $producIdArray);
-            $observerObject->information = $information;
-            $observer->setObject($observerObject);
-        }
-    }
+    // public function simiConnectorGetProductListAfter($observer) {
+    //     if ($this->getConfig('enable') != 0) {
+    //         $observerObject = $observer->getObject();
+    //         $information = $observerObject->information;
+    //         $collection = $observerObject->collection;
+    //         if ($information['message'][0]!=null) {
+    //             $collection->setPageSize($information['message'][0]);
+    //         }
+    //         $producIdArray = array();
+    //         foreach ($collection->getData() as $key => $product) {
+    //             $producIdArray[] = $product['entity_id'];
+    //         }
+    //         $information['other'][0] = array('product_id_array' => $producIdArray);
+    //         $observerObject->information = $information;
+    //         $observer->setObject($observerObject);
+    //     }
+    // }
 
     public function getConfig($value) {
         return Mage::getStoreConfig("ztheme/general/" . $value);

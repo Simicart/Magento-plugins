@@ -31,8 +31,9 @@ class Simi_Themeone_ApiController extends Simi_Connector_Controller_Action
     }
      public function get_order_spotsAction(){
         $data=$this->getData();
-        $phone_type=$data->phone_type;
-        if($phone_type==null || !isset($phone_type)) $phone_type="phone";
+        $phone_type="phone";
+        if(isset($data->phone_type) && $data->phone_type!=null ) 
+            $phone_type=$data->phone_type;
         $information=Mage::getModel('themeone/spotproduct_spot')->getSpotProduct($data,$phone_type);
         $this->_printDataJson($information);
     }

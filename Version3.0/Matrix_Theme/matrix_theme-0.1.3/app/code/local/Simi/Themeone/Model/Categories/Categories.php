@@ -35,6 +35,10 @@ class Simi_Themeone_Model_Categories_Categories extends Simi_Themeone_Model_Cate
             $priority = $category->getData('priority');
             $category_id = $category->getData('category_id');
             $category_name = $category->getData('category_name');
+             if ($category_id == '-1')
+                $category_name = Mage::helper('themeone')->__($category_name);
+            else 
+                $category_name = Mage::getModel('catalog/category')->load($category->getData('category_id'))->getName();
             $images = Mage::getModel('themeone/images')->getCollection()->addFieldToFilter('image_type', 'category')
                     ->addFieldToFilter('image_type_id', $priority)->addFieldToFilter('image_delete', 2)
                     ->setOrder('status', 'DESC');
