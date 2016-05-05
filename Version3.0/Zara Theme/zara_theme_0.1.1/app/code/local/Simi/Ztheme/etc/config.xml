@@ -161,14 +161,14 @@
                 </observers>
             </simicart_get_list_product_before>
            
-            <simi_connector_get_product_list_after>
+            <!-- <simi_connector_get_product_list_after>
                 <observers>
                     <ztheme_observers>
                         <class>ztheme/observer</class>
                         <method>simiConnectorGetProductListAfter</method>
                     </ztheme_observers>
                 </observers>
-            </simi_connector_get_product_list_after>
+            </simi_connector_get_product_list_after> -->
         </events>
         
     </global>

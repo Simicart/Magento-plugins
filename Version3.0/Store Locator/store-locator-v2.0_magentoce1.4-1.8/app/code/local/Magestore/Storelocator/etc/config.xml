@@ -32,6 +32,16 @@
                 </Magestore_Storelocator>
             </modules>
         </translate>
+        <events>
+            <connector_config_get_plugins_return>
+                <observers>
+                    <storelocator_observers>
+                        <class>storelocator/observer</class>
+                        <method>connectorConfigGetPluginsReturn</method>
+                    </storelocator_observers>
+                </observers>
+            </connector_config_get_plugins_return>
+        </events>
     </frontend>>    
     <admin>
         <routers>
@@ -82,13 +92,13 @@
                     </storevalue>
                     <tag>
                         <table>storelocator_tag</table>
-                    </tag>	
+                    </tag>  
                     <holiday>
                         <table>storelocator_holiday</table>
                     </holiday>
                     <specialday>
                         <table>storelocator_specialday</table>
-                    </specialday>				
+                    </specialday>               
                 </entities>
             </storelocator_mysql4>
         </models>

@@ -11,4 +11,20 @@ class Magestore_Storelocator_Model_Observer
 		$action = $observer->getEvent()->getControllerAction();
 		return $this;
 	}
+
+	public function connectorConfigGetPluginsReturn($observer) 
+    {
+        if (!Mage::getStoreConfig('storelocator/general/enable', Mage::app()->getStore()->getId())) {
+            $observerObject = $observer->getObject();
+            $observerData = $observer->getObject()->getData();
+            $contactPluginId = NULL;
+            $plugins = array();
+            foreach ($observerData['data'] as $key => $plugin) {
+                if ($plugin['sku'] == 'magestore_storelocator') continue;
+                $plugins[] = $plugin;
+            }
+            $observerData['data'] = $plugins;
+            $observerObject->setData($observerData);
+        }
+    }
 }
