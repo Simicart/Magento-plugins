@@ -99,9 +99,11 @@
                 </entities>
             </themeone_mysql4>	
             <connector>
+			<!--
               <rewrite>
                   <banner>Simi_Themeone_Model_Banner</banner>
               </rewrite>
+			-->
           </connector>	
         </models>
         <resources>
