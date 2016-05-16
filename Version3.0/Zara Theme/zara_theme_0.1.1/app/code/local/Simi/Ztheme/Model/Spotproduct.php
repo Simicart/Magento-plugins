@@ -55,9 +55,9 @@ class Simi_Ztheme_Model_Spotproduct extends Simi_Ztheme_Model_Abstract {
             //image
             $path = '';
             if ($spot->getSpotproductBannerName() && ($spot->getSpotproductBannerName() != ''))
-                $path = Mage::getBaseUrl('media') . 'simi/ztheme/spotbanner' . '/' . $spot->getSpotproductBannerName();
+                $path = Mage::getBaseUrl('media') . 'simi/ztheme/spotbanner' . '/0/' . $spot->getSpotproductBannerName();
             if (($phone_type == 'tablet') && ($item->getBannerNameTablet()) && ($item->getBannerNameTablet() != ''))
-                $path = Mage::getBaseUrl('media') . 'simi/ztheme/spotbanner_tab' . '/' . $spot->getSpotproductBannerNameTablet();
+                $path = Mage::getBaseUrl('media') . 'simi/ztheme/spotbanner_tab' . '/0/' . $spot->getSpotproductBannerNameTablet();
 
             //title
             $title = '';
