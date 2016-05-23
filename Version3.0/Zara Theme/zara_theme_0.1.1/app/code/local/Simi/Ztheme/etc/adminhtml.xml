@@ -65,31 +65,31 @@
                         </children>
                     </system>
                     <connector>
-                        <children>
-                            <simi_theme>
-                                <children>
-                                    <ztheme module="ztheme" translate="title">
-                                        <title>Zara Theme</title>
-                                        <sort_order>71</sort_order>
-                                        <children>
-                                            <banner module="ztheme" translate="title">
-                                                <title>Manage Banners</title>
-                                                <sort_order>0</sort_order>
-                                            </banner>
-                                            <spotproduct module="ztheme" translate="title">
-                                                <title>Manage Spot Products</title>
-                                                <sort_order>10</sort_order>
-                                            </spotproduct>
-                                            <settings module="ztheme" translate="title">
-                                                <title>Settings</title>
-                                                <sort_order>1000</sort_order>
-                                            </settings>
-                                        </children>
-                                    </ztheme>
-                                </children>
-                            </simi_theme>
-                        </children>
-                    </connector>
+            <children>
+                <simi_theme>
+                    <children>
+                        <ztheme module="ztheme" translate="title">
+                            <title>Zara Theme</title>
+                            <sort_order>71</sort_order>
+                            <children>
+                                <banner module="ztheme" translate="title">
+                                    <title>Manage Banners</title>
+                                    <sort_order>0</sort_order>
+                                </banner>
+                                <spotproduct module="ztheme" translate="title">
+                                    <title>Manage Spot Products</title>
+                                    <sort_order>10</sort_order>
+                                </spotproduct>
+                                <settings module="ztheme" translate="title">
+                                    <title>Settings</title>
+                                    <sort_order>1000</sort_order>
+                                </settings>
+                            </children>
+                        </ztheme>
+                    </children>
+                </simi_theme>
+            </children>
+        </connector>
                 </children>
             </admin>
         </resources>

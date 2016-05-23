@@ -55,13 +55,13 @@
                         </children>
                     </simicontact>
                     <connector>
-                        <children>
-                            <simcontactsettings module="simicontact" translate="title">
-                                <title>Instant Contact</title>
-                                <sort_order>900</sort_order>
-                            </simcontactsettings>
-                        </children>
-                    </connector>
+            <children>
+                <simcontactsettings module="simicontact" translate="title">
+                    <title>Instant Contact</title>
+                    <sort_order>900</sort_order>
+                </simcontactsettings>
+            </children>
+        </connector>
                 </children>
             </admin>
         </resources>
