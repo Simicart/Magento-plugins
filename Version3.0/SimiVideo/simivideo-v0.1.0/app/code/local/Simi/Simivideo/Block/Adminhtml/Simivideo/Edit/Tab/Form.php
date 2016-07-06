@@ -71,7 +71,7 @@ class Simi_Simivideo_Block_Adminhtml_Simivideo_Edit_Tab_Form extends Mage_Adminh
                 <script type="text/javascript">
                     function toggleMainProducts(){
                         if($("main_products_select").style.display == "none"){
-                            var url = "' . $this->getUrl('simivideoadmin/adminhtml_simivideo/chooserMainProducts', array('_secure'=>true)) . '";
+                            var url = "' . $this->getUrl('*/*/chooserMainProducts', array('_secure'=>true)) . '";
                             var params = $("product_ids").value.split(", ");
                             var parameters = {"form_key": FORM_KEY,"selected[]":params };
                             var request = new Ajax.Request(url,
