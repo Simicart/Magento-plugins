@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <simi translate="label">
+            <label>Simi Extension</label>
+            <sort_order>600</sort_order>
+        </simi>
+    </tabs>
+	<sections>
+		<livechatzopim translate="label" module="livechatzopim">
+			<class>separator-top</class>
+			<label>Live Chat Zopim</label>
+			<tab>simi</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>299</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general translate="label">
+					<label>General Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>		
+						<enable translate="label">
+							<label>Enable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>1</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment></comment>
+						</enable>
+						<account_key translate="label">
+                            <label>Account Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+							<comment>Key get from zopim dashboard</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </account_key>  
+                        <show_profile translate="label">
+							<label>Allow show profile</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>4</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment></comment>
+						</show_profile>
+                        <name translate="label">
+                            <label>Name</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechatzopim/options</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_profile>1</show_profile>
+                            </depends>
+                        </name>	
+                        <email translate="label">
+                            <label>Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechatzopim/options</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_profile>1</show_profile>
+                            </depends>
+                        </email>	
+                        <phone translate="label">
+                            <label>Phone</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechatzopim/options</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <show_profile>1</show_profile>
+                            </depends>
+                        </phone>	                                               					
+					</fields>				
+				</general>
+			</groups>
+		</livechatzopim>
+	</sections>
+</config>
