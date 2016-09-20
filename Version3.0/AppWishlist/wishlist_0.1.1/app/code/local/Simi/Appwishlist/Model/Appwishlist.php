@@ -332,7 +332,7 @@ class Simi_Appwishlist_Model_Appwishlist extends Simi_Connector_Model_Catalog_Pr
             $prices = $this->getOptionModel()->getPriceModel($product);
             $manufacturer_name = "";
             try {
-                $manufacturer_name = $product->getAttributeText('manufacturer') == false ? '' : $product->getAttributeText('manufacturer');
+                //$manufacturer_name = $product->getAttributeText('manufacturer') == false ? '' : $product->getAttributeText('manufacturer');
             } catch (Exception $e) {
                 
             }
