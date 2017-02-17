@@ -32,7 +32,7 @@ class Simi_Simibraintree_Block_Braintree extends Mage_Payment_Block_Info_Cc {
         } elseif (Mage::getSingleton('core/session')->getOrderIdForEmail()) {
             $orderId = Mage::getSingleton('core/session')->getOrderIdForEmail();
         }
-        $train = Mage::getModel('paypalmobile/paypalmobile')->getCollection()
+        $train = Mage::getModel('simibraintree/simibraintree')->getCollection()
                 ->addFieldToFilter('order_id', $orderId)
                 ->getLastItem();
         $this->_tranS = $train;
