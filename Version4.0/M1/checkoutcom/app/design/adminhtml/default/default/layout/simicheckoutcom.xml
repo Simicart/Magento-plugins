@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simicheckoutcom
+ * @copyright   Copyright (c) 2012 
+ * @license     
+ */
+-->
+<layout version="0.1.0">
+	<simicheckoutcomadmin_adminhtml_simicheckoutcom_index>
+		<reference name="content">
+			<block type="simicheckoutcom/adminhtml_simicheckoutcom" name="simicheckoutcom" />
+		</reference>
+	</simicheckoutcomadmin_adminhtml_simicheckoutcom_index>
+</layout>

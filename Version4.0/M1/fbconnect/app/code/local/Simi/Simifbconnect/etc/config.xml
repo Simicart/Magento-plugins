@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simifbconnect
+ * @copyright   Copyright (c) 2012
+ * @license     
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simifbconnect>
+            <version>0.1.0</version>
+        </Simi_Simifbconnect>
+    </modules>
+    <frontend>
+        <routers>
+            <simifbconnect>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simifbconnect</module>
+                    <frontName>simifbconnect</frontName>
+                </args>
+            </simifbconnect>
+        </routers>
+        <layout>
+            <updates>
+                <simifbconnect>
+                    <file>simifbconnect.xml</file>
+                </simifbconnect>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simifbconnect>
+                    <files>
+                        <default>Simi_Simifbconnect.csv</default>
+                    </files>
+                </Simi_Simifbconnect>
+            </modules>
+        </translate>
+        <events>
+            <simiconnector_get_storeview_info_after>
+                <observers>
+                    <simifbconnect_storeview_observers>
+                        <type>singleton</type>
+                        <class>simifbconnect/observer</class>
+                        <method>addFbConnectSetting</method>
+                    </simifbconnect_storeview_observers>
+                </observers>
+            </simiconnector_get_storeview_info_after>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <simifbconnectadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Simifbconnect</module>
+                    <frontName>simifbconnectadmin</frontName>
+                </args>
+            </simifbconnectadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simifbconnect>
+                    <file>simifbconnect.xml</file>
+                </simifbconnect>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simifbconnect>
+                    <files>
+                        <default>Simi_Simifbconnect.csv</default>
+                    </files>
+                </Simi_Simifbconnect>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simifbconnect>
+                <class>Simi_Simifbconnect_Model</class>
+                <resourceModel>simifbconnect_mysql4</resourceModel>
+            </simifbconnect>
+            <simifbconnect_mysql4>
+                <class>Simi_Simifbconnect_Model_Mysql4</class>
+                <entities>
+                    <simifbconnect>
+                        <table>simifbconnect</table>
+                    </simifbconnect>
+                </entities>
+            </simifbconnect_mysql4>
+        </models>
+        <blocks>
+            <simifbconnect>
+                <class>Simi_Simifbconnect_Block</class>
+            </simifbconnect>
+        </blocks>
+        <helpers>
+            <simifbconnect>
+                <class>Simi_Simifbconnect_Helper</class>
+            </simifbconnect>
+        </helpers>
+    </global>
+</config>

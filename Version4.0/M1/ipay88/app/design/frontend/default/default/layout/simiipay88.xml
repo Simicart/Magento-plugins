@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category 	
+ * @package 	Simiipay88
+ * @copyright 	Copyright (c) 2012 
+ * @license 	
+ */
+-->
+<layout version="0.1.0">
+	<default>
+		<!-- update layout for all frontend page -->
+	</default>
+	<simiipay88_index_index>
+		<reference name="content">
+			<block type="simiipay88/simiipay88" name="simiipay88" template="simiipay88/simiipay88.phtml" />
+		</reference>
+	</simiipay88_index_index>
+</layout>

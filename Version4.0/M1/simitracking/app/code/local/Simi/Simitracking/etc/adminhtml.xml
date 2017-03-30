@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <simiconnector>
+            <children>
+                <simitracking module="simitracking" translate="title">
+                    <title>Mobile Tracking</title>
+                    <sort_order>299</sort_order>
+                    <children>
+                        <simitracking_user module="simitracking" translate="title">
+                            <title>Users</title>
+                            <sort_order>1</sort_order>
+                            <action>adminhtml/simitracking_user</action>
+                        </simitracking_user>
+                        <simitracking_role module="simitracking" translate="title">
+                            <title>Roles</title>
+                            <sort_order>99</sort_order>
+                            <action>adminhtml/simitracking_role</action>
+                        </simitracking_role>
+                        <simitracking_device module="simitracking" translate="title">
+                            <title>Devices</title>
+                            <sort_order>199</sort_order>
+                            <action>adminhtml/simitracking_device</action>
+                        </simitracking_device>
+                        <simitracking_setting module="simitracking" translate="title">
+                            <title>Settings</title>
+                            <sort_order>299</sort_order>
+                            <action>adminhtml/system_config/edit/section/simitracking</action>
+                        </simitracking_setting>
+                    </children>
+                </simitracking>
+            </children>
+        </simiconnector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simitracking module="simitracking" translate="title">
+                                        <title>Simi Tracking</title>
+                                        <sort_order>71</sort_order>
+                                    </simitracking>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <simiconnector>
+                        <children>
+                            <simitracking module="simitracking" translate="title">
+                                <title>Mobile Tracking</title>
+                                <sort_order>299</sort_order>
+                                <children>
+                                    <simitracking_user module="simitracking" translate="title">
+                                        <title>Users</title>
+                                        <sort_order>1</sort_order>
+                                    </simitracking_user>
+                                    <simitracking_role module="simitracking" translate="title">
+                                        <title>Roles</title>
+                                        <sort_order>99</sort_order>
+                                    </simitracking_role>
+                                    <simitracking_device module="simitracking" translate="title">
+                                        <title>Devices</title>
+                                        <sort_order>199</sort_order>
+                                    </simitracking_device>
+                                    <simitracking_setting module="simitracking" translate="title">
+                                        <title>Settings</title>
+                                        <sort_order>299</sort_order>
+                                    </simitracking_setting>
+                                </children>
+                            </simitracking>
+                        </children>
+                    </simiconnector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simifbconnect
+ * @copyright   Copyright (c) 2012
+ * @license     
+ */
+-->
+<config>
+    <sections>
+        <simifbconnect>
+            <class>separator-top</class>
+            <label>Facebook Connect Settings</label>
+            <tab>simiconnector</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>99</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Facebook Deep Link Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>99</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable>
+                        <android_package translate="label">
+                            <label>Android Package</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>199</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </android_package>
+                        <android_appname translate="label">
+                            <label>Android App Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>299</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </android_appname>
+                        <ios_app_id translate="label">
+                            <label>iOS App Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>399</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ios_app_id>
+                        <ios_appname translate="label">
+                            <label>iOS App Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>499</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ios_appname>
+                    </fields>
+                </general>
+                <fbappinvite translate="label">
+                    <label>Facebook App Invite Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>199</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <invite_link translate="label">
+                            <label>Invite Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </invite_link>
+                        <image_description_link translate="label">
+                            <label>Image Description Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>199</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>I.e. https://yourdomain.com/logo.png</comment>
+                        </image_description_link>
+                    </fields>
+                </fbappinvite>
+            </groups>
+        </simifbconnect>
+    </sections>
+</config>

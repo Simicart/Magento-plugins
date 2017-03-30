@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simicheckoutcom
+ * @copyright   Copyright (c) 2012 
+ * @license     
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simicheckoutcom>
+            <version>0.1.1</version>
+        </Simi_Simicheckoutcom>
+    </modules>
+    <frontend>
+        <routers>
+            <simicheckoutcom>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simicheckoutcom</module>
+                    <frontName>simicheckoutcom</frontName>
+                </args>
+            </simicheckoutcom>
+        </routers>
+        <layout>
+            <updates>
+                <simicheckoutcom>
+                    <file>simicheckoutcom.xml</file>
+                </simicheckoutcom>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simicheckoutcom>
+                    <files>
+                        <default>Simi_Simicheckoutcom.csv</default>
+                    </files>
+                </Simi_Simicheckoutcom>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <simicheckoutcomadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Simicheckoutcom</module>
+                    <frontName>simicheckoutcomadmin</frontName>
+                </args>
+            </simicheckoutcomadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simicheckoutcom>
+                    <file>simicheckoutcom.xml</file>
+                </simicheckoutcom>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simicheckoutcom>
+                    <files>
+                        <default>Simi_Simicheckoutcom.csv</default>
+                    </files>
+                </Simi_Simicheckoutcom>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simicheckoutcom>
+                <class>Simi_Simicheckoutcom_Model</class>
+                <resourceModel>simicheckoutcom_mysql4</resourceModel>
+            </simicheckoutcom>
+            <simicheckoutcom_mysql4>
+                <class>Simi_Simicheckoutcom_Model_Mysql4</class>
+                <entities>
+                    <simicheckoutcom>
+                        <table>simicheckoutcom</table>
+                    </simicheckoutcom>
+                </entities>
+            </simicheckoutcom_mysql4>
+        </models>
+        <resources>
+            <simicheckoutcom_setup>
+                <setup>
+                    <module>Simi_Simicheckoutcom</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </simicheckoutcom_setup>
+            <simicheckoutcom_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </simicheckoutcom_write>
+            <simicheckoutcom_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </simicheckoutcom_read>
+        </resources>
+        <blocks>
+            <simicheckoutcom>
+                <class>Simi_Simicheckoutcom_Block</class>
+            </simicheckoutcom>
+        </blocks>
+        <helpers>
+            <simicheckoutcom>
+                <class>Simi_Simicheckoutcom_Helper</class>
+            </simicheckoutcom>
+        </helpers>
+        <!-- <events>
+                <controller_action_predispatch>
+                        <observers>
+                                <simicheckoutcom_observers>
+                                        <class>simicheckoutcom/observer</class>
+                                        <method>controllerActionPredispatch</method>
+                                </simicheckoutcom_observers>
+                        </observers>
+                </controller_action_predispatch>
+        </events> -->
+        <events>
+            <payment_method_is_active>
+                <observers>
+                    <simicheckoutcom_payment_observers>
+                        <type>singleton</type>
+                        <class>simicheckoutcom/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </simicheckoutcom_payment_observers>
+                </observers>
+            </payment_method_is_active>
+            <simicart_after_place_order>
+                <observers>
+                    <simicheckoutcom_after_place_order>
+                        <type>singleton</type>
+                        <class>simicheckoutcom/observer</class>
+                        <method>afterPlaceOrder</method>
+                    </simicheckoutcom_after_place_order>
+                </observers>
+            </simicart_after_place_order>
+            <simi_add_payment_method>
+                <observers>
+                    <simicheckoutcom_add_payment_method>
+                        <class>simicheckoutcom/observer</class>
+                        <method>addPayment</method>
+                    </simicheckoutcom_add_payment_method>
+                </observers>
+            </simi_add_payment_method>
+            <!-- 4.0 simiconnector version -->
+            <!-- Add API resource -->
+            <simi_simiconnector_model_server_initialize>
+                <observers>
+                    <simi_simiconnector_model_server_initialize_checkoutcom>
+                        <type>singleton</type>
+                        <class>simicheckoutcom/simiobserver</class>
+                        <method>connectorConfigGetPluginsReturnCheckoutcom</method>
+                    </simi_simiconnector_model_server_initialize_checkoutcom>
+                </observers>
+            </simi_simiconnector_model_server_initialize>
+            <simiconnector_add_payment_method>
+                <observers>
+                    <simi_checkoutcom_add_payment_method>
+                        <class>simicheckoutcom/simiobserver</class>
+                        <method>addPayment40</method>
+                    </simi_checkoutcom_add_payment_method>
+                </observers>
+            </simiconnector_add_payment_method>
+            <simiconnector_change_payment_detail>
+                <observers>
+                    <simiconnector_simicheckoutcom_change_payment_detail>
+                        <type>singleton</type>
+                        <class>simicheckoutcom/simiobserver</class>
+                        <method>changePayment</method>
+                    </simiconnector_simicheckoutcom_change_payment_detail>
+                </observers>
+            </simiconnector_change_payment_detail>
+            <simi_simiconnector_model_api_orders_onepage_store_after>
+                <observers>
+                    <simi_simicheckoutcom_api_orders_onepage_store_after>
+                        <class>simicheckoutcom/simiobserver</class>
+                        <method>simiconnectorAfterPlaceOrder</method>
+                    </simi_simicheckoutcom_api_orders_onepage_store_after>
+                </observers>
+            </simi_simiconnector_model_api_orders_onepage_store_after>
+            <!-- end -->
+        </events>
+    </global>
+    <default>
+        <payment>             
+            <simicheckoutcom>
+                <active>0</active> 
+                <order_status>pending</order_status>       
+                <model>simicheckoutcom/payment</model>     
+                <title>Checkout.com</title>
+                <allowspecific>0</allowspecific>      
+                <merchant_id backend_model="adminhtml/system_config_backend_encrypted"/>          
+                <merchant_password backend_model="adminhtml/system_config_backend_encrypted"/>
+                <verify_key backend_model="adminhtml/system_config_backend_encrypted"/>
+                <url_back></url_back>
+                <is_sandbox>0</is_sandbox>
+            </simicheckoutcom>
+        </payment>       
+    </default>
+</config>

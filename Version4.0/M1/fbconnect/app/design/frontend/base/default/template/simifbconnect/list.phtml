@@ -1,0 +1,16 @@
+<?php 
+if(Mage::getStoreConfig("simifbconnect/general/enable")): ?>
+    <?php $_category = Mage::registry('current_category'); ?>
+    <?php if($_category): ?>
+        <meta property="al:android:url" content="<?php echo Mage::getStoreConfig(Mage_Core_Model_Url::XML_PATH_SECURE_URL) ?>" />
+        <meta property="al:android:package" content="<?php echo Mage::getStoreConfig("simifbconnect/general/android_package") ?>">
+        <meta property="al:android:app_name" content="<?php echo Mage::getStoreConfig("simifbconnect/general/android_appname") ?>">
+
+        <meta property="al:ios:url" content="<?php echo str_replace("http", "simicart", Mage::getStoreConfig(Mage_Core_Model_Url::XML_PATH_SECURE_URL)) ?>" />
+        <meta property="al:ios:app_store_id" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_app_id") ?>" />
+        <meta property="al:ios:app_name" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_appname") ?>" />
+        <meta property="al:web:should_fallback" content="false" />
+        <meta property="simi_category_id" content="<?php echo $_category->getId() ?>" />
+        <meta property="simi_is_has_child" content="<?php echo Mage::helper('simifbconnect')->checkIfHasChild($_category) ?>" />
+    <?php endif; ?>
+<?php endif;?>

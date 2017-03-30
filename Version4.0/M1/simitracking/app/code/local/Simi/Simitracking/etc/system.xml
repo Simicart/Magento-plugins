@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <simitracking translate="label">
+            <label>SimiTracking</label>
+            <sort_order>500</sort_order>
+        </simitracking>
+    </tabs>
+    <sections>
+        <simitracking translate="label" module="simitracking">
+            <class>separator-top</class>
+            <label>SimiTracking Settings</label>
+            <tab>simitracking</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>		
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable>
+                        <new_order_notification translate="label">
+                            <label>New Order Notification</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>99</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </new_order_notification>
+                        <order_processing_notification translate="label">
+                            <label>Order Processing Notification</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>199</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </order_processing_notification>
+                        <order_completed_notification translate="label">
+                            <label>Order Completed Notification</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>299</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>2</show_in_store>
+                            <comment></comment>
+                        </order_completed_notification>
+                    </fields>
+                </general>
+            </groups>
+        </simitracking>              
+    </sections>
+</config>

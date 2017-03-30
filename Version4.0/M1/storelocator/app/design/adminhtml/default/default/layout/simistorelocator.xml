@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <styleSheet>simi/simistorelocator.css</styleSheet>
+            </action>
+            <action method="addJs">
+                <script>simi/simistorelocator.js</script>
+            </action>
+        </reference>	
+    </default>
+    <adminhtml_simistorelocator_simistorelocator_index>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="simistorelocator/adminhtml_simistorelocator" name="simistorelocator" />
+        </reference>
+    </adminhtml_simistorelocator_simistorelocator_index>      
+    <adminhtml_simistorelocator_simistorelocator_edit>
+        <reference name="head">
+            <action method="setCanLoadTinyMce">
+                <flag>1</flag>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/variables.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/wysiwyg/widget.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/flex.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/FABridge.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/flexuploader.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/browser.js</script>
+            </action>
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/magento.css</name>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>tiny_mce/tiny_mce.js</name>
+                <params/>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" before="-" />
+        </reference>
+    </adminhtml_simistorelocator_simistorelocator_edit>
+    <adminhtml_simistorelocator_holiday_index>
+        <reference name="content">
+            <block type="simistorelocator/adminhtml_holiday" name="holiday" />
+        </reference>
+    </adminhtml_simistorelocator_holiday_index>
+    <adminhtml_simistorelocator_specialday_index>
+        <reference name="content">
+            <block type="simistorelocator/adminhtml_specialday" name="specialday" />
+        </reference>
+    </adminhtml_simistorelocator_specialday_index>
+    
+    <adminhtml_simistorelocator_guide_index>
+        <reference name="content">
+            <block type="simistorelocator/adminhtml_guide" name="simistorelocator_guide" as="simistorelocator_guide" template="simistorelocator/guide.phtml" />                            
+        </reference>
+    </adminhtml_simistorelocator_guide_index>  
+</layout>

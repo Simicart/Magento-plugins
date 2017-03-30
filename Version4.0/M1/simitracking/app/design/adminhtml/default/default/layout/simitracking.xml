@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="0.1.0"> 
+    <adminhtml_simitracking_role_index>
+        <reference name="content">
+            <block type="simitracking/adminhtml_role" name="simitracking_role"/>
+        </reference>
+    </adminhtml_simitracking_role_index> 
+    <adminhtml_simitracking_role_edit>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/simi/simitracking.css</stylesheet>
+            </action>
+        </reference>
+    </adminhtml_simitracking_role_edit>
+    <adminhtml_simitracking_user_index>
+        <reference name="content">
+            <block type="simitracking/adminhtml_user" name="simitracking_user"/>
+        </reference>
+    </adminhtml_simitracking_user_index> 
+    <adminhtml_simitracking_device_index>
+        <reference name="content">
+            <block type="simitracking/adminhtml_device" name="simitracking_device"/>
+        </reference>
+    </adminhtml_simitracking_device_index>
+</layout>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+	</default>
+	<simiklarna_index_index>
+		<reference name="content">
+			<block type="simiklarna/simiklarna" name="simiklarna" template="simiklarna/simiklarna.phtml" />
+		</reference>
+	</simiklarna_index_index>
+</layout>

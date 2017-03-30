@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Paytabsmobile
+ * @copyright   Copyright (c) 2012
+ * @license     
+ */
+-->
+<config>
+    <menu>
+        <simiconnector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <paytabsmobile module="paytabsmobile" translate="title">
+                            <title>Paytabs Mobile</title>
+                            <sort_order>82</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </paytabsmobile>
+                    </children>
+                </simi_payment>
+            </children>
+        </simiconnector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <paytabsmobile module="paytabsmobile" translate="title">
+                                        <title>Paytabs Mobile</title>
+                                        <sort_order>190</sort_order>
+                                    </paytabsmobile>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+
+                    <simiconnector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <paytabsmobile module="paytabsmobile" translate="title">
+                                        <title>Paytabs Mobile</title>
+                                        <sort_order>82</sort_order>
+                                    </paytabsmobile>
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </simiconnector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

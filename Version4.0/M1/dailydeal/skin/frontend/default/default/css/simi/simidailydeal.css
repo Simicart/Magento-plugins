@@ -1,0 +1,366 @@
+.timeleft-text{font-size:18px;font-weight:normal;color:#000044;margin-left: 3px;}
+.simidailydeal{
+    margin-bottom: -5px;
+	font-family: georgia;
+}
+
+.sidebarsimidailydeal .item {
+    
+}
+.simidailydeal-sidebar-product-name a {
+    color: #203548;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+.simidailydeal-sidebar-product-name a{
+	color: #666!important;
+	font-family: georgia;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.btn-simidailydeal{
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    height: 52px;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    width: auto;
+}
+.btn-simidailydeal span{
+    background: url("../../images/simi/simidailydeal/bnt-add-to-cart.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    float: left;
+	font-family: Impact;
+    font-size: 30px;
+    font-weight: normal;
+    height: 52px;
+    line-height: 47px;
+    overflow: visible;
+    padding: 0 0 0 25px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}
+.btn-simidailydeal span span{
+    background-position: 100% 0;
+    padding: 0 25px 0 0;
+}
+
+/*------- Daily Deal sidebar left ------------------*/
+.block-simidailydeal{
+	font-family: georgia;
+	border: 1px solid #c2bfbb;
+}
+.sidebarsimidailydeal{
+	background: url("../../images/simi/simidailydeal/mid-line.png") no-repeat scroll left bottom transparent;
+	float: left;
+    padding-bottom: 20px;
+    padding-top: 15px;
+}
+.block-simidailydeal div.last{
+	background: none transparent!important;
+}
+.block-simidailydeal .block-content {
+    background: none repeat scroll 0 0 #F5F5F5;
+}
+.sidebarsimidailydeal .simidailydeal-sidebar-product-name a{
+	font-weight: normal;
+}
+.block-subscribe .block-content{
+	padding: 6px;
+}
+.sidebar-product-image img{
+    margin-left: 0px;
+	border: 1px solid #FDFDFD;
+}
+.simidailydeal-price, .save-sold, .time-left, .block-simidailydeal .time-left{
+	width: 100%;
+	float: left;
+}
+.block-simidailydeal .time-left{
+    border-top: 1px dashed #B8B8B8;
+    margin-top: 6px;
+    padding: 5px 0;
+	font-size: 14px;
+	font-weight: normal;
+	color: #828282;
+}
+.block-simidailydeal .time-left label, .block-simidailydeal .time-left div span{
+	font-weight: normal;
+	color: #828282;
+	font-size: 14px;
+}
+.block-simidailydeal .time-left div span{
+	color: #ff9f07;
+	font-family: Impact;
+	font-size: 14px;
+}
+.simidailydeal-price li, .save-sold li{
+	float: left;
+
+}
+.simidailydeal-price .special-price .price{
+	font-family: Impact;
+	font-size: 23px;
+	font-weight: normal;
+	color: #ff9f07;
+}
+.simidailydeal-price .old-price {
+	margin-top: 6px;	
+	margin-left: 14px;
+}
+.simidailydeal-price .old-price .price{
+	font-size: 13px;
+	font-weight: normal;
+	color: #666;	
+}
+.save-sold li label{
+	display: block;
+}
+
+.save-sold li label{
+	color: #828282;
+	font-size: 14px;
+	font-weight: normal;
+}
+.save-sold li.lastspecial{
+	margin-right: 0!important;
+}
+.save-sold li.special-price{
+	margin-right: 15px;
+	text-align: center;
+}
+
+.sidebarsimidailydeal .time-left .text-time{
+	color: #828282!important;
+	font-weight: normal!important;
+	font-size: 14px;
+	font-family: georgia;
+}
+.save-sold .special-price .price{
+	color: #ff9f07;
+	font-family: Impact;
+	font-size: 14px;
+	font-weight: normal;
+}
+.timeleft li{
+	float: left;
+}
+/*------- End Daily Deal sidebar left ------------------*/
+
+
+/*------------Daily Deal Grid ----*/
+.simidailydeal-grid .product-image{
+	width: 340px!important;
+	height: 190px!important;
+	margin: 0!important;
+	padding: 0 !Important;
+	background: #f5f5f5;
+	float: left;
+}
+.simidailydeal-grid li.last{
+	margin-left: 20px!important;
+}
+.simidailydeal-grid{
+	width: 702px!important;
+	background: none transparent!important;
+	font-family: georgia;
+	border: 0 none;
+}
+.simidailydeal-grid li.item{
+	width: 340px;
+	padding: 0!important;
+	/* background: #f5f5f5; */
+	position: relative;
+	margin: 10px 0;
+}
+.simidailydeal-grid .wrap-grid-action{
+	width: 100%;	
+	float: left;
+}
+.simidailydeal-grid .wrap-grid-action .btn-simidailydeal{
+	float: left;
+	width: 158px;
+	margin-right: 25px;
+	
+}
+.simidailydeal-grid .time-left .timeleft-text{
+	color: #ff9f07;
+	margin-left: 5px;
+}
+.simidailydeal-grid li.item .bg-bottom-simidailydeal{
+	position: relative;
+	bottom: 0;
+	height: 11px;
+	width: 100%;
+	background: url(../../images/simi/simidailydeal/bg_bottom_li.png) no-repeat scroll left bottom;
+	float: left;
+}
+.simidailydeal-grid .time-left li, .simidailydeal-grid .time-left .timeleft{
+	float: left;
+/* 	margin-right: 8px; */
+	line-height: 35px;
+	color: #828282;
+	font-size: 14px;
+	font-family: georgia;
+}
+.simidailydeal-grid .wrap-grid-action .save-sold{
+	float: left;
+	width: auto;	
+}
+.bottom-grid-simidailydeal{
+	background:#f5f5f5;
+	padding: 17px;
+	float: left;
+}
+.wrap-grid-action button.btn-simidailydeal{
+	float: left;
+}
+
+
+/*------------End Daily Deal Grid ----*/
+
+
+/*------------Daily Deal Detail --------------*/
+
+.product-essential .wrap-timeleft-detail li{
+	float:left;
+	margin: 10px 0 10px 5px;	
+}
+.product-essential .wrap-timeleft-detail li.time-day{
+	margin-left: 15px;
+}
+.product-essential .wrap-timeleft-detail li.time-sec{
+	margin-right: 0;
+}
+.product-essential .wrap-timeleft-detail .timeleft-text{
+	display: block;
+	width: 30px;
+	background: url(../../images/simi/simidailydeal/bg-digital.png) no-repeat;
+	height: 78px;
+	width: 72px;
+	color: #fff;
+	font-size: 35px;
+	line-height: 65px;
+	text-align: center;
+	position: relative;
+	margin-left: 0;
+	/* text-decoration: line-through; */
+}
+.product-view .timeleft{
+	text-align: center;
+}
+.product-view .wrap-timeleft-detail .text-time{
+	text-transform: uppercase;
+	font-weight: bold;
+	
+}
+.product-essential .bg-saleoff{
+	background: url(../../images/simi/simidailydeal/bg-saleoff.png) no-repeat;
+	height: 37px;
+	width: 321px;
+	float: left;
+	text-align: center;
+	padding:20px 0;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+.product-essential .bg-saleoff .off-label{
+	font-size: 12px;
+}
+.product-essential .bg-saleoff span{
+	margin-top: 10px;
+	color: #fff;
+	font-size: 27px;
+}
+
+
+.product-view .product-shop .wrap-timeleft-detail{
+	border: 1px solid #fff;
+	width: 100%;
+	float: left;
+	margin-bottom: 20px;
+}
+
+.product-view .product-shop .timeleft{
+	background: #f0f2f2;
+	border: 1px solid #ebe9e9;
+	width: 100%;
+	float: left;
+	text-align: center;
+	color: #595959;
+	font-size: 13px;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	/* font-weight: bold; */
+}
+/*------------End Daily Deal Detail --------------*/
+.simidailydeal-list li .product-image{
+	width: 340px!important;
+	height: 190px!important;
+	margin: 0!important;
+	padding: 0!important;
+}
+.simidailydeal-list .product-shop{
+	margin-left: 350px;
+}
+/*------------List Daily Deal --------------*/
+.simidailydeal-list{
+	font-family: georgia;
+}
+ol#products-list .product-shop .timeleft{
+	background: none transparent;
+	border: 0 none;
+	text-transform: none;
+}
+ol#products-list .time-left li{
+	color: #828282;
+	font-size: 14px;
+	font-weight: normal;
+}
+ol#products-list  .time-left li, ol#products-list  .time-left div{
+	float: left;
+	width: auto;
+}
+ol#products-list  .timeleft .timeleft-text{
+	color: #ff9f07!important;
+	font-size: 14px;
+	margin-left: 5px;
+}
+
+ol#products-list .wrap-grid-action{
+	float: left;
+	width: 100%;
+}
+ol#products-list .wrap-grid-action button{
+	float: left;
+	width: 158px;
+	margin-right: 25px;
+}
+ol#products-list li.item {
+    background: url("../../images/simi/simidailydeal/productlist-li-bottom.png") no-repeat scroll 0 100% transparent;
+    border-bottom: 0 none;
+    margin: 10px 0;
+    padding: 0 0 11px;
+}
+ol#products-list li.item .wrap-productlist-li{
+	/* background: url("../../images/simi/simidailydeal/bg-product-list-li-top.png") repeat scroll 0 0 transparent; */
+	background: #f5f5f5;
+	padding: 0;
+	width: 670px;
+	float: left;
+	padding: 9px 12px;	
+
+}
+ol#products-list .time-left{
+	margin-top: 20px;
+}
+ol#products-list .wrap-grid-action .save-sold{
+	float: left;
+	width: auto;
+}
+/*------------End List Daily Deal --------------*/

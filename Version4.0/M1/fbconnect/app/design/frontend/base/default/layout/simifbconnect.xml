@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <catalog_product_view>
+        <reference name="head">
+            <block type="core/template" name="simifbconnectproduct" as="simifbconnectproduct" template="simifbconnect/product.phtml" />
+        </reference>
+    </catalog_product_view>
+    <catalog_category_view>
+        <reference name="head">
+            <block type="core/template" name="simifbconnectcategory" as="simifbconnectcategory" template="simifbconnect/list.phtml" />
+        </reference>
+    </catalog_category_view>
+</layout>

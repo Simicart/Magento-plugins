@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <connector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <simiklarna module="simiklarna" translate="title">
+                            <title>Klarna Checkout</title>
+                            <sort_order>72</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </simiklarna>
+                    </children>
+                </simi_payment>
+            </children>
+        </connector>
+        <simiconnector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <simiklarna module="simiklarna" translate="title">
+                            <title>Klarna Checkout</title>
+                            <sort_order>172</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </simiklarna>
+                    </children>
+                </simi_payment>
+            </children>
+        </simiconnector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simiklarna module="simiklarna" translate="title">
+                                        <title>Klarna Checkout</title>
+                                        <sort_order>72</sort_order>
+                                    </simiklarna>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <connector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <simiklarna module="simiklarna" translate="title">
+                                        <title>Klarna Checkout</title>
+                                        <sort_order>72</sort_order>
+                                    </simiklarna>
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </connector>
+                    <simiconnector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <simiklarna module="simiklarna" translate="title">
+                                        <title>Klarna Checkout</title>
+                                        <sort_order>172</sort_order>
+                                    </simiklarna>
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </simiconnector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_simipromoteapp_simipromoteapp_index>
+		<reference name="head">
+			<action method="addJs"><script>simi/jquery-1.11.1.min.js</script></action>
+			<action method="addJs"><script>simi/jquery-ui.min.js</script></action>
+			<action method="addJs"><script>simi/highcharts.js</script></action>
+			<action method="addJs"><script>simi/exporting.js</script></action>
+			<action method="addCss">
+				<stylesheet>report.css</stylesheet>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="simipromoteapp/adminhtml_promoteapp" name="simipromoteapp.email" template="simipromoteapp/charts/email.phtml" before="-"/>
+			<block type="simipromoteapp/adminhtml_simipromoteapp" name="simipromoteapp" />
+		</reference>
+	</adminhtml_simipromoteapp_simipromoteapp_index>
+</layout>

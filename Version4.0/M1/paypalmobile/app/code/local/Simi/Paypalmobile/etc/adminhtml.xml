@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Paypalmobile
+ * @copyright   Copyright (c) 2012
+ * @license     
+ */
+-->
+<config>
+    <menu>
+        <connector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <paypalmobile module="paypalmobile" translate="title">
+                            <title>Paypal Mobile</title>
+                            <sort_order>190</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </paypalmobile>
+                    </children>
+                </simi_payment>
+            </children>
+        </connector>
+        <simiconnector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <paypalmobile module="paypalmobile" translate="title">
+                            <title>Paypal Mobile</title>
+                            <sort_order>82</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </paypalmobile>
+                    </children>
+                </simi_payment>
+            </children>
+        </simiconnector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <paypalmobile module="paypalmobile" translate="title">
+                                        <title>Paypal Mobile</title>
+                                        <sort_order>190</sort_order>
+                                    </paypalmobile>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <connector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <paypalmobile module="paypalmobile" translate="title">
+                                        <title>Paypal Mobile</title>
+                                        <sort_order>190</sort_order>
+                                    </paypalmobile>
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </connector>
+                    <simiconnector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <paypalmobile module="paypalmobile" translate="title">
+                                        <title>Paypal Mobile</title>
+                                        <sort_order>82</sort_order>
+                                    </paypalmobile>
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </simiconnector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Simi_Simistorelocator>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Simi_Simistorelocator>
+    </modules>
+</config>

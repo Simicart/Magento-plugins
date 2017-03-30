@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Twout
+ * @copyright   Copyright (c) 2012 
+ * @license     
+ */
+-->
+<config>
+    <menu>
+        <connector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <twout module="twout" translate="title">
+                            <title>2Checkout</title>
+                            <sort_order>80</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </twout>
+                    </children>
+                </simi_payment>
+            </children>
+        </connector>
+        <simiconnector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <twout module="twout" translate="title">
+                            <title>2Checkout</title>
+                            <sort_order>80</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </twout>
+                    </children>
+                </simi_payment>
+            </children>
+        </simiconnector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <twout module="twout" translate="title">
+                                        <title>2Checkout</title>
+                                        <sort_order>80</sort_order>
+                                    </twout>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <connector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <twout module="twout" translate="title">
+                                        <title>2Checkout</title>
+                                        <sort_order>80</sort_order>
+                                    </twout>
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </connector>
+                    <simiconnector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <twout module="twout" translate="title">
+                                        <title>2Checkout</title>
+                                        <sort_order>80</sort_order>
+                                    </twout>
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </simiconnector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

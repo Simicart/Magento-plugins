@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <simiavenueadmin_adminhtml_simiavenue_index>
+        <reference name="content">
+            <block type="simiavenue/adminhtml_simiavenue" name="simiavenue" />
+        </reference>
+    </simiavenueadmin_adminhtml_simiavenue_index>
+</layout>

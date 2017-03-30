@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simibraintree
+ * @copyright   Copyright (c) 2012 
+ * @license    
+ */
+-->
+<config>
+    <menu>
+        <connector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <braintree module="simibraintree" translate="title">
+                            <title>Braintree</title>
+                            <sort_order>120</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </braintree>                       
+                    </children>
+                </simi_payment>
+            </children>
+        </connector>
+        <simiconnector>
+            <children>
+                <simi_payment>
+                    <children>
+                        <braintree module="simibraintree" translate="title">
+                            <title>Braintree</title>
+                            <sort_order>120</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </braintree>                       
+                    </children>
+                </simi_payment>
+            </children>
+        </simiconnector>
+    </menu>    
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <connector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <braintree module="simibraintree" translate="title">
+                                        <title>Braintree</title>
+                                        <sort_order>120</sort_order>
+                                    </braintree>                       
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </connector>
+                    <simiconnector>
+                        <children>
+                            <simi_payment>
+                                <children>
+                                    <braintree module="simibraintree" translate="title">
+                                        <title>Braintree</title>
+                                        <sort_order>120</sort_order>
+                                    </braintree>                       
+                                </children>
+                            </simi_payment>
+                        </children>
+                    </simiconnector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

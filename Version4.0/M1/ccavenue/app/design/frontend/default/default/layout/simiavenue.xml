@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <default>
+        <!-- update layout for all frontend page -->
+    </default>
+    <simiavenue_index_index>
+        <reference name="content">
+            <block type="simiavenue/simiavenue" name="simiavenue" template="simiavenue/simiavenue.phtml" />
+        </reference>
+    </simiavenue_index_index>
+</layout>

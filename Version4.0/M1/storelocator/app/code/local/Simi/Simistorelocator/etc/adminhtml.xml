@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <simiconnector>
+            <children>  
+                <simi_rich_content>
+                    <children> 
+                        <simistorelocator module="simistorelocator" translate="title">
+                            <title>Store Locator</title>
+                            <sort_order>71</sort_order>               
+                            <children>
+                                <simistorelocator module="simistorelocator" translate="title">
+                                    <title>Manage Stores</title>
+                                    <sort_order>0</sort_order>
+                                    <action>adminhtml/simistorelocator_simistorelocator</action>
+                                </simistorelocator>
+                                <holidays module="simistorelocator">
+                                    <title>Manage Holidays</title>
+                                    <sort_order>1</sort_order>
+                                    <action>adminhtml/simistorelocator_holiday</action>
+                                </holidays>
+                                <specialdays module="simistorelocator">
+                                    <title>Manage Special Days</title>
+                                    <sort_order>2</sort_order>
+                                    <action>adminhtml/simistorelocator_specialday</action>
+                                </specialdays>
+                                <settings module="simistorelocator" translate="title">
+                                    <title>Settings</title>
+                                    <sort_order>1000</sort_order>
+                                    <action>adminhtml/system_config/edit/section/simistorelocator</action>
+                                </settings>
+                            </children>
+                        </simistorelocator>
+                    </children>
+                </simi_rich_content>
+            </children>
+        </simiconnector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simistorelocator module="simistorelocator" translate="title">
+                                        <title>Store Locator</title>
+                                        <sort_order>71</sort_order>									
+                                    </simistorelocator>								
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <simiconnector>
+                        <children>  
+                            <simi_rich_content>
+                                <children> 
+                                    <simistorelocator module="simistorelocator" translate="title">
+                                        <title>Store Locator</title>
+                                        <sort_order>71</sort_order>               
+                                        <children>
+                                            <simistorelocator module="simistorelocator" translate="title">
+                                                <title>Manage Stores</title>
+                                                <sort_order>0</sort_order>
+                                                <action>adminhtml/simistorelocator_simistorelocator</action>
+                                            </simistorelocator>
+                                            <holidays module="simistorelocator">
+                                                <title>Manage Holidays</title>
+                                                <sort_order>1</sort_order>
+                                                <action>adminhtml/simistorelocator_holiday</action>
+                                            </holidays>
+                                            <specialdays module="simistorelocator">
+                                                <title>Manage Special Days</title>
+                                                <sort_order>2</sort_order>
+                                                <action>adminhtml/simistorelocator_specialday</action>
+                                            </specialdays>
+                                            <settings module="simistorelocator" translate="title">
+                                                <title>Settings</title>
+                                                <sort_order>1000</sort_order>
+                                                <action>adminhtml/system_config/edit/section/simistorelocator</action>
+                                            </settings>
+                                        </children>
+                                    </simistorelocator>
+                                </children>
+                            </simi_rich_content>
+                        </children>
+                    </simiconnector>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

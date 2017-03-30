@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Paytabsmobile
+ * @copyright   Copyright (c) 2012
+ * @license     
+ */
+-->
+<config>
+    <modules>
+        <Simi_Paytabsmobile>
+            <version>0.1.0</version>
+        </Simi_Paytabsmobile>
+    </modules>
+    <frontend>
+        <routers>
+            <paytabsmobile>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Paytabsmobile</module>
+                    <frontName>paytabsmobile</frontName>
+                </args>
+            </paytabsmobile>
+        </routers>
+        <layout>
+            <updates>
+                <paytabsmobile>
+                    <file>paytabsmobile.xml</file>
+                </paytabsmobile>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Paytabsmobile>
+                    <files>
+                        <default>Simi_Paytabsmobile.csv</default>
+                    </files>
+                </Simi_Paytabsmobile>
+            </modules>
+        </translate>
+        <events>
+            <payment_method_is_active>
+                <observers>
+                    <paytabsmobilement_paytabs_observers>
+                        <type>singleton</type>
+                        <class>paytabsmobile/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </paytabsmobilement_paytabs_observers>
+                </observers>
+            </payment_method_is_active>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <paytabsmobileadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Paytabsmobile</module>
+                    <frontName>paytabsmobileadmin</frontName>
+                </args>
+            </paytabsmobileadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <paytabsmobile>
+                    <file>paytabsmobile.xml</file>
+                </paytabsmobile>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Paytabsmobile>
+                    <files>
+                        <default>Simi_Paytabsmobile.csv</default>
+                    </files>
+                </Simi_Paytabsmobile>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <paytabsmobile>
+                <class>Simi_Paytabsmobile_Model</class>
+                <resourceModel>paytabsmobile_mysql4</resourceModel>
+            </paytabsmobile>
+            <paytabsmobile_mysql4>
+                <class>Simi_Paytabsmobile_Model_Mysql4</class>
+                <entities>
+                    <paytabsmobile>
+                        <table>paytabsmobile</table>
+                    </paytabsmobile>
+                </entities>
+            </paytabsmobile_mysql4>
+        </models>
+        <resources>
+            <paytabsmobile_setup>
+                <setup>
+                    <module>Simi_Paytabsmobile</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </paytabsmobile_setup>
+            <paytabsmobile_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </paytabsmobile_write>
+            <paytabsmobile_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </paytabsmobile_read>
+        </resources>
+        <blocks>
+            <paytabsmobile>
+                <class>Simi_Paytabsmobile_Block</class>
+            </paytabsmobile>
+        </blocks>
+        <helpers>
+            <paytabsmobile>
+                <class>Simi_Paytabsmobile_Helper</class>
+            </paytabsmobile>
+        </helpers>
+        <events>
+            <simiconnector_add_payment_method>
+                <observers>
+                    <paytabsmobile_add_payment_method>
+                        <class>paytabsmobile/observer</class>
+                        <method>addPayment</method>
+                    </paytabsmobile_add_payment_method>
+                </observers>
+            </simiconnector_add_payment_method>
+            <simi_simiconnector_model_server_initialize>
+                <observers>
+                    <paytabsmobile_touch_change_server>
+                        <class>paytabsmobile/observer</class>
+                        <method>changeApi</method>
+                    </paytabsmobile_touch_change_server>
+                </observers>
+            </simi_simiconnector_model_server_initialize>
+            <simiconnector_change_payment_detail>
+                <observers>
+                    <paytabsmobile_change_payment_detail>
+                        <class>paytabsmobile/observer</class>
+                        <method>addPaymentInfo</method>
+                    </paytabsmobile_change_payment_detail>
+                </observers>
+            </simiconnector_change_payment_detail>
+        </events>
+    </global>
+    <default>
+        <payment>             
+            <paytabs_mobile>
+                <active>0</active>    
+                <business_account></business_account>                
+                <api_name backend_model="adminhtml/system_config_backend_encrypted"/>
+                <api_pass backend_model="adminhtml/system_config_backend_encrypted"/>
+                <signature backend_model="adminhtml/system_config_backend_encrypted"/>
+                <order_status>pending</order_status>       
+                <model>paytabsmobile/paytabs</model>     
+                <title>Paytabs Mobile</title>
+                <allowspecific>0</allowspecific>
+                <client_id backend_model="adminhtml/system_config_backend_encrypted"/>                    
+                <secret backend_model="adminhtml/system_config_backend_encrypted"/>
+                <is_sandbox>0</is_sandbox>    
+                <use_credit_cart>0</use_credit_cart>
+            </paytabs_mobile>          
+        </payment>       
+    </default>
+</config>

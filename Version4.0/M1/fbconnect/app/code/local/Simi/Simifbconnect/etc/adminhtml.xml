@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simifbconnect
+ * @copyright   Copyright (c) 2012
+ * @license     
+ */
+-->
+<config>
+    <menu>
+        <simiconnector>
+            <children>   
+                <simi_user_experience>
+                    <children>
+                        <simifbconnect module="simifbconnect" translate="title">
+                            <title>Facebook Connect Settings</title>
+                            <sort_order>99</sort_order>
+                            <action>adminhtml/system_config/edit/section/simifbconnect</action>
+                        </simifbconnect>
+                    </children>
+                </simi_user_experience>
+            </children>
+        </simiconnector>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simifbconnect module="simifbconnect" translate="title">
+                                        <title>Deeplink Settings</title>
+                                        <sort_order>50</sort_order>
+                                    </simifbconnect>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <simiconnector>
+                        <children>
+                            <simi_user_experience module="simiconnector" translate="title">
+                                <children>  
+                                    <simifbconnect module="simifbconnect" translate="title">
+                                        <title>Deeplink Settings</title>
+                                        <sort_order>50</sort_order>
+                                    </simifbconnect>
+                                </children>
+                            </simi_user_experience>
+                        </children>
+                    </simiconnector>
+                </children>                
+            </admin>
+        </resources>
+    </acl>
+</config>
