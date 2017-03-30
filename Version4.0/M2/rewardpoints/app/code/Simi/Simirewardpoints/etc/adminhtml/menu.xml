@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Simi_Simirewardpoints::Reward_Points"
+             title="Reward Points" module="Simi_Simirewardpoints" parent="Simi_Simiconnector::simiconnector" sortOrder="699" resource="Simi_Simirewardpoints::Reward_Points" />
+
+        <add id="Simi_Simirewardpoints::Earning_Rates"
+             title="Earning Rates" module="Simi_Simirewardpoints"
+             sortOrder="10" parent="Simi_Simirewardpoints::Reward_Points"
+             action="simirewardpoints/earningrates"
+             resource="Simi_Simirewardpoints::Earning_Rates"/>
+        
+        <add id="Simi_Simirewardpoints::Spending_Rates"
+             title="Spending Rates"
+             module="Simi_Simirewardpoints"
+             sortOrder="20" parent="Simi_Simirewardpoints::Reward_Points"
+             action="simirewardpoints/spendingrates"
+             resource="Simi_Simirewardpoints::Spending_Rates"/>
+
+        <add id="Simi_Simirewardpoints::Manage_Point_Balances"
+             title="Manage Point Balances"
+             module="Simi_Simirewardpoints" sortOrder="30"
+             parent="Simi_Simirewardpoints::Reward_Points"
+             action="simirewardpoints/managepointbalances"
+             resource="Simi_Simirewardpoints::Manage_Point_Balances"/>
+
+        <add id="Simi_Simirewardpoints::Manage_transaction"
+             title="Transactions"
+             module="Simi_Simirewardpoints" sortOrder="40"
+             parent="Simi_Simirewardpoints::Reward_Points"
+             action="simirewardpoints/transaction"
+             resource="Simi_Simirewardpoints::Manage_transaction"/>
+
+        <add id="Simi_Simirewardpoints::settings"
+             title="Settings" module="Simi_Simirewardpoints"
+             parent="Simi_Simirewardpoints::Reward_Points"
+             action="adminhtml/system_config/edit/section/rewardpoints"
+             resource="Simi_Simirewardpoints::settings" sortOrder="100"/>
+    </menu>
+</config>

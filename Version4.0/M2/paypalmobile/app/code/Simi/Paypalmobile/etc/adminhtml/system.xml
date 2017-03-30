@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="paypal_mobile" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Simi - Paypal Mobile</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>New Order Status</label>
+                    <source_model>Simi\Paypalmobile\Model\Config\Source\Order\Status\Pendingpayment</source_model>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                </field>
+                <field id="business_account" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Associated with PayPal Merchant Account</label>
+                </field>
+                <field id="api_name" translate="label" type="password" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Username</label>
+                </field>
+                <field id="api_pass" translate="label" type="password" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Password</label>
+                </field>
+                <field id="signature" translate="label" type="password" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Signature</label>
+                </field>
+                <!--
+                <field id="paypal_mobile_api_wizard" translate="button_label attribute sandbox_button_label" sortOrder="90" showInDefault="1" showInWebsite="1">
+                    <attribute type="button_label">Get Credentials from PayPal</attribute>
+                    <attribute type="button_url">
+                                <![CDATA[https://www.paypal.com/us/cgi-bin/webscr?cmd=_login-api-run]]>
+                    </attribute>
+
+                    <attribute type="sandbox_button_label">Sandbox Credentials</attribute>
+                    <attribute type="sandbox_button_url">
+                                <![CDATA[https://www.sandbox.paypal.com/us/cgi-bin/webscr?cmd=_login-api-run]]>
+                    </attribute>
+                    <attribute type="partner_id"> </attribute>
+                    <attribute type="partner_logo_url"> </attribute>
+                    <attribute type="receive_credentials"></attribute>
+                    <attribute type="show_permissions"></attribute>
+                    <attribute type="display_mode"></attribute>
+                    <attribute type="product_intent_id"></attribute>
+                    <frontend_model>Magento\Paypal\Block\Adminhtml\System\Config\ApiWizard</frontend_model>
+                    <attribute type="shared">1</attribute>
+                </field>
+                -->
+                <field id="client_id" translate="label" type="password" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client ID</label>
+                </field>
+                <field id="secret" translate="label" type="password" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client SECRET</label>
+                </field>
+                <field id="is_sandbox" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sandbox Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="use_credit_cart" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use Credit Card</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!--
+                <field id="min_order_total" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Minimum Order Total</label>
+                </field>
+                <field id="max_order_total" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Maximum Order Total</label>
+                    <comment>Leave empty to disable limit</comment>
+                </field>
+                -->
+            </group>
+            <!-- payment-group -->
+        </section>
+    </system>
+</config>

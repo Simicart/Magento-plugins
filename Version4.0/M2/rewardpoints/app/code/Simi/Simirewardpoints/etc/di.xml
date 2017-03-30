@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Simi\Simirewardpoints\Model\ResourceModel\Rate\Earning\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">simirewardpoints_rate</argument>
+            <argument name="resourceModel" xsi:type="string">Simi\Simirewardpoints\Model\ResourceModel\Rate</argument>
+        </arguments>
+    </type>
+    <type name="Simi\Simirewardpoints\Model\ResourceModel\Rate\Spending\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">simirewardpoints_rate</argument>
+            <argument name="resourceModel" xsi:type="string">Simi\Simirewardpoints\Model\ResourceModel\Rate</argument>
+        </arguments>
+    </type>
+    <type name="Simi\Simirewardpoints\Model\ResourceModel\Rewardcustomer\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_grid_flat</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Customer</argument>
+        </arguments>
+    </type>
+    <type name="Simi\Simirewardpoints\Model\ResourceModel\Transaction\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">simirewardpoints_transaction</argument>
+            <argument name="resourceModel" xsi:type="string">Simi\Simirewardpoints\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="simirewardpoints_spendingrates_listing_data_source" xsi:type="string">Simi\Simirewardpoints\Model\ResourceModel\Rate\Spending\Collection</item>
+                <item name="simirewardpoints_earningrates_listing_data_source" xsi:type="string">Simi\Simirewardpoints\Model\ResourceModel\Rate\Earning\Collection</item>
+                <item name="simirewardpoints_balance_customer_listing_data_source" xsi:type="string">Simi\Simirewardpoints\Model\ResourceModel\Rewardcustomer\Collection</item>
+                <item name="simirewardpoints_transaction_listing_data_source" xsi:type="string">Simi\Simirewardpoints\Model\ResourceModel\Transaction\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>s
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="simirewardpoints_discount_to_item" type="Simi\Simirewardpoints\Model\Plugin\Quote\RewardpointsToOrderItem"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Items\Grid">
+        <plugin name="simirewardpoints_discount_to_subtotal" type="Simi\Simirewardpoints\Model\Plugin\Quote\RewardpointsToSubtotal"/>
+    </type>
+</config>
+

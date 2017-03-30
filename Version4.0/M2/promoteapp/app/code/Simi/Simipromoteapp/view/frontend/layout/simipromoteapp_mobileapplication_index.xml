@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Simi_Simipromoteapp::css/landingpage.css"/>
+    </head>
+    <body>		
+        <referenceContainer name="content">			
+            <block class="Simi\Simipromoteapp\Block\Mobileapplication\Index" name="mobileapplication_index" template="mobileapplication/index.phtml">
+            </block>
+        </referenceContainer>      
+        <referenceContainer name="header.container" remove="true" />
+        <referenceBlock name="catalog.topnav" remove="true" />
+        <referenceContainer name="footer" remove="true" />
+        <referenceContainer name="main.content" htmlTag="main" htmlId="add-ID-name-to-container" htmlClass="new-class-name"/>
+    </body>
+</page>

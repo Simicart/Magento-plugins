@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Simi_Simipromoteapp:etc/email_templates.xsd">
+    <template id="simipromoteapp_email_email_for_register_template" label="Email For Register" type="text" file="email_register.html"  module="Simi_Simipromoteapp" area="adminhtml"/>
+    <template id="simipromoteapp_email_email_for_subscriber_template" label="Email For Subscriber" type="text" file="email_subscriber.html"  module="Simi_Simipromoteapp" area="adminhtml"/>
+    <template id="simipromoteapp_email_email_for_purchasing_template" label="Email For Purchasing Order" type="text" file="email_purchase.html"  module="Simi_Simipromoteapp" area="adminhtml"/>
+</config>

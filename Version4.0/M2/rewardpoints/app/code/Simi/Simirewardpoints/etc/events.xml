@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- setEarningPoints to quote -->
+    <event name="sales_quote_collect_totals_after">
+        <observer name="simirewardpoints_sales_quote_collect_totals_after" instance="Simi\Simirewardpoints\Model\Total\Quote\Earning" />
+    </event>
+    <!-- reset rewardpoint on quote before calculater -->
+    <event name="sales_quote_collect_totals_before">
+        <observer name="simirewardpoints_sales_quote_collect_totals_before" instance="Simi\Simirewardpoints\Model\Total\Quote\ResetRewardpoints" />
+    </event>
+    <!-- convert rewardpoint from quote to order -->
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="simirewardpoints_sales_model_service_quote_submit_before" instance="Simi\Simirewardpoints\Observer\FieldSet" />
+    </event>
+    <!-- reset earning point for Guest order -->
+    <event name="sales_order_save_before">
+        <observer name="simirewardpoints_sales_order_save_before" instance="Simi\Simirewardpoints\Observer\SalesOrderSaveBefore" />
+    </event>
+    <!-- proccess rewardpoint based on order state -->
+    <event name="sales_order_save_after">
+        <observer name="simirewardpoints_sales_order_save_after" instance="Simi\Simirewardpoints\Observer\SalesOrderSaveAfter" />
+    </event>
+    <!-- create earning point when invoice is created -->
+    <event name="sales_order_invoice_save_after">
+        <observer name="simirewardpoints_sales_order_invoice_save_after" instance="Simi\Simirewardpoints\Observer\SalesOrderInvoiceSaveAfter" />
+    </event>
+    <!-- create spending transaction -->
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="simirewardpoints_sales_model_service_quote_submit_success" instance="Simi\Simirewardpoints\Observer\SalesModelServiceQuoteSubmitSuccess" />
+    </event>
+    
+    <!--change module resource-->
+    <event name="simi_simiconnector_model_server_initialize">
+        <observer name="simi_simirewardpoints_change_resource" instance="Simi\Simirewardpoints\Observer\Simiobserver\SimiSimiconnectorModelServerInitialize"/>
+    </event>
+    
+    <!--Show Point on product detail-->
+    <event name="simi_simiconnector_model_api_products_show_after">
+        <observer name="simi_simirewardpoints_product_detail" instance="Simi\Simirewardpoints\Observer\Simiobserver\SimiconnectorModelApiProductsShowAfter"/>
+    </event>
+    
+    <!--Show Earning Point cart on app -->
+    <event name="simi_simiconnector_model_api_quoteitems_index_after">
+        <observer name="simi_simirewardpoints_earning_cart" instance="Simi\Simirewardpoints\Observer\Simiobserver\SimiconnectorModelApiQuoteitemsIndexAfter"/>
+    </event>
+    
+    <!--Collect Totals-->
+    <event name="simi_simiconnector_helper_total_settotal_after">
+        <observer name="simi_simirewardpoints_collect_totals" instance="Simi\Simirewardpoints\Observer\Simiobserver\SimiconnectorHelperTotalSetTotalAfter"/>
+    </event>
+    
+    <!--Collect Totals-->
+    <event name="simi_simiconnector_model_api_orders_onepage_show_after">
+        <observer name="simi_simirewardpoints_onepage_show_after" instance="Simi\Simirewardpoints\Observer\Simiobserver\SimiconnectorModelApiOrdersOnepageShowAfter"/>
+    </event>
+</config>

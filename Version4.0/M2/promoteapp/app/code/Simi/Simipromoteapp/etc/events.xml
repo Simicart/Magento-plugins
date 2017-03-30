@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="simipromoteapp_customer_register_success" 
+                  instance="Simi\Simipromoteapp\Observer\CustomerRegisterSuccess" />
+    </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="simipromoteapp_checkout_onepage_controller_success_action" 
+                  instance="Simi\Simipromoteapp\Observer\CheckoutSuccess" />
+    </event>
+    <event name="newsletter_subscriber_save_after">
+        <observer name="simipromoteapp_newsletter_subscriber_save_after" 
+                  instance="Simi\Simipromoteapp\Observer\NewsletterSubscriberSaveAfter" />
+    </event>
+</config>

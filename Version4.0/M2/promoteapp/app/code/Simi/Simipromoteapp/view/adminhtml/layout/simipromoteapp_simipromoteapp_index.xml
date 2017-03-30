@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Simi_Simipromoteapp::js/jquery-1.11.1.min.js"/>
+        <script src="Simi_Simipromoteapp::js/jquery-ui.min.js"/>
+        <script src="Simi_Simipromoteapp::js/highcharts.js"/>
+        <script src="Simi_Simipromoteapp::js/exporting.js"/>
+        <css src="Simi_Simipromoteapp::css/report.css" />
+    </head> 
+    <body>
+        <referenceContainer name="content">
+            <block class="Simi\Simipromoteapp\Block\Adminhtml\Promoteapp" name="simipromoteapp.email" template="Simi_Simipromoteapp::charts/email.phtml" before="-"/>
+            <block class="Simi\Simipromoteapp\Block\Adminhtml\Simipromoteapp" name="admin.simipromoteapp.simipromoteapp.grid"/>
+        </referenceContainer>
+        <referenceContainer name="page.main.actions">
+
+        </referenceContainer>
+    </body>
+</page>

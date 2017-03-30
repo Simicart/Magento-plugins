@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="payment_method_is_active">
+        <observer name="simi_paypal_mobile_payment_method_is_active" 
+                  instance="Simi\Paypalmobile\Observer\PaymentMethodIsActive" />
+    </event>
+    <event name="simiconnector_add_payment_method">
+        <observer name="Paypal_Mobile_Simiconnector_Add_Payment_Method" 
+                  instance="Simi\Paypalmobile\Observer\SimiconnectorAddPaymentMethod" />
+    </event>
+    <event name="simi_simiconnector_model_server_initialize">
+        <observer name="Paypal_Mobile_Simi_Simiconnector_Model_Server_Initialize" 
+                  instance="Simi\Paypalmobile\Observer\SimiconnectorModelServerInitialize" />
+    </event>
+</config>

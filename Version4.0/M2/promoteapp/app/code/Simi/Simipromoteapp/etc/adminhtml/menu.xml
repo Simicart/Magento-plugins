@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Simi. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Simi_Simiconnector::simipromoteapp" title="Promote Apps" module="Simi_Simipromoteapp" sortOrder="99" parent="Simi_Simiconnector::simiconnector" resource="Simi_Simipromoteapp::simipromoteapp_settings"/>
+        <add id="Simi_Simiconnector::simipromoteapp_reports" title="Reports" module="Simi_Simipromoteapp" sortOrder="10" parent="Simi_Simiconnector::simipromoteapp" action="simipromoteapp/simipromoteapp/" resource="Simi_Simiconnector::manage"/>
+        <add id="Simi_Simiconnector::simipromoteapp_settings" title="Settings" module="Simi_Simipromoteapp" sortOrder="99" parent="Simi_Simiconnector::simipromoteapp" resource="Simi_Simipromoteapp::configuration" action="adminhtml/system_config/edit/section/simipromoteapp"/>
+    </menu>
+</config>

@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="simipromoteapp" translate="label" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Promote Apps</label>
+            <tab>simi</tab>
+            <resource>Simi_Simi::config_simi</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="app" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>App Configuration</label>
+                <field id="ios_link" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>iOs Link</label>
+                </field>
+                <field id="android_link" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Android Link</label>
+                </field>
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sender_name_identity" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Name Sender</label>
+                </field>
+                <field id="sender_email_identity" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                </field>
+                <field id="email_for_register_template" translate="label" type="select" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Email For Register</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="email_for_subscriber_template" translate="label" type="select" sortOrder="399" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Email For Subscribing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="email_for_purchasing_template" translate="label" type="select" sortOrder="499" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Email For Purchasing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+            <group id="chart" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Chart Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="chart_title" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Chart Title</label>
+                </field>
+                <field id="by_app" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text By Apps</label>
+                </field>
+                <field id="by_website" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text By Website</label>
+                </field>
+                <field id="percent" translate="label" type="text" sortOrder="399" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Percent In Chart</label>
+                </field>
+            </group>
+            <group id="promotepage" translate="label" type="text" sortOrder="399" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Promote Application Page Configuration</label>
+                
+                <field id="link_page" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Preview Page</label>
+                    <frontend_model>Simi\Simipromoteapp\Block\Adminhtml\Page</frontend_model>
+                </field>
+                <field id="section_image_first_block" translate="label" type="image" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image in the first block (width: 179px, height: 321px)</label>
+                    <comment>Allow types: jpeg, gif, png. </comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>    
+                    <upload_dir config="system/filesystem/media">simi/simipromoteapp/promotepage</upload_dir> 
+                    <base_url type="media" scope_info="1">simi/simipromoteapp/promotepage</base_url>               
+                </field>
+                <field id="section_image_second_block" translate="label" type="image" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image in the second block (width: 230px, height: 377px)</label>
+                    <comment>Allow types: jpeg, gif, png. </comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>    
+                    <upload_dir config="system/filesystem/media">simi/simipromoteapp/promotepage</upload_dir> 
+                    <base_url type="media" scope_info="1">simi/simipromoteapp/promotepage</base_url>               
+                </field>
+                <field id="section_image_small_third_block" translate="label" type="image" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image 1 in the third block (width: 253px, height: 289px)</label>
+                    <comment>Allow types: jpeg, gif, png. </comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>    
+                    <upload_dir config="system/filesystem/media">simi/simipromoteapp/promotepage</upload_dir> 
+                    <base_url type="media" scope_info="1">simi/simipromoteapp/promotepage</base_url>               
+                </field>
+                <field id="section_image_large_third_block" translate="label" type="image" sortOrder="399" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image 2 in the third block (width: 231px, height: 412px)</label>
+                    <comment>Allow types: jpeg, gif, png. </comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>    
+                    <upload_dir config="system/filesystem/media">simi/simipromoteapp/promotepage</upload_dir> 
+                    <base_url type="media" scope_info="1">simi/simipromoteapp/promotepage</base_url>               
+                </field>
+                <field id="section_image_fourth_block" translate="label" type="image" sortOrder="499" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image in the fourth block (width: 195px, height: 349px)</label>
+                    <comment>Allow types: jpeg, gif, png. </comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>    
+                    <upload_dir config="system/filesystem/media">simi/simipromoteapp/promotepage</upload_dir> 
+                    <base_url type="media" scope_info="1">simi/simipromoteapp/promotepage</base_url>               
+                </field>
+            </group>
+            <group id="popup" translate="label" type="text" sortOrder="499" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Popup Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="link_alert" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link download app for Iphone/Ipod</label>
+                </field>
+                <field id="link_android" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link download app for android</label>
+                </field>
+                <field id="link_ipad" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link download app for ipad</label>
+                </field>
+                <field id="content_alert" translate="label" type="text" sortOrder="399" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Content</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

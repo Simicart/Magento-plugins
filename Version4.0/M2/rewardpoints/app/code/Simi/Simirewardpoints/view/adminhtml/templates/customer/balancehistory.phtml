@@ -1,0 +1,9 @@
+<div class="entry-edit">
+    <fieldset id="grop_fields" class="fieldset admin__fieldset">   
+        <legend class="legend">
+            <span><?php echo __('Transaction History') ?></span>
+        </legend>   
+        <?php echo $this->getLayout()
+            ->createBlock('Simi\Simirewardpoints\Block\Adminhtml\Customer\Tab\History')->toHtml(); ?>
+    </fieldset>
+</div>

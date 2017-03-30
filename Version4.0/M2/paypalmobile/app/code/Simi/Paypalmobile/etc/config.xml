@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <paypal_mobile>
+                <active>0</active>       
+                <title>Paypal Mobile</title>
+                <order_status>pending_payment</order_status>
+                <instructions>Instruction.</instructions>
+                <payment_action>true</payment_action>
+                <model>Simi\Paypalmobile\Model\Paypal</model>
+                <group>offline</group> 
+                <allowspecific>0</allowspecific>
+                <is_sandbox>0</is_sandbox>    
+                <use_credit_cart>0</use_credit_cart>
+            </paypal_mobile>
+        </payment>
+    </default>
+</config>

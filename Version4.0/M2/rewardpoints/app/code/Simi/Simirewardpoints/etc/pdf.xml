@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <totals>
+        <total name="simirewardpoints">
+            <title translate="true">Use points on spend</title>
+            <source_field>simirewardpoints_discount</source_field>
+            <model>Simi\Simirewardpoints\Model\Total\Pdf\Point</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>150</sort_order>
+        </total>
+        <total name="simirewardpoints_earn">
+            <title translate="true">Earn points</title>
+            <source_field>simirewardpoints_earn</source_field>
+            <model>Simi\Simirewardpoints\Model\Total\Pdf\Pointearn</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>140</sort_order>
+        </total>
+    </totals>
+</config>
