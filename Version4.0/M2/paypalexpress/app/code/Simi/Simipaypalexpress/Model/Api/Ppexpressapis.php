@@ -19,6 +19,7 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
 
     public function setBuilderQuery() {
         $this->config = $this->simiObjectManager->create($this->configType, array($this->configMethod));
+        $this->config->setMethod($this->configMethod);
         $data = $this->getData();
         if ($data['resourceid']) {
             
@@ -93,7 +94,7 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
         $result = array();
         $order = array();
         $parameters = (array) $data['contents'];
-        if (!$parameters['s_method']) {
+        if (!isset($parameters['s_method'])) {
             throw new \Simi\Simiconnector\Helper\SimiException(__('Please select Shipping Method'), 6);
         } if (isset($data['resourceid'])) {
             if ($data['resourceid'] == 'place') {
@@ -105,11 +106,28 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
             }
         }
         $result['order'] = $order;
-        $session = $this->simiObjectManager->get('Magento\Checkout\Model\Type\Onepage')->getCheckout();
-        $session->clear();
+        $this->cleanCheckoutSession();
         return $result;
     }
 
+    public function cleanCheckoutSession()
+    {
+        try {
+            $quote = $this->_getQuote();
+            $quote->setIsActive(false);
+            $quote->delete();
+        } catch (\Exception $e) {
+            $this->_getCheckoutSession()->clearQuote()->clearStorage();
+        }
+        $checkoutSession = $this->_getCheckoutSession();
+        $checkoutSession->clearQuote();
+        $checkoutSession->clearStorage();
+        $checkoutSession->clearHelperData();
+        $checkoutSession->resetCheckout();
+        $checkoutSession->restoreQuote();
+    }
+
+    
     /*
      * get Paypal start payment information
      */
@@ -130,8 +148,11 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
 
         $customer = $this->simiObjectManager->get('Magento\Customer\Model\Session')->getCustomer();
         if ($customer && $customer->getId()) {
+            $customerData = $this->simiObjectManager->get('Magento\Customer\Model\Session')->getCustomerDataObject();
             $this->checkout->setCustomerWithAddressChange(
-                    $customer, $this->_getQuote()->getBillingAddress(), $this->_getQuote()->getShippingAddress()
+                    $customerData,
+                    $this->_getQuote()->getBillingAddress(),
+                    $this->_getQuote()->getShippingAddress()
             );
         }
 
