@@ -2,19 +2,22 @@
 if(Mage::getStoreConfig("simifbconnect/general/enable")): ?>
     <?php $_category = Mage::registry('current_category'); ?>
     <?php if($_category): ?>
-        <?php $hasChild = Mage::helper('simifbconnect')->checkIfHasChild($_category) ?>
-        <?php $url = Mage::getStoreConfig("simifbconnect/general/identify_key").'://category_id='.$_category->getId().'&has_child='.$hasChild ?>
+        <?php $hasChild = Mage::helper('simifbconnect')->checkIfHasChild($_category);
+        $identifyKey = Mage::getStoreConfig("simifbconnect/general/identify_key");
+        $url = str_replace(".", "", $identifyKey).'://category_id='.$_category->getId().'&has_child='.$hasChild ?>
         <meta property="al:ios:url" content="<?php echo $url ?>" />
         <meta property="al:ios:app_store_id" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_app_id") ?>" />
         <meta property="al:ios:app_name" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_appname") ?>" />
 
         <meta property="al:android:url" content="<?php echo $url ?>" />
-        <meta property="al:android:package" content="<?php echo Mage::getStoreConfig("simifbconnect/general/android_package") ?>" />
+        <meta property="al:android:package" content="<?php echo Mage::getStoreConfig("simifbconnect/general/identify_key") ?>" />
         <meta property="al:android:app_name" content="<?php echo Mage::getStoreConfig("simifbconnect/general/android_appname") ?>" />
 
         <meta property="og:title" content="<?php echo $_category->getName() ?>" />
         <meta property="og:type" content="website" />
         <meta property="al:web:should_fallback" content="false" />
+        <meta property="fb_category_id" content="<?php echo $_category->getId() ?>" />
+        <meta property="fb_is_has_child" content="<?php echo $hasChild ?>" />
     <?php endif; ?>
         
 <?php endif;?>

@@ -1,7 +1,9 @@
 <?php if (Mage::getStoreConfig("simifbconnect/general/enable")): ?>
     <?php $_product = Mage::registry('current_product'); ?>
     <?php if ($_product) : ?>
-        <?php $url = Mage::getStoreConfig("simifbconnect/general/identify_key").'://product_id='.$_product->getId() ?>
+        <?php 
+        $identifyKey = Mage::getStoreConfig("simifbconnect/general/identify_key");
+        $url = str_replace(".", "", $identifyKey).'://product_id='.$_product->getId() ?>
         <meta property="al:ios:url" content="<?php echo $url ?>" />
         <meta property="al:ios:app_store_id" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_app_id") ?>" />
         <meta property="al:ios:app_name" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_appname") ?>" />
@@ -13,5 +15,6 @@
         <meta property="og:title" content="<?php echo $_product->getName() ?>" />
         <meta property="og:type" content="website" />
         <meta property="al:web:should_fallback" content="false" />
+        <meta property="fb_product_id" content="<?php echo $_product->getId() ?>" />
     <?php endif; ?>
 <?php endif; ?>
