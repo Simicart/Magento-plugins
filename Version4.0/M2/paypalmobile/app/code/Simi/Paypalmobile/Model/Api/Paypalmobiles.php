@@ -8,10 +8,10 @@ namespace Simi\Paypalmobile\Model\Api;
 
 use Simi\Simiconnector\Model\Api\Apiabstract;
 
-class Paypalmobile extends Apiabstract {
+class Paypalmobiles extends Apiabstract {
 
     public function setBuilderQuery() {
-        $this->builderQuery = $this->_objectManager->get('Simi\Paypalmobile\Model\Paypalmobile');
+        $this->builderQuery = $this->simiObjectManager->get('Simi\Paypalmobile\Model\Paypalmobile');
     }
 
     /**

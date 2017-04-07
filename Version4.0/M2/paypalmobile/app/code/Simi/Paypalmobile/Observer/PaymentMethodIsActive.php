@@ -13,10 +13,10 @@ use Magento\Framework\Event\ObserverInterface;
 
 class PaymentMethodIsActive implements ObserverInterface {
 
-    private $_objectManager;
+    public $simiObjectManager;
 
     public function __construct() {
-        $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->simiObjectManager = \Magento\Framework\App\ObjectManager::getInstance();
     }
 
     /**
@@ -27,7 +27,7 @@ class PaymentMethodIsActive implements ObserverInterface {
         $result = $observer['result'];
         $method = $observer['method_instance'];
         if ($method->getCode() == 'paypal_mobile') {
-            if (!strpos($this->_objectManager->get('\Magento\Framework\Url')->getCurrentUrl(), 'simiconnector')) {
+            if (!strpos($this->simiObjectManager->get('\Magento\Framework\Url')->getCurrentUrl(), 'simiconnector')) {
                 $result->isAvailable = false;
             }
         }

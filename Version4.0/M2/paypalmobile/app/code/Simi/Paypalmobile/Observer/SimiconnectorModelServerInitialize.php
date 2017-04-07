@@ -13,10 +13,10 @@ use Magento\Framework\Event\ObserverInterface;
 
 class SimiconnectorModelServerInitialize implements ObserverInterface {
 
-    private $_objectManager;
+    public $simiObjectManager;
 
     public function __construct() {
-        $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->simiObjectManager = \Magento\Framework\App\ObjectManager::getInstance();
     }
 
     /**

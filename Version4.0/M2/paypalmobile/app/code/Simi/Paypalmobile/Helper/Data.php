@@ -48,7 +48,7 @@ class Data extends \Simi\Simiconnector\Helper\Data
             try {
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt_array($ch, $options);
+                @curl_setopt_array($ch, $options);
                 $content = curl_exec($ch);
                 curl_close($ch);
             } catch (Exception $e) {
@@ -96,7 +96,7 @@ class Data extends \Simi\Simiconnector\Helper\Data
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:application/json", "Authorization:Bearer " . $this->getAccessToken()));
-                curl_setopt_array($ch, $options);
+                @curl_setopt_array($ch, $options);
                 $content = curl_exec($ch);
                 curl_close($ch);
             } catch (Exception $e) {
@@ -109,17 +109,19 @@ class Data extends \Simi\Simiconnector\Helper\Data
 
             $content_json = json_decode($content);
             $transactions = $content_json->transactions;
-            $funding_instruments = $content_json->payer->funding_instruments;
             $transaction = $transactions[0];
-            $funding_instrument = $funding_instruments[0];
             $data_ret['payment_status'] = $transaction->related_resources[0]->sale->state;
             $data_ret['transaction_id'] = $content_json->id;
             $data_ret['currency_code'] = $transaction->amount->currency;
             $data_ret['amount'] = $transaction->amount->total;
             $payer = $content_json->payer;
             if ($payer->payment_method == "credit_card") {
-                $data_ret['fund_source_type'] = $funding_instrument->credit_card->type;
-                $data_ret['last_four_digits'] = $funding_instrument->credit_card->number;
+                if (isset($content_json->payer->funding_instruments)) {
+                    $funding_instruments = $content_json->payer->funding_instruments;
+                    $funding_instrument = $funding_instruments[0];
+                    $data_ret['fund_source_type'] = $funding_instrument->credit_card->type;
+                    $data_ret['last_four_digits'] = $funding_instrument->credit_card->number;
+                }
             } else {
                 $data_ret['fund_source_type'] = "PayPal";
                 $data_ret['transaction_email'] = '';
@@ -161,7 +163,7 @@ class Data extends \Simi\Simiconnector\Helper\Data
     }
 
     public function getConfigPayPal($path) {
-        return $this->_scopeConfig->getValue('payment/paypal_mobile/' . $path);
+        return $this->scopeConfig->getValue('payment/paypal_mobile/' . $path);
     }
     
 }

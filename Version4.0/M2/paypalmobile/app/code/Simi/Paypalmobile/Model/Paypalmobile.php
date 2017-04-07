@@ -20,7 +20,7 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
     protected $_tableresource;
     protected $_coreRegistry = null;
     
-    protected $_objectManager;
+    public $simiObjectManager;
     /**
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
@@ -42,9 +42,9 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
     )
     {
         
-        $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->simiObjectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_tableresource = $tableresource;
-        $this->_coreRegistry = $this->_objectManager->get('\Magento\Framework\Registry');
+        $this->_coreRegistry = $this->simiObjectManager->get('\Magento\Framework\Registry');
 
         parent::__construct(
             $context,
@@ -78,7 +78,7 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
             return array('order' => $order, 'message' => __('The order has been cancelled'));            
         }
         $confirm_db = $dataComfrim->proof;
-        $data = $this->_objectManager->get('Simi\Paypalmobile\Helper\Data')->getResponseBody($confirm_db, 0);
+        $data = $this->simiObjectManager->get('Simi\Paypalmobile\Helper\Data')->getResponseBody($confirm_db, 0);
         $data['invoice_number'] = $dataComfrim->invoice_number;
 
         if ((isset($data['payment_status'] )&& $data['payment_status']== 'PENDING') 
@@ -104,7 +104,7 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
             $items[$item->getId()] = $item->getQtyOrdered();
         }
 
-        $this->_objectManager->get('Simi\Simiconnector\Model\Paypalmobile')
+        $this->simiObjectManager->get('Simi\Simiconnector\Model\Paypalmobile')
                 ->setData('transaction_id', $data['transaction_id'])
                 ->setData('transaction_name', $data['fund_source_type'])
                 ->setData('transaction_dis', $data['last_four_digits'])
@@ -114,8 +114,8 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
                 ->setData('status', $data['payment_status'])
                 ->setData('order_id', $order->getId())
                 ->save();
-        $this->_objectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail($order->getId());
-        $orderService = $this->_objectManager->create('Magento\Sales\Api\InvoiceManagementInterface');
+        $this->simiObjectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail($order->getId());
+        $orderService = $this->simiObjectManager->create('Magento\Sales\Api\InvoiceManagementInterface');
         $invoice = $orderService->prepareInvoice($order, $items);
         $invoice->setRequestedCaptureCase(\Magento\Sales\Model\Order\Invoice::CAPTURE_ONLINE);
         $invoice->setEmailSent(true)->register();
@@ -123,12 +123,11 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
         
         $this->_coreRegistry->register('current_invoice', $invoice);
         $invoice->getOrder()->setIsInProcess(true);
-        $transactionSave = $this->_objectManager->get('Magento\Framework\DB\Transaction')
+        $transactionSave = $this->simiObjectManager->get('Magento\Framework\DB\Transaction')
                 ->addObject($invoice)
                 ->addObject($invoice->getOrder());
         $transactionSave->save();
-        $order->sendNewOrderEmail();
-        $this->_objectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail(null);
+        $this->simiObjectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail(null);
         return true;
     }
 
@@ -136,43 +135,41 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
         $items = array();
         $order = $this->_getOrder($orderId);
         if (!$order){
-            throw new Exception(__('The order is not existed'), 4);
-            return;
+            throw new \Simi\Simiconnector\Helper\SimiException(__('The order is not existed'), 4);
         }
             
         foreach ($order->getAllItems() as $item) {
             $items[$item->getId()] = $item->getQtyOrdered();
         }
         try {
-            $this->_objectManager->get('Simi\Paypalmobile\Model\Paypalmobile')
+            $ppMobileModel = $this->simiObjectManager->get('Simi\Paypalmobile\Model\Paypalmobile')
                 ->setData('transaction_id', $data['transaction_id'])
                 ->setData('transaction_name', $data['fund_source_type'])
-                ->setData('transaction_dis', $data['last_four_digits'])
                 ->setData('transaction_email', $data['transaction_email'])
                 ->setData('amount', $data['amount'])
                 ->setData('currency_code', $data['currency_code'])
                 ->setData('status', $data['payment_status'])
-                ->setData('order_id', $order->getId())
-                ->save();
-            $this->_objectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail($order->getId());
+                ->setData('order_id', $order->getId());
+            if (isset($data['last_four_digits'])){
+                $ppMobileModel->setData('transaction_dis', $data['last_four_digits']);
+            }
+            $ppMobileModel->save();
+            $this->simiObjectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail($order->getId());
             
-            $orderService = $this->_objectManager->create('Magento\Sales\Api\InvoiceManagementInterface');
+            $orderService = $this->simiObjectManager->create('Magento\Sales\Api\InvoiceManagementInterface');
             $invoice = $orderService->prepareInvoice($order, $items);
             $invoice->setRequestedCaptureCase(\Magento\Sales\Model\Order\Invoice::CAPTURE_ONLINE);
             $invoice->setEmailSent(true)->register();
             //$invoice->setTransactionId();
             $this->_coreRegistry->register('current_invoice', $invoice);
             $invoice->getOrder()->setIsInProcess(true);
-            $transactionSave = $this->_objectManager->get('Magento\Framework\DB\Transaction')
+            $transactionSave = $this->simiObjectManager->get('Magento\Framework\DB\Transaction')
                     ->addObject($invoice)
                     ->addObject($invoice->getOrder());
             $transactionSave->save();
-            //if ($data)
-            //$order->sendOrderUpdateEmail();
-            $order->sendNewOrderEmail();
-            $this->_objectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail(null);
+            $this->simiObjectManager->get('\Magento\Checkout\Model\Session')->setOrderIdForEmail(null);
         }catch(Exception $e){
-            throw new Exception(__('Unable to save the order'), 4);
+            throw new \Simi\Simiconnector\Helper\SimiException(__('Unable to save the order'), 4);
         }        
         
         return $order;
@@ -182,10 +179,9 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
 
     protected function _getOrder($orderId) {
         if (is_null($this->_order)) {
-            $this->_order = $this->_objectManager->get('Magento\Sales\Model\Order')->loadByIncrementId($orderId);
+            $this->_order = $this->simiObjectManager->get('Magento\Sales\Model\Order')->loadByIncrementId($orderId);
             if (!$this->_order->getId()) {
-                throw new \Exception(__("Can not create invoice. Order was not found."));
-                return;
+                throw new \Simi\Simiconnector\Helper\SimiException(__("Can not create invoice. Order was not found."));
             }
         }
         if (!$this->_order->canInvoice())
@@ -194,7 +190,7 @@ class Paypalmobile extends \Magento\Framework\Model\AbstractModel
     }
 
     protected function setOrderCancel($orderIncrementId) {
-        $order = $this->_objectManager->get('Magento\Sales\Model\Order')->loadByIncrementId($orderIncrementId);
+        $order = $this->simiObjectManager->get('Magento\Sales\Model\Order')->loadByIncrementId($orderIncrementId);
         if ($order->getId()) {
             $order->cancel()->save();
         }

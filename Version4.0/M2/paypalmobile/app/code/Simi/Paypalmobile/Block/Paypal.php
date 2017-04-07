@@ -5,19 +5,19 @@ namespace Simi\Paypalmobile\Block;
 class Paypal extends \Magento\Payment\Block\Info\Cc
 {
     protected $_tranS;
-    protected $_objectManager;
+    public $simiObjectManager;
     
     protected function _prepareSpecificInformation($transport = null) {
         $orderId = $this->getRequest()->getParam('order_id');
         $invoiceId = $this->getRequest()->getParam('invoice_id');
-        $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->simiObjectManager = \Magento\Framework\App\ObjectManager::getInstance();
         if ($invoiceId) {
-            $invoice = $this->_objectManager->get('Magento\Sales\Model\Order\Invoice')->load($invoiceId);
+            $invoice = $this->simiObjectManager->get('Magento\Sales\Model\Order\Invoice')->load($invoiceId);
             $orderId = $invoice->getOrderId();
-        } elseif ($this->_objectManager->get('\Magento\Checkout\Model\Session')->getOrderIdForEmail()) {
-            $orderId = $this->_objectManager->get('\Magento\Checkout\Model\Session')->getOrderIdForEmail();
+        } elseif ($this->simiObjectManager->get('\Magento\Checkout\Model\Session')->getOrderIdForEmail()) {
+            $orderId = $this->simiObjectManager->get('\Magento\Checkout\Model\Session')->getOrderIdForEmail();
         }
-        $train = $this->_objectManager->get('Simi\Paypalmobile\Model\Paypalmobile')->getCollection()
+        $train = $this->simiObjectManager->get('Simi\Paypalmobile\Model\Paypalmobile')->getCollection()
                 ->addFieldToFilter('order_id', $orderId)
                 ->getLastItem();
         $this->_tranS = $train;
