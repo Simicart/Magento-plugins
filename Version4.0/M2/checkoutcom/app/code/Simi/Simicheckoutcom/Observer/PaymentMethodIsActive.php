@@ -7,7 +7,7 @@
  * Time: 08:52
  */
 
-namespace Simi\Paypalmobile\Observer;
+namespace Simi\Simicheckoutcom\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 
@@ -15,8 +15,11 @@ class PaymentMethodIsActive implements ObserverInterface {
 
     public $simiObjectManager;
 
-    public function __construct() {
-        $this->simiObjectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    public function __construct(
+        \Magento\Framework\ObjectManagerInterface $simiObjectManager
+    ) {
+   
+        $this->simiObjectManager = $simiObjectManager;
     }
 
     /**
@@ -25,7 +28,7 @@ class PaymentMethodIsActive implements ObserverInterface {
      */
     public function execute(\Magento\Framework\Event\Observer $observer) {
         $method = $observer['method_instance'];
-        if ($method->getCode() == 'paypal_mobile') {
+        if ($method->getCode() == 'simicheckoutcom') {
             if (!strpos($this->simiObjectManager->get('\Magento\Framework\Url')->getCurrentUrl(), 'simiconnector')) {
                 $result = $observer->getEvent()->getResult();
                 $result->setData('is_available', false);

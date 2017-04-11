@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <simicheckoutcom>
+                <active>0</active>       
+                <title>Checkout.com</title>
+                <order_status>pending_payment</order_status>
+                <payment_action>true</payment_action>
+                <model>Simi\Simicheckoutcom\Model\Payment</model>
+                <group>offline</group> 
+                <allowspecific>0</allowspecific>
+                <is_sandbox>0</is_sandbox>    
+                <use_credit_cart>0</use_credit_cart>
+            </simicheckoutcom>
+        </payment>
+    </default>
+</config>

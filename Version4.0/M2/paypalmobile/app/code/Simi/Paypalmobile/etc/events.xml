@@ -12,4 +12,8 @@
         <observer name="Paypal_Mobile_Simi_Simiconnector_Model_Server_Initialize" 
                   instance="Simi\Paypalmobile\Observer\SimiconnectorModelServerInitialize" />
     </event>
+    <event name="simi_simiconnector_model_api_orders_onepage_store_after">
+        <observer name="paypalmobile_model_api_orders_onepage_store_after" 
+                  instance="Simi\Paypalmobile\Observer\SimiconnectorAfterPlaceOrder" />
+    </event>
 </config>
