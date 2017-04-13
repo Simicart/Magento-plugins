@@ -1,12 +1,14 @@
 <?php
 
-class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_Action
+class Simi_Simimigrate_SynchronizationsController extends Mage_Core_Controller_Front_Action
 {
     protected $_data;
     
-    public function indexAction()
+    public function magentoAction()
     {
         try {
+            $result = array();
+            
             $userEmail = $this->getRequest()->getParam('user_email');
             $websiteUrl = $this->getRequest()->getParam('website_url');
             $simicartAppConfigId = $this->getRequest()->getParam('simicart_app_config_id');
@@ -23,9 +25,11 @@ class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_
                     ->getCollection()
                     ->addFieldToFilter('simicart_app_config_id',$simicartAppConfigId)
                     ->getFirstItem();
-            
-            if (!$appModel->getId())
+            $result['new_account'] = false;
+            if (!$appModel->getId()) {
                 $appModel->setData('simicart_app_config_id', $simicartAppConfigId);
+                $result['new_account'] = true;
+            }
             $appModel->setData('user_email', $userEmail);
             $appModel->setData('website_url', $websiteUrl);
             $appModel->setData('simicart_customer_id', $simicartCustomerId);
@@ -55,7 +59,6 @@ class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_
             $query .= "DELETE FROM " . $customerTable . " WHERE app_id=" . $appId . ";";
             
             $writeConnection->query($query);
-            
             /*
              * Add data
              */
@@ -77,6 +80,7 @@ class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_
                             $this->checkString($storeView['is_active']) . "'); ";
                     $queryInsert .= $newRecord;
                 }
+                $result['storeviews'] = count($storeViews);
             }
             
             //stores
@@ -94,6 +98,7 @@ class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_
                             $this->checkString($store['name']) . "'); ";
                     $queryInsert .= $newRecord;
                 }
+                $result['stores'] = count($stores);
             }
             
             //categories
@@ -114,6 +119,7 @@ class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_
                             $this->checkString($category['url_path']) . "'); ";
                     $queryInsert .= $newRecord;
                 }
+                $result['categories'] = count($categories);
             }
             
             //products
@@ -133,8 +139,8 @@ class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_
                             $this->checkString($product['is_salable']) . "'); ";
                     $queryInsert .= $newRecord;
                 }
+                $result['products'] = count($products);
             }
-            
             //customers
             if (isset($data['migrate_package']['customers']['migrate_customers'])) {
                 $customers = $data["migrate_package"]["customers"]['migrate_customers'];
@@ -149,10 +155,14 @@ class Simi_Simimigrate_SynchronizeController extends Mage_Core_Controller_Front_
                             $customer['email'] . "'); ";
                     $queryInsert .= $newRecord;
                 }
+                $result['customers'] = count($customers);
+            }
+            if ($queryInsert) {
+                $writeConnection->query($queryInsert);
             }
             
-            $writeConnection->query($queryInsert);
-            
+            $this->_printData(['synchronization'=>$result]);
+            exit();
         } catch (Exception $e) {
             $results = array();
             $result = array();
