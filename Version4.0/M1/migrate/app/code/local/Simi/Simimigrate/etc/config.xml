@@ -23,12 +23,27 @@
             </updates>
         </layout>
     </frontend>
+    <admin>
+        <routers>
+            <adminhtml> 
+                <args> 
+                    <modules> 
+                        <Simi_Simimigrate after="Mage_Adminhtml">Simi_Simimigrate_Adminhtml</Simi_Simimigrate>
+                    </modules> 
+                </args> 
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simimigrate>
+                    <file>simimigrate.xml</file>
+                </simimigrate>
+            </updates>
+        </layout>
+    </adminhtml>
     <global>
-        <helpers>
-            <simimigrate>
-                <class>Simi_Simimigrate_Helper</class>
-            </simimigrate>
-        </helpers>
         <models>
             <simimigrate>
                 <class>Simi_Simimigrate_Model</class>
@@ -78,5 +93,15 @@
                 </connection>
             </simimigrate_read>
         </resources>
+        <blocks>
+            <simimigrate>
+                <class>Simi_Simimigrate_Block</class>
+            </simimigrate>
+        </blocks>
+        <helpers>
+            <simimigrate>
+                <class>Simi_Simimigrate_Helper</class>
+            </simimigrate>
+        </helpers>
     </global>
 </config> 

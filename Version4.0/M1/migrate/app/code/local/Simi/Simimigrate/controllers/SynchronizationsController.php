@@ -1,6 +1,6 @@
 <?php
 
-class Simi_Simimigrate_SynchronizationsController extends Mage_Core_Controller_Front_Action
+class Simi_Simimigrate_SynchronizationsController extends Simi_Simimigrate_Controller_Action
 {
     protected $_data;
     
@@ -186,29 +186,10 @@ class Simi_Simimigrate_SynchronizationsController extends Mage_Core_Controller_F
         exit();
     }
     
-    protected function _printData($result)
-    {
-        header("Content-Type: application/json");
-        $this->setData($result);
-        $this->_data = $this->getData();
-        ob_clean();
-        echo Mage::helper('core')->jsonEncode($this->_data);
-    }
-    
     public function checkString($input)
     {
         $input = addslashes($input);
         $input = strip_tags($input);
         return $input;
-    }
-    
-    public function getData()
-    {
-        return $this->_data;
-    }
-
-    public function setData($data)
-    {
-        $this->_data = $data;
     }
 }
