@@ -8,15 +8,14 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
     public function __construct() {
         parent::__construct();
         $this->setId('storeviewGrid');
-        $this->setDefaultSort('storeview_id');
+        $this->setDefaultSort('entity_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
     }
 
     protected function _prepareCollection() {
-        $collection = Mage::getModel('simimigrate/storeview')->getCollection();
-        //die('1');
-        //zend_debug::dump($collection->getData());die;
+        $collection = Mage::helper('simimigrate')
+                    ->joinAppConfigTable(Mage::getModel('simimigrate/storeview')->getCollection());
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -41,15 +40,12 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
             'index' => 'name'
         ));
         
-        
         $this->addColumn('group_id', array(
             'header' => Mage::helper('simimigrate')->__('Group ID'),
             'width' => '150px',
             'index' => 'group_id'
         ));
-
         
-
         $this->addColumn('is_active', array(
             'header' => Mage::helper('simimigrate')->__('Is Active'),
             'width' => '50px',
@@ -61,19 +57,23 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
                 1 => Mage::helper('simimigrate')->__('Yes'),
             ),
         ));
-
         
-        $storeOptions = array();
-        foreach (Mage::getModel('core/store')->getCollection() as $store) {
-            $storeOptions [$store->getId()] = $store->getName(); 
-        }
-        $this->addColumn('storeview_id', array(
-            'header' => Mage::helper('simimigrate')->__('Store View'),
-            'align' => 'left',
-            'width' => '80px',
-            'index' => 'storeview_id',
-            'type' => 'options',
-            'options' => $storeOptions,
+        $this->addColumn('simicart_app_config_id', array(
+            'header' => Mage::helper('simimigrate')->__('SimiCart App Id'),
+            'width' => '150px',
+            'index' => 'simicart_app_config_id'
+        ));
+        
+        $this->addColumn('simicart_customer_id', array(
+            'header' => Mage::helper('simimigrate')->__('SimiCart User Id'),
+            'width' => '150px',
+            'index' => 'simicart_customer_id'
+        ));
+        
+        $this->addColumn('user_email', array(
+            'header' => Mage::helper('simimigrate')->__('SimiCart User Email'),
+            'width' => '150px',
+            'index' => 'user_email'
         ));
         
         $this->addColumn('action', array(
@@ -101,7 +101,7 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
      * @return Magestore_Madapter_Block_Adminhtml_Madapter_Grid
      */
     protected function _prepareMassaction() {
-        $this->setMassactionIdField('notice_id');
+        $this->setMassactionIdField('entity_id');
         $this->getMassactionBlock()->setFormFieldName('siminotification');
 
         $this->getMassactionBlock()->addItem('delete', array(
@@ -119,7 +119,7 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
      * @return string
      */
     public function getRowUrl($row) {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+        return $this->getUrl('*/*/edit', array('entity_id' => $row->getId()));
     }
 
 }
