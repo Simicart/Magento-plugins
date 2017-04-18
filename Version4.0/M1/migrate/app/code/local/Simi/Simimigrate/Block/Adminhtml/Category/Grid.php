@@ -3,11 +3,11 @@
 /**
 
  */
-class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Block_Widget_Grid {
+class Simi_Simimigrate_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
     public function __construct() {
         parent::__construct();
-        $this->setId('storeviewGrid');
+        $this->setId('categoryGrid');
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
@@ -15,7 +15,7 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
 
     protected function _prepareCollection() {
         $collection = Mage::helper('simimigrate')
-                    ->joinAppConfigTable(Mage::getModel('simimigrate/storeview')->getCollection());
+                    ->joinAppConfigTable(Mage::getModel('simimigrate/category')->getCollection());
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -27,35 +27,54 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
             'width' => '50px',
             'index' => 'entity_id',
         ));
-
-        $this->addColumn('code', array(
-            'header' => Mage::helper('simimigrate')->__('Store Code'),
-            'width' => '150px',
-            'index' => 'code'
+        
+        $this->addColumn('category_id', array(
+            'header' => Mage::helper('simimigrate')->__('Category ID'),
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'category_id',
         ));
         
         $this->addColumn('name', array(
-            'header' => Mage::helper('simimigrate')->__('Store Name'),
-            'width' => '150px',
-            'index' => 'name'
+            'header' => Mage::helper('simimigrate')->__('Name'),
+            'align' => 'left',
+            'width' => '250px',
+            'index' => 'name',
         ));
         
-        $this->addColumn('group_id', array(
-            'header' => Mage::helper('simimigrate')->__('Group ID'),
-            'width' => '150px',
-            'index' => 'group_id'
-        ));
-        
-        $this->addColumn('is_active', array(
-            'header' => Mage::helper('simimigrate')->__('Is Active'),
-            'width' => '50px',
+        $this->addColumn('parent_id', array(
+            'header' => Mage::helper('simimigrate')->__('Parent ID'),
             'align' => 'right',
-            'index' => 'is_active',
-            'type' => 'options',
-            'options' => array(
-                0 => Mage::helper('simimigrate')->__('No'),
-                1 => Mage::helper('simimigrate')->__('Yes'),
-            ),
+            'width' => '50px',
+            'index' => 'parent_id',
+        ));
+        
+        $this->addColumn('path', array(
+            'header' => Mage::helper('simimigrate')->__('Path'),
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'path',
+        ));
+        
+        $this->addColumn('position', array(
+            'header' => Mage::helper('simimigrate')->__('Position'),
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'position',
+        ));
+        
+        $this->addColumn('level', array(
+            'header' => Mage::helper('simimigrate')->__('Level'),
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'level',
+        ));
+        
+        $this->addColumn('children_count', array(
+            'header' => Mage::helper('simimigrate')->__('Children Count'),
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'children_count',
         ));
         
         $this->addColumn('simicart_app_config_id', array(
@@ -89,16 +108,17 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
                 )),
             'filter' => false,
             'sortable' => false,
-            'index' => 'stores',
+            'index' => 'categories',
             'is_system' => true,
         ));
+        
         return parent::_prepareColumns();
     }
 
     /**
      * prepare mass action for this grid
      *
-     * @return Magestore_Madapter_Block_Adminhtml_Madapter_Grid
+     * @return Magecategory_Madapter_Block_Adminhtml_Madapter_Grid
      */
     protected function _prepareMassaction() {
         $this->setMassactionIdField('entity_id');

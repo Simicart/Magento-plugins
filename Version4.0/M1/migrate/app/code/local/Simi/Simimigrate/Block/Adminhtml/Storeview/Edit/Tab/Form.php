@@ -19,7 +19,7 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Edit_Tab_Form extends Mage_Admi
         $fieldset = $form->addFieldset('storeview_form', array('legend' => Mage::helper('simimigrate')->__('Storeview information')));
         
         $fieldset->addField('is_active', 'select', array(
-            'label' => Mage::helper('simimigrate')->__('Storeview Type'),
+            'label' => Mage::helper('simimigrate')->__('Is Actived'),
             'name' => 'is_active',
             'values' => array(
                 array('value' => 0, 'label' => Mage::helper('simimigrate')->__('No')),

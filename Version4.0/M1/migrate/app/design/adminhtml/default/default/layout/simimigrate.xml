@@ -1,5 +1,27 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
+    <adminhtml_simimigrate_app_index>
+        <reference name="content">
+            <block type="simimigrate/adminhtml_app" name="app" />
+        </reference>
+    </adminhtml_simimigrate_app_index>
+    <adminhtml_simimigrate_app_grid>       
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="simimigrate/adminhtml_app_grid" name="app" />
+        </block>
+    </adminhtml_simimigrate_app_grid>
+    
+    <adminhtml_simimigrate_store_index>
+        <reference name="content">
+            <block type="simimigrate/adminhtml_store" name="store" />
+        </reference>
+    </adminhtml_simimigrate_store_index>
+    <adminhtml_simimigrate_store_grid>       
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="simimigrate/adminhtml_store_grid" name="store" />
+        </block>
+    </adminhtml_simimigrate_store_grid>
+    
     <adminhtml_simimigrate_storeview_index>
         <reference name="content">
             <block type="simimigrate/adminhtml_storeview" name="storeview" />
@@ -10,4 +32,38 @@
             <block type="simimigrate/adminhtml_storeview_grid" name="storeview" />
         </block>
     </adminhtml_simimigrate_storeview_grid>
+    
+    <adminhtml_simimigrate_category_index>
+        <reference name="content">
+            <block type="simimigrate/adminhtml_category" name="category" />
+        </reference>
+    </adminhtml_simimigrate_category_index>
+    <adminhtml_simimigrate_category_grid>       
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="simimigrate/adminhtml_category_grid" name="category" />
+        </block>
+    </adminhtml_simimigrate_category_grid>
+    
+    <adminhtml_simimigrate_product_index>
+        <reference name="content">
+            <block type="simimigrate/adminhtml_product" name="product" />
+        </reference>
+    </adminhtml_simimigrate_product_index>
+    <adminhtml_simimigrate_product_grid>       
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="simimigrate/adminhtml_product_grid" name="product" />
+        </block>
+    </adminhtml_simimigrate_product_grid>
+    
+    <adminhtml_simimigrate_customer_index>
+        <reference name="content">
+            <block type="simimigrate/adminhtml_customer" name="customer" />
+        </reference>
+    </adminhtml_simimigrate_customer_index>
+    <adminhtml_simimigrate_customer_grid>       
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="simimigrate/adminhtml_customer_grid" name="customer" />
+        </block>
+    </adminhtml_simimigrate_customer_grid>
+    
 </layout>

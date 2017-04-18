@@ -26,6 +26,7 @@ class Simi_Simimigrate_Model_Api_Synchronizations extends Simi_Simimigrate_Model
         $websiteUrl = $data['website_url'];
         $simicartAppConfigId = $data['simicart_app_config_id'];
         $simicartCustomerId = $data['simicart_customer_id'];
+        $simicartCustomerName = $data['simicart_customer_name'];
         
         $url = $websiteUrl . '/simiconnector/rest/v2/migrate_packages/all';
         $json = @file_get_contents($url);
@@ -46,6 +47,7 @@ class Simi_Simimigrate_Model_Api_Synchronizations extends Simi_Simimigrate_Model
         $appModel->setData('user_email', $userEmail);
         $appModel->setData('website_url', $websiteUrl);
         $appModel->setData('simicart_customer_id', $simicartCustomerId);
+        $appModel->setData('user_name', $simicartCustomerName);
         $appModel->save();
         $appId = $appModel->getId();
         

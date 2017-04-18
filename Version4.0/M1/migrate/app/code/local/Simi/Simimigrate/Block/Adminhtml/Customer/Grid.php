@@ -3,11 +3,11 @@
 /**
 
  */
-class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Block_Widget_Grid {
+class Simi_Simimigrate_Block_Adminhtml_Customer_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
     public function __construct() {
         parent::__construct();
-        $this->setId('storeviewGrid');
+        $this->setId('customerGrid');
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
@@ -15,7 +15,7 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
 
     protected function _prepareCollection() {
         $collection = Mage::helper('simimigrate')
-                    ->joinAppConfigTable(Mage::getModel('simimigrate/storeview')->getCollection());
+                    ->joinAppConfigTable(Mage::getModel('simimigrate/customer')->getCollection());
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -28,34 +28,22 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
             'index' => 'entity_id',
         ));
 
-        $this->addColumn('code', array(
-            'header' => Mage::helper('simimigrate')->__('Store Code'),
+        $this->addColumn('customer_id', array(
+            'header' => Mage::helper('simimigrate')->__('Customer Id'),
             'width' => '150px',
-            'index' => 'code'
-        ));
-        
-        $this->addColumn('name', array(
-            'header' => Mage::helper('simimigrate')->__('Store Name'),
-            'width' => '150px',
-            'index' => 'name'
+            'index' => 'customer_id'
         ));
         
         $this->addColumn('group_id', array(
-            'header' => Mage::helper('simimigrate')->__('Group ID'),
-            'width' => '150px',
+            'header' => Mage::helper('simimigrate')->__('Group Id'),
+            'width' => '250px',
             'index' => 'group_id'
         ));
         
-        $this->addColumn('is_active', array(
-            'header' => Mage::helper('simimigrate')->__('Is Active'),
-            'width' => '50px',
-            'align' => 'right',
-            'index' => 'is_active',
-            'type' => 'options',
-            'options' => array(
-                0 => Mage::helper('simimigrate')->__('No'),
-                1 => Mage::helper('simimigrate')->__('Yes'),
-            ),
+        $this->addColumn('email', array(
+            'header' => Mage::helper('simimigrate')->__('Customer Email'),
+            'width' => '250px',
+            'index' => 'email'
         ));
         
         $this->addColumn('simicart_app_config_id', array(

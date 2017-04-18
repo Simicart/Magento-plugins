@@ -4,12 +4,37 @@
         <simimigrate module="simimigrate" translate="title">
             <title>SimiCart Migrated Data</title>
             <sort_order>70</sort_order>               
-            <children>   
-                <storeview module="simimigrate" translate="title">
-                    <title>Storeviews</title>
+            <children>  
+                <app module="simimigrate" translate="title">
+                    <title>Apps</title>
                     <sort_order>10</sort_order>
+                    <action>adminhtml/simimigrate_app</action>
+                </app> 
+                <store module="simimigrate" translate="title">
+                    <title>Stores</title>
+                    <sort_order>99</sort_order>
+                    <action>adminhtml/simimigrate_store</action>
+                </store>
+                <storeview module="simimigrate" translate="title">
+                    <title>Store Views</title>
+                    <sort_order>199</sort_order>
                     <action>adminhtml/simimigrate_storeview</action>
                 </storeview>
+                <category module="simimigrate" translate="title">
+                    <title>Categories</title>
+                    <sort_order>299</sort_order>
+                    <action>adminhtml/simimigrate_category</action>
+                </category>
+                <product module="simimigrate" translate="title">
+                    <title>Products</title>
+                    <sort_order>399</sort_order>
+                    <action>adminhtml/simimigrate_product</action>
+                </product>
+                <customer module="simimigrate" translate="title">
+                    <title>Customers</title>
+                    <sort_order>499</sort_order>
+                    <action>adminhtml/simimigrate_customer</action>
+                </customer>
             </children>
         </simimigrate>
     </menu>

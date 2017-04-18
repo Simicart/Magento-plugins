@@ -8,7 +8,7 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Edit_Tabs extends Mage_Adminhtm
 
     public function __construct() {
         parent::__construct();
-        $this->setId('siminotification_tabs');
+        $this->setId('storeview_tabs');
         $this->setDestElementId('edit_form');
         $this->setTitle(Mage::helper('simimigrate')->__('Storeview Information'));
     }

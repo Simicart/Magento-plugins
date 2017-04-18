@@ -248,10 +248,10 @@ abstract class Simi_Simimigrate_Model_Api_Abstract
                     foreach ($value as $k => $v) {
                         $filters[] = $this->_addCondition($k, $v, true);
                     }
-                    if (count($filters)) $query->addAttributeToFilter($filters);
+                    if (count($filters)) $query->addFieldToFilter($filters);
                 } else {
                     $filter = $this->_addCondition($key, $value);
-                    $query->addAttributeToFilter($key, $filter);
+                    $query->addFieldToFilter($key, $filter);
                 }
             }
         }

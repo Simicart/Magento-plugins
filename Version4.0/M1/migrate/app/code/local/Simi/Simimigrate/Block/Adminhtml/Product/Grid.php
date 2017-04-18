@@ -3,11 +3,11 @@
 /**
 
  */
-class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Block_Widget_Grid {
+class Simi_Simimigrate_Block_Adminhtml_Product_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
     public function __construct() {
         parent::__construct();
-        $this->setId('storeviewGrid');
+        $this->setId('productGrid');
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
@@ -15,7 +15,7 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
 
     protected function _prepareCollection() {
         $collection = Mage::helper('simimigrate')
-                    ->joinAppConfigTable(Mage::getModel('simimigrate/storeview')->getCollection());
+                    ->joinAppConfigTable(Mage::getModel('simimigrate/product')->getCollection());
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -28,29 +28,53 @@ class Simi_Simimigrate_Block_Adminhtml_Storeview_Grid extends Mage_Adminhtml_Blo
             'index' => 'entity_id',
         ));
 
-        $this->addColumn('code', array(
-            'header' => Mage::helper('simimigrate')->__('Store Code'),
+        $this->addColumn('product_id', array(
+            'header' => Mage::helper('simimigrate')->__('Product Id'),
             'width' => '150px',
-            'index' => 'code'
+            'index' => 'product_id'
+        ));
+        
+        $this->addColumn('sku', array(
+            'header' => Mage::helper('simimigrate')->__('Product SKU'),
+            'width' => '150px',
+            'index' => 'sku'
         ));
         
         $this->addColumn('name', array(
-            'header' => Mage::helper('simimigrate')->__('Store Name'),
-            'width' => '150px',
+            'header' => Mage::helper('simimigrate')->__('Product Name'),
+            'width' => '250px',
             'index' => 'name'
         ));
         
-        $this->addColumn('group_id', array(
-            'header' => Mage::helper('simimigrate')->__('Group ID'),
-            'width' => '150px',
-            'index' => 'group_id'
-        ));
-        
-        $this->addColumn('is_active', array(
-            'header' => Mage::helper('simimigrate')->__('Is Active'),
+        $this->addColumn('has_options', array(
+            'header' => Mage::helper('simimigrate')->__('Has Option'),
             'width' => '50px',
             'align' => 'right',
-            'index' => 'is_active',
+            'index' => 'has_options',
+            'type' => 'options',
+            'options' => array(
+                0 => Mage::helper('simimigrate')->__('No'),
+                1 => Mage::helper('simimigrate')->__('Yes'),
+            ),
+        ));
+        
+        $this->addColumn('required_options', array(
+            'header' => Mage::helper('simimigrate')->__('Required Options'),
+            'width' => '50px',
+            'align' => 'right',
+            'index' => 'required_options',
+            'type' => 'options',
+            'options' => array(
+                0 => Mage::helper('simimigrate')->__('No'),
+                1 => Mage::helper('simimigrate')->__('Yes'),
+            ),
+        ));
+        
+        $this->addColumn('is_salable', array(
+            'header' => Mage::helper('simimigrate')->__('Is Salable'),
+            'width' => '50px',
+            'align' => 'right',
+            'index' => 'is_salable',
             'type' => 'options',
             'options' => array(
                 0 => Mage::helper('simimigrate')->__('No'),
