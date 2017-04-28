@@ -45,12 +45,12 @@ class Simi_Simipromoteapp_Model_Observer
 		$event = $observer->getEvent();
 		$subscriber = $event->getDataObject();
 		$data = $subscriber->getData();
-		$email = $data['subscriber_email'];
 
 		$statusChange = $subscriber->getIsStatusChanged();
 
 		$isEnable = Mage::helper('simipromoteapp/email')->isEnable();
-		if($isEnable){
+		if($isEnable && isset($data['subscriber_email'])){
+			$email = $data['subscriber_email'];
 			if ($data['subscriber_status'] == "1" && $statusChange == true) {
 				//code to handle if customer is just subscribed...
 				$name = explode('@',$email);
