@@ -82,6 +82,11 @@ class Simi_Simicheckoutcom_Model_Simicheckoutcom extends Mage_Core_Model_Abstrac
         foreach ($order->getAllItems() as $item) {
             $items[$item->getId()] = $item->getQtyOrdered();
         }
+
+        $order->setState('processing');
+        $order->setData('status','payment_successful'); 
+        $order->save();
+
         //Zend_debug::dump(get_class_methods($order));die();
         Mage::getModel('simicheckoutcom/simicheckoutcom')
                 //->setData('transaction_id', $data['transaction_id'])
@@ -93,17 +98,18 @@ class Simi_Simicheckoutcom_Model_Simicheckoutcom extends Mage_Core_Model_Abstrac
                 ->save();
         Mage::getSingleton('core/session')->setOrderIdForEmail($order->getId());
         /* @var $invoice Mage_Sales_Model_Service_Order */
-        $invoice = Mage::getModel('sales/service_order', $order)->prepareInvoice($items);
-        $invoice->setRequestedCaptureCase(Mage_Sales_Model_Order_Invoice::CAPTURE_ONLINE);
-        $invoice->setEmailSent(true)->register();
+        //$invoice = Mage::getModel('sales/service_order', $order)->prepareInvoice($items);
+        //$invoice->setRequestedCaptureCase(Mage_Sales_Model_Order_Invoice::CAPTURE_ONLINE);
+        //$invoice->setEmailSent(true)->register();
         //$invoice->setTransactionId();
-
+        /*
         Mage::register('current_invoice', $invoice);
         $invoice->getOrder()->setIsInProcess(true);
         $transactionSave = Mage::getModel('core/resource_transaction')
                 ->addObject($invoice)
                 ->addObject($invoice->getOrder());
         $transactionSave->save();
+        */
         //if ($data)
         //$order->sendOrderUpdateEmail();
         $order->sendNewOrderEmail();
