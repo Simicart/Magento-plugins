@@ -6,7 +6,5 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
     <menu>
-        <add id="simi::base" title="Simi" module="Simi_Simicustompayment" sortOrder="90" resource="Simi_Simicustompayment::sample"/>
-        <add id="simi_simicustompayment::simicustompayment" title="Items" module="Simi_Simicustompayment" sortOrder="10" parent="simi::base" action="simi_simicustompayment/items/" resource="Simi_Simicustompayment::items"/>
     </menu>
 </config>
