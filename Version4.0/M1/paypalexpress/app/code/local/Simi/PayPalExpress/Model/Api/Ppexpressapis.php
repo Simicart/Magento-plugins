@@ -97,6 +97,9 @@ class Simi_Paypalexpress_Model_Api_Ppexpressapis extends Simi_Simiconnector_Mode
             if ($data['resourceid'] == 'place') {
                 $this->_initCheckout();
                 $this->_checkout->place($this->_initToken(), $parameters['s_method']->method);
+                $this->_checkout->place($this->_initToken(), $parameters['s_method']->method);
+                $orderDetail = $this->_checkout->getOrder();
+                Mage::helper('simiconnector/checkout')->processAfterOrder($orderDetail->getId(), $order);
                 $session = $this->_getCheckoutSession();
                 $session->clearHelperData();
                 $order['message'] = Mage::helper('checkout')->__("Thank you for your purchase!");
