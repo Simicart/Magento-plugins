@@ -13,15 +13,19 @@ class Simicart_Simimigrate_Model_Api_Storeviews extends Simicart_Simimigrate_Mod
 
     public function index() {
     	$result = parent::index();
-    	$groups = Mage::helper('simimigrate')
-                    ->addSimicartAppConfigId(Mage::getModel('simimigrate/store')->getCollection());
-        $groupArray = array();
-        foreach ($groups as $key => $group) {
-        	$groupArray[$group->getId()] = $group->getName();
-        }
-        foreach ($result['storeviews'] as $index => $storeview) {
-        	if (isset($groupArray[$storeview['group_id']]))
-        		$result['storeviews'][$index]['group_name'] = $groupArray[$storeview['group_id']];
+    	$data = $this->getData();
+        if (isset($data['params']['filter']['simicart_app_config_id'])){
+        	$groups = Mage::helper('simimigrate')
+                    ->addSimicartAppConfigId(Mage::getModel('simimigrate/store')->getCollection())
+                    ->addFieldToFilter('simicart_app_config_id', $data['params']['filter']['simicart_app_config_id']);
+	        $groupArray = array();
+	        foreach ($groups as $key => $group) {
+	        	$groupArray[$group->getGroupId()] = $group->getName();
+	        }
+	        foreach ($result['storeviews'] as $index => $storeview) {
+        		if (isset($groupArray[$storeview['group_id']]))
+	        		$result['storeviews'][$index]['group_name'] = $groupArray[$storeview['group_id']];
+	        }
         }
         return $result;
     }
