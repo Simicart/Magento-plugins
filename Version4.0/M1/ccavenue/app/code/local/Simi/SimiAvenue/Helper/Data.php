@@ -53,7 +53,7 @@ class Simi_SimiAvenue_Helper_Data extends Mage_Core_Helper_Abstract {
         $ccavenue['tid'] = $timestamp;
         $ccavenue['order_id'] = $order_id;
         $ccavenue['merchant_id'] = Mage::getStoreConfig('payment/simiavenue/merchant_id');
-        $ccavenue['amount'] = round($order->getBaseGrandTotal(), 2);
+        $ccavenue['amount'] = round($order->getGrandTotal(), 2);
         $ccavenue['currency'] = Mage::app()->getStore()->getCurrentCurrencyCode();
         $ccavenue['redirect_url'] = Mage::getBaseUrl() . 'simiavenue/api/response';
         $ccavenue['cancel_url'] = Mage::getBaseUrl() . 'simiavenue/api/response';
