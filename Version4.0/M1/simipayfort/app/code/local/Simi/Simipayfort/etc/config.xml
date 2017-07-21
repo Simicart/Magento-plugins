@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simipayfort
+ * @copyright   Copyright (c) 2017 
+ * @license     
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simipayfort>
+            <version>0.1.1</version>
+        </Simi_Simipayfort>
+    </modules>
+    <frontend>
+        <routers>
+            <simipayfort>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simipayfort</module>
+                    <frontName>simipayfort</frontName>
+                </args>
+            </simipayfort>
+        </routers>
+        <layout>
+            <updates>
+                <simipayfort>
+                    <file>simipayfort.xml</file>
+                </simipayfort>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simipayfort>
+                    <files>
+                        <default>Simi_Simipayfort.csv</default>
+                    </files>
+                </Simi_Simipayfort>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <simipayfortadmin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Simipayfort</module>
+                    <frontName>simipayfortadmin</frontName>
+                </args>
+            </simipayfortadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simipayfort>
+                    <file>simipayfort.xml</file>
+                </simipayfort>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Simi_Simipayfort>
+                    <files>
+                        <default>Simi_Simipayfort.csv</default>
+                    </files>
+                </Simi_Simipayfort>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <simipayfort>
+                <class>Simi_Simipayfort_Model</class>
+                <resourceModel>simipayfort_mysql4</resourceModel>
+            </simipayfort>
+            <simipayfort_mysql4>
+                <class>Simi_Simipayfort_Model_Mysql4</class>
+                <entities>
+                    <simipayfort>
+                        <table>simipayfort</table>
+                    </simipayfort>
+                </entities>
+            </simipayfort_mysql4>
+        </models>
+        <resources>
+            <simipayfort_setup>
+                <setup>
+                    <module>Simi_Simipayfort</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </simipayfort_setup>
+            <simipayfort_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </simipayfort_write>
+            <simipayfort_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </simipayfort_read>
+        </resources>
+        <blocks>
+            <simipayfort>
+                <class>Simi_Simipayfort_Block</class>
+            </simipayfort>
+        </blocks>
+        <helpers>
+            <simipayfort>
+                <class>Simi_Simipayfort_Helper</class>
+            </simipayfort>
+        </helpers>
+        <!-- <events>
+                <controller_action_predispatch>
+                        <observers>
+                                <simipayfort_observers>
+                                        <class>simipayfort/observer</class>
+                                        <method>controllerActionPredispatch</method>
+                                </simipayfort_observers>
+                        </observers>
+                </controller_action_predispatch>
+        </events> -->
+        <events>
+            <payment_method_is_active>
+                <observers>
+                    <simipayfort_payment_observers>
+                        <type>singleton</type>
+                        <class>simipayfort/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </simipayfort_payment_observers>
+                </observers>
+            </payment_method_is_active>
+            <simicart_after_place_order>
+                <observers>
+                    <simipayfort_after_place_order>
+                        <type>singleton</type>
+                        <class>simipayfort/observer</class>
+                        <method>afterPlaceOrder</method>
+                    </simipayfort_after_place_order>
+                </observers>
+            </simicart_after_place_order>
+            <simi_add_payment_method>
+                <observers>
+                    <simipayfort_add_payment_method>
+                        <class>simipayfort/observer</class>
+                        <method>addPayment</method>
+                    </simipayfort_add_payment_method>
+                </observers>
+            </simi_add_payment_method>
+            <!-- 4.0 simiconnector version -->
+            <!-- Add API resource -->
+            <simi_simiconnector_model_server_initialize>
+                <observers>
+                    <simi_simiconnector_model_server_initialize_payfort>
+                        <type>singleton</type>
+                        <class>simipayfort/observer</class>
+                        <method>connectorConfigGetPluginsReturnPayfort</method>
+                    </simi_simiconnector_model_server_initialize_payfort>
+                </observers>
+            </simi_simiconnector_model_server_initialize>
+            <simiconnector_add_payment_method>
+                <observers>
+                    <simi_payfort_add_payment_method>
+                        <class>simipayfort/simiobserver</class>
+                        <method>addPayment40</method>
+                    </simi_payfort_add_payment_method>
+                </observers>
+            </simiconnector_add_payment_method>
+            <simiconnector_change_payment_detail>
+                <observers>
+                    <simiconnector_simipayfort_change_payment_detail>
+                        <type>singleton</type>
+                        <class>simipayfort/simiobserver</class>
+                        <method>changePayment</method>
+                    </simiconnector_simipayfort_change_payment_detail>
+                </observers>
+            </simiconnector_change_payment_detail>
+            <simi_simiconnector_model_api_orders_onepage_store_after>
+                <observers>
+                    <simi_simipayfort_api_orders_onepage_store_after>
+                        <class>simipayfort/simiobserver</class>
+                        <method>simiconnectorAfterPlaceOrder</method>
+                    </simi_simipayfort_api_orders_onepage_store_after>
+                </observers>
+            </simi_simiconnector_model_api_orders_onepage_store_after>
+            <!-- end -->
+        </events>
+    </global>
+    <default>
+        <payment>             
+            <simipayfort>
+                <active>0</active> 
+                <order_status>pending</order_status>       
+                <model>simipayfort/payment</model>     
+                <title>Checkout.com</title>
+                <allowspecific>0</allowspecific>      
+                <merchant_id backend_model="adminhtml/system_config_backend_encrypted"/>          
+                <merchant_password backend_model="adminhtml/system_config_backend_encrypted"/>
+                <verify_key backend_model="adminhtml/system_config_backend_encrypted"/>
+                <url_back></url_back>
+                <is_sandbox>0</is_sandbox>
+            </simipayfort>
+        </payment>       
+    </default>
+</config>
