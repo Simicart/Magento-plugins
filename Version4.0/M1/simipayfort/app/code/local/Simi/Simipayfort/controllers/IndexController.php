@@ -62,39 +62,29 @@ class Simi_Simipayfort_IndexController extends Mage_Core_Controller_Front_Action
 
     public function startPayfortAction() {
         $orderId = $this->getRequest()->getParam('order_id');
-        echo Mage::helper("simipayfort")->getPaymentToken($orderId);
+        echo $this->redirectToForm($orderId);
     }
 
-    public function paymentrestv22Action() {
-        $paymentToken = $this->getRequest()->getParam('payment_token');
-        $orderId = $this->getRequest()->getParam('order_id');
+    public function redirectToForm($orderId) {
         $order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
-        if (Mage::getStoreConfig("payment/simipayfort/is_sandbox")) {
-            echo "<script src=\"https://sandbox.checkout.com/js/checkout.js\"></script>";
-        } else {
-            echo "<script src=\"https://cdn.checkout.com/js/checkout.js\"></script>";
-        }
-        echo "
-        <form method=\"POST\" class=\"payment-form\">
-            <script>
-                Checkout.render({
-                    debugMode: false,
-                    publicKey: '" . Mage::getStoreConfig("payment/simipayfort/public_key") . "',
-                    paymentToken: '" . $paymentToken . "',
-                    customerEmail: '" . $order->getData('customer_email') . "',
-                    customerName: '" . $order->getData('customer_firstname') . ' ' . $order->getData('customer_middlename') . ' ' . $order->getData('customer_lastname') . "',
-                    value: " . floatval($order->getData('grand_total')) * 100 . ",
-                    currency: '" . $order->getData('order_currency_code') . "',
-                    widgetContainerSelector: '.payment-form',
-                    widgetColor: '#333',
-                    themeColor: '#3075dd',
-                    buttonColor:'#51c470',
-                    logoUrl: \"http://www.merchant.com/images/logo.png\",
-                });
-            </script>
+        Mage::getStoreConfig("payment/simipayfort/is_sandbox");
+        echo '
+        <form name="myForm" id="myForm" action="'.Mage::getUrl('simipayfort/Start.php', array('_secure'=>true)).'" method="POST">
+            <input type="hidden" name="secret_key" value="'.Mage::getStoreConfig("payment/simipayfort/private_key").'">
+            <input type="hidden" name="open_key" value="'.Mage::getStoreConfig("payment/simipayfort/public_key").'">
+            <input type="hidden" name="successurl" value="'.Mage::getStoreConfig("payment/simipayfort/success_url").'">
+            <input type="hidden" name="currency" value="'.$order->getData('order_currency_code').'">
+            <input type="hidden" name="user_email" value="'.$order->getData('customer_email').'">
+            <input type="hidden" name="value" value="'.$order->getData('grand_total').'">
+            <input type="hidden" name="command" value="'.Mage::helper('simipayfort')->__('Payment for Order').' '.$orderId.'">
+            <input type="submit" value="Submit" />
         </form>
-        ";
-        exit();
+
+        <script type="text/javascript">
+            document.getElementById("myForm").submit();
+        </script>
+        ';
     }
+
 
 }

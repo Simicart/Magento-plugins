@@ -55,7 +55,6 @@ class Simi_Simipayfort_Model_Simipayfort extends Mage_Core_Model_Abstract {
         $data['invoice_number'] = $dataComfrim->invoice_number;
         //$data['transaction_id'] = $dataComfrim->transaction_id;
         $data['payment_status'] = Mage::getStoreConfig('payment/simipayfort/payment_success_status');
-
         try {
             if ($this->_initInvoice($data['invoice_number'], $data)) {
                 $informtaion = $this->statusSuccess();
@@ -82,36 +81,12 @@ class Simi_Simipayfort_Model_Simipayfort extends Mage_Core_Model_Abstract {
         foreach ($order->getAllItems() as $item) {
             $items[$item->getId()] = $item->getQtyOrdered();
         }
-
-        $order->setState('processing');
-        $order->setData('status','payment_successful'); 
+        $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING)
+        ->setStatus(Mage_Sales_Model_Order::STATE_PROCESSING)
+        ->save();
         $order->save();
 
-        //Zend_debug::dump(get_class_methods($order));die();
-        Mage::getModel('simipayfort/simipayfort')
-                //->setData('transaction_id', $data['transaction_id'])
-                ->setData('transaction_name', "")
-                ->setData('transaction_email', "")
-                ->setData('currency_code', "")
-                ->setData('status', $data['payment_status'])
-                ->setData('order_id', $order->getId())
-                ->save();
         Mage::getSingleton('core/session')->setOrderIdForEmail($order->getId());
-        /* @var $invoice Mage_Sales_Model_Service_Order */
-        //$invoice = Mage::getModel('sales/service_order', $order)->prepareInvoice($items);
-        //$invoice->setRequestedCaptureCase(Mage_Sales_Model_Order_Invoice::CAPTURE_ONLINE);
-        //$invoice->setEmailSent(true)->register();
-        //$invoice->setTransactionId();
-        /*
-        Mage::register('current_invoice', $invoice);
-        $invoice->getOrder()->setIsInProcess(true);
-        $transactionSave = Mage::getModel('core/resource_transaction')
-                ->addObject($invoice)
-                ->addObject($invoice->getOrder());
-        $transactionSave->save();
-        */
-        //if ($data)
-        //$order->sendOrderUpdateEmail();
         $order->sendNewOrderEmail();
         Mage::getSingleton('core/session')->setOrderIdForEmail(null);
         return true;

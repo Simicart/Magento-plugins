@@ -140,25 +140,6 @@
                     </simipayfort_payment_observers>
                 </observers>
             </payment_method_is_active>
-            <simicart_after_place_order>
-                <observers>
-                    <simipayfort_after_place_order>
-                        <type>singleton</type>
-                        <class>simipayfort/observer</class>
-                        <method>afterPlaceOrder</method>
-                    </simipayfort_after_place_order>
-                </observers>
-            </simicart_after_place_order>
-            <simi_add_payment_method>
-                <observers>
-                    <simipayfort_add_payment_method>
-                        <class>simipayfort/observer</class>
-                        <method>addPayment</method>
-                    </simipayfort_add_payment_method>
-                </observers>
-            </simi_add_payment_method>
-            <!-- 4.0 simiconnector version -->
-            <!-- Add API resource -->
             <simi_simiconnector_model_server_initialize>
                 <observers>
                     <simi_simiconnector_model_server_initialize_payfort>
@@ -171,7 +152,7 @@
             <simiconnector_add_payment_method>
                 <observers>
                     <simi_payfort_add_payment_method>
-                        <class>simipayfort/simiobserver</class>
+                        <class>simipayfort/observer</class>
                         <method>addPayment40</method>
                     </simi_payfort_add_payment_method>
                 </observers>
@@ -180,7 +161,7 @@
                 <observers>
                     <simiconnector_simipayfort_change_payment_detail>
                         <type>singleton</type>
-                        <class>simipayfort/simiobserver</class>
+                        <class>simipayfort/observer</class>
                         <method>changePayment</method>
                     </simiconnector_simipayfort_change_payment_detail>
                 </observers>
@@ -188,12 +169,11 @@
             <simi_simiconnector_model_api_orders_onepage_store_after>
                 <observers>
                     <simi_simipayfort_api_orders_onepage_store_after>
-                        <class>simipayfort/simiobserver</class>
+                        <class>simipayfort/observer</class>
                         <method>simiconnectorAfterPlaceOrder</method>
                     </simi_simipayfort_api_orders_onepage_store_after>
                 </observers>
             </simi_simiconnector_model_api_orders_onepage_store_after>
-            <!-- end -->
         </events>
     </global>
     <default>
@@ -202,7 +182,7 @@
                 <active>0</active> 
                 <order_status>pending</order_status>       
                 <model>simipayfort/payment</model>     
-                <title>Checkout.com</title>
+                <title>Start.Payfort</title>
                 <allowspecific>0</allowspecific>      
                 <merchant_id backend_model="adminhtml/system_config_backend_encrypted"/>          
                 <merchant_password backend_model="adminhtml/system_config_backend_encrypted"/>
