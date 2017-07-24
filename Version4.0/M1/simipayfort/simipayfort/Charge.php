@@ -23,9 +23,11 @@ $api_keys = array(
     "open_key"   => "test_open_k_b40fa0f5355fd17064fc"
 );
 
-$amount_in_cents = $_GET["value"];
-$currency = $_GET["currency"];
-$customer_email = $_GET["user_email"];
+$amount_in_cents = $_POST["amount_in_cents"];
+$currency = $_POST["currency"];
+$customer_email = $_POST["customer_email"];
+$command = $_POST["command"];
+$successurl = $_POST["successurl"];
 
 # Read the fields that were automatically submitted by beautiful.js
 $token = $_POST["startToken"];
@@ -41,13 +43,13 @@ try {
         "card"        => $token,
         "email"       => $email,
         "ip"          => $_SERVER["REMOTE_ADDR"],
-        "description" => "Charge Description"
+        "description" => $command
     ));
 
     echo "<h1>Successfully charged 10.00 AED</h1>";
     echo "<p>Charge ID: ".$charge["id"]."</p>";
     echo "<p>Charge State: ".$charge["state"]."</p>";
-
+    echo "<script> window.location = '".$successurl."';</script>";
 } catch (Start_Error $e) {
     $error_code = $e->getErrorCode();
     $error_message = $e->getMessage();
