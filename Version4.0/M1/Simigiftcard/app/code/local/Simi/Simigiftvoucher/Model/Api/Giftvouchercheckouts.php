@@ -89,14 +89,13 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckouts extends Simi_Simiconne
          *           "giftcode"
          * */
         elseif ($data['resourceid'] == 'addcodecheckout'){
-            $message = Mage::getModel('simigiftvoucher/simimapping')->addgiftCheckout($data);
+            $message = Mage::getModel('simigiftvoucher/simimapping')->UseGiftCode($data);
             $onepageAPI = Mage::getModel('simiconnector/api_orders');
             $data['resource'] = 'orders';
             $data['resourceid'] = 'onepage';
             $onepageAPI->setData($data);
             $onepageAPI->setBuilderQuery();
             $onepageAPI->setPluralKey('orders');
-
             $detail = $onepageAPI->show();
             $detail['order']['gift_card']['message'] = $message;
             return $detail;
@@ -138,14 +137,14 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckouts extends Simi_Simiconne
          *  Checkout Page
          *  params : "usecredit"
          * */
-        elseif ($data['resourceid'] == 'changeusecredit'){
+        elseif ($data['resourceid'] == 'usecreditcheckout'){
             $onepageAPI = Mage::getModel('simiconnector/api_orders');
             $data['resource'] = 'orders';
             $data['resourceid'] = 'onepage';
             $onepageAPI->setData($data);
             $onepageAPI->setBuilderQuery();
             $onepageAPI->setPluralKey('orders');
-            $message = Mage::getModel('simigiftvoucher/simimapping')->UseCreditCheckout($data);
+            $message = Mage::getModel('simigiftvoucher/simimapping')->UseCredit($data);
             $detail = $onepageAPI->show();
             $detail['order']['gift_card']['message'] = $message;
             return $detail;
