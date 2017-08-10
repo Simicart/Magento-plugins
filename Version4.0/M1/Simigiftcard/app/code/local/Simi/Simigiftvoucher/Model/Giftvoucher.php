@@ -273,14 +273,14 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
         if (is_null($session)) {
             $session = Mage::getSingleton('checkout/session');
         }
-        if ($codes = $session->getGiftCodes()) {
+        if ($codes = $session->getSimigiftCodes()) {
             $codesArray = explode(',', $codes);
             $codesArray[] = $this->getGiftCode();
             $codes = implode(',', array_unique($codesArray));
         } else {
             $codes = $this->getGiftCode();
         }
-        $session->setGiftCodes($codes);
+        $session->setSimigiftCodes($codes);
         return $this;
     }
 

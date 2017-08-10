@@ -59,7 +59,7 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Giftproduct_Edit_Tab_Form extends Mag
         $fieldset->addField('product_type', 'note', array(
             'label' => Mage::helper('simigiftvoucher')->__('Product Type'),
             'name' => 'product_type',
-            'text' => Mage::helper('simigiftvoucher')->__('Gift Card') .
+            'text' => Mage::helper('simigiftvoucher')->__('Simi Gift Card') .
             '</br><button type="button" class="scalable save" onclick="setAttributeGiftProduct()"><span>' . Mage::helper("simigiftvoucher")->__("Continue") . '</span></button>' . $js,
         ));
 

@@ -26,7 +26,7 @@
 <config>
     <menu>
         <simigiftvoucher module="simigiftvoucher">
-            <title>Gift Card</title>
+            <title>Simi Gift Card</title>
             <sort_order>72</sort_order>
             <children>
                 <simigiftvoucher module="simigiftvoucher">
@@ -49,11 +49,11 @@
                     <sort_order>10</sort_order>
                     <action>adminhtml/simigiftvoucher_giftproduct</action>
                 </giftproduct>
-                <giftcodeset module="simigiftvoucher">
+                <!--<giftcodeset module="simigiftvoucher">
                     <title>Manage Gift Code Sets</title>
                     <sort_order>30</sort_order>
                     <action>adminhtml/simigiftvoucher_giftcodeset</action>
-                </giftcodeset>
+                </giftcodeset>-->
                 <generategiftcard module="simigiftvoucher">
                     <title>Generate Gift Codes </title>
                     <sort_order>20</sort_order>

@@ -41,7 +41,7 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
     {
         $session = Mage::getSingleton('checkout/session');
         $code = trim($this->getRequest()->getParam('code'));
-        $codes = trim($session->getGiftCodes());
+        $codes = trim($session->getSimigiftCodes());
         $success = false;
         if ($code && $codes) {
             $codesArray = explode(',', $codes);
@@ -49,10 +49,10 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
                 if ($value == $code) {
                     unset($codesArray[$key]);
                     $success = true;
-                    $giftMaxUseAmount = unserialize($session->getGiftMaxUseAmount());
+                    $giftMaxUseAmount = unserialize($session->getSimigiftMaxUseAmount());
                     if (is_array($giftMaxUseAmount) && array_key_exists($code, $giftMaxUseAmount)) {
                         unset($giftMaxUseAmount[$code]);
-                        $session->setGiftMaxUseAmount(serialize($giftMaxUseAmount));
+                        $session->setSimigiftMaxUseAmount(serialize($giftMaxUseAmount));
                     }
                     break;
                 }
@@ -61,7 +61,7 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
 
         if ($success) {
             $codes = implode(',', $codesArray);
-            $session->setGiftCodes($codes);
+            $session->setSimigiftCodes($codes);
             $session->addSuccess($this->__('Gift Card "%s" has been removed successfully!', 
                 Mage::helper('simigiftvoucher')->getHiddenCode($code)));
         } else {
@@ -86,22 +86,22 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
             if ($request->isPost()) {
                 if ($request->getParam('simigiftvoucher_credit') 
                     && Mage::helper('simigiftvoucher')->getGeneralConfig('enablecredit')) {
-                    $session->setUseGiftCardCredit(1);
-                    $session->setMaxCreditUsed(floatval($request->getParam('credit_amount')));
+                    $session->setSimiuseGiftCardCredit(1);
+                    $session->setSimimaxCreditUsed(floatval($request->getParam('credit_amount')));
                 } else {
-                    $session->setUseGiftCardCredit(0);
-                    $session->setMaxCreditUsed(null);
+                    $session->setSimiuseGiftCardCredit(0);
+                    $session->setSimimaxCreditUsed(null);
                 }
                 if ($request->getParam('simigiftvoucher')) {
-                    $session->setUseGiftCard(1);
+                    $session->setSimiuseGiftCard(1);
                     $giftcodesAmount = $request->getParam('giftcodes');
                     if (count($giftcodesAmount)) {
-                        $giftMaxUseAmount = unserialize($session->getGiftMaxUseAmount());
+                        $giftMaxUseAmount = unserialize($session->getSimigiftMaxUseAmount());
                         if (!is_array($giftMaxUseAmount)) {
                             $giftMaxUseAmount = array();
                         }
                         $giftMaxUseAmount = array_merge($giftMaxUseAmount, $giftcodesAmount);
-                        $session->setGiftMaxUseAmount(serialize($giftMaxUseAmount));
+                        $session->setSimigiftMaxUseAmount(serialize($giftMaxUseAmount));
                     }
                     $addcodes = array();
                     if ($request->getParam('existed_giftvoucher_code')) {
@@ -181,8 +181,8 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
                     } else {
                         $session->addSuccess($this->__('Your Gift Card(s) has been applied successfully.'));
                     }
-                } elseif ($session->getUseGiftCard()) {
-                    $session->setUseGiftCard(null);
+                } elseif ($session->getSimiuseGiftCard()) {
+                    $session->setSimiuseGiftCard(null);
                     $session->addSuccess($this->__('Your Gift Card information has been removed successfully.'));
                 }
             }
@@ -200,7 +200,7 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
         $result = array();
 
         if ($quote->getCouponCode() && !Mage::helper('simigiftvoucher')->getGeneralConfig('use_with_coupon') 
-            && (!$session->getUseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
+            && (!$session->getSimiuseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
             $result['notice'] = Mage::helper('simigiftvoucher')->__('A coupon code has been used. You cannot apply gift codes with the coupon to get discount.');
         } else {
             $addCodes = array();
@@ -315,7 +315,7 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
     {
         $session = Mage::getSingleton('checkout/session');
         $code = trim($this->getRequest()->getParam('code'));
-        $codes = $session->getGiftCodes();
+        $codes = $session->getSimigiftCodes();
 
         $success = false;
         if ($code && $codes) {
@@ -324,10 +324,10 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
                 if ($value == $code) {
                     unset($codesArray[$key]);
                     $success = true;
-                    $giftMaxUseAmount = unserialize($session->getGiftMaxUseAmount());
+                    $giftMaxUseAmount = unserialize($session->getSimigiftMaxUseAmount());
                     if (is_array($giftMaxUseAmount) && array_key_exists($code, $giftMaxUseAmount)) {
                         unset($giftMaxUseAmount[$code]);
-                        $session->setGiftMaxUseAmount(serialize($giftMaxUseAmount));
+                        $session->setSimigiftMaxUseAmount(serialize($giftMaxUseAmount));
                     }
                     break;
                 }
@@ -337,7 +337,7 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
         $result = array();
         if ($success) {
             $codes = implode(',', $codesArray);
-            $session->setGiftCodes($codes);
+            $session->setSimigiftCodes($codes);
             $updatepayment = ($session->getQuote()->getGrandTotal() < 0.001);
             $session->getQuote()->collectTotals()->save();
             if ($updatepayment xor ( $session->getQuote()->getGrandTotal() < 0.001)) {
@@ -358,7 +358,7 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
     public function giftcardAction()
     {
         $session = Mage::getSingleton('checkout/session');
-        $session->setUseGiftCard($this->getRequest()->getParam('simigiftvoucher'));
+        $session->setSimiuseGiftCard($this->getRequest()->getParam('simigiftvoucher'));
         $result = array();
         $updatepayment = ($session->getQuote()->getGrandTotal() < 0.001);
         $session->getQuote()->collectTotals()->save();
@@ -375,22 +375,22 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
     {
         $session = Mage::getSingleton('checkout/session');
         $quote = $session->getQuote();
-        $codes = $session->getGiftCodes();
+        $codes = $session->getSimigiftCodes();
 
         $code = $this->getRequest()->getParam('code');
         $amount = floatval($this->getRequest()->getParam('amount'));
         $result = array();
         if ($quote->getCouponCode() && !Mage::helper('simigiftvoucher')->getGeneralConfig('use_with_coupon') 
-            && (!$session->getUseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
+            && (!$session->getSimiuseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
             $result['notice'] = Mage::helper('simigiftvoucher')->__('A coupon code has been used. You cannot apply Gift Card credit with the coupon to get discount.');
         } else {
             if (in_array($code, explode(',', $codes))) {
-                $giftMaxUseAmount = unserialize($session->getGiftMaxUseAmount());
+                $giftMaxUseAmount = unserialize($session->getSimigiftMaxUseAmount());
                 if (!is_array($giftMaxUseAmount)) {
                     $giftMaxUseAmount = array();
                 }
                 $giftMaxUseAmount[$code] = $amount;
-                $session->setGiftMaxUseAmount(serialize($giftMaxUseAmount));
+                $session->setSimigiftMaxUseAmount(serialize($giftMaxUseAmount));
                 $updatepayment = ($session->getQuote()->getGrandTotal() < 0.001);
                 $quote->collectTotals()->save();
                 if ($updatepayment xor ( $session->getQuote()->getGrandTotal() < 0.001)) {
@@ -416,10 +416,10 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
         }
         $session = Mage::getSingleton('checkout/session');
         $quote = $session->getQuote();
-        $session->setUseGiftCardCredit($this->getRequest()->getParam('giftcredit'));
+        $session->setSimiuseGiftCardCredit($this->getRequest()->getParam('giftcredit'));
         $result = array();
         if ($quote->getCouponCode() && !Mage::helper('simigiftvoucher')->getGeneralConfig('use_with_coupon') 
-            && (!$session->getUseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
+            && (!$session->getSimiuseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
             $result['notice'] = Mage::helper('simigiftvoucher')->__('A coupon code has been used. You cannot apply Gift Card credit with the coupon to get discount.');
         } else {
             $updatepayment = ($session->getQuote()->getGrandTotal() < 0.001);
@@ -447,14 +447,14 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
         $result = array();
 
         if ($quote->getCouponCode() && !Mage::helper('simigiftvoucher')->getGeneralConfig('use_with_coupon') 
-            && (!$session->getUseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
+            && (!$session->getSimiuseGiftCreditAmount() || !$session->getSimigiftVoucherDiscount())) {
             $result['notice'] = Mage::helper('simigiftvoucher')->__('A coupon code has been used. You cannot apply Gift Card credit with the coupon to get discount.');
         } else {
             $amount = floatval($this->getRequest()->getParam('amount'));
-            if ($amount > -0.0001 && (abs($amount - $session->getMaxCreditUsed()) > 0.0001 
-                || !$session->getMaxCreditUsed())
+            if ($amount > -0.0001 && (abs($amount - $session->getSimimaxCreditUsed()) > 0.0001
+                || !$session->getSimimaxCreditUsed())
             ) {
-                $session->setMaxCreditUsed($amount);
+                $session->setSimimaxCreditUsed($amount);
                 $updatepayment = ($session->getQuote()->getGrandTotal() < 0.001);
                 $session->getQuote()->collectTotals()->save();
                 if ($updatepayment xor ( $session->getQuote()->getGrandTotal() < 0.001)) {
@@ -474,19 +474,19 @@ class Simi_Simigiftvoucher_CheckoutController extends Mage_Core_Controller_Front
      */
     public function clearGiftcardSession($session)
     {
-        if ($session->getUseGiftCard()) {
-            $session->setUseGiftCard(null)
-                ->setGiftCodes(null)
-                ->setBaseAmountUsed(null)
+        if ($session->getSimiuseGiftCard()) {
+            $session->setSimiuseGiftCard(null)
+                ->setSimigiftCodes(null)
+                ->setSimibaseAmountUsed(null)
                 ->setSimibaseGiftVoucherDiscount(null)
                 ->setSimigiftVoucherDiscount(null)
-                ->setCodesBaseDiscount(null)
-                ->setCodesDiscount(null)
-                ->setGiftMaxUseAmount(null);
+                ->setSimicodesBaseDiscount(null)
+                ->setSimicodesDiscount(null)
+                ->setSimigiftMaxUseAmount(null);
         }
-        if ($session->getUseGiftCardCredit()) {
-            $session->setUseGiftCardCredit(null)
-                ->setMaxCreditUsed(null)
+        if ($session->getSimiuseGiftCardCredit()) {
+            $session->setSimiuseGiftCardCredit(null)
+                ->setSimimaxCreditUsed(null)
                 ->setSimibaseUseGiftCreditAmount(null)
                 ->setSimiuseGiftCreditAmount(null);
         }

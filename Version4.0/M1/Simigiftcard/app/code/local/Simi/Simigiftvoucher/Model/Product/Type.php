@@ -122,7 +122,7 @@ class Simi_Simigiftvoucher_Model_Product_Type extends Mage_Catalog_Model_Product
         $fnPrice = 0;
         if ($amount) {
             $giftAmount = Mage::helper('simigiftvoucher/giftproduct')->getGiftValue($product);
-            switch ($giftAmount['type']) {
+            switch ($giftAmount['type_value']) {
                 case 'range':
                     if ($amount < $this->convertPrice($product, $giftAmount['from'])) {
                         $amount = $this->convertPrice($product, $giftAmount['from']);
@@ -172,7 +172,7 @@ class Simi_Simigiftvoucher_Model_Product_Type extends Mage_Catalog_Model_Product
                         $fnPrice = $fnPrices[$amount];
                     }
                     break;
-                case 'static':
+                case 'fixed':
                     if ($amount != $this->convertPrice($product, $giftAmount['value'])) {
                         $amount = $giftAmount['value'];
                     }

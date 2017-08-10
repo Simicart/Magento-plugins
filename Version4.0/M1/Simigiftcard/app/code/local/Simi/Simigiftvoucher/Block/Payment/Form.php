@@ -82,9 +82,9 @@ class Simi_Simigiftvoucher_Block_Payment_Form extends Mage_Payment_Block_Form
     {
         $session = Mage::getSingleton('checkout/session');
         $discounts = array();
-        if ($codes = $session->getGiftCodes()) {
+        if ($codes = $session->getSimigiftCodes()) {
             $codesArray = explode(',', $codes);
-            $codesDiscountArray = explode(',', $session->getCodesDiscount());
+            $codesDiscountArray = explode(',', $session->getSimicodesDiscount());
             $discounts = array_combine($codesArray, $codesDiscountArray);
         }
         return $discounts;
@@ -124,7 +124,7 @@ class Simi_Simigiftvoucher_Block_Payment_Form extends Mage_Payment_Block_Form
      */
     public function getUseGiftVoucher()
     {
-        return Mage::getSingleton('checkout/session')->getUseGiftCard();
+        return Mage::getSingleton('checkout/session')->getSimiuseGiftCard();
     }
 
     /**
@@ -160,7 +160,7 @@ class Simi_Simigiftvoucher_Block_Payment_Form extends Mage_Payment_Block_Form
         ;
         $giftCards = array();
         $addedCodes = array();
-        if ($codes = Mage::getSingleton('checkout/session')->getGiftCodes()) {
+        if ($codes = Mage::getSingleton('checkout/session')->getSimigiftCodes()) {
             $addedCodes = explode(',', $codes);
         }
         $helper = Mage::helper('simigiftvoucher');
@@ -255,16 +255,16 @@ class Simi_Simigiftvoucher_Block_Payment_Form extends Mage_Payment_Block_Form
             $baseCurrency = $store->getBaseCurrency();
             $currentCurrency = $store->getCurrentCurrency();
             if ($cardCurrency->getCode() == $currentCurrency->getCode()) {
-                return $store->formatPrice($credit->getBalance() - $this->getUseGiftCreditAmount());
+                return $store->formatPrice($credit->getBalance() - $this->getSimiuseGiftCreditAmount());
             }
             if ($cardCurrency->getCode() == $baseCurrency->getCode()) {
                 $amount = $store->convertPrice($credit->getBalance(), false);
-                return $store->formatPrice($amount - $this->getUseGiftCreditAmount());
+                return $store->formatPrice($amount - $this->getSimiuseGiftCreditAmount());
             }
             if ($baseCurrency->convert(100, $cardCurrency)) {
                 $amount = $credit->getBalance() * $baseCurrency->convert(100, $currentCurrency) 
                     / $baseCurrency->convert(100, $cardCurrency);
-                return $store->formatPrice($amount - $this->getUseGiftCreditAmount());
+                return $store->formatPrice($amount - $this->getSimiuseGiftCreditAmount());
             }
             return $cardCurrency->format($credit->getBalance(), array(), true);
         }
@@ -278,7 +278,7 @@ class Simi_Simigiftvoucher_Block_Payment_Form extends Mage_Payment_Block_Form
      */
     public function getUseGiftCredit()
     {
-        return Mage::getSingleton('checkout/session')->getUseGiftCardCredit();
+        return Mage::getSingleton('checkout/session')->getSimiuseGiftCardCredit();
     }
 
     /**
@@ -287,16 +287,16 @@ class Simi_Simigiftvoucher_Block_Payment_Form extends Mage_Payment_Block_Form
     public function getUsingAmount()
     {
         return Mage::app()->getStore()->formatPrice(
-                Mage::getSingleton('checkout/session')->getUseGiftCreditAmount()
+                Mage::getSingleton('checkout/session')->getSimiuseGiftCreditAmount()
         );
     }
 
     /**
      * @return mixed
      */
-    public function getUseGiftCreditAmount()
+    public function getSimiuseGiftCreditAmount()
     {
-        return Mage::getSingleton('checkout/session')->getUseGiftCreditAmount();
+        return Mage::getSingleton('checkout/session')->getSimiuseGiftCreditAmount();
     }
 
     /**

@@ -90,7 +90,7 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Customer_Tab_Credit extends Mage_Admi
      */
     public function getTabLabel()
     {
-        return Mage::helper('simigiftvoucher')->__('Gift Card Credit');
+        return Mage::helper('simigiftvoucher')->__('Simi Gift Card Credit');
     }
 
     /**
@@ -98,7 +98,7 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Customer_Tab_Credit extends Mage_Admi
      */
     public function getTabTitle()
     {
-        return Mage::helper('simigiftvoucher')->__('Gift Card Credit');
+        return Mage::helper('simigiftvoucher')->__('Simi Gift Card Credit');
     }
 
     /**

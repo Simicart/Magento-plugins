@@ -47,20 +47,32 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
         $giftType = $product->getSimigiftType();
         switch ($giftType) {
             case Simi_Simigiftvoucher_Model_Gifttype::GIFT_TYPE_FIX:
-                return array(
-                    'type' => 'static', 
-                    'simigift_price' => $this->getGiftPriceByStatic($product), 
+                $priceType = $product->getSimigiftPriceType();
+                $data =  array(
+                    'type_value' => 'fixed',
+                    'price' => $this->getGiftPriceByStatic($product),
                     'value' => $product->getSimigiftValue()
                 );
 
+                if ($priceType == Simi_Simigiftvoucher_Model_Giftpricetype::GIFT_PRICE_TYPE_DEFAULT){
+                    $data['type_price'] = 'default';
+                }
+                elseif ($priceType == Simi_Simigiftvoucher_Model_Giftpricetype::GIFT_PRICE_TYPE_FIX){
+                    $data['type_price'] = 'fixed';
+                }
+                else {
+                    $data['type_price'] = 'percent';
+                    $data['percent_value'] = $product->getSimigiftPrice();
+                }
+                return $data;
             case Simi_Simigiftvoucher_Model_Gifttype::GIFT_TYPE_RANGE:
-                $data = array('type' => 'range', 'from' => $product->getSimigiftFrom(), 'to' => $product->getSimigiftTo());
+                $data = array('type_value' => 'range', 'from' => $product->getSimigiftFrom(), 'to' => $product->getSimigiftTo());
                 $priceType = $product->getSimigiftPriceType();
                 if ($priceType == Simi_Simigiftvoucher_Model_Giftpricetype::GIFT_PRICE_TYPE_DEFAULT) {
-                    $data['simigift_price_type'] = 'default';
+                    $data['type_price'] = 'default';
                 } else {
-                    $data['simigift_price_type'] = 'percent';
-                    $data['gift_price_options'] = $product->getSimigiftPrice();
+                    $data['type_price'] = 'percent';
+                    $data['percent_value'] = $product->getSimigiftPrice();
                 }
                 return $data;
 
@@ -74,21 +86,24 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
                     }
                 }
 
-                $data = array('type' => 'dropdown', 'options' => $options);
+                $data = array('type_value' => 'dropdown', 'options_value' => $options);
                 $priceType = $product->getSimigiftPriceType();
                 if ($priceType == Simi_Simigiftvoucher_Model_Giftpricetype::GIFT_PRICE_TYPE_DEFAULT) {
-                    $data['prices'] = $options;
+                    $data['type_price'] = 'default';
+                    $data['prices_dropdown'] = $options;
                 } else if ($priceType == Simi_Simigiftvoucher_Model_Giftpricetype::GIFT_PRICE_TYPE_FIX) {
+                    $data['type_price'] = 'fixed';
                     $optionsPrice = explode(',', $product->getSimigiftPrice());
-                    $data['prices'] = $optionsPrice;
+                    $data['prices_dropdown'] = $optionsPrice;
                 } else {
+                    $data['type_price'] = 'percent';
                     if (count($giftPrices) == count($options)) {
                         for ($i = 0; $i < count($giftPrices); $i++) {
-                            $data['prices'][] = $giftPrices[$i] * $options[$i] / 100;
+                            $data['prices_dropdown'][] = $giftPrices[$i] * $options[$i] / 100;
                         }
                     } else {
                         foreach ($options as $value) {
-                            $data['prices'][] = $value * $product->getSimigiftPrice() / 100;
+                            $data['prices_dropdown'][] = $value * $product->getSimigiftPrice() / 100;
                         }
                     }
                 }
@@ -161,7 +176,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
                 if ($this->displayBothPrices()){
                     $priceV2['show_ex_in_price'] = 1;
                     $priceV2['price_excluding_tax']['price_label'] = Mage::helper('tax')->__('Excl. Tax');
-                    $priceV2['price_excluding_tax']['price'] = Mage::helper('core')->currency($_minimalPriceTax);
+                    $priceV2['price_excluding_tax']['price'] = Mage::helper('core')->currency($_minimalPriceTax,false);
                     if ($_weeeTaxAmount && Mage::helper('weee')->typeOfDisplay($_product, array(2, 1, 4))){
                         $_weeeSeparator = '';
 
@@ -182,7 +197,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
                         $priceV2['show_weee_price'] = 1;
                     }
                     $priceV2['price_including_tax']['price_label'] = Mage::helper('tax')->__('Incl. Tax');
-                    $priceV2['price_including_tax']['price'] = Mage::helper('core')->currency($_minimalPriceInclTax);
+                    $priceV2['price_including_tax']['price'] = Mage::helper('core')->currency($_minimalPriceInclTax,false);
                 }
                 else {
                     $priceV2['show_ex_in_price'] = 0;
@@ -242,7 +257,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
                     }
 
                     $priceV2['special_price']['price_including_tax']['label'] = Mage::helper('tax')->__('Incl. Tax');
-                    $priceV2['special_price']['price_including_tax']['price'] = Mage::helper('core')->currency($_finalPriceInclTax);
+                    $priceV2['special_price']['price_including_tax']['price'] = Mage::helper('core')->currency($_finalPriceInclTax,false);
                 }
                 // !$this->displayBothPrices()
                 else {

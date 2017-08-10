@@ -321,7 +321,7 @@
     <adminhtml_customer_edit>
         <reference name="customer_edit_tabs">
             <action method="addTab">
-                <name>credit_balance_giftcard</name>
+                <name>credit_balance_simigiftcard</name>
                 <block>simigiftvoucher/adminhtml_customer_tab_credit</block>
             </action>
         </reference>
@@ -336,11 +336,11 @@
         </reference>
         <reference name="product_tabs">
             <action method="addTab">
-                <name>giftcard_conditions</name>
+                <name>simigiftcard_conditions</name>
                 <block>simigiftvoucher/adminhtml_product_tab_conditions</block>              
             </action>
             <action method="addTab">
-                <name>giftcard_actions</name>
+                <name>simigiftcard_actions</name>
                 <block>simigiftvoucher/adminhtml_product_tab_actions</block>
             </action>
         </reference>
@@ -353,11 +353,11 @@
         </reference>
         <reference name="product_tabs">
             <action method="addTab">
-                <name>giftcard_conditions</name>
+                <name>simigiftcard_conditions</name>
                 <block>simigiftvoucher/adminhtml_product_tab_conditions</block>
             </action>
             <action method="addTab">
-                <name>giftcard_actions</name>
+                <name>simigiftcard_actions</name>
                 <block>simigiftvoucher/adminhtml_product_tab_actions</block>
             </action>
         </reference>

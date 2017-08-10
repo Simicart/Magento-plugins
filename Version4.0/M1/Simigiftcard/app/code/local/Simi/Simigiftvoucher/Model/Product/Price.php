@@ -48,15 +48,15 @@ class Simi_Simigiftvoucher_Model_Product_Price extends Mage_Catalog_Model_Produc
 
         $giftAmount = Mage::helper('simigiftvoucher/giftproduct')->getGiftValue($product);
 
-        switch ($giftAmount['type']) {
+        switch ($giftAmount['type_value']) {
             case 'range':
                 $giftAmount['min_price'] = $giftAmount['from'];
                 $giftAmount['max_price'] = $giftAmount['to'];
                 $giftAmount['price'] = $giftAmount['from'];
-                if ($giftAmount['simigift_price_type'] == 'percent') {
-                    $giftAmount['price'] = $giftAmount['price'] * $giftAmount['gift_price_options'] / 100;
-                    $giftAmount['min_price'] = $giftAmount['from'] * $giftAmount['gift_price_options'] / 100;
-                    $giftAmount['max_price'] = $giftAmount['to'] * $giftAmount['gift_price_options'] / 100;
+                if ($giftAmount['type_price'] == 'percent') {
+                    $giftAmount['price'] = $giftAmount['price'] * $giftAmount['percent_value'] / 100;
+                    $giftAmount['min_price'] = $giftAmount['from'] * $giftAmount['percent_value'] / 100;
+                    $giftAmount['max_price'] = $giftAmount['to'] * $giftAmount['percent_value'] / 100;
                 }
 
                 if ($giftAmount['min_price'] == $giftAmount['max_price']) {
@@ -66,17 +66,17 @@ class Simi_Simigiftvoucher_Model_Product_Price extends Mage_Catalog_Model_Produc
                 }
                 break;
             case 'dropdown':
-                $giftAmount['min_price'] = min($giftAmount['prices']);
-                $giftAmount['max_price'] = max($giftAmount['prices']);
-                $giftAmount['price'] = $giftAmount['prices'][0];
+                $giftAmount['min_price'] = min($giftAmount['prices_dropdown']);
+                $giftAmount['max_price'] = max($giftAmount['prices_dropdown']);
+                $giftAmount['price'] = $giftAmount['prices_dropdown'][0];
                 if ($giftAmount['min_price'] == $giftAmount['max_price']) {
                     $giftAmount['price_type'] = self::PRICE_TYPE_FIXED;
                 } else {
                     $giftAmount['price_type'] = self::PRICE_TYPE_DYNAMIC;
                 }
                 break;
-            case 'static':
-                $giftAmount['price'] = $giftAmount['simigift_price'];
+            case 'fixed':
+                //$giftAmount['price'] = $giftAmount['price'];
                 $giftAmount['price_type'] = self::PRICE_TYPE_FIXED;
                 break;
             default:

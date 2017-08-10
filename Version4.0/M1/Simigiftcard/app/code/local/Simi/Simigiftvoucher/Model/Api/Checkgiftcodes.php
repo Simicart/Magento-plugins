@@ -5,7 +5,7 @@
  * Date: 7/6/17
  * Time: 8:54 AM
  */
-class Simi_Simigiftvoucher_Model_Api_Checkgiftcard extends Simi_Simiconnector_Model_Api_Abstract{
+class Simi_Simigiftvoucher_Model_Api_Checkgiftcodes extends Simi_Simiconnector_Model_Api_Abstract{
 
     public function setBuilderQuery(){}
 

@@ -34,9 +34,9 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Order_Form extends Mage_Adminhtml_Blo
     public function getGiftVoucherDiscount() {
         $session = Mage::getSingleton('checkout/session');
         $discounts = array();
-        if ($codes = $session->getGiftCodes()) {
+        if ($codes = $session->getSimigiftCodes()) {
             $codesArray = explode(',', $codes);
-            $codesDiscountArray = explode(',', $session->getCodesDiscount());
+            $codesDiscountArray = explode(',', $session->getSimicodesDiscount());
             $discounts = array_combine($codesArray, $codesDiscountArray);
         }
         return $discounts;
@@ -55,7 +55,7 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Order_Form extends Mage_Adminhtml_Blo
      * @return boolean
      */
     public function getUseGiftVoucher() {
-        return Mage::getSingleton('checkout/session')->getUseGiftCard();
+        return Mage::getSingleton('checkout/session')->getSimiuseGiftCard();
     }
 
     /**
@@ -86,7 +86,7 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Order_Form extends Mage_Adminhtml_Blo
         // ->where("v.recipient_email IS NULL OR v.recipient_email = ''");
         $giftCards = array();
         $addedCodes = array();
-        if ($codes = Mage::getSingleton('checkout/session')->getGiftCodes()) {
+        if ($codes = Mage::getSingleton('checkout/session')->getSimigiftCodes()) {
             $addedCodes = explode(',', $codes);
         }
         $conditions = Mage::getSingleton('simigiftvoucher/giftvoucher')->getConditions();
@@ -167,15 +167,15 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Order_Form extends Mage_Adminhtml_Blo
             $baseCurrency = $store->getBaseCurrency();
             $currentCurrency = $store->getCurrentCurrency();
             if ($cardCurrency->getCode() == $currentCurrency->getCode()) {
-                return $store->formatPrice($credit->getBalance() - $this->getUseGiftCreditAmount());
+                return $store->formatPrice($credit->getBalance() - $this->getSimiuseGiftCreditAmount());
             }
             if ($cardCurrency->getCode() == $baseCurrency->getCode()) {
                 $amount = $store->convertPrice($credit->getBalance(), false);
-                return $store->formatPrice($amount - $this->getUseGiftCreditAmount());
+                return $store->formatPrice($amount - $this->getSimiuseGiftCreditAmount());
             }
             if ($baseCurrency->convert(100, $cardCurrency)) {
                 $amount = $credit->getBalance() * $baseCurrency->convert(100, $currentCurrency) / $baseCurrency->convert(100, $cardCurrency);
-                return $store->formatPrice($amount - $this->getUseGiftCreditAmount());
+                return $store->formatPrice($amount - $this->getSimiuseGiftCreditAmount());
             }
             return $cardCurrency->format($credit->getBalance(), array(), true);
         }
@@ -188,7 +188,7 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Order_Form extends Mage_Adminhtml_Blo
      * @return boolean
      */
     public function getUseGiftCredit() {
-        return Mage::getSingleton('checkout/session')->getUseGiftCardCredit();
+        return Mage::getSingleton('checkout/session')->getSimiuseGiftCardCredit();
     }
 
     /**
@@ -196,15 +196,15 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Order_Form extends Mage_Adminhtml_Blo
      */
     public function getUsingAmount() {
         return $this->getStore()->formatPrice(
-                        Mage::getSingleton('checkout/session')->getUseGiftCreditAmount()
+                        Mage::getSingleton('checkout/session')->getSimiuseGiftCreditAmount()
         );
     }
 
     /**
      * @return mixed
      */
-    public function getUseGiftCreditAmount() {
-        return Mage::getSingleton('checkout/session')->getUseGiftCreditAmount();
+    public function getSimiuseGiftCreditAmount() {
+        return Mage::getSingleton('checkout/session')->getSimiuseGiftCreditAmount();
     }
 
 }

@@ -396,7 +396,7 @@ CREATE TABLE {$this->getTable('simigiftcard_template')} (
 ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE {$this->getTable('simigiftvoucher')}
-    ADD CONSTRAINT `FK_GIFTVOUCHER_RELATION_TEMPLATE` FOREIGN KEY (`giftcard_template_id`)
+    ADD CONSTRAINT `FK_SIMIGIFTVOUCHER_RELATION_TEMPLATE` FOREIGN KEY (`giftcard_template_id`)
     REFERENCES {$this->getTable('simigiftcard_template')} (`giftcard_template_id`)
         ON DELETE CASCADE;
 ");

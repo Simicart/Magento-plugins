@@ -5,7 +5,7 @@
  * Date: 7/5/17
  * Time: 9:37 AM
  */
-class Simi_Simigiftvoucher_Model_Api_Simigiftcard extends Simi_Simiconnector_Model_Api_Abstract{
+class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Model_Api_Abstract{
     protected $_DEFAULT_ORDER = 'giftcard_product_id';
     protected $_helperProduct;
     protected $_layer = array();
@@ -134,7 +134,7 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcard extends Simi_Simiconnector_Mod
             }
             if (++$check_limit > $limit)
                 break;
-            $info_detail = $entity->toArray($fields);
+            $info_detail = $entity_product->toArray($fields);
             $all_ids[] = $entity->getId();
             //zend_debug::dump($);die('xx');
             $images = array();
@@ -258,6 +258,7 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcard extends Simi_Simiconnector_Mod
         $info['wishlist_item_id'] = Mage::helper('simiconnector/wishlist')->getWishlistItemId($entity);
         $info['product_label'] = Mage::helper('simiconnector/productlabel')->getProductLabel($entity);
         $info['product_video'] = Mage::helper('simiconnector/simivideo')->getProductVideo($entity);
+        //$info['timezones'] = Mage::getModel('core/locale')->getOptionTimezones();
         $this->detail_info = $this->getDetail($info);
         Mage::dispatchEvent('simi_simiconnector_model_api_products_show_after', array('object' => $this, 'data' => $this->detail_info));
         return $this->detail_info;
@@ -271,8 +272,14 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcard extends Simi_Simiconnector_Mod
         if ($data['resourceid'] == 'uploadimage'){
             $result = array();
             if (isset($_FILES['image'])) {
+                //echo json_encode($_FILES['image']);die;
                 $error = $_FILES["image"]["error"];
-
+                if ($_FILES['image']['size'] > 2097152){
+                    throw new Exception(Mage::helper('simigiftvoucher')->__('The uploaded image exceeds 2Mb !'),4);
+                }
+                if ( $error > 0 ) {
+                    throw new Exception(Mage::helper('simigiftvoucher')->__('The uploaded image error! Please try again.'),4);
+                }
                 try {
                     $uploader = new Varien_File_Uploader('image');
                     $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
@@ -290,14 +297,13 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcard extends Simi_Simiconnector_Mod
                     $result['filename'] = $fileName;
                     $result['sucess'] = true;
                 } catch (Exception $e) {
-                    $result['sucess'] = false;
-                    $result = array('error' => $e->getMessage(), 'errorcode' => $e->getCode());
+                    throw new Exception(array('error' => $e->getMessage(), 'errorcode' => $e->getCode()),4);
                 }
             } else {
-                $result['sucess'] = false;
-                $result['error'] =  Mage::helper('simigiftvoucher')->__('Image Saving Error!');
+
+                throw new Exception(Mage::helper('simigiftvoucher')->__('Image Saving Error!'),4);
             }
-            return $result;
+            return array('images'=>$result);
         }
     }
 }

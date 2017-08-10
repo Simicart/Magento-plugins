@@ -54,7 +54,7 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcreditaftertax extends Mage
 
         if (!Mage::helper('simigiftvoucher')->getGeneralConfig('enablecredit', $quote->getStoreId())) {
             $session->setSimibaseUseGiftCreditAmount(0);
-            $session->setUseGiftCreditAmount(0);
+            $session->setSimiuseGiftCreditAmount(0);
             return $this;
         }
         if (Mage::app()->getStore()->isAdmin()) {
@@ -63,7 +63,7 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcreditaftertax extends Mage
             $customer = Mage::getSingleton('customer/session')->getCustomer();
         }
 
-        if ($address->getAddressType() == 'billing' && !$quote->isVirtual() || !$session->getUseGiftCardCredit() || !$customer->getId()
+        if ($address->getAddressType() == 'billing' && !$quote->isVirtual() || !$session->getSimiuseGiftCardCredit() || !$customer->getId()
         ) {
 
             return $this;
@@ -73,22 +73,24 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcreditaftertax extends Mage
         );
         if ($credit->getBalance() < 0.0001) {
             $session->setSimibaseUseGiftCreditAmount(0);
-            $session->setUseGiftCreditAmount(0);
+            $session->setSimiuseGiftCreditAmount(0);
             return $this;
         }
         $store = $quote->getStore();
-        $baseBalance = 0;
-        if ($rate = $store->getBaseCurrency()->getRate($credit->getData('currency'))) {
-            $baseBalance = $credit->getBalance() / $rate;
-        }
+        $baseBalance = $store->convertPrice($credit->getBalance()) ;
+        /*if ($rate = $store->getBaseCurrency()->getRate($credit->getData('currency'))) {
+
+            $baseBalance =
+            zend_debug::dump($baseBalance);
+        }*/
         if ($baseBalance < 0.0001) {
             $session->setSimibaseUseGiftCreditAmount(0);
-            $session->setUseGiftCreditAmount(0);
+            $session->setSimiuseGiftCreditAmount(0);
             return $this;
         }
 
-        if ($session->getMaxCreditUsed() > 0.0001) {
-            $baseBalance = min($baseBalance, floatval($session->getMaxCreditUsed()) / $store->convertPrice(1, false, false));
+        if ($session->getSimimaxCreditUsed() > 0.0001) {
+            $baseBalance = min($baseBalance, floatval($session->getSimimaxCreditUsed()));
         }
 
         $baseTotalDiscount = 0;
@@ -120,7 +122,7 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcreditaftertax extends Mage
 
         if ($baseDiscount && $discount) {
             $session->setSimibaseUseGiftCreditAmount($baseDiscount);
-            $session->setUseGiftCreditAmount($discount);
+            $session->setSimiuseGiftCreditAmount($discount);
 
             $address->setSimigiftcardCreditAmount($baseDiscount * $rate);
             $address->setSimibaseUseGiftCreditAmount($baseDiscount);
@@ -131,7 +133,12 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcreditaftertax extends Mage
             $address->setBaseGrandTotal($address->getBaseGrandTotal() - $baseDiscount);
             $address->setGrandTotal($store->convertPrice($address->getBaseGrandTotal()));
         }
-
+        /*zend_debug::dump($baseTotalDiscount);
+        zend_debug::dump($baseBalance);
+        zend_debug::dump($baseDiscount);
+        zend_debug::dump($rate);
+        zend_debug::dump($discount);
+        //die;*/
         return $this;
     }
 
@@ -145,11 +152,13 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcreditaftertax extends Mage
         if (!$applyGiftAfterTax) {
             return $this;
         }
+
         $amount = $address->getSimiuseGiftCreditAmount();
+
         if ($amount > 0) {
             $address->addTotal(array(
                 'code' => $this->getCode(),
-                'title' => Mage::helper('simigiftvoucher')->__('Gift Card credit'),
+                'title' => Mage::helper('simigiftvoucher')->__('Simi Gift Card credit'),
                 'value' => -$amount
             ));
         }
@@ -199,18 +208,18 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcreditaftertax extends Mage
      * @param $session
      */
     public function clearGiftcardSession($session) {
-        if ($session->getUseGiftCard())
-            $session->setUseGiftCard(null)
-                    ->setGiftCodes(null)
-                    ->setBaseAmountUsed(null)
+        if ($session->getSimiuseGiftCard())
+            $session->setSimiuseGiftCard(null)
+                    ->setSimigiftCodes(null)
+                    ->setSimibaseAmountUsed(null)
                     ->setSimibaseGiftVoucherDiscount(null)
                     ->setSimigiftVoucherDiscount(null)
-                    ->setCodesBaseDiscount(null)
-                    ->setCodesDiscount(null)
-                    ->setGiftMaxUseAmount(null);
-        if ($session->getUseGiftCardCredit()) {
-            $session->setUseGiftCardCredit(null)
-                    ->setMaxCreditUsed(null)
+                    ->setSimicodesBaseDiscount(null)
+                    ->setSimicodesDiscount(null)
+                    ->setSimigiftMaxUseAmount(null);
+        if ($session->getSimiuseGiftCardCredit()) {
+            $session->setSimiuseGiftCardCredit(null)
+                    ->setSimimaxCreditUsed(null)
                     ->setSimibaseUseGiftCreditAmount(null)
                     ->setSimiuseGiftCreditAmount(null);
         }

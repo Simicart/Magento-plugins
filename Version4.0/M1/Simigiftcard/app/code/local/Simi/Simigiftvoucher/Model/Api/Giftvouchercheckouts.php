@@ -5,7 +5,7 @@
  * Date: 7/13/17
  * Time: 5:15 PM
  */
-class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnector_Model_Api_Abstract{
+class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckouts extends Simi_Simiconnector_Model_Api_Abstract{
 
     public function setBuilderQuery(){
         $data = $this->getData();
@@ -38,8 +38,8 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnec
         /*
          *  Add gift code from card page
          *  params : "giftvoucher"
-         *           "giftcouvher_code"
-         *           "existed_giftvoucher_code"
+         *           "giftcode"
+         *           "existed_giftcode"
          * */
         elseif ($data['resourceid'] == 'usecode'){
             $message = Mage::getModel('simigiftvoucher/simimapping')->UseGiftCode($data);
@@ -78,9 +78,9 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnec
             $onepageAPI->setData($data);
             $onepageAPI->setBuilderQuery();
             $onepageAPI->setPluralKey('orders');
-            Mage::getModel('simigiftvoucher/simimapping')->ChangeUseCode($data);
+            $message = Mage::getModel('simigiftvoucher/simimapping')->ChangeUseCode($data);
             $detail = $onepageAPI->show();
-            //$detail['gift_card']['message'] = $message;
+            $detail['order']['gift_card']['message'] = $message;
             return $detail;
         }
         /*
@@ -89,16 +89,16 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnec
          *           "giftcode"
          * */
         elseif ($data['resourceid'] == 'addcodecheckout'){
-
+            $message = Mage::getModel('simigiftvoucher/simimapping')->addgiftCheckout($data);
             $onepageAPI = Mage::getModel('simiconnector/api_orders');
             $data['resource'] = 'orders';
             $data['resourceid'] = 'onepage';
             $onepageAPI->setData($data);
             $onepageAPI->setBuilderQuery();
             $onepageAPI->setPluralKey('orders');
-            $message = Mage::getModel('simigiftvoucher/simimapping')->addgiftCheckout($data);
+
             $detail = $onepageAPI->show();
-            $detail['gift_card']['message'] = $message;
+            $detail['order']['gift_card']['message'] = $message;
             return $detail;
         }
         /*
@@ -115,7 +115,7 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnec
             $onepageAPI->setPluralKey('orders');
             $message = Mage::getModel('simigiftvoucher/simimapping')->updateAmountGiftcode($data);
             $detail = $onepageAPI->show();
-            $detail['gift_card']['message'] = $message;
+            $detail['order']['gift_card']['message'] = $message;
             return $detail;
         }
         /*
@@ -131,12 +131,12 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnec
             $onepageAPI->setPluralKey('orders');
             $message = Mage::getModel('simigiftvoucher/simimapping')->removeCodeCheckout($data);
             $detail = $onepageAPI->show();
-            $detail['gift_card']['message'] = $message;
+            $detail['order']['gift_card']['message'] = $message;
             return $detail;
         }
         /*
          *  Checkout Page
-         *  params : "giftcredit"
+         *  params : "usecredit"
          * */
         elseif ($data['resourceid'] == 'changeusecredit'){
             $onepageAPI = Mage::getModel('simiconnector/api_orders');
@@ -145,9 +145,9 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnec
             $onepageAPI->setData($data);
             $onepageAPI->setBuilderQuery();
             $onepageAPI->setPluralKey('orders');
-            Mage::getModel('simigiftvoucher/simimapping')->UseCreditCheckout($data);
+            $message = Mage::getModel('simigiftvoucher/simimapping')->UseCreditCheckout($data);
             $detail = $onepageAPI->show();
-            //$detail['usecredit'] = $message;
+            $detail['order']['gift_card']['message'] = $message;
             return $detail;
         }
         /*
@@ -163,7 +163,7 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckout extends Simi_Simiconnec
             $onepageAPI->setPluralKey('orders');
             $message = Mage::getModel('simigiftvoucher/simimapping')->creditamountAction($data);
             $detail = $onepageAPI->show();
-            $detail['gift_card']['message'] = $message;
+            $detail['order']['gift_card']['message'] = $message;
             return $detail;
         }
     }

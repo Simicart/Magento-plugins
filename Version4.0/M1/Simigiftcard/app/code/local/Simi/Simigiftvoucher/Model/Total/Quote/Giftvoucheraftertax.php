@@ -47,11 +47,11 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftvoucheraftertax extends Mage_Sa
         }
         $session = Mage::getSingleton('checkout/session');
 
-        if ($address->getAddressType() == 'billing' && !$quote->isVirtual() || !$session->getUseGiftCard()) {
+        if ($address->getAddressType() == 'billing' && !$quote->isVirtual() || !$session->getSimiuseGiftCard()) {
             return $this;
         }
 
-        if ($codes = $session->getGiftCodes()) {
+        if ($codes = $session->getSimigiftCodes()) {
             $codesArray = array_unique(explode(',', $codes));
             $store = $quote->getStore();
 
@@ -61,23 +61,23 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftvoucheraftertax extends Mage_Sa
             $codesBaseDiscount = array();
             $codesDiscount = array();
 
-            $baseSessionAmountUsed = explode(',', $session->getBaseAmountUsed());
-            $baseAmountUsed = array_combine($codesArray, $baseSessionAmountUsed);
-            $amountUsed = $baseAmountUsed;
+            $baseSessionAmountUsed = explode(',', $session->getSimibaseAmountUsed());
+            $SimibaseAmountUsed = array_combine($codesArray, $baseSessionAmountUsed);
+            $amountUsed = $SimibaseAmountUsed;
 
-            $giftMaxUseAmount = unserialize($session->getGiftMaxUseAmount());
+            $giftMaxUseAmount = unserialize($session->getSimigiftMaxUseAmount());
             if (!is_array($giftMaxUseAmount)) {
                 $giftMaxUseAmount = array();
             }
             foreach ($codesArray as $key => $code) {
                 $model = Mage::getModel('simigiftvoucher/giftvoucher')->loadByCode($code);
-                if ($model->getStatus() != Simi_Simigiftvoucher_Model_Status::STATUS_ACTIVE || $model->getBalance() == 0 || $model->getBaseBalance() <= $baseAmountUsed[$code] || !$model->validate($address)
+                if ($model->getStatus() != Simi_Simigiftvoucher_Model_Status::STATUS_ACTIVE || $model->getBalance() == 0 || $model->getBaseBalance() <= $SimibaseAmountUsed[$code] || !$model->validate($address)
                 ) {
                     $codesBaseDiscount[] = 0;
                     $codesDiscount[] = 0;
                 } else {
                     if (Mage::helper('simigiftvoucher')->canUseCode($model)) {
-                        $baseBalance = $model->getBaseBalance() - $baseAmountUsed[$code];
+                        $baseBalance = $model->getBaseBalance() - $SimibaseAmountUsed[$code];
                         if (array_key_exists($code, $giftMaxUseAmount)) {
                             $maxDiscount = max(floatval($giftMaxUseAmount[$code]), 0) / $store->convertPrice(1, false, false);
                             $baseBalance = min($baseBalance, $maxDiscount);
@@ -115,8 +115,8 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftvoucheraftertax extends Mage_Sa
                     if ($baseDiscountTotal != 0)
                         $this->prepareGiftDiscountForItem($address, $baseDiscount / $baseDiscountTotal, $store, $model, $baseDiscount);
 
-                    $baseAmountUsed[$code] += $baseDiscount;
-                    $amountUsed[$code] = $store->convertPrice($baseAmountUsed[$code]);
+                    $SimibaseAmountUsed[$code] += $baseDiscount;
+                    $amountUsed[$code] = $store->convertPrice($SimibaseAmountUsed[$code]);
 
                     $baseTotalDiscount += $baseDiscount;
                     $totalDiscount += $discount;
@@ -129,13 +129,13 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftvoucheraftertax extends Mage_Sa
             $codesDiscountString = implode(',', $codesDiscount);
 
             //update session
-            $session->setBaseAmountUsed(implode(',', $baseAmountUsed));
+            $session->setSimibaseAmountUsed(implode(',', $SimibaseAmountUsed));
 
             $session->setSimibaseGiftVoucherDiscount($session->getSimibaseGiftVoucherDiscount() + $baseTotalDiscount);
             $session->setSimigiftVoucherDiscount($session->getSimigiftVoucherDiscount() + $totalDiscount);
 
-            $session->setCodesBaseDiscount($session->getBaseAmountUsed());
-            $session->setCodesDiscount(implode(',', $amountUsed));
+            $session->setSimicodesBaseDiscount($session->getSimibaseAmountUsed());
+            $session->setSimicodesDiscount(implode(',', $amountUsed));
 
             //update address
             $address->setBaseGrandTotal($address->getBaseGrandTotal() - $baseTotalDiscount);
@@ -155,8 +155,8 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftvoucheraftertax extends Mage_Sa
             $quote->setSimigiftVoucherDiscount($session->getSimigiftVoucherDiscount());
 
             $quote->setSimigiftCodes($codes);
-            $quote->setSimicodesBaseDiscount($session->getCodesBaseDiscount());
-            $quote->setSimicodesDiscount($session->getCodesDiscount());
+            $quote->setSimicodesBaseDiscount($session->getSimicodesBaseDiscount());
+            $quote->setSimicodesDiscount($session->getSimicodesDiscount());
         }
 
         return $this;
@@ -232,18 +232,18 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftvoucheraftertax extends Mage_Sa
      * @param $session
      */
     public function clearGiftcardSession($session) {
-        if ($session->getUseGiftCard())
-            $session->setUseGiftCard(null)
-                    ->setGiftCodes(null)
-                    ->setBaseAmountUsed(null)
+        if ($session->getSimiuseGiftCard())
+            $session->setSimiuseGiftCard(null)
+                    ->setSimigiftCodes(null)
+                    ->setSimibaseAmountUsed(null)
                     ->setSimibaseGiftVoucherDiscount(null)
                     ->setSimigiftVoucherDiscount(null)
-                    ->setCodesBaseDiscount(null)
-                    ->setCodesDiscount(null)
-                    ->setGiftMaxUseAmount(null);
-        if ($session->getUseGiftCardCredit()) {
-            $session->setUseGiftCardCredit(null)
-                    ->setMaxCreditUsed(null)
+                    ->setSimicodesBaseDiscount(null)
+                    ->setSimicodesDiscount(null)
+                    ->setSimigiftMaxUseAmount(null);
+        if ($session->getSimiuseGiftCardCredit()) {
+            $session->setSimiuseGiftCardCredit(null)
+                    ->setSimimaxCreditUsed(null)
                     ->setSimibaseUseGiftCreditAmount(null)
                     ->setSimiuseGiftCreditAmount(null);
         }

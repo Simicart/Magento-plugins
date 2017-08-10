@@ -626,6 +626,17 @@
                 </observers>
             </simi_simiconnector_model_api_orders_onepage_show_after>
 
+            <!-- Total Row -->
+            <simi_simiconnector_helper_total_settotal_after>
+                <observers>
+                    <simi_simiconnector_helper_total_settotal_after_giftvoucher>
+                        <type>singleton</type>
+                        <class>simigiftvoucher/simiobserver</class>
+                        <method>simiSimiconnectorHelperTotalSetTotalAfter</method>
+                    </simi_simiconnector_helper_total_settotal_after_giftvoucher>
+                </observers>
+            </simi_simiconnector_helper_total_settotal_after>
+
             <checkout_cart_product_add_after>
                 <observers>
                     <simigiftvoucher_collect_totals_before>
