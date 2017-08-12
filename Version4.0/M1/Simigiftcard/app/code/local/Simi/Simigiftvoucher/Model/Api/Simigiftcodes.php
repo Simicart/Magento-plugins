@@ -93,9 +93,15 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcodes extends Simi_Simiconnector_Mo
         $info['conditions_serialized'] = unserialize($info['conditions_serialized']);
         $info['actions_serialized'] = unserialize($info['actions_serialized']);
         $info['actions'] = Mage::getModel('simigiftvoucher/simimapping')->getAction($info['giftvoucher_id']);
-        $info['history'] = Mage::getModel('simigiftvoucher/history')
+        $history = Mage::getModel('simigiftvoucher/history')
                             ->getCollection()
                             ->addFieldToFilter('giftvoucher_id', $giftcode->getId())->getData();
+        foreach ($history as $item){
+            $create_at = Mage::getModel('core/date')->timestamp($item['created_at']);
+            $item['created_at'] = date("m/d/Y", Mage::getModel('core/date')->timestamp($create_at));
+            $info['history'] = $item;
+        }
+
         return $this->getDetail($info);
     }
 

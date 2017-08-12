@@ -38,10 +38,33 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
             $item['giftvoucher_id'] = $info['voucher_id'];
             $info['listcode'][] = $item;
         }
-        $info['history'] = Mage::getModel('simigiftvoucher/credithistory')
+        $history = Mage::getModel('simigiftvoucher/credithistory')
                         ->getCollection()
                         ->addFieldToFilter('customer_id',$customer->getId())
                         ->getData();
+        foreach ($history as $item){
+            if ($item['action'] == 'Redeem'){
+                $item['action'] = Mage::helper('simigiftvoucher')->__('Customer Redemption');
+            }
+            elseif ($item['action'] == 'Api_re'){
+                $item['action'] = Mage::helper('simigiftvoucher')->__('API User Redemption');
+            }
+            elseif ($item['action'] == 'Apiupdate'){
+                $item['action'] = Mage::helper('simigiftvoucher')->__('API User Update');
+            }
+            elseif ($item['action'] == 'Adminupdate'){
+                $item['action'] = Mage::helper('simigiftvoucher')->__('Admin Update');
+            }
+            elseif ($item['action'] == 'Spend'){
+                $item['action'] = Mage::helper('simigiftvoucher')->__('Customer Spend');
+            }
+            elseif ($item['action'] == 'Refund'){
+                $item['action'] = Mage::helper('simigiftvoucher')->__('Admin Refund');
+            }
+            $create_at = Mage::getModel('core/date')->timestamp($item['created_date']);
+            $item['created_date'] = date("m/d/Y", Mage::getModel('core/date')->timestamp($create_at));
+            $info['history'][] = $item;
+        }
         return $this->getDetail($info);
     }
 
@@ -104,24 +127,33 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
         if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
             throw new Exception(Mage::helper('customer')->__('Please login First.'),4);
         }
-        $data = $this->getData();
-        $params = (array) $data['contents'];
-        $customerVoucherId = $params['customer_voucher_id'];
 
-        $result = array();
-        $voucher = Mage::getModel('giftvoucher/customervoucher')->load($customerVoucherId);
-        if (!$voucher->getId()){
-            throw new Exception(Mage::helper('simigiftvoucher')->__('Gift Code of customer not exist !'),4);
-        }
-        if ($voucher->getCustomerId() == Mage::getSingleton('customer/session')->getCustomer()->getId()) {
-            try {
-                $voucher->delete();
-                $result['success'] =  Mage::helper('simigiftvoucher')->__('Gift Code was successfully removed !');
-            } catch (Exception $e) {
-                $error = $e->getMessage();
-                throw new Exception($error,4);
+        $data = $this->getData();
+        if ($data['nested_resources'] && $data['resourceid'] == 'self'){
+            $params = (array) $data['contents'];
+            $customerVoucherId = $data['nested_resources'];
+            $voucher = Mage::getModel('simigiftvoucher/customervoucher')->load($customerVoucherId);
+            if (!$voucher->getId()){
+                throw new Exception(Mage::helper('simigiftvoucher')->__('Gift Code of customer not exist !'),4);
             }
+            if ($voucher->getCustomerId() == Mage::getSingleton('customer/session')->getCustomer()->getId()) {
+                try {
+                    $voucher->delete();
+                    $result =  Mage::helper('simigiftvoucher')->__('Gift Code was removed successfully !');
+                } catch (Exception $e) {
+                    $error = $e->getMessage();
+                    throw new Exception($error,4);
+                }
+            }
+            $showAPI = Mage::getModel('simiconnector/api_simicustomercredits');
+            $data['resource'] = 'simicustomercredits';
+            $data['resourceid'] = 'self';
+            $showAPI->setData($data);
+            $showAPI->setBuilderQuery();
+            $showAPI->setPluralKey('simicustomercredits');
+            $detail = $showAPI->show();
+            $detail['simicustomercredit']['message'] = $result;
+            return $detail;
         }
-        return array('message' => $result);
     }
 }

@@ -324,7 +324,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
             else {
                 $this->setTaxFromPrice($priceV2, $_minimalPriceTax);
                 $this->setTaxToPrice($priceV2, $_maximalPriceTax);
-
+                $priceV2['show_ex_in_price'] = 0;
                 if ($_weeeTaxAmount && Mage::helper('weee')->typeOfDisplay($_product, array(2, 1, 4))){
                     $wee = '';
                     foreach ($_weeeTaxAttributes as $_weeeTaxAttribute){
@@ -357,7 +357,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
             }
 
             if ($_maximalPriceTax > $_minimalPriceTax){
-                $priceV2['show_from_to_tax_price'] = 0;
+                $priceV2['show_from_to_tax_price'] = 1;
                 if ($this->displayBothPrices()){
                     $priceV2['show_ex_in_price'] = 1;
                     $priceV2['product_from_label'] = $this->helper('catalog')->__('From') ;
@@ -386,6 +386,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
                 }
                 // !$this->displayBothPrices()
                 else {
+                    $priceV2['show_ex_in_price'] = 0;
                     $this->setTaxPrice($priceV2,$_maximalPriceTax);
                     if ($_weeeTaxAmount && Mage::helper('weee')->typeOfDisplay($_product, array(2, 1, 4))){
                         $wee = '';

@@ -11,7 +11,11 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
 
     public function loadGiftcode($id,$customer_id){
         $giftcode = Mage::getModel('simigiftvoucher/giftvoucher')->load($id);
-        if ($giftcode->getCustomerId() == $customer_id){
+        $customer_voucher = Mage::getModel('simigiftvoucher/customervoucher')->getCollection()
+            ->addFieldToFilter('customer_id',$customer_id)
+            ->addFieldToFilter('voucher_id',$id)
+            ->getData();
+        if ($customer_voucher){
             return $this->builderQuery = $giftcode;
         }
         else {
@@ -204,11 +208,12 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
     public function UseCredit($data){
         $data = (array) $data['contents'];
         $session = Mage::getSingleton('checkout/session');
-
+        $quote = $session->getQuote();
         $info = array();
         if($data['usecredit'] && Mage::helper('simigiftvoucher')->getGeneralConfig('enablecredit') && $data['credit_amount']){
             $session->setSimiuseGiftCardCredit(1);
             $session->setSimimaxCreditUsed(floatval($data['credit_amount']));
+            $quote->setTotalsCollectedFlag(false)->collectTotals();
             $info['success'] = Mage::helper('simigiftvoucher')->__('Your Credit has been used successfully.');
         }else {
             $session->setSimiuseGiftCardCredit(0);
@@ -484,7 +489,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
                     throw new Exception(Mage::helper('simigiftvoucher')->__('This gift code has already existed in your list.'),4);
                 }
                 elseif ($giftcode->getStatus() != 1 && $giftcode->getStatus() != 2 && $giftcode->getStatus() != 4){
-                    throw new Exception(Mage::helper('simigiftcode')->__('Gift code "%s" is not available', $code),4);
+                    throw new Exception(Mage::helper('simigiftvoucher')->__('Gift code "%s" is not available', $code),4);
                 }
                 else {
                     $model = Mage::getModel('simigiftvoucher/customervoucher')
@@ -625,7 +630,18 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
             ));
         $collection->setOrder('customer_voucher_id', 'DESC');
 
-        return $collection->getData();
+        $data = $collection->getData();
+        $result = array();
+        foreach ($data as $item){
+            $added_date = Mage::getModel('core/date')->timestamp($item['added_date']);
+            $added_date = date("m/d/Y", Mage::getModel('core/date')->timestamp($added_date));
+            $expired_at = Mage::getModel('core/date')->timestamp($item['expired_at']);
+            $expired_at = date("m/d/Y", Mage::getModel('core/date')->timestamp($expired_at));
+            $item['added_date'] = $added_date;
+            $item['expired_at'] = $expired_at;
+            $result[] = $item;
+        }
+        return $result;
     }
 
     public function getAction($id){

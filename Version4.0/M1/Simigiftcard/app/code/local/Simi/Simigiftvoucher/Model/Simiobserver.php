@@ -70,6 +70,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                         if ($credit->getBalance() > 0.0001){
                             $detail_list['gift_card']['customer'] = $credit->getData();
                             $detail_list['gift_card']['customer']['balance'] = $this->formatBalance($credit, true);
+                            $detail_list['gift_card']['customer']['currency_symbol'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
                             if($this->getUseGiftCredit()){
                                 $detail_list['gift_card']['credit']['use_credit'] = 1;
                                 $detail_list['gift_card']['credit']['use_credit_amount'] = $this->getSimiuseGiftCreditAmount();
@@ -93,7 +94,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                         foreach ($discounts as $code => $discount){
                             if($discount <=0){
                                 $error = Mage::helper('simigiftvoucher')->__('Gift code "%s" hasn\'t been used yet.', Mage::helper('simigiftvoucher')->getHiddenCode($code));
-                                throw new Exception($error,4);
+                                $detail_list['gift_card']['message']['notice'] = $error;
                             }
                         }
 
@@ -115,7 +116,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             $quoteitems = $detail_list['quoteitems'];
             foreach ($quoteitems as $item){
                 if ($item['product_type'] == 'simigiftvoucher'){
-                    $item['giftcard_option'] = $this->getGiftcardOptions($item['item_id']);
+                    $item['option'] = $this->getGiftcardOptions($item['item_id']);
                 }
                 $quoteitems_detail[] = $item;
             }
@@ -152,6 +153,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                     if ($credit->getBalance() > 0.0001){
                         $detail_onepage['order']['gift_card']['customer'] = $credit->getData();
                         $detail_onepage['order']['gift_card']['customer']['balance'] = $this->formatBalance($credit, true);
+                        $detail_list['gift_card']['customer']['currency_symbol'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
                         if($this->getUseGiftCredit()){
                             $detail_onepage['order']['gift_card']['credit']['use_credit'] = 1;
                             $detail_onepage['order']['gift_card']['credit']['use_credit_amount'] = $this->getSimiuseGiftCreditAmount();
@@ -175,7 +177,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                     foreach ($discounts as $code => $discount){
                         if($discount <=0){
                             $error = Mage::helper('simigiftvoucher')->__('Gift code "%s" hasn\'t been used yet.', Mage::helper('simigiftvoucher')->getHiddenCode($code));
-                            throw new Exception($error,4);
+                            $detail_list['order']['gift_card']['message']['notice'] = $error;
                         }
                         $detail_onepage['order']['gift_card']['giftcode'][] = array(
                             "gift_code"  => $code,
@@ -183,13 +185,6 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                             "amount"    =>  $discount
                         );
                     }
-
-                    /*foreach ($discounts as $code => $discount){
-                        if($discount <= 0){
-                            continue;
-                        }
-
-                    }*/
                 }
 
             }
