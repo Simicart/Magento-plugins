@@ -177,7 +177,7 @@ class Simi_Simistorelocator_Adminhtml_Simistorelocator_SpecialdayController exte
     }
 
     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('connector');
+        return Mage::getSingleton('admin/session')->isAllowed('simiconnector/simi_rich_content/simistorelocator');
     }
 
 }

@@ -170,9 +170,9 @@ class Simi_Simistorelocator_Adminhtml_Simistorelocator_HolidayController extends
         $response->sendResponse();
         die;
     }
-    
-     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('connector');
+
+    protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('simiconnector/simi_rich_content/simistorelocator');
     }
 
 }

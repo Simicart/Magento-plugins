@@ -63,9 +63,9 @@ class Simi_Simirewardpoints_Adminhtml_Simireward_CheckoutController extends Mage
             $session->setSimiRewardCheckedRules($rewardCheckedRules);
         }
     }
-    
+
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('simirewardpoints');
+        return Mage::getSingleton('admin/session')->isAllowed('simiconnector/simi_user_experience/simirewardpoints');
     }
 }

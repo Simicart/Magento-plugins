@@ -392,9 +392,9 @@ class Simi_Simirewardpoints_Adminhtml_Simireward_TransactionController extends M
                            ->getXml();
         $this->_prepareDownloadResponse($fileName, $content);
     }
-    
+
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('simirewardpoints');
+        return Mage::getSingleton('admin/session')->isAllowed('simiconnector/simi_user_experience/simirewardpoints');
     }
 }
