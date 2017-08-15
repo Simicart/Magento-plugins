@@ -64,6 +64,7 @@ class Simi_Simigiftvoucher_Block_Cart_Item extends Mage_Checkout_Block_Cart_Item
                 }
             }
         }
+        //zend_debug::dump($option);
         return $options;
     }
 

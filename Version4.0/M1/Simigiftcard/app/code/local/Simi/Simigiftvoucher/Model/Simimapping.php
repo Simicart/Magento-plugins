@@ -633,12 +633,9 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
         $data = $collection->getData();
         $result = array();
         foreach ($data as $item){
-            $added_date = Mage::getModel('core/date')->timestamp($item['added_date']);
-            $added_date = date("m/d/Y", Mage::getModel('core/date')->timestamp($added_date));
-            $expired_at = Mage::getModel('core/date')->timestamp($item['expired_at']);
-            $expired_at = date("m/d/Y", Mage::getModel('core/date')->timestamp($expired_at));
-            $item['added_date'] = $added_date;
-            $item['expired_at'] = $expired_at;
+            $item['added_date'] = Mage::helper('core')->formatDate($item['added_date'],'medium');
+            $item['expired_at'] = Mage::helper('core')->formatDate($item['expired_at'],'medium');
+            $item['currency_symbol'] = Mage::app()->getLocale()->currency($item['currency'])->getSymbol();
             $result[] = $item;
         }
         return $result;
@@ -658,7 +655,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
             }
         }
 
-        $avaiable = Mage::helper('giftvoucher')
+        $avaiable = Mage::helper('simigiftvoucher')
             ->canUseCode($giftvoucher);
         if (Mage::helper('simigiftvoucher')->getGeneralConfig('enablecredit') && $avaiable) {
             if (($giftvoucher->getStatus() == Simi_Simigiftvoucher_Model_Status::STATUS_ACTIVE
@@ -682,7 +679,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
     {
         $giftValue = Mage::helper('simigiftvoucher/giftproduct')->getGiftValue($product);
         $store = Mage::app()->getStore();
-        switch ($giftValue['type']) {
+        switch ($giftValue['type_value']) {
             case 'range':
                 $giftValue['from'] = $this->convertPrice($product, $giftValue['from']);
                 $giftValue['to'] = $this->convertPrice($product, $giftValue['to']);
@@ -690,18 +687,18 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
                 //$giftValue['to_txt'] = $store->formatPrice($giftValue['to'],false);
                 break;
             case 'dropdown':
-                $giftValue['options'] = $this->_convertPrices($product, $giftValue['options']);
-                $giftValue['prices'] = $this->_convertPrices($product, $giftValue['prices']);
-                $giftValue['prices'] = array_combine($giftValue['options'], $giftValue['prices']);
+                $giftValue['options_value'] = $this->_convertPrices($product, $giftValue['options_value']);
+                $giftValue['prices_dropdown'] = $this->_convertPrices($product, $giftValue['prices_dropdown']);
+                $giftValue['prices_dropdown'] = array_combine($giftValue['options_value'], $giftValue['prices_dropdown']);
                 //$giftValue['options_txt'] = $this->_formatPrices($giftValue['options']);
                 break;
-            case 'static':
+            case 'fixed':
                 $giftValue['value'] = $this->convertPrice($product, $giftValue['value']);
                 //$giftValue['value_txt'] = $store->formatPrice($giftValue['value']);
                 $giftValue['price'] = $this->convertPrice($product, $giftValue['price']);
                 break;
             default:
-                $giftValue['type'] = 'any';
+                $giftValue['type_value'] = 'any';
         }
         return $giftValue;
     }
@@ -764,7 +761,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
 
         if ($quote->getCouponCode() && !Mage::helper('simigiftvoucher')->getGeneralConfig('use_with_coupon')
             && (!$session->getSimiuseGiftCreditAmount() || !$session->getGiftVoucherDiscount())) {
-            $result['notice'] = Mage::helper('giftvoucher')->__('A coupon code has been used. You cannot apply gift codes with the coupon to get discount.');
+            $result['notice'] = Mage::helper('simigiftvoucher')->__('A coupon code has been used. You cannot apply gift codes with the coupon to get discount.');
         }
         else {
             $addcodes = array();

@@ -12,7 +12,7 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
         $data = $this->getData();
         if (Mage::getSingleton('customer/session')->isLoggedIn()){
             $customer = Mage::getSingleton('customer/session')->getCustomer();
-            if (isset($data['resourceid']) && $data['resourceid'] == 'self'){
+            if ($data['resourceid'] == 'self'){
                 $this->builderQuery = Mage::getModel('simigiftvoucher/credit')->load($customer->getId(),'customer_id');
             }
         }
@@ -30,12 +30,16 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
         if (isset($parameters['fields']) && $parameters['fields']) {
             $fields = explode(',', $parameters['fields']);
         }
+        $store = Mage::app()->getStore();
         $info = $credit->toArray($fields);
+        $info['balance'] = $store->convertPrice($info['balance']);
+        $info['currency'] = $store->getCurrentCurrencyCode();
+        $info['currency_symbol'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
         $listcode = Mage::getModel('simigiftvoucher/simimapping')->getListCode();
         foreach ($listcode as $item){
-            $voucher_id = $item->getVoucherId();
+            $voucher_id = $item['voucher_id'];
             $item['action'] =  Mage::getModel('simigiftvoucher/simimapping')->getAction($voucher_id);
-            $item['giftvoucher_id'] = $info['voucher_id'];
+            $item['giftvoucher_id'] = $item['voucher_id'];
             $info['listcode'][] = $item;
         }
         $history = Mage::getModel('simigiftvoucher/credithistory')
@@ -61,8 +65,8 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
             elseif ($item['action'] == 'Refund'){
                 $item['action'] = Mage::helper('simigiftvoucher')->__('Admin Refund');
             }
-            $create_at = Mage::getModel('core/date')->timestamp($item['created_date']);
-            $item['created_date'] = date("m/d/Y", Mage::getModel('core/date')->timestamp($create_at));
+            $item['created_date'] = Mage::helper('core')->formatDate($item['created_date'],'medium');
+            $item['currency_symbol'] = Mage::app()->getLocale()->currency($item['currency'])->getSymbol();
             $info['history'][] = $item;
         }
         return $this->getDetail($info);

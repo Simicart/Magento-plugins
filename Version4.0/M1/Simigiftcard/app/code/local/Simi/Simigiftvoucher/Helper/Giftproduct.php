@@ -175,7 +175,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
                 $priceV2['minimal_price'] = 1;
                 if ($this->displayBothPrices()){
                     $priceV2['show_ex_in_price'] = 1;
-                    $priceV2['price_excluding_tax']['price_label'] = Mage::helper('tax')->__('Excl. Tax');
+                    $priceV2['price_excluding_tax']['label'] = Mage::helper('tax')->__('Excl. Tax');
                     $priceV2['price_excluding_tax']['price'] = Mage::helper('core')->currency($_minimalPriceTax,false);
                     if ($_weeeTaxAmount && Mage::helper('weee')->typeOfDisplay($_product, array(2, 1, 4))){
                         $_weeeSeparator = '';
@@ -196,7 +196,7 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
                         $this->setWeePrice($priceV2, $_weeeSeparator);
                         $priceV2['show_weee_price'] = 1;
                     }
-                    $priceV2['price_including_tax']['price_label'] = Mage::helper('tax')->__('Incl. Tax');
+                    $priceV2['price_including_tax']['label'] = Mage::helper('tax')->__('Incl. Tax');
                     $priceV2['price_including_tax']['price'] = Mage::helper('core')->currency($_minimalPriceInclTax,false);
                 }
                 else {
@@ -229,9 +229,9 @@ class Simi_Simigiftvoucher_Helper_Giftproduct extends Mage_Core_Helper_Data
             else {
                 $priceV2['minimal_price'] = 0;
                 $priceV2['has_special_price'] = 1;
-                $priceV2['old_price']['price_label'] = Mage::helper('catalog')->__('Regular Price');
+                $priceV2['old_price']['label'] = Mage::helper('catalog')->__('Regular Price');
                 $priceV2['old_price']['price'] = Mage::helper('core')->currency($_minimalPriceTax);
-                $priceV2['special_price']['price_label'] = Mage::helper('catalog')->__('Special Price');
+                $priceV2['special_price']['label'] = Mage::helper('catalog')->__('Special Price');
                 if ($this->displayBothPrices()){
                     $priceV2['show_ex_in_price'] = 1;
                     $priceV2['special_price']['price_excluding_tax']['label'] = Mage::helper('tax')->__('Excl. Tax');

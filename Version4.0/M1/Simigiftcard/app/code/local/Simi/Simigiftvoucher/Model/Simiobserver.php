@@ -70,6 +70,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                         if ($credit->getBalance() > 0.0001){
                             $detail_list['gift_card']['customer'] = $credit->getData();
                             $detail_list['gift_card']['customer']['balance'] = $this->formatBalance($credit, true);
+                            $detail_list['gift_card']['customer']['currency'] = Mage::app()->getStore()->getCurrentCurrencyCode();
                             $detail_list['gift_card']['customer']['currency_symbol'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
                             if($this->getUseGiftCredit()){
                                 $detail_list['gift_card']['credit']['use_credit'] = 1;
@@ -91,17 +92,8 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                     $detail_list['gift_card']['customer']['list_code'] = $list_code;
                     $discounts = $this->getGiftVoucherDiscount();
                     if (count($discounts)){
-                        foreach ($discounts as $code => $discount){
-                            if($discount <=0){
-                                $error = Mage::helper('simigiftvoucher')->__('Gift code "%s" hasn\'t been used yet.', Mage::helper('simigiftvoucher')->getHiddenCode($code));
-                                $detail_list['gift_card']['message']['notice'] = $error;
-                            }
-                        }
 
                         foreach ($discounts as $code => $discount){
-                            if($discount <= 0){
-                                continue;
-                            }
                             $detail_list['gift_card']['giftcode'][] = array(
                                 "gift_code"  => $code,
                                 "hidden_code"  =>  Mage::helper('simigiftvoucher')->getHiddenCode($code),
@@ -153,7 +145,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                     if ($credit->getBalance() > 0.0001){
                         $detail_onepage['order']['gift_card']['customer'] = $credit->getData();
                         $detail_onepage['order']['gift_card']['customer']['balance'] = $this->formatBalance($credit, true);
-                        $detail_list['gift_card']['customer']['currency_symbol'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+                        $detail_onepage['order']['gift_card']['customer']['currency_symbol'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
                         if($this->getUseGiftCredit()){
                             $detail_onepage['order']['gift_card']['credit']['use_credit'] = 1;
                             $detail_onepage['order']['gift_card']['credit']['use_credit_amount'] = $this->getSimiuseGiftCreditAmount();
@@ -175,10 +167,10 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                 $discounts = $this->getGiftVoucherDiscount();
                 if (count($discounts)){
                     foreach ($discounts as $code => $discount){
-                        if($discount <=0){
+                        /*if($discount <=0){
                             $error = Mage::helper('simigiftvoucher')->__('Gift code "%s" hasn\'t been used yet.', Mage::helper('simigiftvoucher')->getHiddenCode($code));
-                            $detail_list['order']['gift_card']['message']['notice'] = $error;
-                        }
+                            $detail_list['order']['gift_card']['notice'] = $error;
+                        }*/
                         $detail_onepage['order']['gift_card']['giftcode'][] = array(
                             "gift_code"  => $code,
                             "hidden_code"  =>  Mage::helper('simigiftvoucher')->getHiddenCode($code),
@@ -348,27 +340,6 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         $options = Mage::getModel('sales/quote_item_option')
             ->getCollection()->addItemFilter($optionId);
         $formData = array();
-        //zend_debug::dump($options->getData());die('xx');
-        $result = array();
-        foreach ($options as $option) {
-            $result[$option->getCode()] = $option->getValue();
-        }
-
-        if (isset($result['base_gc_value'])) {
-            if (isset($result['gc_product_type']) && $result['gc_product_type'] == 'range') {
-                $currency = $store->getCurrentCurrencyCode();
-                $baseCurrencyCode = $store->getBaseCurrencyCode();
-
-                if ($currency != $baseCurrencyCode) {
-                    $currentCurrency = Mage::getModel('directory/currency')->load($currency);
-                    $baseCurrency = Mage::getModel('directory/currency')->load($baseCurrencyCode);
-
-                    $value = $baseCurrency->convert($result['base_gc_value'], $currentCurrency);
-                } else {
-                    $value = $result['base_gc_value'];
-                }
-            }
-        }
 
         foreach ($options as $option) {
             if ($option->getCode() == 'amount') {
@@ -381,6 +352,37 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                 $formData[$option->getCode()] = $option->getValue();
             }
         }
-        return $formData;
+        $opt = array();
+        foreach (Mage::helper('simigiftvoucher')->getGiftVoucherOptions() as $code => $label) {
+            if ($formData[$code]){
+                if ($code == 'giftcard_template_id') {
+                    $valueTemplate = Mage::getModel('simigiftvoucher/gifttemplate')->load($formData[$code]);
+                    $opt[] = array(
+                        'option_title' => $label,
+                        'option_value' => Mage::helper('core')->htmlEscape($valueTemplate->getTemplateName() ?
+                            $valueTemplate->getTemplateName() : $formData[$code]),
+                    );
+                }else if ($code == 'amount') {
+                    $opt[] = array(
+                        'option_title' => $label,
+                        'option_value' => Mage::helper('core')->formatPrice($formData[$code],false),
+                    );
+                } elseif($code == 'day_to_send'){
+                    $opt[] = array(
+                        'option_title' => $label,
+                        'option_value' => Mage::helper('core')->formatDate($formData[$code],'medium'),
+                    );
+                }
+                else {
+                    $opt[] = array(
+                        'option_title' => $label,
+                        'option_value' => Mage::helper('core')->htmlEscape($formData[$code]),
+                    );
+                }
+            }
+        }
+        return $opt;
     }
+
+
 }

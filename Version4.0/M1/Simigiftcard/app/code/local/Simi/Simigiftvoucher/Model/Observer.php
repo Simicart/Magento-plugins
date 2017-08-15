@@ -334,6 +334,7 @@ class Simi_Simigiftvoucher_Model_Observer
     public function orderPlaceAfter($observer)
     {
         $order = $observer->getEvent()->getOrder();
+
         $this->_addGiftVoucherForOrder($order);
         $session = Mage::getSingleton('checkout/session');
         $adminSession = Mage::getSingleton('adminhtml/session_quote');
@@ -452,11 +453,11 @@ class Simi_Simigiftvoucher_Model_Observer
             }
         }
 
-        if ($order->getSimigiftcardCreditAmount() && $order->getCustomerId()) {
+        if ($order->getSimibaseUseGiftCreditAmount() && $order->getCustomerId()) {
             $credit = Mage::getModel('simigiftvoucher/credit')->load($order->getCustomerId(), 'customer_id');
             if ($credit->getId()) {
                 try {
-                    $credit->setBalance($credit->getBalance() - $order->getSimigiftcardCreditAmount());
+                    $credit->setBalance($credit->getBalance() - $order->getSimibaseUseGiftCreditAmount());
                     $credit->save();
                     if ($store->getCurrentCurrencyCode() != $order->getBaseCurrencyCode()) {
                         $currencyBalance = $store->convertPrice(round($credit->getBalance(), 4));

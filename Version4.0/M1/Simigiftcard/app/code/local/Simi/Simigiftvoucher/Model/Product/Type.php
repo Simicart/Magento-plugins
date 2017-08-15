@@ -122,6 +122,7 @@ class Simi_Simigiftvoucher_Model_Product_Type extends Mage_Catalog_Model_Product
         $fnPrice = 0;
         if ($amount) {
             $giftAmount = Mage::helper('simigiftvoucher/giftproduct')->getGiftValue($product);
+            //echo json_encode($giftAmount);die('xx');
             switch ($giftAmount['type_value']) {
                 case 'range':
                     if ($amount < $this->convertPrice($product, $giftAmount['from'])) {
@@ -148,27 +149,27 @@ class Simi_Simigiftvoucher_Model_Product_Type extends Mage_Catalog_Model_Product
                     }
 
                     $fnPrice = $amount;
-                    if ($giftAmount['simigift_price_type'] == 'percent') {
-                        $fnPrice = $fnPrice * $giftAmount['gift_price_options'] / 100;
+                    if ($giftAmount['type_price'] == 'percent') {
+                        $fnPrice = $fnPrice * $giftAmount['percent_value'] / 100;
                     }
                     break;
                 case 'dropdown':
-                    if (!empty($giftAmount['options'])) {
+                    if (!empty($giftAmount['options_value'])) {
                         $check = false;
                         $giftDropdown = array();
-                        for ($i = 0; $i < count($giftAmount['options']); $i++) {
-                            $giftDropdown[$i] = $this->convertPrice($product, $giftAmount['options'][$i]);
+                        for ($i = 0; $i < count($giftAmount['options_value']); $i++) {
+                            $giftDropdown[$i] = $this->convertPrice($product, $giftAmount['options_value'][$i]);
                             if ($amount == $giftDropdown[$i]) {
                                 $check = true;
-                                $baseValue = $giftAmount['options'][$i];
+                                $baseValue = $giftAmount['options_value'][$i];
                             }
                         }
                         if (!$check) {
-                            $amount = $giftAmount['options'][0];
-                            $baseValue = $giftAmount['options'][0];
+                            $amount = $giftAmount['options_value'][0];
+                            $baseValue = $giftAmount['options_value'][0];
                         }
 
-                        $fnPrices = array_combine($giftDropdown, $giftAmount['prices']);
+                        $fnPrices = array_combine($giftDropdown, $giftAmount['prices_dropdown']);
                         $fnPrice = $fnPrices[$amount];
                     }
                     break;
@@ -177,7 +178,7 @@ class Simi_Simigiftvoucher_Model_Product_Type extends Mage_Catalog_Model_Product
                         $amount = $giftAmount['value'];
                     }
                     $baseValue = $giftAmount['value'];
-                    $fnPrice = $giftAmount['simigift_price'];
+                    $fnPrice = $giftAmount['price'];
                     break;
                 default:
                     return Mage::helper('simigiftvoucher')->__('Please enter Gift Card information.');
@@ -189,7 +190,7 @@ class Simi_Simigiftvoucher_Model_Product_Type extends Mage_Catalog_Model_Product
         $buyRequest->setAmount($amount);
         $product->addCustomOption('base_gc_value', $baseValue);
         $product->addCustomOption('base_gc_currency', Mage::app()->getStore()->getBaseCurrencyCode());
-        $product->addCustomOption('gc_product_type', $giftAmount['type']);
+        $product->addCustomOption('gc_product_type', $giftAmount['type_value']);
         $product->addCustomOption('price_amount', $fnPrice);
 
         foreach (Mage::helper('simigiftvoucher')->getFullGiftVoucherOptions() as $key => $label) {

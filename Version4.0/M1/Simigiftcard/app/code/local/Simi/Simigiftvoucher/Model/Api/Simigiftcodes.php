@@ -90,6 +90,14 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcodes extends Simi_Simiconnector_Mo
             $fields = explode(',', $parameters['fields']);
         }
         $info = $giftcode->toArray($fields);
+        $customer_voucher = Mage::getModel('simigiftvoucher/customervoucher')->load($info['giftvoucher_id'])->getData();
+        $info['added_date'] = Mage::helper('core')->formatDate($customer_voucher['added_date'],'medium');
+        $info['expired_at'] = Mage::helper('core')->formatDate($info['expired_at'],'medium');
+        if (($giftcode->getRecipientName() && $giftcode->getRecipientEmail()
+            && $giftcode->getCustomerId() == Mage::getSingleton('customer/session')->getCustomerId())){
+            $info['comment'] = Mage::help('simigiftvoucher')->__('This is your gift to give for %s (%s)',$giftcode->getRecipientName(), $giftcode->getRecipientEmail());
+        }
+        $info['currency_symbol'] = Mage::app()->getLocale()->currency($info['currency'])->getSymbol();
         $info['conditions_serialized'] = unserialize($info['conditions_serialized']);
         $info['actions_serialized'] = unserialize($info['actions_serialized']);
         $info['actions'] = Mage::getModel('simigiftvoucher/simimapping')->getAction($info['giftvoucher_id']);
@@ -97,9 +105,9 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcodes extends Simi_Simiconnector_Mo
                             ->getCollection()
                             ->addFieldToFilter('giftvoucher_id', $giftcode->getId())->getData();
         foreach ($history as $item){
-            $create_at = Mage::getModel('core/date')->timestamp($item['created_at']);
-            $item['created_at'] = date("m/d/Y", Mage::getModel('core/date')->timestamp($create_at));
-            $info['history'] = $item;
+            $item['created_at'] = Mage::helper('core')->formatDate($info['created_at'],'medium');
+            $item['currency_symbol'] = Mage::app()->getLocale()->currency($item['currency'])->getSymbol();
+            $info['history'][] = $item;
         }
 
         return $this->getDetail($info);
