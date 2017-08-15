@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Simi_Simidailydeal>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
         </Simi_Simidailydeal>
     </modules>
     <frontend>
@@ -67,24 +67,24 @@
                 <class>Simi_Simidailydeal_Model</class>
                 <resourceModel>dailydeal_mysql4</resourceModel>
             </simidailydeal>
-            <dailydeal_mysql4>
+            <simidailydeal_mysql4>
                 <class>Simi_Simidailydeal_Model_Mysql4</class>
                 <entities>
-                    <dailydeal>
-                        <table>simi_simidailydeal</table>
-                    </dailydeal>
+                    <simidailydeal>
+                        <table>simidailydeal</table>
+                    </simidailydeal>
                 </entities>
-            </dailydeal_mysql4>
+            </simidailydeal_mysql4>
         </models>
         <resources>
-            <simi_simidailydeal_setup>
+            <simidailydeal_setup>
                 <setup>
                     <module>Simi_Simidailydeal</module>
                 </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </simi_simidailydeal_setup>
+            </simidailydeal_setup>
             <dailydeal_write>
                 <connection>
                     <use>core_write</use>

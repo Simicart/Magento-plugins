@@ -207,7 +207,7 @@ class Simi_Simidailydeal_Model_Dailydeal extends Mage_Core_Model_Abstract
 	{
 		$quantity    = $this->load($dealId)->getQuantity();
 		$collection1 = Mage::getResourceModel('sales/order_collection')
-			->addFieldToFilter('dailydeals', array('finset' => $dealId));
+			->addFieldToFilter('simidailydeals', array('finset' => $dealId));
 		$temp        = $quantity - $collection1->getSize();
 
 		return $temp;

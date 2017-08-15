@@ -705,7 +705,7 @@
             <product>
                 <type>
                     <simigiftvoucher translate="label" module="simigiftvoucher">
-                        <label>Gift Card</label>
+                        <label>Simi Gift Card</label>
                         <model>simigiftvoucher/product_type</model>
                         <price_model>simigiftvoucher/product_price</price_model>
                         <index_data_retreiver>catalogindex/data_simple</index_data_retreiver>
