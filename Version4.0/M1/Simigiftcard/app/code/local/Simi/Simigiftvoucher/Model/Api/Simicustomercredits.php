@@ -149,13 +149,7 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
                     throw new Exception($error,4);
                 }
             }
-            $showAPI = Mage::getModel('simiconnector/api_simicustomercredits');
-            $data['resource'] = 'simicustomercredits';
-            $data['resourceid'] = 'self';
-            $showAPI->setData($data);
-            $showAPI->setBuilderQuery();
-            $showAPI->setPluralKey('simicustomercredits');
-            $detail = $showAPI->show();
+            $detail = $this->show();
             $detail['simicustomercredit']['message'] = $result;
             return $detail;
         }

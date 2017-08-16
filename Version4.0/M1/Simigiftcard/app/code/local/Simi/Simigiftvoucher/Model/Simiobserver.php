@@ -109,6 +109,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             foreach ($quoteitems as $item){
                 if ($item['product_type'] == 'simigiftvoucher'){
                     $item['option'] = $this->getGiftcardOptions($item['item_id']);
+                    $item['image'] = $this->getGiftcardOptions($item['item_id'], true);
                 }
                 $quoteitems_detail[] = $item;
             }
@@ -334,7 +335,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
     /**
      * @return array
      */
-    public function getGiftcardOptions($optionId)
+    public function getGiftcardOptions($optionId,$getUrlImage = false)
     {
         $store = Mage::app()->getStore();
         $options = Mage::getModel('sales/quote_item_option')
@@ -351,6 +352,10 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             } else {
                 $formData[$option->getCode()] = $option->getValue();
             }
+        }
+        $info_buyRequest = unserialize($formData['info_buyRequest']);
+        if ($getUrlImage && isset($info_buyRequest['url_image'])){
+            return $info_buyRequest['url_image'];
         }
         $opt = array();
         foreach (Mage::helper('simigiftvoucher')->getGiftVoucherOptions() as $code => $label) {
@@ -383,6 +388,4 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         }
         return $opt;
     }
-
-
 }

@@ -86,22 +86,6 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckouts extends Simi_Simiconne
             return $detail;
         }
         /*
-         * Checkout Page
-         * params : "giftvoucher"
-         * */
-        elseif ($data['resourceid'] == 'changeusegiftcode'){
-            $onepageAPI = Mage::getModel('simiconnector/api_orders');
-            $data['resource'] = 'orders';
-            $data['resourceid'] = 'onepage';
-            $onepageAPI->setData($data);
-            $onepageAPI->setBuilderQuery();
-            $onepageAPI->setPluralKey('orders');
-            $message = Mage::getModel('simigiftvoucher/simimapping')->ChangeUseCode($data);
-            $detail = $onepageAPI->show();
-            $detail['order']['gift_card']['message'] = $message;
-            return $detail;
-        }
-        /*
          *  Checkout Page
          *  params : "existed_giftcode"
          *           "giftcode"

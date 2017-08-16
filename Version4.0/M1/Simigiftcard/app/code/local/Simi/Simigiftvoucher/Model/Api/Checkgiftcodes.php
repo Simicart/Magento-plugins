@@ -18,8 +18,9 @@ class Simi_Simigiftvoucher_Model_Api_Checkgiftcodes extends Simi_Simiconnector_M
         $code = $params['giftcode'];
         $giftcode = Mage::getModel('simigiftvoucher/giftvoucher')->loadByCode($code);
         if ($giftcode->getId()){
-            $giftcode['conditions_serialized'] = unserialize($giftcode['conditions_serialized']);
-            $giftcode['actions_serialized'] = unserialize($giftcode['actions_serialized']);
+            $giftcode['expired_at'] = Mage::helper('core')->formatDate($giftcode['expired_at'],'medium');
+            $giftcode['day_to_send'] = Mage::helper('core')->formatDate($giftcode['day_to_send'],'medium');
+            $giftcode['day_store'] = Mage::helper('core')->formatDate($giftcode['day_store'],'medium');
             return $giftcode;
         }
         else {
