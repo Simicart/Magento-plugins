@@ -56,10 +56,10 @@ class Simi_Simidailydeal_Block_Adminhtml_Dailydeal_Edit_Tabs extends Mage_Adminh
 
 	public function getDailydeal()
 	{
-		if (!$this->hasData('dailydeal_data')) {
-			$this->setData('dailydeal_data', Mage::registry('dailydeal_data'));
+		if (!$this->hasData('simidailydeal_data')) {
+			$this->setData('simidailydeal_data', Mage::registry('simidailydeal_data'));
 		}
 
-		return $this->getData('dailydeal_data');
+		return $this->getData('simidailydeal_data');
 	}
 }

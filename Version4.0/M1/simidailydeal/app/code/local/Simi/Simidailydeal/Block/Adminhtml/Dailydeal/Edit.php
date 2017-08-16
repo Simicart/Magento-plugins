@@ -35,8 +35,8 @@ class Simi_Simidailydeal_Block_Adminhtml_Dailydeal_Edit extends Mage_Adminhtml_B
 
 	public function getHeaderText()
 	{
-		if (Mage::registry('dailydeal_data') AND Mage::registry('dailydeal_data')->getId()) {
-			return Mage::helper('simidailydeal')->__("Edit '%s'", Mage::registry('dailydeal_data')->getProductName());
+		if (Mage::registry('simidailydeal_data') AND Mage::registry('simidailydeal_data')->getId()) {
+			return Mage::helper('simidailydeal')->__("Edit '%s'", Mage::registry('simidailydeal_data')->getProductName());
 
 		} else {
 			return Mage::helper('simidailydeal')->__('Add Deal');
@@ -45,10 +45,10 @@ class Simi_Simidailydeal_Block_Adminhtml_Dailydeal_Edit extends Mage_Adminhtml_B
 
 	public function getDailydeal()
 	{
-		if (!$this->hasData('dailydeal_data')) {
-			$this->setData('dailydeal_data', Mage::registry('dailydeal_data'));
+		if (!$this->hasData('simidailydeal_data')) {
+			$this->setData('simidailydeal_data', Mage::registry('simidailydeal_data'));
 		}
 
-		return $this->getData('dailydeal_data');
+		return $this->getData('simidailydeal_data');
 	}
 }

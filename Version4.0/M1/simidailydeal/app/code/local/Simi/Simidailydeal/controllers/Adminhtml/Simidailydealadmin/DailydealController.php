@@ -21,13 +21,12 @@ class Simi_Simidailydeal_Adminhtml_Simidailydealadmin_DailydealController extend
 	{
 		$id    = $this->getRequest()->getParam('id');
 		$model = Mage::getModel('simidailydeal/dailydeal')->load($id);
-
 		if ($model->getId() || $id == 0) {
 			$data = Mage::getSingleton('adminhtml/session')->getFormData(true);
 			if (!empty($data))
 				$model->setData($data);
 
-			Mage::register('dailydeal_data', $model);
+			Mage::register('simidailydeal_data', $model);
 			$this->loadLayout();
 			$this->_setActiveMenu('simidailydeal/dailydeal');
 

@@ -15,8 +15,8 @@ class Simi_Simidailydeal_Block_Adminhtml_Dailydeal_Edit_Tab_Generalform extends 
 		if (Mage::getSingleton('adminhtml/session')->getDailydealData()) {
 			$data = Mage::getSingleton('adminhtml/session')->getDailydealData();
 			Mage::getSingleton('adminhtml/session')->setDailydealData(null);
-		} elseif (Mage::registry('dailydeal_data'))
-			$data = Mage::registry('dailydeal_data')->getData();
+		} elseif (Mage::registry('simidailydeal_data'))
+			$data = Mage::registry('simidailydeal_data')->getData();
 
 		$fieldset = $form->addFieldset('dailydeal_form', array('legend' => Mage::helper('simidailydeal')->__('Deal information')));
 

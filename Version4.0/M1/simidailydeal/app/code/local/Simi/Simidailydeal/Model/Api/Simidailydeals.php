@@ -26,7 +26,6 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
         if (isset($parameters[self::LIMIT]) && $parameters[self::LIMIT]) {
             $limit = $parameters[self::LIMIT];
         }
-        {}
         $offset = $limit * ($page - 1);
         if (isset($parameters[self::OFFSET]) && $parameters[self::OFFSET]) {
             $offset = $parameters[self::OFFSET];
@@ -56,20 +55,24 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
             $image_height = 600;
         }
 
-
-
-        foreach ($collection as $giftcode) {
+        foreach ($collection as $dailydeal) {
             if (++$check_offset <= $offset) {
                 continue;
             }
             if (++$check_limit > $limit)
                 break;
 
-            $info_detail = $giftcode->toArray($fields);
-            $all_ids[] = $giftcode->getId();
+            $info_detail = $dailydeal->toArray($fields);
+            $all_ids[] = $dailydeal->getId();
             $product = Mage::getModel('catalog/product')->load($info_detail['product_id']);
 
             $info_detail['title'] = Mage::helper('simidailydeal')->getDailydealTitle($info_detail['title'],$info_detail['product_name'],$info_detail['save']);
+            $info_detail['deal_price'] = Mage::app()->getStore()->convertPrice($info_detail['deal_price']);
+
+            $deal_time = Mage::getModel('core/date')->timestamp($info_detail['close_time'])-Mage::getModel('core/date')->timestamp($info_detail['start_time']);
+            $info_detail['deal_time'] = $deal_time;
+            $info_detail['time_left'] = (Mage::getModel('core/date')->timestamp($info_detail['close_time']) - Mage::getModel('core/date')->timestamp(time()));
+            $info_detail['currency'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
 
             $images = array();
             $imagelink = Mage::helper('simiconnector/products')->getImageProduct($product, null, $image_width, $image_height);
@@ -79,18 +82,22 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
                 'position' => 1
             );
 
-            $info_detail['product_info'] = array(
-                'price' => Mage::app()->getStore()->convertPrice($product->getPrice()),
+            $ratings = Mage::helper('simiconnector/review')->getRatingStar($product->getId());
+            $total_rating = Mage::helper('simiconnector/review')->getTotalRate($ratings);
+            $avg = Mage::helper('simiconnector/review')->getAvgRate($ratings, $total_rating);
+            //$info_detail['product'] = $product->toArray();
+            $info_detail['product'] = array(
                 'url_key' => $product->getUrlKey(),
                 'url_path'  => $product->getUrlPath(),
-                'images'    => $images
+                'images'    => $images,
+                'app_prices'    =>  Mage::helper('simiconnector/price')->formatPriceFromProduct($product, true),
+                'app_reviews' => array(
+                    'rate' => $avg,
+                    'number' => $ratings[5],
+                ),
+                'product_label' => Mage::helper('simiconnector/productlabel')->getProductLabel($product)
             );
-            $info_detail['deal_price'] = Mage::app()->getStore()->convertPrice($info_detail['deal_price']);
 
-            $deal_time = Mage::getModel('core/date')->timestamp($info_detail['close_time'])-Mage::getModel('core/date')->timestamp($info_detail['start_time']);
-            $info_detail['deal_time'] = $deal_time;
-            $info_detail['time_left'] = (Mage::getModel('core/date')->timestamp($info_detail['close_time']) - Mage::getModel('core/date')->timestamp(time()));
-            $info_detail['currency'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
             $info[] = $info_detail;
         }
         return $this->getList($info, $all_ids, $total, $limit, $offset);

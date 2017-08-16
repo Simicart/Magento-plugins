@@ -33,7 +33,7 @@ class Simi_Simidailydeal_Block_Adminhtml_Dailydeal_Edit_Tab_Listorder extends Ma
 		}
 		$deal_id    = $deal->getId();
 		$collection = Mage::getResourceModel($this->_getCollectionClass())
-			->addFieldToFilter('dailydeals', array('finset' => $deal_id));
+			->addFieldToFilter('simidailydeals', array('finset' => $deal_id));
 		$collection->getSelect()
 			->joinLeft(array('order_item' => Mage::getModel('core/resource')->getTableName('sales_flat_order_item')), 'main_table.entity_id=order_item.order_id AND order_item.product_id=' . $deal->getProductId(), array('item_id', 'qty' => 'qty_ordered', 'total' => 'row_total'));
 		$this->setCollection($collection);

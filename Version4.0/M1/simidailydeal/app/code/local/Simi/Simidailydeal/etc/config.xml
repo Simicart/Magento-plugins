@@ -65,14 +65,14 @@
         <models>
             <simidailydeal>
                 <class>Simi_Simidailydeal_Model</class>
-                <resourceModel>dailydeal_mysql4</resourceModel>
+                <resourceModel>simidailydeal_mysql4</resourceModel>
             </simidailydeal>
             <simidailydeal_mysql4>
                 <class>Simi_Simidailydeal_Model_Mysql4</class>
                 <entities>
-                    <simidailydeal>
+                    <dailydeal>
                         <table>simidailydeal</table>
-                    </simidailydeal>
+                    </dailydeal>
                 </entities>
             </simidailydeal_mysql4>
         </models>

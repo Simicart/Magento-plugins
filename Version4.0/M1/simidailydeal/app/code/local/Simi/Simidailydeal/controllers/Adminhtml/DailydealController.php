@@ -27,7 +27,7 @@ class Simi_Simidailydeal_Adminhtml_DailydealController extends Mage_Adminhtml_Co
 			if (!empty($data))
 				$model->setData($data);
 
-			Mage::register('dailydeal_data', $model);
+			Mage::register('simidailydeal_data', $model);
 			$this->loadLayout();
 			$this->_setActiveMenu('simidailydeal/dailydeal');
 

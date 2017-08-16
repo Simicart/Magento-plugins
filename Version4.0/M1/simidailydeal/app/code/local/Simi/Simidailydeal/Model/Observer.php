@@ -10,7 +10,7 @@ class Simi_Simidailydeal_Model_Observer
             $deal = Mage::getModel('simidailydeal/dailydeal')->getDealByProduct($product->getEntityId());
 			if ($deal->getId()) {
 				$temp = $deal->getQuantity() - $deal->getSold();
-				echo $temp;
+				//echo $temp;
 				if ($temp > 0 ){
                     $product->setData('final_price', $product->getPrice() - $deal->getSave() * $product->getPrice() / 100);
                 }
@@ -52,7 +52,7 @@ class Simi_Simidailydeal_Model_Observer
 				}
 			}
 		}
-		$order->setData('dailydeals', implode(",", $deals));
+		$order->setData('simidailydeals', implode(",", $deals));
 
 	}
 
