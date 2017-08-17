@@ -93,9 +93,9 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcodes extends Simi_Simiconnector_Mo
         $customer_voucher = Mage::getModel('simigiftvoucher/customervoucher')->load($info['giftvoucher_id'])->getData();
         $info['added_date'] = Mage::helper('core')->formatDate($customer_voucher['added_date'],'medium');
         $info['expired_at'] = Mage::helper('core')->formatDate($info['expired_at'],'medium');
-        if (($giftcode->getRecipientName() && $giftcode->getRecipientEmail()
-            && $giftcode->getCustomerId() == Mage::getSingleton('customer/session')->getCustomerId())){
-            $info['comment'] = Mage::help('simigiftvoucher')->__('This is your gift to give for %s (%s)',$giftcode->getRecipientName(), $giftcode->getRecipientEmail());
+        if (($info['recipient_name'] && $info['recipient_email']
+            && $info['customer_id'] == Mage::getSingleton('customer/session')->getCustomerId())){
+            $info['comment'] = Mage::helper('simigiftvoucher')->__('This is your gift to give for %s (%s)',$info['recipient_name'], $info['recipient_email']);
         }
         $info['currency_symbol'] = Mage::app()->getLocale()->currency($info['currency'])->getSymbol();
         $info['conditions_serialized'] = unserialize($info['conditions_serialized']);

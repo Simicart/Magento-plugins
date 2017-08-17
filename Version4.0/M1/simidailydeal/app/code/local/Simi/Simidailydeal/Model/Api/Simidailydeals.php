@@ -44,6 +44,11 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
             $fields = explode(',', $parameters['fields']);
         }
 
+        $fields = array();
+        if (isset($parameters['fields']) && $parameters['fields']) {
+            $fields = explode(',', $parameters['fields']);
+        }
+
         $check_limit = 0;
         $check_offset = 0;
 
@@ -62,17 +67,19 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
             if (++$check_limit > $limit)
                 break;
 
-            $info_detail = $dailydeal->toArray($fields);
-            $all_ids[] = $dailydeal->getId();
-            $product = Mage::getModel('catalog/product')->load($info_detail['product_id']);
+            $product = Mage::getModel('catalog/product')->load($dailydeal->getProductId());
+            $info_detail = $product->toArray($fields);
 
-            $info_detail['title'] = Mage::helper('simidailydeal')->getDailydealTitle($info_detail['title'],$info_detail['product_name'],$info_detail['save']);
-            $info_detail['deal_price'] = Mage::app()->getStore()->convertPrice($info_detail['deal_price']);
+            $all_ids[] = $product->getId();
 
-            $deal_time = Mage::getModel('core/date')->timestamp($info_detail['close_time'])-Mage::getModel('core/date')->timestamp($info_detail['start_time']);
-            $info_detail['deal_time'] = $deal_time;
-            $info_detail['time_left'] = (Mage::getModel('core/date')->timestamp($info_detail['close_time']) - Mage::getModel('core/date')->timestamp(time()));
-            $info_detail['currency'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+            $info_dailydeal = $dailydeal->toArray();
+            $info_dailydeal['title'] = Mage::helper('simidailydeal')->getDailydealTitle($info_dailydeal['title'],$info_dailydeal['product_name'],$info_dailydeal['save']);
+            $info_dailydeal['deal_price'] = Mage::app()->getStore()->convertPrice($info_dailydeal['deal_price']);
+
+            $deal_time = Mage::getModel('core/date')->timestamp($info_dailydeal['close_time'])-Mage::getModel('core/date')->timestamp($info_dailydeal['start_time']);
+            $info_dailydeal['deal_time'] = $deal_time;
+            $info_dailydeal['time_left'] = (Mage::getModel('core/date')->timestamp($info_dailydeal['close_time']) - Mage::getModel('core/date')->timestamp(time()));
+            $info_dailydeal['currency'] = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
 
             $images = array();
             $imagelink = Mage::helper('simiconnector/products')->getImageProduct($product, null, $image_width, $image_height);
@@ -85,22 +92,23 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
             $ratings = Mage::helper('simiconnector/review')->getRatingStar($product->getId());
             $total_rating = Mage::helper('simiconnector/review')->getTotalRate($ratings);
             $avg = Mage::helper('simiconnector/review')->getAvgRate($ratings, $total_rating);
-            //$info_detail['product'] = $product->toArray();
-            $info_detail['product'] = array(
-                'url_key' => $product->getUrlKey(),
-                'url_path'  => $product->getUrlPath(),
-                'images'    => $images,
-                'app_prices'    =>  Mage::helper('simiconnector/price')->formatPriceFromProduct($product, true),
-                'app_reviews' => array(
-                    'rate' => $avg,
-                    'number' => $ratings[5],
-                ),
-                'product_label' => Mage::helper('simiconnector/productlabel')->getProductLabel($product)
-            );
 
+            $info_detail['images'] = $images;
+            $info_detail['app_prices'] = Mage::helper('simiconnector/price')->formatPriceFromProduct($product, true);
+            $info_detail['app_reviews'] = array(
+                'rate' => $avg,
+                'number' => $ratings[5],
+            );
+            $info_detail['product_label'] = Mage::helper('simiconnector/productlabel')->getProductLabel($product);
+            $info_detail['dailydeal'] = $info_dailydeal;
             $info[] = $info_detail;
         }
         return $this->getList($info, $all_ids, $total, $limit, $offset);
+    }
+
+    public function setPluralKey(){
+        $this->pluralKey = 'products';
+        return $this;
     }
 }
 ?>
