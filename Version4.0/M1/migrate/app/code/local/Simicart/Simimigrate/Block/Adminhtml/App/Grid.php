@@ -24,7 +24,7 @@ class Simicart_Simimigrate_Block_Adminhtml_App_Grid extends Mage_Adminhtml_Block
             'header' => Mage::helper('simimigrate')->__('ID'),
             'align' => 'right',
             'width' => '50px',
-            'index' => 'entity_id',
+            'index' => 'app_id',
         ));
         
         $this->addColumn('simicart_app_config_id', array(
