@@ -9,11 +9,32 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
 
     public function setBuilderQuery(){
         $data = $this->getData();
-        $this->builderQuery = Mage::getModel('simidailydeal/dailydeal')->getDailydeals();
+        $this->setFilterDailydeal();
+    }
+
+    public function setFilterDailydeal(){
+        $productIds = array();
+        $deals = Mage::getModel('simidailydeal/dailydeal')->getDailydeals();
+        foreach ($deals as $deal) {
+            if ($deal->getQuantity() > $deal->getSold())
+                $productIds[] = $deal->getProductId();
+        }
+        $productCollection = Mage::getResourceModel('catalog/product_collection')
+            ->setStoreId($this->getStoreId())
+            ->addFieldToFilter('entity_id', array('in' => $productIds));
+        Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($productCollection);
+        Mage::getSingleton('catalog/product_visibility')->addVisibleInSiteFilterToCollection($productCollection);
+        $this->builderQuery = $productCollection;
+    }
+
+    public function getStoreId()
+    {
+        return Mage::app()->getStore()->getId();
     }
 
     public function index(){
         $collection = $this->builderQuery;
+        //zend_debug::dump($collection->getData());die;
         $this->filter();
         $data = $this->getData();
         $parameters = $data['params'];
@@ -44,11 +65,6 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
             $fields = explode(',', $parameters['fields']);
         }
 
-        $fields = array();
-        if (isset($parameters['fields']) && $parameters['fields']) {
-            $fields = explode(',', $parameters['fields']);
-        }
-
         $check_limit = 0;
         $check_offset = 0;
 
@@ -60,18 +76,16 @@ class Simi_Simidailydeal_Model_Api_Simidailydeals extends Simi_Simiconnector_Mod
             $image_height = 600;
         }
 
-        foreach ($collection as $dailydeal) {
+        foreach ($collection as $entity) {
             if (++$check_offset <= $offset) {
                 continue;
             }
             if (++$check_limit > $limit)
                 break;
-
-            $product = Mage::getModel('catalog/product')->load($dailydeal->getProductId());
+            $product = Mage::getModel('catalog/product')->load($entity->getId());
             $info_detail = $product->toArray($fields);
-
-            $all_ids[] = $product->getId();
-
+            $all_ids[] = $entity->getId();
+            $dailydeal = Mage::getModel('simidailydeal/dailydeal')->getDealByProduct($product->getId());
             $info_dailydeal = $dailydeal->toArray();
             $info_dailydeal['title'] = Mage::helper('simidailydeal')->getDailydealTitle($info_dailydeal['title'],$info_dailydeal['product_name'],$info_dailydeal['save']);
             $info_dailydeal['deal_price'] = Mage::app()->getStore()->convertPrice($info_dailydeal['deal_price']);

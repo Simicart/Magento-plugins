@@ -47,7 +47,7 @@
                         </limit>
                     </fields>
                 </general>
-                <sidebar translate="label">
+                <!--<sidebar translate="label">
                     <label>Sidebar Configuration</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>10</sort_order>
@@ -181,7 +181,7 @@
 
 
                     </fields>
-                </sidebar>
+                </sidebar>-->
             </groups>
         </simidailydeal>
     </sections>

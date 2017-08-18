@@ -50,7 +50,6 @@ class Simi_Simidailydeal_Block_Dailydeal extends Mage_Catalog_Block_Product_List
 					$productIds[] = $deal->getProductId();
 			}
 
-
 			$this->_productCollection = Mage::getResourceModel('catalog/product_collection')
 				->setStoreId($this->getStoreId())
 				->addFieldToFilter('entity_id', array('in' => $productIds))
@@ -63,7 +62,6 @@ class Simi_Simidailydeal_Block_Dailydeal extends Mage_Catalog_Block_Product_List
 			Mage::getSingleton('catalog/product_visibility')->addVisibleInSiteFilterToCollection($this->_productCollection);
 
 		}
-
 		return $this->_productCollection;
 	}
 
