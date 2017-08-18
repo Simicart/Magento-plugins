@@ -342,6 +342,16 @@
                 </observers>
             </catalog_product_save_after>
 
+            <!--peter 18/08/2017-->
+            <catalog_product_save_before>
+                <observers>
+                    <simigiftcard_product_save_before>
+                        <type>singleton</type>
+                        <class>simigiftvoucher/simiobserver</class>
+                        <method>productSavebefore</method>
+                    </simigiftcard_product_save_before>
+                </observers>
+            </catalog_product_save_before>
         </events>
     </adminhtml>
     <global>

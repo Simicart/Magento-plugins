@@ -19,7 +19,15 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         return $this->_getCart()->getQuote();
     }
 
-
+    /*
+     * event catalog_product_save_before
+     * */
+    public function productSavebefore($observer){
+        $product = $observer->getProduct();
+        if ($product->getTypeId() == 'simigiftvoucher'){
+            $product->setVisibility(1);
+        }
+    }
 
     public function simiSimiconnectorModelServerInitialize($observer){
         $observerObject = $observer->getObject();
@@ -204,7 +212,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         }//die;
         $giftcodes = explode(',',$giftcodes);
         $codediscount = explode(',',$codediscount);
-        $position = 5;
+        $position = 6;
         if ($giftcodes){
             foreach ($giftcodes as $key => $code){
                 if ($code){
@@ -226,7 +234,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
      */
     public function getUseGiftCredit()
     {
-        return Mage::getSingleton('checkout/session')->getSimiuseGiftCardCredit();
+        return $this->_getSession()->getSimiuseGiftCardCredit();
     }
 
     /**
@@ -235,7 +243,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
     public function getUsingAmount()
     {
         return Mage::app()->getStore()->formatPrice(
-            Mage::getSingleton('checkout/session')->getSimiuseGiftCreditAmount()
+            $this->_getSession()->getSimiuseGiftCreditAmount()
         );
     }
 
@@ -244,7 +252,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
      */
     public function getSimiuseGiftCreditAmount()
     {
-        return Mage::getSingleton('checkout/session')->getSimiuseGiftCreditAmount();
+        return $this->_getSession()->getSimiuseGiftCreditAmount();
     }
 
     /**
@@ -270,7 +278,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
      */
     public function getUseGiftVoucher()
     {
-        return Mage::getSingleton('checkout/session')->getSimiuseGiftCard();
+        return $this->_getSession()->getSimiuseGiftCard();
     }
 
     /**
