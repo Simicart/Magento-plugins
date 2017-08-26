@@ -83,7 +83,7 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Gifttemplate_Edit extends Mage_Adminh
                             }
                         });
             }
-            function previewImage(element){
+            function previewImage(element){                
                 edit_form=$('edit_form').serialize(true);
                 form_data=Object.toJSON(edit_form);
                 new Ajax.Request('"

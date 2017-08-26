@@ -334,9 +334,11 @@ class Simi_Simigiftvoucher_Adminhtml_Simigiftvoucher_GifttemplateController exte
      */
     public function previewimageAction()
     {
+
         $imageName = $this->getRequest()->getParam('value');
         $templage = $this->getRequest()->getParam('form_data');
         $templage = new Varien_Object(json_decode($templage, true));
+        //zend_debug::dump($templage);die;
         $templage->setImages($imageName);
         Mage::register('template_data', $templage);
         $this->loadLayout()->renderLayout();

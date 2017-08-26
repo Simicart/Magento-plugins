@@ -672,7 +672,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
     /**
      * Get the price information of Gift Card product
      *
-     * @param Magestore_Giftvoucher_Model_Product $product
+     * @param  $product
      * @return array
      */
     public function getGiftAmount($product)
@@ -706,7 +706,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
     /**
      * Convert Gift Card base price
      *
-     * @param Magestore_Giftvoucher_Model_Product $product
+     * @param  $product
      * @param float $basePrices
      * @return float
      */
@@ -721,7 +721,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
     /**
      * Get Gift Card product price with all tax settings processing
      *
-     * @param Magestore_Giftvoucher_Model_Product $product
+     * @param  $product
      * @param float $price
      * @return float
      */

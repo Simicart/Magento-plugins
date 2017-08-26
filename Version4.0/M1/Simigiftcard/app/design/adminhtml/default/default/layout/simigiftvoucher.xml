@@ -103,7 +103,13 @@
             </action>
             <action method="addJs">
                 <script>simi/simigiftvoucher/js/slideshow.js</script>
-            </action>        
+            </action>
+            <action method="addJs">
+                <script>tinybox/tinybox.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/tinybox/style.css</stylesheet>
+            </action>
         </reference>       
     </adminhtml_simigiftvoucher_gifttemplate_edit>
     <adminhtml_simigiftvoucher_gifttemplate_new>

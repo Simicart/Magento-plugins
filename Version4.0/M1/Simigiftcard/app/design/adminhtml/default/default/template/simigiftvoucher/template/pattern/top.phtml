@@ -33,7 +33,7 @@
 	if ($template->getNotes())
 		$notes = $template->getNotes();
 	else
-		$notes = Mage::getSingleton('giftvoucher/giftvoucher')->getPrintNotes();
+		$notes = Mage::getSingleton('simigiftvoucher/giftvoucher')->getPrintNotes();
 
     if ($template->getImages()) {
         $image = explode(',', $template->getImages());
