@@ -20,8 +20,10 @@
  * @package     Simifbconnect
  * @author      Developer
  */
-class Simi_Simifbconnect_Helper_Data extends Mage_Core_Helper_Abstract {
-    public function checkIfHasChild($category){
+class Simi_Simifbconnect_Helper_Data extends Mage_Core_Helper_Abstract
+{
+    public function checkIfHasChild($category)
+    {
         $categoryChildrenCount = $category->getChildrenCount();
         if ($categoryChildrenCount > 0)
             $categoryChildrenCount = 1;
@@ -30,6 +32,7 @@ class Simi_Simifbconnect_Helper_Data extends Mage_Core_Helper_Abstract {
         if (!$categoryChildrenCount) {
             return '0';
         }
+
         return '1';
     }
 }

@@ -2,14 +2,18 @@
     <?php $_product = Mage::registry('current_product'); ?>
     <?php if ($_product) : ?>
         <?php 
-        $identifyKey = Mage::getStoreConfig("simifbconnect/general/identify_key");
-        $url = str_replace(".", "", $identifyKey).'://product_id='.$_product->getId() ?>
-        <meta property="al:ios:url" content="<?php echo $url ?>" />
+        $androidIdentifyKey = Mage::getStoreConfig("simifbconnect/general/android_identify_key");
+        $iOSIdentifyKey = Mage::getStoreConfig("simifbconnect/general/ios_identify_key");
+        $urlAndroid = str_replace(".", "", $androidIdentifyKey).'://product_id='.$_product->getId();
+        $urliOS = str_replace(".", "", $iOSIdentifyKey).'://product_id='.$_product->getId()
+        ?>
+
+        <meta property="al:ios:url" content="<?php echo $urliOS ?>" />
         <meta property="al:ios:app_store_id" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_app_id") ?>" />
         <meta property="al:ios:app_name" content="<?php echo Mage::getStoreConfig("simifbconnect/general/ios_appname") ?>" />
 
-        <meta property="al:android:url" content="<?php echo $url ?>" />
-        <meta property="al:android:package" content="<?php echo Mage::getStoreConfig("simifbconnect/general/identify_key") ?>" />
+        <meta property="al:android:url" content="<?php echo $urlAndroid ?>" />
+        <meta property="al:android:package" content="<?php echo Mage::getStoreConfig("simifbconnect/general/android_identify_key") ?>" />
         <meta property="al:android:app_name" content="<?php echo Mage::getStoreConfig("simifbconnect/general/android_appname") ?>" />
 
         <meta property="og:title" content="<?php echo $_product->getName() ?>" />
