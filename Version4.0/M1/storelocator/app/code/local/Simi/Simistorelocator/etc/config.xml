@@ -84,6 +84,16 @@
                 </Simi_Simistorelocator>
             </modules>
         </translate>
+        <events>
+            <adminhtml_init_system_config>
+                <observers>
+                    <simistorelocator_add_field_config_enable>
+                        <class>simistorelocator/simiobserver</class>
+                        <method>addFieldSystemConfig</method>
+                    </simistorelocator_add_field_config_enable>
+                </observers>
+            </adminhtml_init_system_config>
+        </events>
     </adminhtml>   
     <global>
         <models>
