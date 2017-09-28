@@ -341,6 +341,15 @@ class Simi_Simistorelocator_Helper_Data extends Mage_Core_Helper_Abstract {
         $options = array();
         $collection = Mage::getModel('simistorelocator/simistorelocator')->getCollection()
                 ->setOrder('name', 'ASC');
+        if(Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser()) {
+            $typeID = Mage::helper('simiconnector')->getVisibilityTypeId('storelocator');
+            $visibilityTable = Mage::getSingleton('core/resource')->getTableName('simiconnector/visibility');
+            $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+            $storeIds = Mage::app()->getWebsite($websiteId)->getStoreIds();
+            $storeIds =implode(',',$storeIds);
+            $collection->getSelect()
+                ->join(array('visibility' => $visibilityTable), 'visibility.item_id = main_table.simistorelocator_id AND visibility.content_type = ' . $typeID . ' AND visibility.store_view_id IN(' . $storeIds.')');
+        }
         foreach ($collection as $store) {
             $option = array();
             $option['label'] = $store->getName();
@@ -450,7 +459,15 @@ class Simi_Simistorelocator_Helper_Data extends Mage_Core_Helper_Abstract {
     public function getSpecialdayOption() {
         $specialdays = Mage::getModel('simistorelocator/simistorelocator')->getCollection();
         $result = array();
-
+        if(Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser()) {
+            $typeID = Mage::helper('simiconnector')->getVisibilityTypeId('storelocator');
+            $visibilityTable = Mage::getSingleton('core/resource')->getTableName('simiconnector/visibility');
+            $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+            $storeIds = Mage::app()->getWebsite($websiteId)->getStoreIds();
+            $storeIds =implode(',',$storeIds);
+            $specialdays->getSelect()
+                ->join(array('visibility' => $visibilityTable), 'visibility.item_id = main_table.simistorelocator_id AND visibility.content_type = ' . $typeID . ' AND visibility.store_view_id IN(' . $storeIds.')');
+        }
         foreach ($specialdays as $specialday) {
             $result[$specialday->getId()] = $specialday->getName();
         }

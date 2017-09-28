@@ -13,6 +13,17 @@ class Simi_Simistorelocator_Block_Adminhtml_Holiday_Grid extends Mage_Adminhtml_
     protected function _prepareCollection() {
         
         $collection = Mage::getModel('simistorelocator/holiday')->getCollection();
+
+//        if(Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser()) {
+//            $typeID = Mage::helper('simiconnector')->getVisibilityTypeId('storelocator');
+//            $visibilityTable = Mage::getSingleton('core/resource')->getTableName('simiconnector/visibility');
+//            $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+//            $storeIds = Mage::app()->getWebsite($websiteId)->getStoreIds();
+//            $storeIds =implode(',',$storeIds);
+//            $collection->getSelect()
+//                ->join(array('visibility' => $visibilityTable), 'visibility.item_id = main_table.simistorelocator_id AND visibility.content_type = ' . $typeID . ' AND visibility.store_view_id IN(' . $storeIds.')');
+//        }
+
         $filter   = $this->getParam($this->getVarNameFilter(), null);
         $condorder = '';
         $condorderto = '';
