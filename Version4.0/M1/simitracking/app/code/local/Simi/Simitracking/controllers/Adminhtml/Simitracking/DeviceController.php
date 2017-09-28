@@ -94,4 +94,7 @@ class Simi_Simitracking_Adminhtml_Simitracking_DeviceController extends Mage_Adm
         $this->_redirect('*/*/index');
     }
 
+    protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('simitracking');
+    }
 }

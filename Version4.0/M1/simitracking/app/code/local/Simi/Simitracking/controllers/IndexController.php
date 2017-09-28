@@ -46,6 +46,7 @@ class Simi_Simitracking_IndexController extends Mage_Core_Controller_Front_Actio
             
         ");
         $installer->endSetup();
-        echo 'success';
+        return $this->getResponse()->setBody('success');
+
     }
 }
