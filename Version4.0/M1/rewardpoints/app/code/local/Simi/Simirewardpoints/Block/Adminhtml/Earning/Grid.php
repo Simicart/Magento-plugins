@@ -46,9 +46,13 @@ class Simi_Simirewardpoints_Block_Adminhtml_Earning_Grid extends Mage_Adminhtml_
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('simirewardpoints/rate')->getEarningRates();
+        $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+        if($websiteId){
+            $collection->addFieldToFilter('website_ids',$websiteId);
+        }
         $this->setCollection($collection);
         parent::_prepareCollection();
-        
+
         // Prepare website, customer group for grid
         foreach ($this->getCollection() as $rate) {
             $rate->setData('website_ids', explode(',', $rate->getData('website_ids')));
