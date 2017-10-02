@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Simi_Simigiftvoucher>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Simi_Simigiftvoucher>
+    </modules>
+</config> 

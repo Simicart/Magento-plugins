@@ -135,7 +135,13 @@ class Simi_Simirewardpoints_Adminhtml_Simireward_TransactionController extends M
                 if (!$customer->getId()) {
                     throw new Exception($this->__('Not found customer to create transaction.'));
                 }
-                $transaction = Mage::helper('simirewardpoints/action')->addTransaction('admin',
+
+                $actionCode ='admin';
+                $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+                if($websiteId){
+                    $actionCode .="_".$websiteId;
+                }
+                $transaction = Mage::helper('simirewardpoints/action')->addTransaction($actionCode,
                     $customer,
                     new Varien_Object(array(
                         'point_amount'  => $request->getPost('point_amount'),
@@ -392,9 +398,9 @@ class Simi_Simirewardpoints_Adminhtml_Simireward_TransactionController extends M
                            ->getXml();
         $this->_prepareDownloadResponse($fileName, $content);
     }
-    
+
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('simirewardpoints');
+        return Mage::getSingleton('admin/session')->isAllowed('simiconnector/simi_user_experience/simirewardpoints');
     }
 }

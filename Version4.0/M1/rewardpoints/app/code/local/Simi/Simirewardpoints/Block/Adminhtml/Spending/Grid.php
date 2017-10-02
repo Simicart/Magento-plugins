@@ -45,6 +45,10 @@ class Simi_Simirewardpoints_Block_Adminhtml_Spending_Grid extends Mage_Adminhtml
      */
     protected function _prepareCollection() {
         $collection = Mage::getModel('simirewardpoints/rate')->getSpendingRates();
+        $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+        if($websiteId){
+            $collection->addFieldToFilter('website_ids',$websiteId);
+        }
         $this->setCollection($collection);
         parent::_prepareCollection();
 

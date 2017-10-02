@@ -13,6 +13,31 @@ class Simi_Simistorelocator_Block_Adminhtml_Holiday_Grid extends Mage_Adminhtml_
     protected function _prepareCollection() {
         
         $collection = Mage::getModel('simistorelocator/holiday')->getCollection();
+
+        if(Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser()) {
+            $storelocatorCollection = Mage::getModel('simistorelocator/simistorelocator')->getCollection();
+            $typeID = Mage::helper('simiconnector')->getVisibilityTypeId('storelocator');
+            $visibilityTable = Mage::getSingleton('core/resource')->getTableName('simiconnector/visibility');
+            $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+            $storeIds = Mage::app()->getWebsite($websiteId)->getStoreIds();
+            $storeIds =implode(',',$storeIds);
+            $storelocatorCollection->getSelect()
+                ->join(array('visibility' => $visibilityTable), 'visibility.item_id = main_table.simistorelocator_id AND visibility.content_type = ' . $typeID . ' AND visibility.store_view_id IN(' . $storeIds.')');
+            $storelocatorIds = $storelocatorCollection->getAllIds();
+
+            $cacheCollection = new Varien_Data_Collection();
+
+            foreach ($collection as $holiday){
+                $holidayStoreId = explode(',', $holiday->getStoreId());
+                $intersectArray = array_intersect($storelocatorIds,$holidayStoreId);
+                if(sizeof($intersectArray) > 0){
+                    $cacheCollection->addItem($holiday);
+                }
+            }
+            $this->setCollection($cacheCollection);
+            return $this;
+        }
+
         $filter   = $this->getParam($this->getVarNameFilter(), null);
         $condorder = '';
         $condorderto = '';

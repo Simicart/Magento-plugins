@@ -20,9 +20,11 @@
  * @package     Simifbconnect
  * @author      Developer
  */
-class Simi_Simifbconnect_Model_Observer {
+class Simi_Simifbconnect_Model_Observer
+{
 
-    public function addFbConnectSetting($observer) {
+    public function addFbConnectSetting($observer) 
+    {
         $storeviewObject = $observer->getObject();
         if ($storeviewObject) {
             $storeviewInfo = $storeviewObject->storeviewInfo;

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    
+ * @package     Simiintercomchat
+ * @copyright   Copyright (c) 2012
+ * @license     
+ */
+-->
+<config>
+    <modules>
+        <Simi_Simiintercomchat>
+            <version>0.1.0</version>
+        </Simi_Simiintercomchat>
+    </modules>
+    <frontend>
+        <routers>
+            <simiintercomchat>
+                <use>standard</use>
+                <args>
+                    <module>Simi_Simiintercomchat</module>
+                    <frontName>simiintercomchat</frontName>
+                </args>
+            </simiintercomchat>
+        </routers>
+    </frontend>
+    <admin>
+        <routers>
+            <admin>
+                <use>admin</use>
+                <args>
+                    <module>Simi_Simiintercomchat</module>
+                    <frontName>simiintercomchatadmin</frontName>
+                </args>
+            </admin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <simiintercomchat>
+                    <file>Simiintercomchat.xml</file>
+                </simiintercomchat>
+            </updates>
+        </layout>
+    </adminhtml>   
+    <global>
+        <events>
+            <simiconnector_get_storeview_info_after>
+                <observers>
+                    <simiintercomchat_storeview_info_after>
+                        <type>singleton</type>
+                        <class>Simi_Simiintercomchat_Model_Observer</class>
+                        <method>addIntercomchatSettings</method>
+                    </simiintercomchat_storeview_info_after>
+                </observers>
+            </simiconnector_get_storeview_info_after>
+        </events>
+        <blocks>
+            <simiintercomchat>
+                <class>Simi_Simiintercomchat_Block</class>
+            </simiintercomchat>
+        </blocks>
+        <helpers>
+            <Simiintercomchat>
+                <class>Simi_Simiintercomchat_Helper</class>
+            </Simiintercomchat>
+        </helpers>
+    </global>
+</config>

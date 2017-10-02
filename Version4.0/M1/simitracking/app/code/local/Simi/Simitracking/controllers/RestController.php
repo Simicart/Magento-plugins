@@ -7,9 +7,9 @@ class Simi_Simitracking_RestController extends Simi_Simiconnector_Controller_Act
         $enable = (int)Mage::getStoreConfig("simitracking/general/enable");
         
         if (!$enable) {
-            echo 'SimiTracking Connector was disabled!';
+            $message = 'SimiTracking Connector was disabled!';
             header("HTTP/1.0 503");
-            exit();
+            return $this->getResponse()->setBody($message);
         }
     }
     
@@ -44,7 +44,6 @@ class Simi_Simitracking_RestController extends Simi_Simiconnector_Controller_Act
             $results['errors'] = $result;
             $this->_printData($results);
         }
-        exit();
         ob_end_flush();
     }
         

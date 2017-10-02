@@ -47,9 +47,15 @@ class Simi_Simirewardpoints_Helper_Action extends Mage_Core_Helper_Abstract
     public function __construct()
     {
         $actionConfig = (array)Mage::getConfig()->getNode(self::XML_CONFIG_ACTIONS);
+        $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+        if($websiteId){
+            $actionCode = 'admin_'.$websiteId;
+            $actionConfig[$actionCode] = (string)$actionConfig['admin'];
+        }
         foreach ($actionConfig as $code => $model) {
             $this->_config[$code] = (string)$model;
         }
+
     }
     
     /**
@@ -108,6 +114,7 @@ class Simi_Simirewardpoints_Helper_Action extends Mage_Core_Helper_Abstract
      * @throws Exception
      */
     public function getActionModelClass($code) {
+
         if (isset($this->_config[$code]) && $this->_config[$code]) {
             return $this->_config[$code];
         }

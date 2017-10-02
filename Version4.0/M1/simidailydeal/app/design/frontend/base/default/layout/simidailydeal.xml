@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="simidailydeal" ifconfig="simidailydeal/general/enable"
+                    ifvalue="1">
+                <label>Simi Daily deal</label>
+                <url helper="simidailydeal/getTopLink"/>
+                <title>Simi Daily deal</title>
+                <prepare/>
+                <urlParams/>
+                <position>10</position>
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/simi/simidailydeal.css</stylesheet>
+            </action>
+            <action method="addJs">
+                <script>simi/simidailydeal.js</script>
+            </action>
+        </reference>
+
+        <reference name="left">
+            <block type="simidailydeal/sidebar" before="-" name="simidailydeal.left.sidebar">
+                <action method="getLeft"/>
+            </block>
+
+        </reference>
+
+        <reference name="right">
+
+            <block type="simidailydeal/sidebar" before="-" name="simidailydeal.right.sidebar">
+                <action method="getRight"/>
+            </block>
+
+        </reference>
+    </default>
+    <simidailydeal_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="simidailydeal/dailydeal" name="simidailydeal" template="simi/simidailydeal/dailydeal.phtml">
+                <block type="catalog/product_list_toolbar" name="product_list_toolbar"
+                       template="catalog/product/list/toolbar.phtml">
+                    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName">
+                    <name>product_list_toolbar</name>
+                </action>
+            </block>
+        </reference>
+    </simidailydeal_index_index>
+    <catalog_product_view>
+        <!--<reference name="root">-->
+        <!--<action method="setTemplate">-->
+        <!--<template>page/2columns-left.phtml</template>-->
+        <!--</action>-->
+        <!--</reference>-->
+        <reference name="product.info.extrahint">
+            <block type="simidailydeal/productdailydeal" name="product.simidailydeal" as="productdailydeal"
+                   template="simi/simidailydeal/product.phtml" before="-">
+            </block>
+        </reference>
+    </catalog_product_view>
+</layout>

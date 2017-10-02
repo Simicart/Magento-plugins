@@ -8,7 +8,7 @@ class Simi_Simistorelocator_Adminhtml_Simistorelocator_GuideController extends M
         $this->getLayout()->getBlock('head')->setTitle($this->__('Store Locator Guide'));
         $this->renderLayout();
     }
-     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('connector');
+    protected function _isAllowed() {
+        return Mage::getSingleton('admin/session')->isAllowed('simiconnector/simi_rich_content/simistorelocator');
     }
 }

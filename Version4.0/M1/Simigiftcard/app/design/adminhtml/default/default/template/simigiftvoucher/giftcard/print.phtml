@@ -1,0 +1,111 @@
+<?php
+/**
+ * Simi
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Simicart.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.Simicart.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Simi (http://www.Simicart.com/)
+ * @license     http://www.Simicart.com/license-agreement.html
+ */
+?>
+<?php $_store = Mage::app()->getStore() ?>
+<?php
+$_giftCard = $this->getGiftVoucher();
+if ($_giftCard->getExpiredAt()) {
+    $expire_day = date('m/d/Y', strtotime($_giftCard->getExpiredAt()));
+} else {
+    $expire_day = '';
+}
+
+$currency = Mage::getModel('directory/currency')->load($_giftCard->getCurrency());
+?>
+<?php $_template = $this->getGiftcardTemplate($_giftCard->getGiftcardTemplateId()) ?>
+<?php
+if ($_template->getNotes())
+    $notes = $_template->getNotes();
+else
+    $notes = $_giftCard->getPrintNotes();
+
+$barcode = Mage::helper('simigiftvoucher')->getGeneralConfig('barcode_enable');
+$barcode_type = Mage::helper('simigiftvoucher')->getGeneralConfig('barcode_type');
+$url_barcode = '';
+$qr = new Simi_Simigiftvoucher_QRCode($_giftCard->getGiftCode());
+$resizeImage = FALSE;
+if ($barcode) {
+    $resizeImage = FALSE;
+    if ($barcode_type == 'code128') {
+        $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'simigiftvoucher/template/barcode/' . $_giftCard->getGiftCode() . '.png';
+        $imageUrl = Mage::getBaseDir('media') . DS . 'simigiftvoucher' . DS . 'template' . DS . 'barcode' . DS . $_giftCard->getGiftCode() . '.png';
+        $imageObj = new Varien_Image($imageUrl);
+        if ($imageObj->getOriginalWidth() > 200)
+            $resizeImage = true;
+    } else
+        $url_barcode = $qr->getResult();
+}
+?>
+<?php
+if (!$_template->getStyleColor())
+    $_template->setStyleColor('orange');
+if (!$_template->getTextColor())
+    $_template->setTextColor('#2f2f2f');
+$_styleColor = $_template->getStyleColor();
+$_textColor = $_template->getTextColor();
+if (!$_giftCard->getGiftcardTemplateImage())
+    $_giftCard->setGiftcardTemplateImage('default.png');
+if (!$_template->getBackgroundImg())
+    $_template->setBackgroundImg('default.png');
+?>
+<style>
+    .giftcard-text-color{
+        color: <?php echo $_textColor; ?> !important;
+    }
+    .giftcard-style-color{
+        color: <?php echo $_styleColor; ?> !important;
+    }
+
+</style>
+
+<?php
+$data = array(
+    'gift_card' => $_giftCard,
+    'store' => $_store,
+    'url_barcode' => $url_barcode,
+    'template_param' => $_template,
+    'currency' => $currency,
+    'text_color' => $_textColor,
+    'style_color' => $_styleColor,
+    'expire_day' => $expire_day,
+    'notes' => $notes,
+    'resize_image' => $resizeImage
+
+);
+?>
+<?php if ($_template->getDesignPattern() == Simi_Simigiftvoucher_Model_Designpattern::PATTERN_TOP): ?>
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('simigiftvoucher/print/top.phtml')
+        ->setData($data)->toHtml();?>
+<?php elseif ($_template->getDesignPattern() == Simi_Simigiftvoucher_Model_Designpattern::PATTERN_CENTER): ?>
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('simigiftvoucher/print/center.phtml')
+        ->setData($data)->toHtml();?>
+<?php elseif ($_template->getDesignPattern() == Simi_Simigiftvoucher_Model_Designpattern::PATTERN_SIMPLE): ?>
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('simigiftvoucher/print/simple.phtml')
+        ->setData($data)->toHtml();?>
+<?php elseif ($_template->getDesignPattern() == Simi_Simigiftvoucher_Model_Designpattern::PATTERN_AMAZON): ?>
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('simigiftvoucher/print/amazon.phtml')
+        ->setData($data)->toHtml();?>
+<?php else: ?>
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('simigiftvoucher/print/default.phtml')
+        ->setData($data)->toHtml();?>
+<?php endif; ?>
+
+<script type="text/javascript">window.print();</script>

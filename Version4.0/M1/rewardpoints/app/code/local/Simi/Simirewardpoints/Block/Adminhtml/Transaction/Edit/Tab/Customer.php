@@ -53,7 +53,11 @@ class Simi_Simirewardpoints_Block_Adminhtml_Transaction_Edit_Tab_Customer
             ->addNameToSelect()
             ->addAttributeToSelect('email')
             ->addAttributeToSelect('group_id');
-        
+
+        $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+        if($websiteId){
+            $collection->addFieldToFilter('website_id',$websiteId);
+        }
         // Join to get Points
         $collection->getSelect()
             ->joinLeft(array('rp' => $collection->getTable('simirewardpoints/customer')),

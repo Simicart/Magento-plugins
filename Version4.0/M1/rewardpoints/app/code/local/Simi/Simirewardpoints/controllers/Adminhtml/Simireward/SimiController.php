@@ -31,7 +31,7 @@ class Simi_Simirewardpoints_Adminhtml_Simireward_SimiController extends Mage_Adm
 
     protected function _isAllowed()
     {
-        return Mage::getSingleton('admin/session')->isAllowed('simirewardpoints/simicart');
+        return Mage::getSingleton('admin/session')->isAllowed('simiconnector/simi_user_experience/simirewardpoints');
     }
     
     public function indexAction(){

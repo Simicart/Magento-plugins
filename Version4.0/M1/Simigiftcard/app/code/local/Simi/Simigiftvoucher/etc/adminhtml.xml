@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+~ Simi
+~
+~ NOTICE OF LICENSE
+~
+~ This source file is subject to the Simicart.com license that is
+~ available through the world-wide-web at this URL:
+~ http://www.Simicart.com/license-agreement.html
+~
+~ DISCLAIMER
+~
+~ Do not edit or add to this file if you wish to upgrade this extension to newer
+~ version in the future.
+~
+~ @category    Simi
+~ @package     Simi_Simigiftvoucher
+~ @module     Giftvoucher
+~ @author      Simi Developer
+~
+~ @copyright   Copyright (c) 2016 Simi (http://www.Simicart.com/)
+~ @license     http://www.Simicart.com/license-agreement.html
+~
+-->
+
+<config>
+    <menu>
+        <simigiftvoucher module="simigiftvoucher">
+            <title>Simi Gift Card</title>
+            <sort_order>72</sort_order>
+            <children>
+                <simigiftvoucher module="simigiftvoucher">
+                    <title>Manage Gift Codes</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/simigiftvoucher_giftvoucher</action>
+                </simigiftvoucher>
+                <gifttemplate module="simigiftvoucher">
+                    <title>Manage Gift Card Templates</title>
+                    <sort_order>40</sort_order>
+                    <action>adminhtml/simigiftvoucher_gifttemplate</action>
+                </gifttemplate>
+                <gifthistory module="simigiftvoucher">
+                    <title>History</title>
+                    <sort_order>50</sort_order>
+                    <action>adminhtml/simigiftvoucher_gifthistory</action>
+                </gifthistory>
+                <giftproduct module="simigiftvoucher">
+                    <title>Manage Gift Card Products</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/simigiftvoucher_giftproduct</action>
+                </giftproduct>
+                <!--<giftcodeset module="simigiftvoucher">
+                    <title>Manage Gift Code Sets</title>
+                    <sort_order>30</sort_order>
+                    <action>adminhtml/simigiftvoucher_giftcodeset</action>
+                </giftcodeset>-->
+                <generategiftcard module="simigiftvoucher">
+                    <title>Generate Gift Codes </title>
+                    <sort_order>20</sort_order>
+                    <action>adminhtml/simigiftvoucher_generategiftcard</action>
+                </generategiftcard>
+                <settings module="simigiftvoucher">
+                    <title>Settings</title>
+                    <sort_order>100</sort_order>
+                    <action>adminhtml/system_config/edit/section/simigiftvoucher</action>
+                </settings>
+            </children>
+        </simigiftvoucher>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simigiftvoucher translate="title">
+                                        <title>Gift Card</title>
+                                        <sort_order>45</sort_order>
+                                    </simigiftvoucher>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <customer>
+                        <children>
+                            <manage translate="title" module="simigiftvoucher">
+                                <children>
+                                    <giftcredittab module="simigiftvoucher">
+                                        <title>Gift Credit Tab</title>
+                                        <sort_order>10</sort_order>
+                                    </giftcredittab>
+                                </children>
+                            </manage>
+                        </children>
+                    </customer>
+                    <simigiftvoucher>
+                        <title>Gift Card</title>
+                        <sort_order>10</sort_order>
+                        <children>
+                            <simigiftvoucher module="simigiftvoucher">
+                                <title>Manage Gift Codes</title>
+                                <sort_order>1</sort_order>
+                            </simigiftvoucher>
+                            <gifttemplate module="simigiftvoucher">
+                                <title>Manage Gift Card Templates</title>
+                                <sort_order>40</sort_order>
+                            </gifttemplate>
+                            <gifthistory module="simigiftvoucher">
+                                <title>History</title>
+                                <sort_order>50</sort_order>
+                            </gifthistory>
+                            <giftproduct module="simigiftvoucher">
+                                <title>Manage Gift Card Products</title>
+                                <sort_order>10</sort_order>
+                            </giftproduct>
+                            <giftcodeset module="simigiftvoucher">
+                                <title>Manage Gift Code Sets</title>
+                                <sort_order>30</sort_order>
+                            </giftcodeset>
+                            <generategiftcard module="simigiftvoucher">
+                                <title>Generate Gift Codes </title>
+                                <sort_order>20</sort_order>
+                            </generategiftcard>
+                        </children>
+                    </simigiftvoucher>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

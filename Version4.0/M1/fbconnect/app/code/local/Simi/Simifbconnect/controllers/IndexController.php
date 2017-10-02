@@ -20,9 +20,11 @@
  * @package     Simifbconnect
  * @author      Developer
  */
-class Simi_Simifbconnect_IndexController extends Mage_Core_Controller_Front_Action {
+class Simi_Simifbconnect_IndexController extends Mage_Core_Controller_Front_Action
+{
 
-    public function checkInstallAction() {
+    public function checkInstallAction() 
+    {
         echo "1";
         exit();
     }

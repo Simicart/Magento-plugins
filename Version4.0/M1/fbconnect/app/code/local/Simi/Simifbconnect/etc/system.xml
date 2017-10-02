@@ -43,14 +43,22 @@
                             <show_in_store>1</show_in_store>
                             <comment></comment>
                         </enable>
-                        <identify_key translate="label">
-                            <label>Identify Key</label>
+                        <android_identify_key translate="label">
+                            <label>Android Identify Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </android_identify_key>
+                        <ios_identify_key translate="label">
+                            <label>iOS Identify Key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>99</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </identify_key>
+                        </ios_identify_key>
                         <android_appname translate="label">
                             <label>Android App Name</label>
                             <frontend_type>text</frontend_type>

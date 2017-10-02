@@ -18,11 +18,21 @@ class Simi_Simistorelocator_Block_Adminhtml_Simistorelocator_Grid extends Mage_A
     protected function _prepareCollection() {
         $storeId = $this->getRequest()->getParam('store');
         $collection = Mage::getModel('simistorelocator/simistorelocator')->getCollection();
+        $typeID = Mage::helper('simiconnector')->getVisibilityTypeId('storelocator');
+        $visibilityTable = Mage::getSingleton('core/resource')->getTableName('simiconnector/visibility');
+
         if ($storeId) {
-             $typeID = Mage::helper('simiconnector')->getVisibilityTypeId('storelocator');
-            $visibilityTable = Mage::getSingleton('core/resource')->getTableName('simiconnector/visibility');
             $collection->getSelect()
                 ->join(array('visibility' => $visibilityTable), 'visibility.item_id = main_table.simistorelocator_id AND visibility.content_type = ' . $typeID . ' AND visibility.store_view_id =' . $storeId);
+        }else{
+            //Scott add to check SimiWebsiteId
+            if(Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser()) {
+                $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
+                $storeIds = Mage::app()->getWebsite($websiteId)->getStoreIds();
+                $storeIds =implode(',',$storeIds);
+                $collection->getSelect()
+                    ->join(array('visibility' => $visibilityTable), 'visibility.item_id = main_table.simistorelocator_id AND visibility.content_type = ' . $typeID . ' AND visibility.store_view_id IN(' . $storeIds.')');
+            }
         }
         $this->setCollection($collection);
         return parent::_prepareCollection();

@@ -19,19 +19,8 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
-                    <fields>	
-                        <general_configuration_separator translate="label comment">
-                            <label>General</label>
-                            <frontend_type>label</frontend_type>
-                            <frontend_model>simistorelocator/adminhtml_system_config_form_field_separator</frontend_model>
-                            <margin_top>10px</margin_top>
-                            <sort_order>1</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                            <comment></comment>
-                        </general_configuration_separator>	
-                        <enable translate="label">
+                    <fields>
+                        <!--<enable translate="label">
                             <label>Enable</label>
                             <frontend_type>select</frontend_type>
                             <sort_order>2</sort_order>
@@ -40,7 +29,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment></comment>
-                        </enable>                                                                             
+                        </enable>       -->
                     </fields>				
                 </general>
             </groups>
