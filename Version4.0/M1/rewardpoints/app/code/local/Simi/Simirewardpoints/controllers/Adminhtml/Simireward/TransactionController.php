@@ -137,10 +137,6 @@ class Simi_Simirewardpoints_Adminhtml_Simireward_TransactionController extends M
                 }
 
                 $actionCode ='admin';
-                $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
-                if($websiteId){
-                    $actionCode .="_".$websiteId;
-                }
                 $transaction = Mage::helper('simirewardpoints/action')->addTransaction($actionCode,
                     $customer,
                     new Varien_Object(array(
@@ -149,6 +145,7 @@ class Simi_Simirewardpoints_Adminhtml_Simireward_TransactionController extends M
                         'expiration_day'=> (int)$request->getPost('expiration_day'),
                     ))
                 );
+
                 if (!$transaction->getId()) {
                     throw new Exception(
                         $this->__('Cannot create transaction, please recheck form information.')

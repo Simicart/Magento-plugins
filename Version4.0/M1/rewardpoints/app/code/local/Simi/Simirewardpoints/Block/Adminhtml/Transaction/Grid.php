@@ -50,7 +50,11 @@ class Simi_Simirewardpoints_Block_Adminhtml_Transaction_Grid extends Mage_Adminh
 
         $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
         if($websiteId){
-            $collection->addFieldToFilter('action','admin_'.$websiteId);
+            $customerTable = Mage::getSingleton('core/resource')->getTableName('customer/entity');
+            $collection->getSelect()->join(
+                array('customer_table' => $customerTable),
+                'main_table.customer_id = customer_table.entity_id AND customer_table.website_id ='.$websiteId
+            );
         }
         $this->setCollection($collection);
         return parent::_prepareCollection();

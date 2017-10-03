@@ -58,12 +58,7 @@ class Simi_Simirewardpoints_Model_Adminhtml_Observer {
         // Create transactions for customer if need
         if (!empty($params['change_balance'])) {
             try {
-                $websiteId = Mage::helper('simiconnector/cloud')->getWebsiteIdSimiUser();
-                $actionCode ='admin';
-                if($websiteId){
-                    $actionCode .="_".$websiteId;
-                }
-                Mage::helper('simirewardpoints/action')->addTransaction($actionCode, $customer, new Varien_Object(array(
+                Mage::helper('simirewardpoints/action')->addTransaction('admin', $customer, new Varien_Object(array(
                     'point_amount' => $params['change_balance'],
                     'title' => $params['change_title'],
                     'expiration_day' => (int) $params['expiration_day'],
