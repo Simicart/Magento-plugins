@@ -301,6 +301,7 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
             ));
             
             $gifttemplate = Mage::getModel('simigiftvoucher/gifttemplate')->load($this->getData('giftcard_template_id'));
+
             if (Mage::helper('simigiftvoucher')->getEmailConfig('attachment', $store->getStoreId())) {
                 if($gifttemplate->getDesignPattern() != Simi_Simigiftvoucher_Model_Designpattern::PATTERN_AMAZON){
                     $pdf = Mage::getModel('simigiftvoucher/pdf_giftcard')->getPdf(array($this->getId()));
@@ -314,7 +315,6 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
             if($gifttemplate->getDesignPattern() == Simi_Simigiftvoucher_Model_Designpattern::PATTERN_AMAZON){
                 $giftcart_template_email = 'simigiftvoucher_email_self_amazon';
             }
-
             $text_color = '#DC8C71';
             $style_color = '#949392';
 
@@ -368,12 +368,14 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
                     $simigiftvoucher->save();
                 }
             } catch (Exception $ex) {
-                
+
             }
         }
 
+
         $this->setEmailSent($mailSent);
         $translate->setTranslateInline(true);
+        zend_debug::dump($mailTemplate->getData());
         return $this;
     }
 
