@@ -64,12 +64,17 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                     $count++;
                 }
             }
-            if ($count == count($items)){
+            $EnableGiftcard = Mage::helper('simigiftvoucher')->getInterfaceCheckoutConfig('show_gift_card');
+            if (!$EnableGiftcard){
+                $detail_list['gift_card']['use_giftcard'] = false;
+            }
+            elseif ($count == count($items)){
                 $detail_list['gift_card']['use_giftcard'] = false;
                 $detail_list['gift_card']['label'] = Mage::helper('simigiftvoucher')->__('Gift Cards cannot be used to purchase Gift Card products');
             }else {
                 $detail_list['gift_card']['use_giftcard'] = true;
             }
+
             if ($detail_list['gift_card']['use_giftcard']){
                 if (Mage::getSingleton('customer/session')->isLoggedIn()){
                     $customer = Mage::getSingleton('customer/session')->getCustomer();
@@ -114,10 +119,13 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             }
             $quoteitems_detail = array();
             $quoteitems = $detail_list['quoteitems'];
+            $showImage = Mage::helper('simigiftvoucher')->getInterfaceCheckoutConfig('show_gift_card');
             foreach ($quoteitems as $item){
                 if ($item['product_type'] == 'simigiftvoucher'){
                     $item['option'] = $this->getGiftcardOptions($item['item_id']);
-                    $item['image'] = $this->getGiftcardOptions($item['item_id'], true);
+                    if ($showImage){
+                        $item['image'] = $this->getGiftcardOptions($item['item_id'], true);
+                    }
                 }
                 $quoteitems_detail[] = $item;
             }
@@ -138,8 +146,11 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                 $count++;
             }
         }
-
-        if ($count == count($items)){
+        $EnableGiftcard = Mage::getStoreConfig('simigiftvoucher/interface_payment/show_gift_card');
+        if (!$EnableGiftcard){
+            $detail_list['gift_card']['use_giftcard'] = false;
+        }
+        elseif ($count == count($items)){
             $detail_onepage['order']['gift_card']['use_giftcard'] = false;
             $detail_onepage['order']['gift_card']['label'] = Mage::helper('simigiftvoucher')->__('Gift Cards cannot be used to purchase Gift Card products');
         }else {

@@ -521,7 +521,7 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
         }
         $customerId = $session->getCustomer()->getId();
         $storeId = Mage::app()->getStore()->getStoreId();
-        zend_debug::dump($storeId);
+        //zend_debug::dump($storeId);
         $collection = Mage::getResourceModel('simigiftvoucher/customervoucher_collection')
             ->addFieldToFilter('main_table.customer_id', $customerId);
         $voucherTable = $collection->getTable('simigiftvoucher/giftvoucher');
@@ -634,7 +634,9 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
         $result = array();
         foreach ($data as $item){
             $item['added_date'] = Mage::helper('core')->formatDate($item['added_date'],'medium');
-            $item['expired_at'] = Mage::helper('core')->formatDate($item['expired_at'],'medium');
+            if($item['expired_at']){
+                $item['expired_at'] = Mage::helper('core')->formatDate($item['expired_at'],'medium');
+            }
             $item['currency_symbol'] = Mage::app()->getLocale()->currency($item['currency'])->getSymbol();
             $result[] = $item;
         }

@@ -375,7 +375,6 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
 
         $this->setEmailSent($mailSent);
         $translate->setTranslateInline(true);
-        zend_debug::dump($mailTemplate->getData());
         return $this;
     }
 
