@@ -230,6 +230,13 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
         $info['description'] = Mage::helper('catalog/output')->productAttribute($entity, $entity->getDescription(), 'description');
         $info['simigift_template_ids'] = Mage::getModel('simigiftvoucher/simimapping')->getTemplateInProduct($info['simigift_template_ids']);
 
+        $enableCustomDesign = Mage::helper('simigiftvoucher')->getInterfaceConfig('custom_image');
+        $info['simigiftcard_settings']= array(
+            'simigift_template_upload' => $enableCustomDesign,
+            'simigift_postoffice' => Mage::helper('simigiftvoucher')->getInterfaceConfig('postoffice'),
+            'simigift_message_max' => Mage::helper('simigiftvoucher')->getInterfaceConfig('max'),
+            'is_day_to_send' => Mage::helper('simigiftvoucher')->getInterfaceConfig('schedule')
+        );
         /*$info['conditions'] = Mage::getModel('simigiftvoucher/simimapping')->getConditionProduct($entity->getId());
         $info['conditions']['conditions_serialized'] = unserialize($info['conditions']['conditions_serialized']);
         $info['conditions']['actions_serialized'] = unserialize($info['conditions']['actions_serialized']);*/
@@ -256,13 +263,6 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
         $info['product_label'] = Mage::helper('simiconnector/productlabel')->getProductLabel($entity);
         $info['product_video'] = Mage::helper('simiconnector/simivideo')->getProductVideo($entity);
 
-        $enableCustomDesign = Mage::helper('simigiftvoucher')->getInterfaceConfig('custom_image');
-        $info['simigiftcard_settings']= array(
-            'simigift_template_upload' => $enableCustomDesign,
-            'simigift_postoffice' => Mage::helper('simigiftvoucher')->getInterfaceConfig('postoffice'),
-            'simigift_message_max' => Mage::helper('simigiftvoucher')->getInterfaceConfig('max'),
-            'is_day_to_send' => Mage::helper('simigiftvoucher')->getInterfaceConfig('schedule')
-        );
         //$info['timezones'] = Mage::getModel('core/locale')->getOptionTimezones();
         $this->detail_info = $this->getDetail($info);
         Mage::dispatchEvent('simi_simiconnector_model_api_giftcard_show_after', array('object' => $this, 'data' => $this->detail_info));

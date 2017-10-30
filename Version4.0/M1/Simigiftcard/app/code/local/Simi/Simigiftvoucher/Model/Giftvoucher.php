@@ -358,14 +358,14 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
         if ($this->getRecipientEmail() || $this->getCustomerEmail()) {
             try {
                 // changed by Adam
-                $simigiftvoucher = Mage::getModel('simigiftvoucher/giftvoucher')->load($this->getId());
+                //$simigiftvoucher = Mage::getModel('simigiftvoucher/giftvoucher')->load($this->getId());
                 if ($this->getData('recipient_address')) {
-                    $simigiftvoucher->setIsSent(2);
+                    $this->setIsSent(2);
                 } else {
-                    $simigiftvoucher->setIsSent(true);
+                    $this->setIsSent(true);
                 }
                 if (!$this->getNotResave()) {
-                    $simigiftvoucher->save();
+                    $this->save();
                 }
             } catch (Exception $ex) {
 
