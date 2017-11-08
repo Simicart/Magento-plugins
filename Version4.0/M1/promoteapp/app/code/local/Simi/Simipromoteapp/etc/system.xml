@@ -18,7 +18,7 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
-                    <fields>		
+                    <fields>        
                         <enable translate="label">
                             <label>Enable</label>
                             <frontend_type>select</frontend_type>
@@ -28,8 +28,8 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment></comment>
-                        </enable>						
-                    </fields>				
+                        </enable>                       
+                    </fields>               
                 </general>
                 <app translate="label">
                     <label>App Configuration</label>
@@ -122,6 +122,7 @@
                         </email_for_subscriber_template>
                     </fields>
                 </email>
+                <!--
                 <chart translate="label">
                     <label>Chart Configuration</label>
                     <frontend_type>text</frontend_type>
@@ -174,6 +175,7 @@
                         </percent>
                     </fields>
                 </chart>
+            -->
                 <cms translate="label">
                     <label>CMS Configuration</label>
                     <frontend_type>text</frontend_type>
@@ -278,7 +280,7 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
-                    <fields>		
+                    <fields>        
                         <enable translate="label">
                             <label>Enable</label>
                             <frontend_type>select</frontend_type>
@@ -288,7 +290,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                             <comment></comment>
-                        </enable>	
+                        </enable>   
                         <link_alert translate="label">
                             <label>Link download app for Iphone/Ipod</label>
                             <frontend_type>text</frontend_type>
@@ -306,7 +308,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                             <comment></comment>
-                        </link_android>  						
+                        </link_android>                         
                         <link_ipad translate="label">
                             <label>Link download app for ipad</label>
                             <frontend_type>text</frontend_type>
@@ -324,8 +326,8 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                             <comment></comment>
-                        </content_alert>   						
-                    </fields>				
+                        </content_alert>                        
+                    </fields>               
                 </popup>
             </groups>
         </simipromoteapp>
