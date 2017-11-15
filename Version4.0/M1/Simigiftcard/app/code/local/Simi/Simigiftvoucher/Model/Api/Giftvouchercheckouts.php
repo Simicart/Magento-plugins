@@ -11,8 +11,16 @@ class Simi_Simigiftvoucher_Model_Api_Giftvouchercheckouts extends Simi_Simiconne
         $data = $this->getData();
         if (Mage::getSingleton('customer/session')->isLoggedIn()) {
             $customer = Mage::getSingleton('customer/session')->getCustomer();
-        } else
+        } else{
+            if ($data['resourceid'] == 'usecode' || $data['resourceid'] == 'updatecode'
+                || $data['resourceid'] == 'remove'
+                || $data['resourceid'] == 'addcodecheckout'
+                || $data['resourceid'] == 'updategiftcode'){
+                return;
+            }
             throw new Exception(Mage::helper('customer')->__('Please login First.'), 4);
+        }
+
     }
 
     /**

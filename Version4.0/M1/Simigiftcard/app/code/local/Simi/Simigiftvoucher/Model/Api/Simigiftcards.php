@@ -21,7 +21,11 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
         if (isset($data['resourceid']) && $data['resourceid'] && $data['resourceid'] != 'uploadimage'){
             $this->builderQuery = $this->_helperProduct->getProduct($data['resourceid']);
         } else {
-            $this->builderQuery = Mage::getModel('catalog/product')->getCollection()->addFieldToFilter('type_id','simigiftvoucher');
+            $this->builderQuery = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addFieldToFilter('type_id','simigiftvoucher')
+                ->addFieldToFilter('status',1);
+
         }
     }
 
@@ -138,7 +142,7 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
             $all_ids[] = $entity->getId();
             //zend_debug::dump($);die('xx');
             $images = array();
-            $imagelink = $this->_helperProduct->getImageProduct($entity, null, $image_width, $image_height);
+            $imagelink = $this->_helperProduct->getImageProduct($entity_product, null, $image_width, $image_height);
             //$sizes = getimagesize($imagelink);
             $images[] = array(
                 'url' => $imagelink,
