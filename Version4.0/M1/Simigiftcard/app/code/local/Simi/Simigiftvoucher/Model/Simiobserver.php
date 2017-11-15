@@ -58,6 +58,9 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             $detail_list = $quoteItemApi->detail_list;
             $count = 0;
             $items = $this->_getQuote()->getAllItems();
+            if (!count($items)){
+                $this->clearGiftcardSession($this->_getSession());
+            }
             foreach ($items as $item){
                 $data = $item->getData();
                 if ($data['product_type'] == 'simigiftvoucher') {
@@ -119,11 +122,11 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             }
             $quoteitems_detail = array();
             $quoteitems = $detail_list['quoteitems'];
-            $showImage = Mage::helper('simigiftvoucher')->getInterfaceCheckoutConfig('show_gift_card');
+            $showImage = Mage::helper('simigiftvoucher')->getInterfaceCheckoutConfig('display_image_item');
             foreach ($quoteitems as $item){
                 if ($item['product_type'] == 'simigiftvoucher'){
                     $item['option'] = $this->getGiftcardOptions($item['item_id']);
-                    if ($showImage){
+                    if (!$showImage){
                         $item['image'] = $this->getGiftcardOptions($item['item_id'], true);
                     }
                 }
@@ -406,5 +409,23 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             }
         }
         return $opt;
+    }
+
+    public function clearGiftcardSession($session) {
+        if ($session->getSimiuseGiftCard())
+            $session->setSimiuseGiftCard(null)
+                ->setSimigiftCodes(null)
+                ->setSimibaseAmountUsed(null)
+                ->setSimibaseGiftVoucherDiscount(null)
+                ->setSimigiftVoucherDiscount(null)
+                ->setSimicodesBaseDiscount(null)
+                ->setSimicodesDiscount(null)
+                ->setSimigiftMaxUseAmount(null);
+        if ($session->getSimiuseGiftCardCredit()) {
+            $session->setSimiuseGiftCardCredit(null)
+                ->setSimimaxCreditUsed(null)
+                ->setSimibaseUseGiftCreditAmount(null)
+                ->setSimiuseGiftCreditAmount(null);
+        }
     }
 }
