@@ -196,7 +196,14 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
             }
         }
         elseif ($session->getSimiuseGiftCard()) {
-            $session->setSimiuseGiftCard(null);
+            $session->setSimiuseGiftCard(null)
+                ->setSimigiftCodes(null)
+                ->setSimibaseAmountUsed(null)
+                ->setSimibaseGiftVoucherDiscount(null)
+                ->setSimigiftVoucherDiscount(null)
+                ->setSimicodesBaseDiscount(null)
+                ->setSimicodesDiscount(null)
+                ->setSimigiftMaxUseAmount(null);
             $result['success'] = Mage::helper('simigiftvoucher')->__('Your Gift Card information has been removed successfully.');
         }
         return $result;
@@ -233,7 +240,6 @@ class Simi_Simigiftvoucher_Model_Simimapping extends Mage_Core_Model_Abstract {
             $error = Mage::helper('simigiftvoucher')->__('Can not use your credit .');
             throw new Exception($error);
         }
-        echo json_encode($session->getData());die;
         return $info;
     }
 

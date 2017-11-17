@@ -126,7 +126,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             foreach ($quoteitems as $item){
                 if ($item['product_type'] == 'simigiftvoucher'){
                     $item['option'] = $this->getGiftcardOptions($item['item_id']);
-                    if (!$showImage){
+                    if ($showImage){
                         $item['image'] = $this->getGiftcardOptions($item['item_id'], true);
                     }
                 }
