@@ -237,17 +237,15 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         }//die;
         $giftcodes = explode(',',$giftcodes);
         $codediscount = explode(',',$codediscount);
-        $position = 6;
         if ($giftcodes){
             foreach ($giftcodes as $key => $code){
                 if ($code){
-                    $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__($code),$position,$codediscount[$key]);
-                    $position += 1;
+                    $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__($code),9,$codediscount[$key]);
                 }
             }
         }
         if ($creditDiscount){
-            $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__('Giftvoucher Credit'),$position,$creditDiscount);
+            $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__('Giftvoucher Credit'),8,$creditDiscount);
         }
 
     }
