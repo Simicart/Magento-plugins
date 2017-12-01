@@ -80,6 +80,18 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                 $detail_list['gift_card']['use_giftcard'] = true;
             }
 
+            if (!$this->checkGiftVoucher()){
+                $detail_list['gift_card']['use_giftcard'] = false;
+            }
+
+//            if (isset($detail_list['total']['grand_total']) && !$detail_list['grand_total']){
+//                $detail_list['gift_card']['use_giftcard'] = false;
+//            }elseif (isset($detail_list['total']['grand_total_excl_tax']) && !$detail_list['total']['grand_total_excl_tax']){
+//                $detail_list['gift_card']['use_giftcard'] = false;
+//            }elseif (isset($detail_list['total']['grand_total_incl_tax']) && !$detail_list['total']['grand_total_incl_tax']){
+//                $detail_list['gift_card']['use_giftcard'] = false;
+//            }
+
             if ($detail_list['gift_card']['use_giftcard']){
                 if (Mage::getSingleton('customer/session')->isLoggedIn()){
                     $customer = Mage::getSingleton('customer/session')->getCustomer();
@@ -143,7 +155,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             $detail_list['quoteitems'] =  $quoteitems_detail;
             $quoteItemApi->detail_list = $detail_list;
 
-
+            //echo json_encode($this->_getSession()->getData());die;
     }
 
     public function simiSimiconnectorModelApiOrdersOnepageShowAfter($observer){
@@ -167,6 +179,17 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         }else {
             $detail_onepage['order']['gift_card']['use_giftcard'] = true;
         }
+
+        if (!$this->checkGiftVoucher()){
+            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+        }
+//        if (isset($detail_onepage['order']['total']['grand_total']) && !$detail_onepage['order']['total']['grand_total']){
+//            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+//        }elseif (isset($detail_onepage['order']['total']['grand_total_excl_tax']) && !$detail_onepage['order']['total']['grand_total_excl_tax']){
+//            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+//        }elseif (isset($detail_onepage['order']['total']['grand_total_incl_tax']) && !$detail_onepage['order']['total']['grand_total_incl_tax']){
+//            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+//        }
 
         if ($detail_onepage['order']['gift_card']['use_giftcard']){
             if (Mage::getSingleton('customer/session')->isLoggedIn()){
@@ -248,6 +271,15 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__('Giftvoucher Credit'),8,$creditDiscount);
         }
 
+    }
+
+    public  function checkGiftVoucher(){
+        $session = $this->_getSession();
+        $quote = $this->_getQuote();
+        if ($quote->getBaseGrandTotal() < 0.0001 && !$session->getSimiuseGiftCard() && !$session->getSimiuseGiftCardCredit()){
+            return false;
+        }
+        return true;
     }
 
     /**
