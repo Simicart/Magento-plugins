@@ -1,15 +1,18 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: admin
  * Date: 11/20/17
  * Time: 5:12 PM
  */
-class Simi_Simipwa_Model_Simiobserver {
-    public function simiSimiconnectorModelServerInitialize($observer){
+class Simi_Simipwa_Model_Simiobserver
+{
+    public function simiSimiconnectorModelServerInitialize($observer)
+    {
         $observerObject = $observer->getObject();
         $observerObjectData = $observerObject->getData();
-        if ($observerObjectData['resource'] == 'simipwas'){
+        if ($observerObjectData['resource'] == 'simipwas' || $observerObjectData['resource'] == 'sitemaps') {
             $observerObjectData['module'] = 'simipwa';
         }
         $observerObject->setData($observerObjectData);
