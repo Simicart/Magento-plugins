@@ -38,6 +38,18 @@ class Simi_Simipwa_Block_Adminhtml_Pwa_Edit_Tab_Form extends Mage_Adminhtml_Bloc
         'bold' => true,
     ));
 
+    $fieldset->addField('city', 'label', array(
+        'label'  => Mage::helper('simipwa')->__('City'),
+        'name'   => 'city',
+        'bold' => true,
+    ));
+
+    $fieldset->addField('country', 'label', array(
+        'label'  => Mage::helper('simipwa')->__('Country'),
+        'name'   => 'country',
+        'bold' => true,
+    ));
+
     $fieldset->addField('endpoint', 'label', array(
         'label'  => Mage::helper('simipwa')->__('PWA Endpoint'),
         'name'   => 'endpoint',

@@ -42,7 +42,7 @@
                 <settings module="simipwa">
                     <title>Settings</title>
                     <sort_order>100</sort_order>
-                    <action>adminhtml/system_config/edit/section/pwa_setting</action>
+                    <action>adminhtml/system_config/edit/section/simipwa</action>
                 </settings>
             </children>
         </simipwa>

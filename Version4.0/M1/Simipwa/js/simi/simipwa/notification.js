@@ -22,28 +22,6 @@ function urlB64ToUint8Array(base64String) {
 }
 
 
-if ('serviceWorker' in navigator && 'PushManager' in window) {
-        console.log('Service Worker and Push is supported');
-
-        navigator.serviceWorker.register('sw.js',{
-            scope: './'
-        })
-            .then(function(swReg) {
-                console.log('Service Worker is registered', '');
-
-                swRegistration = swReg;
-                initializeUI();
-
-            })
-            .catch(function(error) {
-                console.error('Service Worker Error', error);
-            });
-    } else {
-        console.warn('Push messaging is not supported');
-        console.log('Push Not Supported');
-}
-
-
 function initializeUI() {
     subscribeUser();
     // Set the initial subscription value
@@ -85,16 +63,12 @@ function subscribeUser() {
 
 function updateSubscriptionOnServer(subscription,type = 1) {
     // TODO: Send subscription to application server
-    var api = "./simiconnector/rest/v2/simipwas";
+    var api = "./simipwa/index/register";
     var method = 'POST';
     if (type === 2) {
-        method = 'DELETE';
+        api = './simipwa/index/delete';
     }
-
-    //console.log(method);
-    var params = JSON.stringify(subscription);
     ConnectionApi(api,method,subscription);
-    //console.log(params);
 }
 
 function unsubscribeUser() {
@@ -151,7 +125,7 @@ function ConnectionApi(api,method = 'GET',params = null){
             throw new Error('Network response was not ok');
         })
         .then(function (data) {
-           //console.log(data);
+           console.log(data);
         }).catch((error) => {
         //alert(error.toString());
         console.error(error);

@@ -1,6 +1,6 @@
 'use strict';
 self.addEventListener('push', function(event) {
-    var apiPath = './simiconnector/rest/v2/simipwas?endpoint=';
+    var apiPath = './simipwa/index/message?endpoint=';
     event.waitUntil(
         registration.pushManager.getSubscription()
             .then(function(subscription) {
@@ -46,11 +46,10 @@ self.addEventListener('push', function(event) {
                                 data: data
                             };
                         } else {
-                            title = 'Notification';
+                            title = 'New Notification';
                             options = {
-                                body: 'New Notification',
-                                icon: './media/images/icon.png',
-                                badge: './media/images/badge.png',
+                                icon: './skin/frontend/default/pwa/icon.png',
+                                badge: './skin/frontend/default/pwa/badge.png',
                                 data: {
                                     url: "/"
                                 }
@@ -61,10 +60,9 @@ self.addEventListener('push', function(event) {
                     })
                     .catch(function(err) {
                         console.log(err);
-                        return self.registration.showNotification('Notification', {
-                            body: 'New Notification',
-                            icon: './media/images/icon.png',
-                            badge: './media/images/badge.png',
+                        return self.registration.showNotification('New Notification', {
+                            icon: './skin/frontend/default/pwa/icon.png',
+                            badge: './skin/frontend/default/pwa/badge.png',
                             data: {
                                 url: "/"
                             }

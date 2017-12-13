@@ -8,7 +8,7 @@
     </tabs>
 
     <sections>
-        <pwa_setting translate="label" module="simipwa">
+        <simipwa translate="label" module="simipwa">
             <class>separator-top</class>
             <label>Simi Pwa Setting</label>
             <tab>Simi</tab>
@@ -27,7 +27,7 @@
                     <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
-                            <label>Enable</label>
+                            <label>Enable for Website</label>
                             <frontend_type>select</frontend_type>
                             <sort_order>1</sort_order>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -39,6 +39,6 @@
                     </fields>
                 </general>
             </groups>
-        </pwa_setting>
+        </simipwa>
     </sections>
 </config>
