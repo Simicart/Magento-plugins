@@ -79,8 +79,9 @@
                                 <sort_order>1</sort_order>
                             </simipwa_agent>
                             <simipwa_notification module="simipwa">
-                            <title>Manage PWA Notification</title>
-                            <sort_order>2</sort_order>
+                                <title>Manage PWA Notification</title>
+                                <sort_order>1</sort_order>
+                            </simipwa_notification>
                             <settings module="simipwa">
                                 <title>Settings</title>
                                 <sort_order>100</sort_order>
