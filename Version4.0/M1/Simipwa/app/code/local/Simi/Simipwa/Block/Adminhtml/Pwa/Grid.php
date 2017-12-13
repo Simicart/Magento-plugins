@@ -34,14 +34,13 @@ class Simi_Simipwa_Block_Adminhtml_Pwa_Grid extends Mage_Adminhtml_Block_Widget_
         ));
 
         $this->addColumn('country', array(
-            'header'	=> Mage::helper('simipwa')->__('City'),
+            'header'	=> Mage::helper('simipwa')->__('Country'),
             'index'	 => 'country',
         ));
 
         $this->addColumn('created_at',array(
             'header'    =>  Mage::helper('simipwa')->__('Created Time'),
             'align'     => 'center',
-            'width'     =>  '0px',
             'index'     =>  'created_at',
             'type'      => 'datetime',
         ));
