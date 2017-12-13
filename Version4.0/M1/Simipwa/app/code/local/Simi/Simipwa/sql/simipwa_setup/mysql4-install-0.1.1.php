@@ -14,7 +14,7 @@ $installer->run("
         `endpoint_key` text NULL  DEFAULT  '',
         `p256dh_key` text NULL  DEFAULT '',
         `auth_key` text NULL DEFAULT '',
-        `created_at` datetime NOT NULL default CURRENT_TIMESTAMP ,
+        `created_at` datetime NOT NULL default '0000-00-00 00:00:00' ,
         `status` SMALLINT(2) NOT NULL DEFAULT 2,
         PRIMARY KEY (`agent_id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -29,7 +29,7 @@ $installer->run("
         `category_id` int(10) unsigned  NOT NULL,
         `product_id` int(10) unsigned  NOT NULL,
         `image_url` varchar(255) NOT NULL default '',
-        `created_time` datetime NOT NULL default CURRENT_TIMESTAMP ,
+        `created_time` datetime NOT NULL default '0000-00-00 00:00:00' ,
         `notice_type` smallint(5) unsigned DEFAULT 2,
         `status` smallint(5) unsigned,
         PRIMARY KEY (`message_id`)

@@ -8,7 +8,6 @@
  */
 class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
 {
-
     public function getSiteMaps()
     {
         $filePath = Mage::getBaseDir('code') . DS . "local" . DS . "Simi" . DS . "Simipwa" . DS . "Assest" . DS . "sitemaps.json";
@@ -101,5 +100,9 @@ class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
             return true;
         }
         return false;
+    }
+
+    public function IsEnableForWebsite(){
+        return Mage::getStoreConfig('simipwa/general/enable');
     }
 }

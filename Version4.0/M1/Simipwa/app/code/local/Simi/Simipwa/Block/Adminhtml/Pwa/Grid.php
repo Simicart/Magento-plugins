@@ -28,9 +28,14 @@ class Simi_Simipwa_Block_Adminhtml_Pwa_Grid extends Mage_Adminhtml_Block_Widget_
             'index'	 => 'agent_id',
         ));
 
-        $this->addColumn('user_agent', array(
-            'header'	=> Mage::helper('simipwa')->__('User Agent'),
-            'index'	 => 'user_agent',
+        $this->addColumn('city', array(
+            'header'	=> Mage::helper('simipwa')->__('City'),
+            'index'	 => 'city',
+        ));
+
+        $this->addColumn('country', array(
+            'header'	=> Mage::helper('simipwa')->__('City'),
+            'index'	 => 'country',
         ));
 
         $this->addColumn('created_at',array(
@@ -44,12 +49,12 @@ class Simi_Simipwa_Block_Adminhtml_Pwa_Grid extends Mage_Adminhtml_Block_Widget_
         $this->addColumn('action',
             array(
                 'header'	=>	Mage::helper('simipwa')->__('Action'),
-                'width'		=> '50px',
+                'width'		=> '150px',
                 'type'		=> 'action',
                 'getter'	=> 'getId',
                 'actions'	=> array(
                     array(
-                        'caption'	=> Mage::helper('simipwa')->__('Edit'),
+                        'caption'	=> Mage::helper('simipwa')->__('Send Message'),
                         'url'		=> array('base'=> '*/*/edit'),
                         'field'		=> 'id'
                     )),
