@@ -8,9 +8,9 @@
     </tabs>
 
     <sections>
-        <pwa_setting translate="label" module="simipwa">
+        <simipwa translate="label" module="simipwa">
             <class>separator-top</class>
-            <label>Simi Pwa Setting</label>
+            <label>Simicart Progessive Web App</label>
             <tab>Simi</tab>
             <frontend_type>text</frontend_type>
             <sort_order>299</sort_order>
@@ -36,9 +36,20 @@
                             <show_in_store>1</show_in_store>
                             <comment></comment>
                         </enable>
+                        <sync_site_url translate="label">
+                            <label>Sync Sitemap Url</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>simipwa/adminhtml_system_config_form_syncbutton</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </sync_site_url>
+
                     </fields>
                 </general>
             </groups>
-        </pwa_setting>
+        </simipwa>
     </sections>
 </config>

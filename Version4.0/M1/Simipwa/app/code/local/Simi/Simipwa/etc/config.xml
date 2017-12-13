@@ -22,15 +22,6 @@
                 </simipwa>
             </updates>
         </layout>
-        <translate>
-            <modules>
-                <Simi_Simitracking>
-                    <files>
-                        <default>Simi_Simipwa.csv</default>
-                    </files>
-                </Simi_Simitracking>
-            </modules>
-        </translate>
     </frontend>
     <admin>
         <routers>

@@ -85,4 +85,21 @@ class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
         $result['sitemaps'] = $urls;
         return json_encode($result);
     }
+
+    public function synSiteMaps()
+    {
+        $filePath = Mage::getBaseDir('code') . DS . "local" . DS . "Simi" . DS . "Simipwa" . DS . "Assest" . DS . "sitemaps.json";
+
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        $file = fopen($filePath, 'w+');
+        $sitemaps = $this->getDataSiteMaps();
+        if ($file) {
+            file_put_contents($filePath, $sitemaps);
+            return true;
+        }
+        return false;
+    }
 }

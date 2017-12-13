@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: admin
@@ -12,13 +13,15 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
         return Mage::getSingleton('admin/session')->isAllowed('simipwa');
     }
 
-    public function agentAction(){
+    public function agentAction()
+    {
         $this->loadLayout()->renderLayout();
     }
 
-    public function editAction() {
-        $id	 = $this->getRequest()->getParam('id');
-        $model  = Mage::getModel('simipwa/agent')->load($id);
+    public function editAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        $model = Mage::getModel('simipwa/agent')->load($id);
 
         if ($model->getId() || $id == 0) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
@@ -44,14 +47,15 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
         }
     }
 
-    public function sendMessageAction(){
+    public function sendMessageAction()
+    {
         if ($data = $this->getRequest()->getPost()) {
             $data['device_id'] = (int)$data['device_id'];
             $id = $data['device_id'];
-            $message = Mage::getModel('simipwa/message')->load($id,'device_id');
+            $message = Mage::getModel('simipwa/message')->load($id, 'device_id');
 
             /*upload img*/
-            if (isset($_FILES['img_url']['name']) && $_FILES['img_url']['name'] != ''){
+            if (isset($_FILES['img_url']['name']) && $_FILES['img_url']['name'] != '') {
                 try {
                     $uploader = new Varien_File_Uploader($_FILES['img_url']);
                     $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
@@ -62,13 +66,13 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
 
                     $result = $uploader->save($path, $_FILES['img_url']['name']);
 
-                    $data['image_url'] =  'simipwa/img/'.$result['file'];
+                    $data['image_url'] = 'simipwa/img/' . $result['file'];
                 } catch (Exception $e) {
                     Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 }
             } else {
                 if (isset($data['img_url']['delete']) && $data['img_url']['delete'] == 1) {
-                    $pathImg = 'media/'.$data['img_url']['value'];
+                    $pathImg = 'media/' . $data['img_url']['value'];
                     if (file_exists($pathImg)) {
                         unlink($pathImg);
                     }
@@ -78,31 +82,30 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
             try {
                 //zend_debug::dump($message->getId());die;
                 $message_id = $message->getId();
-                if (!$message_id){
+                if (!$message_id) {
                     $message = Mage::getModel('simipwa/message');
                 }
-                if (!$data['type'] && $data['product_id']){
+                if (!$data['type'] && $data['product_id']) {
                     $data['type'] = 1;
                 }
                 //zend_debug::dump($data);die;
                 $message->setData($data);
                 $mess = Mage::getModel('simipwa/message')->getCollection()
-                    ->addFieldToFilter('status',1);
-                foreach ($mess as $item){
+                    ->addFieldToFilter('status', 1);
+                foreach ($mess as $item) {
                     $item['status'] = 2;
                     $item->save();
                 }
                 $message->setCreatedTime(now())->setStatus(1);
 //                zend_debug::dump($message->getData());die;
                 $message->setId($message_id)->save();
-                if($data['notice_type'] == 1){
-                    if ($data['endpoint_key']){
+                if ($data['notice_type'] == 1) {
+                    if ($data['endpoint_key']) {
                         Mage::getModel('simipwa/agent')->send($data['device_id']);
                     }
-                }
-                elseif ($data['notice_type'] == 2){
+                } elseif ($data['notice_type'] == 2) {
                     $devices = Mage::getModel('simipwa/agent')->getCollection();
-                    foreach ($devices as $item){
+                    foreach ($devices as $item) {
                         $send = Mage::getModel('simipwa/agent')->send($item->getId());
                         if (!$send) $item->delete();
                     }
@@ -111,8 +114,7 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
                 $this->_redirect('*/*/agent');
                 return;
-            }
-            catch (Exception $e){
+            } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 Mage::getSingleton('adminhtml/session')->setFormData($data);
                 $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
@@ -121,12 +123,12 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
         }
     }
 
-    public function chooserMainCategoriesAction(){
+    public function chooserMainCategoriesAction()
+    {
         $request = $this->getRequest();
         $id = $request->getParam('selected', array());
-        $block = $this->getLayout()->createBlock('simipwa/adminhtml_pwa_edit_tab_categories','maincontent_category', array('js_form_object' => $request->getParam('form')))
-            ->setCategoryIds($id)
-        ;
+        $block = $this->getLayout()->createBlock('simipwa/adminhtml_pwa_edit_tab_categories', 'maincontent_category', array('js_form_object' => $request->getParam('form')))
+            ->setCategoryIds($id);
 
         if ($block) {
             $this->getResponse()->setBody($block->toHtml());
@@ -136,8 +138,9 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
     /**
      * Get tree node (Ajax version)
      */
-    public function categoriesJsonAction() {
-        if ($categoryId = (int) $this->getRequest()->getPost('id')) {
+    public function categoriesJsonAction()
+    {
+        if ($categoryId = (int)$this->getRequest()->getPost('id')) {
             $this->getRequest()->setParam('id', $categoryId);
 
             if (!$category = $this->_initCategory()) {
@@ -155,9 +158,10 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
      *
      * @return Mage_Catalog_Model_Category
      */
-    protected function _initCategory() {
-        $categoryId = (int) $this->getRequest()->getParam('id', false);
-        $storeId = (int) $this->getRequest()->getParam('store');
+    protected function _initCategory()
+    {
+        $categoryId = (int)$this->getRequest()->getParam('id', false);
+        $storeId = (int)$this->getRequest()->getParam('store');
 
         $category = Mage::getModel('catalog/category');
         $category->setStoreId($storeId);
@@ -179,7 +183,8 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
         return $category;
     }
 
-    public function categoriesJson2Action() {
+    public function categoriesJson2Action()
+    {
         $this->_initItem();
         $this->getResponse()->setBody(
             $this->getLayout()->createBlock('simipwa/adminhtml_pwa_edit_tab_categories')
@@ -187,7 +192,8 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
         );
     }
 
-    public function chooserMainProductsAction() {
+    public function chooserMainProductsAction()
+    {
         $request = $this->getRequest();
         $block = $this->getLayout()->createBlock(
             'simipwa/adminhtml_pwa_edit_tab_products', 'promo_widget_chooser_sku', array('js_form_object' => $request->getParam('form'),
@@ -195,5 +201,21 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
         if ($block) {
             $this->getResponse()->setBody($block->toHtml());
         }
+    }
+
+    public function syncSitemapsAction()
+    {
+        $result = Mage::helper('simipwa')->synSiteMaps();
+        $data = array();
+        if ($result) {
+            $data['status'] = "1";
+            $data['message'] = "Sync Completed!";
+        } else {
+            $data['status'] = "1";
+            $data['message'] = "Sync Failed!";
+        }
+       return $this->getResponse()
+            ->setHeader('Content-Type', 'application/json')
+            ->setBody(json_encode($data));
     }
 }
