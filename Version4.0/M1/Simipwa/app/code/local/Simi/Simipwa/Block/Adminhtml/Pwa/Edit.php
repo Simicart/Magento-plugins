@@ -15,7 +15,8 @@ class Simi_Simipwa_Block_Adminhtml_Pwa_Edit extends Mage_Adminhtml_Block_Widget_
         $this->_controller = 'adminhtml_pwa';
         $this->removeButton('reset');
         $this->removeButton('save');
-        $this->_updateButton('delete', 'label', Mage::helper('simipwa')->__('Delete Item'));
+        $this->removeButton('delete');
+        //$this->_updateButton('delete', 'label', Mage::helper('simipwa')->__('Delete Item'));
 
         $this->_addButton('duplicate', array(
             'label'		=> Mage::helper('adminhtml')->__('Send Notification'),
