@@ -134,7 +134,7 @@ class Simi_Simigiftvoucher_Model_Total_Quote_Giftcardcredit extends Mage_Sales_M
 
         if ($baseDiscount && $discount) {
             $session->setSimibaseUseGiftCreditAmount($baseDiscount);
-            $session->setSimiUseGiftCreditAmount($discount);
+            $session->setSimiuseGiftCreditAmount($discount);
 
             $address->setSimigiftcardCreditAmount($baseDiscount * $rateCredit);
             $address->setSimibaseUseGiftCreditAmount($baseDiscount);

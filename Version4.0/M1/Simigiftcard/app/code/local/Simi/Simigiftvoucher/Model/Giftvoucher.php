@@ -301,6 +301,7 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
             ));
             
             $gifttemplate = Mage::getModel('simigiftvoucher/gifttemplate')->load($this->getData('giftcard_template_id'));
+
             if (Mage::helper('simigiftvoucher')->getEmailConfig('attachment', $store->getStoreId())) {
                 if($gifttemplate->getDesignPattern() != Simi_Simigiftvoucher_Model_Designpattern::PATTERN_AMAZON){
                     $pdf = Mage::getModel('simigiftvoucher/pdf_giftcard')->getPdf(array($this->getId()));
@@ -314,7 +315,6 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
             if($gifttemplate->getDesignPattern() == Simi_Simigiftvoucher_Model_Designpattern::PATTERN_AMAZON){
                 $giftcart_template_email = 'simigiftvoucher_email_self_amazon';
             }
-
             $text_color = '#DC8C71';
             $style_color = '#949392';
 
@@ -358,19 +358,20 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
         if ($this->getRecipientEmail() || $this->getCustomerEmail()) {
             try {
                 // changed by Adam
-                $simigiftvoucher = Mage::getModel('simigiftvoucher/giftvoucher')->load($this->getId());
+                //$simigiftvoucher = Mage::getModel('simigiftvoucher/giftvoucher')->load($this->getId());
                 if ($this->getData('recipient_address')) {
-                    $simigiftvoucher->setIsSent(2);
+                    $this->setIsSent(2);
                 } else {
-                    $simigiftvoucher->setIsSent(true);
+                    $this->setIsSent(true);
                 }
                 if (!$this->getNotResave()) {
-                    $simigiftvoucher->save();
+                    $this->save();
                 }
             } catch (Exception $ex) {
-                
+
             }
         }
+
 
         $this->setEmailSent($mailSent);
         $translate->setTranslateInline(true);
@@ -403,7 +404,7 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
             $allowStatus = array();
         }
         if ($this->getSetId() > 0 && $this->getStatus() == Simi_Simigiftvoucher_Model_Status::STATUS_PENDING || $this->getIsSent()) {  // changed by Adam
-            return $this;
+            //return $this;
         }
         if ($this->getRecipientEmail() && !$this->getData('dont_send_email_to_recipient') 
             && in_array($this->getStatus(), $allowStatus)
@@ -465,17 +466,16 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
                     'secure_key' => base64_encode($this->getGiftCode() . '$' . $this->getId())
                 )
             );
-
             try {
                 // changed by Adam
-                $simigiftvoucher = Mage::getModel('simigiftvoucher/giftvoucher')->load($this->getId());
+                //$simigiftvoucher = Mage::getModel('simigiftvoucher/giftvoucher')->load($this->getId());
                 if (!$this->getData('recipient_address')) {
-                    $simigiftvoucher->setIsSent(true);
+                    $this->setIsSent(true);
                 } else {
-                    $simigiftvoucher->setIsSent(2);
+                    $this->setIsSent(2);
                 }                
                 if (!$this->getNotResave()) {
-                    $simigiftvoucher->save();
+                    $this->save();
                 }
             } catch (Exception $ex) {
                 
@@ -549,7 +549,7 @@ class Simi_Simigiftvoucher_Model_Giftvoucher extends Mage_Rule_Model_Rule
                 )
             );
         }
-        $translate->setTranslateInline(false);
+        $translate->setTranslateInline(true);
         return $this;
     }
 

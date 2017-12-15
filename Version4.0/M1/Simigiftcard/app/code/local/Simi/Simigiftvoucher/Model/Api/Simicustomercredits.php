@@ -133,9 +133,9 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
         }
 
         $data = $this->getData();
-        if ($data['nested_resources'] && $data['resourceid'] == 'self'){
+        if ($data['nestedresource'] && $data['resourceid'] == 'self'){
             $params = (array) $data['contents'];
-            $customerVoucherId = $data['nested_resources'];
+            $customerVoucherId = $data['nestedresource'];
             $voucher = Mage::getModel('simigiftvoucher/customervoucher')->load($customerVoucherId);
             if (!$voucher->getId()){
                 throw new Exception(Mage::helper('simigiftvoucher')->__('Gift Code of customer not exist !'),4);

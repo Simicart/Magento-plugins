@@ -7,6 +7,8 @@
  */
 class Simi_Simigiftvoucher_Model_Simiobserver {
 
+    private $__NotRecipientShip = array();
+
     protected function _getSession() {
         return Mage::getSingleton('checkout/session');
     }
@@ -58,18 +60,38 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             $detail_list = $quoteItemApi->detail_list;
             $count = 0;
             $items = $this->_getQuote()->getAllItems();
+            if (!count($items)){
+                $this->clearGiftcardSession($this->_getSession());
+            }
             foreach ($items as $item){
                 $data = $item->getData();
                 if ($data['product_type'] == 'simigiftvoucher') {
                     $count++;
                 }
             }
-            if ($count == count($items)){
+            $EnableGiftcard = Mage::helper('simigiftvoucher')->getInterfaceCheckoutConfig('show_gift_card');
+            if (!$EnableGiftcard){
+                $detail_list['gift_card']['use_giftcard'] = false;
+            }
+            elseif ($count == count($items)){
                 $detail_list['gift_card']['use_giftcard'] = false;
                 $detail_list['gift_card']['label'] = Mage::helper('simigiftvoucher')->__('Gift Cards cannot be used to purchase Gift Card products');
             }else {
                 $detail_list['gift_card']['use_giftcard'] = true;
             }
+
+            if (!$this->checkGiftVoucher()){
+                $detail_list['gift_card']['use_giftcard'] = false;
+            }
+
+//            if (isset($detail_list['total']['grand_total']) && !$detail_list['grand_total']){
+//                $detail_list['gift_card']['use_giftcard'] = false;
+//            }elseif (isset($detail_list['total']['grand_total_excl_tax']) && !$detail_list['total']['grand_total_excl_tax']){
+//                $detail_list['gift_card']['use_giftcard'] = false;
+//            }elseif (isset($detail_list['total']['grand_total_incl_tax']) && !$detail_list['total']['grand_total_incl_tax']){
+//                $detail_list['gift_card']['use_giftcard'] = false;
+//            }
+
             if ($detail_list['gift_card']['use_giftcard']){
                 if (Mage::getSingleton('customer/session')->isLoggedIn()){
                     $customer = Mage::getSingleton('customer/session')->getCustomer();
@@ -90,41 +112,50 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                         }
 
                     }
-                    if ($this->getUseGiftVoucher()){
-                        $detail_list['gift_card']['giftcode']['use_giftcode'] = 1;
-                    }
-                    else {
-                        $detail_list['gift_card']['giftcode']['use_giftcode'] = 0;
-                    }
                     $list_code = Mage::getModel('simigiftvoucher/simimapping')->getExistedGiftCard();
                     $detail_list['gift_card']['customer']['list_code'] = $list_code;
-                    $discounts = $this->getGiftVoucherDiscount();
-                    if (count($discounts)){
+                }
+                if ($this->getUseGiftVoucher()){
+                    $detail_list['gift_card']['giftcode']['use_giftcode'] = 1;
+                }
+                else {
+                    $detail_list['gift_card']['giftcode']['use_giftcode'] = 0;
+                }
+                $discounts = $this->getGiftVoucherDiscount();
+                if (count($discounts)){
 
-                        foreach ($discounts as $code => $discount){
-                            $detail_list['gift_card']['giftcode'][] = array(
-                                "gift_code"  => $code,
-                                "hidden_code"  =>  Mage::helper('simigiftvoucher')->getHiddenCode($code),
-                                "amount"    =>  $discount
-                            );
-                        }
+                    foreach ($discounts as $code => $discount){
+                        $detail_list['gift_card']['giftcode'][] = array(
+                            "gift_code"  => $code,
+                            "hidden_code"  =>  Mage::helper('simigiftvoucher')->getHiddenCode($code),
+                            "amount"    =>  $discount
+                        );
                     }
-
                 }
             }
+
             $quoteitems_detail = array();
             $quoteitems = $detail_list['quoteitems'];
+            $showImage = Mage::helper('simigiftvoucher')->getInterfaceCheckoutConfig('display_image_item');
             foreach ($quoteitems as $item){
                 if ($item['product_type'] == 'simigiftvoucher'){
                     $item['option'] = $this->getGiftcardOptions($item['item_id']);
-                    $item['image'] = $this->getGiftcardOptions($item['item_id'], true);
+                    if ($showImage){
+                        $item['image'] = $this->getGiftcardOptions($item['item_id'], true);
+                    }
+                }else {
+                    $this->__NotRecipientShip['no'] = 1;
                 }
                 $quoteitems_detail[] = $item;
+            }
+            $this->_getSession()->setNotShipping(1);
+            if (isset($this->__NotRecipientShip['no']) && $this->__NotRecipientShip['no']){
+                $this->_getSession()->setNotShipping(0);
             }
             $detail_list['quoteitems'] =  $quoteitems_detail;
             $quoteItemApi->detail_list = $detail_list;
 
-
+            //echo json_encode($this->_getSession()->getData());die;
     }
 
     public function simiSimiconnectorModelApiOrdersOnepageShowAfter($observer){
@@ -138,13 +169,27 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                 $count++;
             }
         }
-
-        if ($count == count($items)){
+        $EnableGiftcard = Mage::getStoreConfig('simigiftvoucher/interface_payment/show_gift_card');
+        if (!$EnableGiftcard){
+            $detail_list['gift_card']['use_giftcard'] = false;
+        }
+        elseif ($count == count($items)){
             $detail_onepage['order']['gift_card']['use_giftcard'] = false;
             $detail_onepage['order']['gift_card']['label'] = Mage::helper('simigiftvoucher')->__('Gift Cards cannot be used to purchase Gift Card products');
         }else {
             $detail_onepage['order']['gift_card']['use_giftcard'] = true;
         }
+
+        if (!$this->checkGiftVoucher()){
+            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+        }
+//        if (isset($detail_onepage['order']['total']['grand_total']) && !$detail_onepage['order']['total']['grand_total']){
+//            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+//        }elseif (isset($detail_onepage['order']['total']['grand_total_excl_tax']) && !$detail_onepage['order']['total']['grand_total_excl_tax']){
+//            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+//        }elseif (isset($detail_onepage['order']['total']['grand_total_incl_tax']) && !$detail_onepage['order']['total']['grand_total_incl_tax']){
+//            $detail_onepage['order']['gift_card']['use_giftcard'] = false;
+//        }
 
         if ($detail_onepage['order']['gift_card']['use_giftcard']){
             if (Mage::getSingleton('customer/session')->isLoggedIn()){
@@ -165,29 +210,32 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                     }
 
                 }
-                if ($this->getUseGiftVoucher()){
-                    $detail_onepage['order']['gift_card']['giftcode']['use_giftcode'] = 1;
-                }
-                else {
-                    $detail_onepage['order']['gift_card']['giftcode']['use_giftcode'] = 0;
-                }
                 $list_code = Mage::getModel('simigiftvoucher/simimapping')->getExistedGiftCard();
                 $detail_onepage['order']['gift_card']['customer']['list_code'] = $list_code;
-                $discounts = $this->getGiftVoucherDiscount();
-                if (count($discounts)){
-                    foreach ($discounts as $code => $discount){
-                        /*if($discount <=0){
-                            $error = Mage::helper('simigiftvoucher')->__('Gift code "%s" hasn\'t been used yet.', Mage::helper('simigiftvoucher')->getHiddenCode($code));
-                            $detail_list['order']['gift_card']['notice'] = $error;
-                        }*/
-                        $detail_onepage['order']['gift_card']['giftcode'][] = array(
-                            "gift_code"  => $code,
-                            "hidden_code"  =>  Mage::helper('simigiftvoucher')->getHiddenCode($code),
-                            "amount"    =>  $discount
-                        );
-                    }
-                }
 
+            }
+            if ($this->getUseGiftVoucher()){
+                $detail_onepage['order']['gift_card']['giftcode']['use_giftcode'] = 1;
+            }
+            else {
+                $detail_onepage['order']['gift_card']['giftcode']['use_giftcode'] = 0;
+            }
+            $discounts = $this->getGiftVoucherDiscount();
+            if (count($discounts)){
+                foreach ($discounts as $code => $discount){
+                    $detail_onepage['order']['gift_card']['giftcode'][] = array(
+                        "gift_code"  => $code,
+                        "hidden_code"  =>  Mage::helper('simigiftvoucher')->getHiddenCode($code),
+                        "amount"    =>  $discount
+                    );
+                }
+            }
+        }
+        if (!$detail_onepage['order']['gift_card']['use_giftcard']){
+            if ($this->_getSession()->getNotShipping()){
+                $shipping = [];
+                $detail_onepage['order']['shipping_address'] = (object) $shipping;
+                $detail_onepage['order']['shipping'] = (object) $shipping;
             }
         }
         $onepageApi->detail_onepage = $detail_onepage;
@@ -212,19 +260,26 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         }//die;
         $giftcodes = explode(',',$giftcodes);
         $codediscount = explode(',',$codediscount);
-        $position = 6;
         if ($giftcodes){
             foreach ($giftcodes as $key => $code){
                 if ($code){
-                    $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__($code),$position,$codediscount[$key]);
-                    $position += 1;
+                    $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__($code),9,$codediscount[$key]);
                 }
             }
         }
         if ($creditDiscount){
-            $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__('Giftvoucher Credit'),$position,$creditDiscount);
+            $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__('Giftvoucher Credit'),8,$creditDiscount);
         }
 
+    }
+
+    public  function checkGiftVoucher(){
+        $session = $this->_getSession();
+        $quote = $this->_getQuote();
+        if ($quote->getBaseGrandTotal() < 0.0001 && !$session->getSimiuseGiftCard() && !$session->getSimiuseGiftCardCredit()){
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -361,9 +416,15 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
                 $formData[$option->getCode()] = $option->getValue();
             }
         }
+
         $info_buyRequest = unserialize($formData['info_buyRequest']);
         if ($getUrlImage && isset($info_buyRequest['url_image'])){
             return $info_buyRequest['url_image'];
+        }
+        if (!$formData['recipient_ship'] || empty($formData['recipient_ship']) || !isset($formData['recipient_ship'])){
+            $this->__NotRecipientShip['yes'] = 1;
+        }else {
+            $this->__NotRecipientShip['no'] = 1;
         }
         $opt = array();
         foreach (Mage::helper('simigiftvoucher')->getGiftVoucherOptions() as $code => $label) {
@@ -395,5 +456,23 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             }
         }
         return $opt;
+    }
+
+    public function clearGiftcardSession($session) {
+        if ($session->getSimiuseGiftCard())
+            $session->setSimiuseGiftCard(null)
+                ->setSimigiftCodes(null)
+                ->setSimibaseAmountUsed(null)
+                ->setSimibaseGiftVoucherDiscount(null)
+                ->setSimigiftVoucherDiscount(null)
+                ->setSimicodesBaseDiscount(null)
+                ->setSimicodesDiscount(null)
+                ->setSimigiftMaxUseAmount(null);
+        if ($session->getSimiuseGiftCardCredit()) {
+            $session->setSimiuseGiftCardCredit(null)
+                ->setSimimaxCreditUsed(null)
+                ->setSimibaseUseGiftCreditAmount(null)
+                ->setSimiuseGiftCreditAmount(null);
+        }
     }
 }

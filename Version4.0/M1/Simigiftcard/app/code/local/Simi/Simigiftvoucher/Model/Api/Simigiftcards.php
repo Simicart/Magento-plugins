@@ -21,7 +21,11 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
         if (isset($data['resourceid']) && $data['resourceid'] && $data['resourceid'] != 'uploadimage'){
             $this->builderQuery = $this->_helperProduct->getProduct($data['resourceid']);
         } else {
-            $this->builderQuery = Mage::getModel('catalog/product')->getCollection()->addFieldToFilter('type_id','simigiftvoucher');
+            $this->builderQuery = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addFieldToFilter('type_id','simigiftvoucher')
+                ->addFieldToFilter('status',1);
+
         }
     }
 
@@ -138,7 +142,7 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
             $all_ids[] = $entity->getId();
             //zend_debug::dump($);die('xx');
             $images = array();
-            $imagelink = $this->_helperProduct->getImageProduct($entity, null, $image_width, $image_height);
+            $imagelink = $this->_helperProduct->getImageProduct($entity_product, null, $image_width, $image_height);
             //$sizes = getimagesize($imagelink);
             $images[] = array(
                 'url' => $imagelink,
@@ -230,12 +234,16 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
         $info['description'] = Mage::helper('catalog/output')->productAttribute($entity, $entity->getDescription(), 'description');
         $info['simigift_template_ids'] = Mage::getModel('simigiftvoucher/simimapping')->getTemplateInProduct($info['simigift_template_ids']);
 
-        //$info['simigift_dropdown'] = Mage::getModel('simigiftvoucher/simimapping')->fomatDropdown($info['simigift_dropdown']);
-        //$info['simigift_price'] = Mage::getModel('simigiftvoucher/simimapping')->fomatDropdown($info['simigift_price']);
-
-        $info['conditions'] = Mage::getModel('simigiftvoucher/simimapping')->getConditionProduct($entity->getId());
+        $enableCustomDesign = Mage::helper('simigiftvoucher')->getInterfaceConfig('custom_image');
+        $info['simigiftcard_settings']= array(
+            'simigift_template_upload' => $enableCustomDesign,
+            'simigift_postoffice' => Mage::helper('simigiftvoucher')->getInterfaceConfig('postoffice'),
+            'simigift_message_max' => Mage::helper('simigiftvoucher')->getInterfaceConfig('max'),
+            'is_day_to_send' => Mage::helper('simigiftvoucher')->getInterfaceConfig('schedule')
+        );
+        /*$info['conditions'] = Mage::getModel('simigiftvoucher/simimapping')->getConditionProduct($entity->getId());
         $info['conditions']['conditions_serialized'] = unserialize($info['conditions']['conditions_serialized']);
-        $info['conditions']['actions_serialized'] = unserialize($info['conditions']['actions_serialized']);
+        $info['conditions']['actions_serialized'] = unserialize($info['conditions']['actions_serialized']);*/
 
         $info['additional'] = $_additional;
         $info['images'] = $images;
@@ -258,9 +266,10 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
         $info['wishlist_item_id'] = Mage::helper('simiconnector/wishlist')->getWishlistItemId($entity);
         $info['product_label'] = Mage::helper('simiconnector/productlabel')->getProductLabel($entity);
         $info['product_video'] = Mage::helper('simiconnector/simivideo')->getProductVideo($entity);
+
         //$info['timezones'] = Mage::getModel('core/locale')->getOptionTimezones();
         $this->detail_info = $this->getDetail($info);
-        Mage::dispatchEvent('simi_simiconnector_model_api_products_show_after', array('object' => $this, 'data' => $this->detail_info));
+        Mage::dispatchEvent('simi_simiconnector_model_api_giftcard_show_after', array('object' => $this, 'data' => $this->detail_info));
         return $this->detail_info;
     }
 

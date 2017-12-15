@@ -729,32 +729,32 @@
             <email>
                 <simigiftvoucher_email_self>
                     <label>Send to purchaser</label>
-                    <file>simigiftvoucher/self_amazon.html</file>
+                    <file>giftvoucher/self_amazon.html</file>
                     <type>html</type>
                 </simigiftvoucher_email_self>
                 <simigiftvoucher_email_self_amazon>
                     <label>Send to purchaser</label>
-                    <file>simigiftvoucher/self_amazon.html</file>
+                    <file>giftvoucher/self_amazon.html</file>
                     <type>html</type>
                 </simigiftvoucher_email_self_amazon>
                 <simigiftvoucher_email_template>
                     <label>Send Gift Card to friend</label>
-                    <file>simigiftvoucher/amazon.html</file>
+                    <file>giftvoucher/amazon.html</file>
                     <type>html</type>
                 </simigiftvoucher_email_template>
                 <simigiftvoucher_email_template_amazon>
                     <label>Send Gift Card to friend</label>
-                    <file>simigiftvoucher/amazon.html</file>
+                    <file>giftvoucher/amazon.html</file>
                     <type>html</type>
                 </simigiftvoucher_email_template_amazon>
                 <simigiftvoucher_email_template_refund>
                     <label>Send message refund Gift Card to friend</label>
-                    <file>simigiftvoucher/gift_refund.html</file>
+                    <file>giftvoucher/gift_refund.html</file>
                     <type>html</type>
                 </simigiftvoucher_email_template_refund>
                 <simigiftvoucher_email_template_success>
                     <label>Send message to sender when Gift Card is sent to friend</label>
-                    <file>simigiftvoucher/self_success.html</file>
+                    <file>giftvoucher/self_success.html</file>
                     <type>html</type>
                 </simigiftvoucher_email_template_success>
             </email>
