@@ -110,6 +110,15 @@
                     </simi_simiconnector_model_server_initialize_simipwa>
                 </observers>
             </simi_simiconnector_model_server_initialize>
+            <simiconnector_get_storeview_info_after>
+                <observers>
+                    <simiconnector_get_storeview_info_after_simipwa>
+                        <type>singleton</type>
+                        <class>simipwa/simiobserver</class>
+                        <method>simiPwaChangeStoreView</method>
+                    </simiconnector_get_storeview_info_after_simipwa>
+                </observers>
+            </simiconnector_get_storeview_info_after>
         </events>
     </global>
 </config>

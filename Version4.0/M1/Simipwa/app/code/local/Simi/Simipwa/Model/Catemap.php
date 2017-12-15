@@ -15,13 +15,12 @@ class Simi_Simipwa_Model_Catemap extends Mage_Sitemap_Model_Resource_Catalog_Cat
         $store = Mage::app()->getStore($storeId);
         if (!$store) {
             return false;
-        }
-
+        }        
         $this->_select = $this->_getWriteAdapter()->select()
             ->from($this->getMainTable())
             ->where($this->getIdFieldName() . '=?', $store->getRootCategoryId());
 
-        $categoryRow = $this->_getWriteAdapter()->fetchRow($this->_select);
+        $categoryRow = $this->_getWriteAdapter()->fetchRow($this->_select);        
         if (!$categoryRow) {
             return false;
         }
