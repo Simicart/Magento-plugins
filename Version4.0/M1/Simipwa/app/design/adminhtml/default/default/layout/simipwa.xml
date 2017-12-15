@@ -21,11 +21,11 @@
  */
 -->
 <layout version="0.1.0">
-    <adminhtml_simipwa_pwa_agent>
+    <adminhtml_simipwa_pwa_index>
         <reference name="content">
             <block type="simipwa/adminhtml_pwa" name="simipwa_agent" />
         </reference>
-    </adminhtml_simipwa_pwa_agent>
+    </adminhtml_simipwa_pwa_index>
     <adminhtml_simipwa_notification_index>
         <reference name="content">
             <block type="simipwa/adminhtml_notification" name="simipwa_notification" />

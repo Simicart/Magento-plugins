@@ -17,7 +17,7 @@ class Simi_Simipwa_Model_Message extends Mage_Core_Model_Abstract
         $message = Mage::getModel('simipwa/message')->getCollection()
                     ->addFieldToFilter('device_id',$device->getId())
                     ->getLastItem();
-        if(!$message->getId() || $message->getStatus == 2){
+        if(!$message->getId() || $message->getStatus() == 2){
             $message = Mage::getModel('simipwa/message')->getCollection()
                 ->addFieldToFilter('notice_type',2)
                 ->addFieldToFilter('status',1)

@@ -85,9 +85,8 @@ class Simi_Simipwa_Adminhtml_Simipwa_NotificationController extends Mage_Adminht
                 $data['notice_type'] = 1;
             }
             $device_ids = $data['device_id'];
-            //zend_debug::dump($device_ids);die;
+            //zend_debug::dump($id);die;
             $data['device_id'] = implode(',',$data['device_id']);
-            $message->setData($data);
             //zend_debug::dump($data);die;
             try {
                 if (!$data['type'] && $data['product_id']){
@@ -100,10 +99,12 @@ class Simi_Simipwa_Adminhtml_Simipwa_NotificationController extends Mage_Adminht
                     $item['status'] = 2;
                     $item->save();
                 }
+                if ($id){
+                    $message->setId($id);
+                }
 
                 $message->setCreatedTime(now())->setStatus(1);
-                $message->setId($id)->save();
-
+                $message->save();
                 if($data['notice_type'] == 1){
                     foreach ($device_ids as $id){
                         Mage::getModel('simipwa/agent')->send($id);

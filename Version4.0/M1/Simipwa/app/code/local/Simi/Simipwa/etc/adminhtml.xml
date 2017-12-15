@@ -32,7 +32,7 @@
                 <simipwa_agent module="simipwa">
                     <title>Manage PWA Device</title>
                     <sort_order>1</sort_order>
-                    <action>adminhtml/simipwa_pwa/agent</action>
+                    <action>adminhtml/simipwa_pwa/</action>
                 </simipwa_agent>
                 <simipwa_notification module="simipwa">
                     <title>Manage PWA Notification</title>

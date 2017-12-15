@@ -13,9 +13,28 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
         return Mage::getSingleton('admin/session')->isAllowed('simipwa');
     }
 
-    public function agentAction()
+    public function indexAction()
     {
         $this->loadLayout()->renderLayout();
+    }
+
+    public function deteleAction(){
+        if ($this->getRequest()->getParam('id') > 0) {
+            try {
+                $model = Mage::getModel('simipwa/agent');
+
+                $model->setId($this->getRequest()->getParam('id'))
+                    ->delete();
+
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__('Device was successfully deleted'));
+                $this->_redirect('*/*/');
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+            }
+        }
+        $this->_redirect('*/*/');
     }
 
     public function editAction()
@@ -112,7 +131,7 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
                 }
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('simipwa')->__('Notification was successfully sent'));
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
-                $this->_redirect('*/*/agent');
+                $this->_redirect('*/*/');
                 return;
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
