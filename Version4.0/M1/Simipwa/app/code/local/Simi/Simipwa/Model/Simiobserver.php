@@ -17,4 +17,17 @@ class Simi_Simipwa_Model_Simiobserver
         }
         $observerObject->setData($observerObjectData);
     }
+
+    public function simiPwaChangeStoreView($observer){
+    	$observerObject = $observer->getObject();
+    	$data = $observerObject->getData();
+    	if(isset($data['params']) && isset($data['params']['pwa'])){
+    		$obj = $observer['object'];
+    		$info = $obj->storeviewInfo;
+    		$siteMap = Mage::helper('simipwa')->getSiteMaps();
+            if($siteMap && isset($siteMap['sitemaps']))
+    		  $info['urls'] = $siteMap['sitemaps'];
+    		$obj->storeviewInfo = $info;    		
+    	}    	
+    }
 }

@@ -21,7 +21,7 @@ class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
             }
             return json_decode($sitemaps, true);
         } else {
-            $file = fopen($filePath, 'w+');
+            $file = @fopen($filePath, 'w+');
             $sitemaps = $this->getDataSiteMaps();
             if ($file) {
                 file_put_contents($filePath, $sitemaps);
@@ -34,10 +34,14 @@ class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
 
     public function getDataSiteMaps()
     {
-        $storeId = Mage::app()->getStore()->getId();
+        $storeId = Mage::app()
+            ->getWebsite(true)
+            ->getDefaultGroup()
+            ->getDefaultStoreId();
+
         $baseUrl = Mage::app()->getStore($storeId)->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK);
         // get categories
-        $collection = Mage::getModel('simipwa/catemap')->getCollection($storeId);
+        $collection = Mage::getModel('simipwa/catemap')->getCollection($storeId);                
         $categories = new Varien_Object();
         $categories->setItems($collection);
         $categories_url = array();
@@ -49,9 +53,7 @@ class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
                 'name' => $item->getCategoryName()
             );
         }
-        $urls['categories_url'] = $categories_url;
-        unset($collection);
-
+        $urls['categories_url'] = $categories_url;        
 //         get products
         $collection = new Mage_Sitemap_Model_Resource_Catalog_Product();
         $collection = $collection->getCollection($storeId);
@@ -87,18 +89,18 @@ class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
 
     public function synSiteMaps()
     {
-        $filePath = Mage::getBaseDir('code') . DS . "local" . DS . "Simi" . DS . "Simipwa" . DS . "Assest" . DS . "sitemaps.json";
-
+        $filePath = Mage::getBaseDir('code') . DS . "local" . DS . "Simi" . DS . "Simipwa" . DS . "Assest" . DS . "sitemaps.json";        
         if (file_exists($filePath)) {
             unlink($filePath);
         }
 
-        $file = fopen($filePath, 'w+');
-        $sitemaps = $this->getDataSiteMaps();
+        $file = @fopen($filePath, 'w+');
+        $sitemaps = $this->getDataSiteMaps();        
         if ($file) {
             file_put_contents($filePath, $sitemaps);
             return true;
         }
+
         return false;
     }
 
