@@ -28,13 +28,6 @@ class Simi_Simipwa_Block_Adminhtml_Notification_Grid extends Mage_Adminhtml_Bloc
             'index'	 => 'message_id',
         ));
 
-        $this->addColumn('device_id', array(
-            'header'	=> Mage::helper('simipwa')->__('Device ID'),
-            'align'	 =>'right',
-            'width'	 => '50px',
-            'index'	 => 'device_id',
-        ));
-
         $this->addColumn('notice_title', array(
             'header'	=> Mage::helper('simipwa')->__('Message Title'),
             'index'	 => 'notice_title',
@@ -53,17 +46,6 @@ class Simi_Simipwa_Block_Adminhtml_Notification_Grid extends Mage_Adminhtml_Bloc
             'type'      => 'datetime',
         ));
 
-        $this->addColumn('notice_type', array(
-            'header'	=> Mage::helper('simipwa')->__('Send Device'),
-            'align'	 => 'left',
-            'width'	 => '80px',
-            'index'	 => 'notice_type',
-            'type'		=> 'options',
-            'options'	 => array(
-                1 =>  'Current',
-                2 =>  'All',
-            ),
-        ));
 
         $this->addColumn('status', array(
             'header'	=> Mage::helper('simipwa')->__('Status'),
