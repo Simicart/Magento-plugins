@@ -19,29 +19,155 @@ class Simi_Simipwa_Block_Adminhtml_Notification_Edit_Tab_Form extends Mage_Admin
         //zend_debug::dump($data);
         $data['id'] = $this->getRequest()->getParam('id');
         $fieldset = $form->addFieldset('message_form', array('legend'=>Mage::helper('simipwa')->__('Send Notification')));
-        $device = Mage::getModel('simipwa/agent')->getCollection();
-        $items = array();
-        $items[] = array(
-            'value' => 0,
-            'label' => 'All Device'
-        );
-        foreach ($device as $item){
-            $items[] = array(
-                'value' => $item->getId(),
-                'label' => $item->getId(),
-            );
-        }
-        if ($data['notice_type'] == 2){
-            $data['device_id'] = 0;
-        }
-        $data['device_id'] = explode(',',$data['device_id']);
-
-        $fieldset->addField('device_id', 'multiselect', array(
-            'label'    => Mage::helper('simipwa')->__('Device ID'),
-            'class'    => '',
+//        $device = Mage::getModel('simipwa/agent')->getCollection();
+//        $items = array();
+//        $items[] = array(
+//            'value' => 0,
+//            'label' => 'All Device'
+//        );
+//        foreach ($device as $item){
+//            $items[] = array(
+//                'value' => $item->getId(),
+//                'label' => $item->getId(),
+//            );
+//        }
+//        if ($data['notice_type'] == 2){
+//            $data['device_id'] = 0;
+//        }
+//        $data['device_id'] = explode(',',$data['device_id']);
+//
+//        $fieldset->addField('device_id', 'multiselect', array(
+//            'label'    => Mage::helper('simipwa')->__('Device ID'),
+//            'class'    => '',
+//            'required' => true,
+//            'name'     => 'device_id',
+//            'values'   => $items,
+//        ));
+        $deviceIds = Mage::getModel('simipwa/agent')->getCollection()->getAllIds();
+        $fieldset->addField('devices_pushed', 'textarea', array(
+            'name' => 'devices_pushed',
+            'class' => 'required-entry',
             'required' => true,
-            'name'     => 'device_id',
-            'values'   => $items,
+            'label' => Mage::helper('simipwa')->__('Device IDs'),
+            'note' => Mage::helper('simipwa')->__('Select your Devices'),
+            'after_element_html' => '
+                <a id="product_link" href="javascript:void(0)" onclick="toggleMainDevices()"><img src="' . $this->getSkinUrl('images/rule_chooser_trigger.gif') . '" alt="" class="v-middle rule-chooser-trigger" title="Select Device"></a>
+                <input type="hidden" value="' . $deviceIds . '" id="device_all_ids"/>
+                <div id="main_devices_select" style="display:none"></div>  
+                <script type="text/javascript">
+                    function clearDevices(){                    
+                        $("main_devices_select").style.display == "none";
+                        toggleMainDevices(2);
+                    }
+                    function updateNumberSeleced(){
+                        $("note_devices_pushed_number").update($("devices_pushed").value.split(", ").size());
+                    }
+                    function toggleMainDevices(check){
+                        var cate = $("main_devices_select");
+                        if($("main_devices_select").style.display == "none" || (check ==1) || (check == 2)){
+                            var url = "' . $this->getUrl('adminhtml/simipwa_pwa/chooseDevices') . '";                        
+                            if(check == 1){
+                                $("devices_pushed").value = $("devices_all_ids").value;
+                            }else if(check == 2){
+                                $("devices_pushed").value = "";
+                            }
+                            var params = $("devices_pushed").value.split(", ");
+                            var parameters = {"form_key": FORM_KEY,"selected[]":params };
+                            var request = new Ajax.Request(url,
+                                {
+                                    evalScripts: true,
+                                    parameters: parameters,
+                                    onComplete:function(transport){
+                                        $("main_devices_select").update(transport.responseText);
+                                        $("main_devices_select").style.display = "block"; 
+                                    }
+                                });
+                        if(cate.style.display == "none"){
+                            cate.style.display = "";
+                        }else{
+                            cate.style.display = "none";
+                        } 
+                    }else{
+                        cate.style.display = "none";                    
+                    }
+                    updateNumberSeleced();
+                };
+                
+                var griddevice;
+                   
+                function constructDataDevice(div){
+                    griddevice = window[div.id+"JsObject"];
+                    if(!griddevice.reloadParams){
+                        griddevice.reloadParams = {};
+                        griddevice.reloadParams["selected[]"] = $("devices_pushed").value.split(", ");
+                    }
+                }
+                function toogleCheckAllDevices(el){
+                    if(el == true){
+                        $$("#main_devices_select input[type=checkbox][class=checkbox]").each(function(e){
+                            if(e.name != "check_all"){
+                                if(!e.checked){
+                                    if($("devices_pushed").value == "")
+                                        $("devices_pushed").value = e.value;
+                                    else
+                                        $("devices_pushed").value = $("devices_pushed").value + ", "+e.value;
+                                    e.checked = true;
+                                    griddevice.reloadParams["selected[]"] = $("devices_pushed").value.split(", ");
+                                }
+                            }
+                        });
+                    }else{
+                        $$("#main_devices_select input[type=checkbox][class=checkbox]").each(function(e){
+                            if(e.name != "check_all"){
+                                if(e.checked){
+                                    var vl = e.value;
+                                    if($("devices_pushed").value.search(vl) == 0){
+                                        if($("devices_pushed").value == vl) $("devices_pushed").value = "";
+                                        $("devices_pushed").value = $("devices_pushed").value.replace(vl+", ","");
+                                    }else{
+                                        $("devices_pushed").value = $("devices_pushed").value.replace(", "+ vl,"");
+                                    }
+                                    e.checked = false;
+                                    griddevice.reloadParams["selected[]"] = $("devices_pushed").value.split(", ");
+                                }
+                            }
+                        });
+                    }
+                    updateNumberSeleced();
+                }
+                function selectDevice(e) {
+                        if(e.checked == true){
+                            if(e.id == "main_on"){
+                                $("devices_pushed").value = $("device_all_ids").value;
+                            }else{
+                                if($("devices_pushed").value == "")
+                                    $("devices_pushed").value = e.value;
+                                else
+                                    $("devices_pushed").value = $("devices_pushed").value + ", "+e.value;
+                                e.checked == false;
+                                griddevice.reloadParams["selected[]"] = $("devices_pushed").value.split(", ");
+                            }
+                        }else{
+                             if(e.id == "main_on"){
+                                $("devices_pushed").value = "";
+                            }else{
+                                var vl = e.value;
+                                if($("devices_pushed").value.search(vl) == 0){
+                                    if ($("devices_pushed").value.search(",") == -1)
+                                        $("devices_pushed").value = "";
+                                    else
+                                        $("devices_pushed").value = $("devices_pushed").value.replace(vl+", ","");
+                                }else{
+                                    $("devices_pushed").value = $("devices_pushed").value.replace(", "+ vl,"");
+                                }
+                                e.checked == false;
+                                griddevice.reloadParams["selected[]"] = $("devices_pushed").value.split(", ");
+                            }
+                        }
+                        updateNumberSeleced();
+                    }
+            </script>
+            '
         ));
 
         $fieldset->addField('id', 'hidden', array(
