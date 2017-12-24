@@ -49,7 +49,7 @@ class Simi_Simipwa_Helper_Data extends Mage_Core_Helper_Data
             $categories_url[] = array(
                 'id' => $item->getId(),
                 'url' => $item->getUrl(),
-                'child' => $item->getChild() ? true : false,
+                'hasChild' => $item->getChild() ? true : false,
                 'name' => $item->getCategoryName()
             );
         }
