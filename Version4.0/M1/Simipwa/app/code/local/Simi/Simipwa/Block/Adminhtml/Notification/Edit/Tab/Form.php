@@ -44,6 +44,7 @@ class Simi_Simipwa_Block_Adminhtml_Notification_Edit_Tab_Form extends Mage_Admin
 //            'values'   => $items,
 //        ));
         $deviceIds = Mage::getModel('simipwa/agent')->getCollection()->getAllIds();
+        $data['devices_pushed'] = $data['device_id'];
         $fieldset->addField('devices_pushed', 'textarea', array(
             'name' => 'devices_pushed',
             'class' => 'required-entry',
