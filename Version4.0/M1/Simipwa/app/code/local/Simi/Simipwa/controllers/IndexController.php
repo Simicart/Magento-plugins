@@ -46,7 +46,7 @@ class Simi_Simipwa_IndexController extends Mage_Core_Controller_Front_Action
                 if ($_SERVER["HTTP_USER_AGENT"]) {
                     $user_agent = $_SERVER["HTTP_USER_AGENT"];
                 }
-                $ip = '27.72.100.84';
+                $ip = $_SERVER['REMOTE_ADDR'];
                 $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
 
                 $endpoint = $data['endpoint'];
