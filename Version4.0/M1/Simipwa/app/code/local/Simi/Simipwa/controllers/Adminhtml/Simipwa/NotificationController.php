@@ -255,4 +255,23 @@ class Simi_Simipwa_Adminhtml_Simipwa_NotificationController extends Mage_Adminht
         }
         $this->_redirect('*/*/index');
     }
+
+    public function deleteAction(){
+        if ($this->getRequest()->getParam('id') > 0) {
+            try {
+                $model = Mage::getModel('simipwa/message');
+
+                $model->setId($this->getRequest()->getParam('id'))
+                    ->delete();
+
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__('Notification was successfully deleted'));
+                $this->_redirect('*/*/');
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+            }
+        }
+        $this->_redirect('*/*/');
+    }
 }

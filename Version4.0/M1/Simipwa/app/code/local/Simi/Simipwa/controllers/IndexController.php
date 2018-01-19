@@ -15,11 +15,11 @@ class Simi_Simipwa_IndexController extends Mage_Core_Controller_Front_Action
         $img  = null;
         if ($message_info['type'] == 1){
             $product = Mage::getModel('catalog/product')->load($message->getProductId());
-            $message_info['notice_url'] = $product->getUrlPath();
+            $message_info['notice_url'] = $product->getUrlPath() . "?id=".$message_info["product_id"];
         }
         if ($message_info['type'] == 2){
             $cate = Mage::getModel('catalog/category')->load($message->getCategoryId());
-            $message_info['notice_url'] = $cate->getUrlPath();
+            $message_info['notice_url'] = $cate->getUrlPath() . "?cat=".$message_info["category_id"];
         }
         if ($message_info['image_url']){
             $img = Mage::getUrl('',array('_secure' => true)) . 'media/'.$message_info['image_url'];
