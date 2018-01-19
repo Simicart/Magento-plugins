@@ -25,7 +25,7 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
                 ->getCollection()
                 ->addFieldToFilter('type_id','simigiftvoucher')
                 ->addFieldToFilter('status',1);
-
+            $this->_sortOrders = $this->_helperProduct->getStoreQrders();
         }
     }
 
@@ -266,7 +266,23 @@ class Simi_Simigiftvoucher_Model_Api_Simigiftcards extends Simi_Simiconnector_Mo
         $info['wishlist_item_id'] = Mage::helper('simiconnector/wishlist')->getWishlistItemId($entity);
         $info['product_label'] = Mage::helper('simiconnector/productlabel')->getProductLabel($entity);
         $info['product_video'] = Mage::helper('simiconnector/simivideo')->getProductVideo($entity);
-
+        $barcode = Mage::helper('simigiftvoucher')->getGeneralConfig('barcode_enable');
+        $barcode_type = Mage::helper('simigiftvoucher')->getGeneralConfig('barcode_type');
+        $url_barcode = '';
+        if ($barcode) {
+            if ($barcode_type == 'code128')
+                $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'simigiftvoucher/template/barcode/default.png';
+            else
+                $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'simigiftvoucher/template/barcode/qr.png';
+        }
+        $timeLife = Mage::getStoreConfig('simigiftvoucher/general/expire')*24*3600;
+        $timeSite = Mage::getModel('core/date')->timestamp(now()) + $timeLife;
+        $expire_day = date('m/d/Y', $timeSite);
+        $info['barcode'] = array(
+          'image' => $url_barcode,
+          'expire_day' => $expire_day
+        );
+        $info['timezone'] = Mage::getStoreConfig('general/locale/timezone');
         //$info['timezones'] = Mage::getModel('core/locale')->getOptionTimezones();
         $this->detail_info = $this->getDetail($info);
         Mage::dispatchEvent('simi_simiconnector_model_api_giftcard_show_after', array('object' => $this, 'data' => $this->detail_info));
