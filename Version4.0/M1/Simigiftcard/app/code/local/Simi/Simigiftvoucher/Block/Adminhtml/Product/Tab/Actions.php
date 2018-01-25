@@ -44,13 +44,13 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Product_Tab_Actions extends Mage_Admi
         $form->setHtmlIdPrefix('giftvoucher_');
 //        $fieldset = $form->addFieldset('description_fieldset', array('legend' => Mage::helper('simigiftvoucher')->__('Description')));
 //
-//        $fieldset->addField('simigiftcard_description', 'editor', array(
-//            'label' => Mage::helper('simigiftvoucher')->__('Description of gift card conditions'),
-//            'title' => Mage::helper('simigiftvoucher')->__('Description of gift card conditions'),
+//        $fieldset->addField('cart_rule_description', 'editor', array(
+//            'label' => Mage::helper('simigiftvoucher')->__('Describe conditions applied to shopping cart when using this gift code'),
+//            'title' => Mage::helper('simigiftvoucher')->__('Describe conditions applied to shopping cart when using this gift code'),
 ////            'class' => 'required-entry',
 ////            'required' => true,
-//            'name' => 'simigiftcard_description',
-//            'wysiwyg' => true,
+//            'name' => 'cart_rule_description',
+//            //'wysiwyg' => true,
 //        ));
         $renderer = Mage::getBlockSingleton('adminhtml/widget_form_renderer_fieldset')
                 ->setTemplate('promo/fieldset.phtml')

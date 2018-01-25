@@ -237,4 +237,75 @@ class Simi_Simipwa_Adminhtml_Simipwa_PwaController extends Mage_Adminhtml_Contro
             ->setHeader('Content-Type', 'application/json')
             ->setBody(json_encode($data));
     }
+
+    /*
+     * Get Device to Push Notification
+     */
+
+    public function chooseDevicesAction() {
+        $request = $this->getRequest();
+        echo '<p class="note"><span id="note_devices_pushed_number"> </span> <span> '.Mage::helper('simipwa')->__('Device(s) Selected').'</span></p>';
+//        $block = $this->getLayout()->createBlock(
+//            'simipwa/adminhtml_notification_edit_tab_devices','aaaaa'
+//        );
+
+        $block = $this->getLayout()->createBlock(
+            'simipwa/adminhtml_notification_edit_tab_devices', 'promo_widget_chooser_device_id', array('js_form_object' => $request->getParam('form'),
+        ));
+
+        if ($block) {
+            $this->getResponse()->setBody($block->toHtml());
+        }
+    }
+
+    /**
+     * Delete msg in mass number
+     */
+    public function massDeleteAction()
+    {
+        $Ids = $this->getRequest()->getParam('agent');
+        if (!is_array($Ids)) {
+            Mage::getSingleton('adminhtml/session')->addError(
+                Mage::helper('adminhtml')->__('Please select Device(s)'));
+        } else {
+            try {
+                foreach ($Ids as $id) {
+                    $msg = Mage::getModel('simipwa/agent')->load($id);
+                    $msg->delete();
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__(
+                        'Total of %d record(s) were successfully deleted', count($Ids)
+                    )
+                );
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
+    }
+
+    public function massStatusAction()
+    {
+        $Ids = $this->getRequest()->getParam('agent');
+        $stt = $this->getRequest()->getParam('status');
+        if (!is_array($Ids)) {
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Device(s)'));
+        } else {
+            try {
+                foreach ($Ids as $id) {
+                    $device = Mage::getSingleton('simipwa/agent')
+                        ->load($id);
+                    $device->setStatus($stt)->save();
+
+                }
+                $this->_getSession()->addSuccess(
+                    $this->__('Total of %d record(s) were successfully updated', count($Ids))
+                );
+            } catch (Exception $e) {
+                $this->_getSession()->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
+    }
 }

@@ -554,8 +554,7 @@ class Simi_Simigiftvoucher_Helper_Data extends Mage_Core_Helper_Data
     {
         Mage::helper('simigiftvoucher')->createImageFolderHaitv('barcode', '');
         $options = array(
-            'text' => $giftCode, 
-            'barHeight' => 40, 
+            'text' => $giftCode,
             'barThickWidth' => 2, 
             'drawText' => false, 
             'barHeight' => 42, 

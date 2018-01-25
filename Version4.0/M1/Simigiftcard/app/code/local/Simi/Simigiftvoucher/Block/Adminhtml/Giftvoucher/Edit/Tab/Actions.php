@@ -46,6 +46,12 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Giftvoucher_Edit_Tab_Actions extends 
         $renderer = Mage::getBlockSingleton('adminhtml/widget_form_renderer_fieldset')
                 ->setTemplate('promo/fieldset.phtml')
                 ->setNewChildUrl($this->getUrl('adminhtml/promo_quote/newActionHtml/form/giftvoucher_actions_fieldset'));
+        $fieldset = $form->addFieldset('description_fieldset', array('legend' => Mage::helper('simigiftvoucher')->__('Description')));
+        $fieldset->addField('cart_rule_description', 'editor', array(
+            'label' => Mage::helper('simigiftvoucher')->__('Describe conditions applied to shopping cart when using this gift code'),
+            'title' => Mage::helper('simigiftvoucher')->__('Describe conditions applied to shopping cart when using this gift code'),
+            'name' => 'cart_rule_description',
+        ));
         $fieldset = $form->addFieldset('actions_fieldset', array('legend' => Mage::helper('simigiftvoucher')->__('Allow using the gift code only if products in cart meet the following conditions (leave blank for all products)')))->setRenderer($renderer);
         $fieldset->addField('actions', 'text', array(
             'label' => Mage::helper('simigiftvoucher')->__('Apply To'),

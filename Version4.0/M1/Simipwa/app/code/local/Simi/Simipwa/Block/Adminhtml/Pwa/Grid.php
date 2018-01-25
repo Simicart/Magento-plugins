@@ -79,24 +79,24 @@ class Simi_Simipwa_Block_Adminhtml_Pwa_Grid extends Mage_Adminhtml_Block_Widget_
             'confirm'	=> Mage::helper('simipwa')->__('Are you sure?')
         ));
 
-        $statuses = array(
-            1 => Mage::helper('simipwa')->__('Enabled'),
-            2 => Mage::helper('simipwa')->__('Disabled')
-        );
-
-        array_unshift($statuses, array('label'=>'', 'value'=>''));
-        $this->getMassactionBlock()->addItem('status', array(
-            'label'=> Mage::helper('simipwa')->__('Change status'),
-            'url'	=> $this->getUrl('*/*/massStatus', array('_current'=>true)),
-            'additional' => array(
-                'visibility' => array(
-                    'name'	=> 'status',
-                    'type'	=> 'select',
-                    'class'	=> 'required-entry',
-                    'label'	=> Mage::helper('simipwa')->__('Status'),
-                    'values'=> $statuses
-                ))
-        ));
+//        $statuses = array(
+//            1 => Mage::helper('simipwa')->__('Enabled'),
+//            2 => Mage::helper('simipwa')->__('Disabled')
+//        );
+//
+//        array_unshift($statuses, array('label'=>'', 'value'=>''));
+//        $this->getMassactionBlock()->addItem('status', array(
+//            'label'=> Mage::helper('simipwa')->__('Change status'),
+//            'url'	=> $this->getUrl('*/*/massStatus', array('_current'=>true)),
+//            'additional' => array(
+//                'visibility' => array(
+//                    'name'	=> 'status',
+//                    'type'	=> 'select',
+//                    'class'	=> 'required-entry',
+//                    'label'	=> Mage::helper('simipwa')->__('Status'),
+//                    'values'=> $statuses
+//                ))
+//        ));
         return $this;
     }
 

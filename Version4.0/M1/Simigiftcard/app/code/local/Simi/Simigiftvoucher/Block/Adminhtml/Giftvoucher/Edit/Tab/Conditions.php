@@ -60,8 +60,8 @@ class Simi_Simigiftvoucher_Block_Adminhtml_Giftvoucher_Edit_Tab_Conditions exten
             'label' => Mage::helper('simigiftvoucher')->__('Describe conditions applied to shopping cart when using this gift code'),
             'title' => Mage::helper('simigiftvoucher')->__('Describe conditions applied to shopping cart when using this gift code'),
             'name' => 'description',
-            'wysiwyg' => true,
-            'config' => $configSettings,
+            //'wysiwyg' => true,
+            //'config' => $configSettings,
         ));
         $fieldset = $form->addFieldset('conditions_fieldset', array('legend' => Mage::helper('simigiftvoucher')->__('Allow using the gift code only if the following shopping cart conditions are met (leave blank for all shopping carts)')))->setRenderer($renderer);
 

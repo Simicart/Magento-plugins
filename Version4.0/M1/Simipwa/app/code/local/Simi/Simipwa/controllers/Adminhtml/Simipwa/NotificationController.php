@@ -78,16 +78,16 @@ class Simi_Simipwa_Adminhtml_Simipwa_NotificationController extends Mage_Adminht
                     $data['image_url'] = '';
                 }
             }
-            if(array_key_exists(0,$data['device_id'])){
+
+            $data['device_id'] = $data['devices_pushed'];
+
+            $device_ids = explode(',',$data['device_id']);
+            if(count($device_ids) > 1){
                 $data['notice_type'] = 2;
             }
             else {
                 $data['notice_type'] = 1;
             }
-            $device_ids = $data['device_id'];
-            //zend_debug::dump($id);die;
-            $data['device_id'] = implode(',',$data['device_id']);
-            //zend_debug::dump($data);die;
             try {
                 if (!$data['type'] && $data['product_id']){
                     $data['type'] = 1;
@@ -103,20 +103,18 @@ class Simi_Simipwa_Adminhtml_Simipwa_NotificationController extends Mage_Adminht
                     $message->setId($id);
                 }
 
-                $message->setCreatedTime(now())->setStatus(1);
+                foreach ($device_ids as $key => $id){
+                    $send = Mage::getModel('simipwa/agent')->send($id);
+                    if (!$send) {
+                        Mage::getModel('simipwa/agent')->load($id)->delete();
+                        unset($device_ids[$key]);
+                    }
+                }
+                $ids = implode(',',$device_ids);
+                $message->setCreatedTime(now())
+                        ->setStatus(1)
+                        ->setDeviceId($ids);
                 $message->save();
-                if($data['notice_type'] == 1){
-                    foreach ($device_ids as $id){
-                        Mage::getModel('simipwa/agent')->send($id);
-                    }
-                }
-                elseif ($data['notice_type'] == 2){
-                    $devices = Mage::getModel('simipwa/agent')->getCollection();
-                    foreach ($devices as $item){
-                        $send = Mage::getModel('simipwa/agent')->send($item->getId());
-                        if (!$send) $item->delete();
-                    }
-                }
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('simipwa')->__('Notification was successfully sent'));
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
                 $this->_redirect('*/*/index');
@@ -205,5 +203,75 @@ class Simi_Simipwa_Adminhtml_Simipwa_NotificationController extends Mage_Adminht
         if ($block) {
             $this->getResponse()->setBody($block->toHtml());
         }
+    }
+
+    /**
+     * Delete msg in mass number
+     */
+    public function massDeleteAction()
+    {
+        $msg_Ids = $this->getRequest()->getParam('message');
+        if (!is_array($msg_Ids)) {
+            Mage::getSingleton('adminhtml/session')->addError(
+                Mage::helper('adminhtml')->__('Please select Notification(s)'));
+        } else {
+            try {
+                foreach ($msg_Ids as $msg_id) {
+                    $msg = Mage::getModel('simipwa/message')->load($msg_id);
+                    $msg->delete();
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__(
+                        'Total of %d record(s) were successfully deleted', count($msg_Ids)
+                    )
+                );
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
+    }
+
+    public function massStatusAction()
+    {
+        $msg_Ids = $this->getRequest()->getParam('message');
+        $stt = $this->getRequest()->getParam('status');
+        if (!is_array($msg_Ids)) {
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Notification(s)'));
+        } else {
+            try {
+                foreach ($msg_Ids as $id) {
+                    $msg = Mage::getSingleton('simipwa/message')
+                        ->load($id);
+                    $msg->setStatus($stt)->save();
+
+                }
+                $this->_getSession()->addSuccess(
+                    $this->__('Total of %d record(s) were successfully updated', count($msg_Ids))
+                );
+            } catch (Exception $e) {
+                $this->_getSession()->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
+    }
+
+    public function deleteAction(){
+        if ($this->getRequest()->getParam('id') > 0) {
+            try {
+                $model = Mage::getModel('simipwa/message');
+
+                $model->setId($this->getRequest()->getParam('id'))
+                    ->delete();
+
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__('Notification was successfully deleted'));
+                $this->_redirect('*/*/');
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
+            }
+        }
+        $this->_redirect('*/*/');
     }
 }
