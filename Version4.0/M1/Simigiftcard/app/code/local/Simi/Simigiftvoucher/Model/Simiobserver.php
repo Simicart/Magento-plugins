@@ -235,7 +235,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             if ($this->_getSession()->getNotShipping()){
                 $shipping = [];
                 $detail_onepage['order']['shipping_address'] = (object) $shipping;
-                $detail_onepage['order']['shipping'] = (object) $shipping;
+                $detail_onepage['order']['shipping'] = $shipping;
             }
         }
         $onepageApi->detail_onepage = $detail_onepage;
