@@ -31,6 +31,7 @@ class Message extends \Magento\Framework\App\Action\Action
         $data = $this->getRequest()->getParams();
         $endpoint = $data['endpoint'];
         $message = $this->_objectManager->get('Simi\Simipwa\Model\Notification')->getMessage($endpoint);
+
         $message_info = $message->getData();
         $img = null;
         if ($message_info['type'] == 1) {
@@ -48,7 +49,7 @@ class Message extends \Magento\Framework\App\Action\Action
         $result = array(
             "notification" => $message_info
         );
-        $this->getResponse()->clearHeaders()->setHeader('Content-type', 'application/json', true);
+        $this->getResponse()->setHeader('Content-type', 'application/json', true);
         $this->getResponse()->setBody(json_encode($result));
     }
 

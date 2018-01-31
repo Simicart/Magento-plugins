@@ -6,9 +6,9 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
-    <router id="admin">
-        <route id="simipwaadmin" frontName="simipwaadmin">
-            <module name="Simi_simipwa" before="Magento_Backend" />
+    <router id="standard">
+        <route id="simipwa" frontName="simipwa">
+            <module name="Simi_Simipwa" />
         </route>
     </router>
 </config>

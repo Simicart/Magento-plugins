@@ -50,7 +50,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
         \Magento\Store\Model\System\Store $systemStore,
-        \Simi\Simipwa\Helper\Website $websiteHelper,
+        \Simi\Simiconnector\Helper\Website $websiteHelper,
         \Simi\Simipwa\Model\DeviceFactory $deviceFactory,
         \Magento\Framework\Json\EncoderInterface $jsonEncoder,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
@@ -179,10 +179,10 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         );
 
         $fieldset->addField(
-            'created_time',
+            'created_at',
             'label',
             [
-                'name' => 'created_time',
+                'name' => 'created_at',
                 'label' => __('Created Date'),
                 'title' => __('Created Date'),
                 'required' => false,

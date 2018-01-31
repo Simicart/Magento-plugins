@@ -64,11 +64,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if (!is_dir($filePath)) {
             try {
                 mkdir($filePath, 0777, TRUE);
-                $filePath .= 'sitemaps.json';
             } catch (Exception $e) {
 
             }
         }
+        $filePath .= 'sitemaps.json';
         if (file_exists($filePath)) {
             $sitemaps = file_get_contents($filePath);
             if (!$sitemaps) {

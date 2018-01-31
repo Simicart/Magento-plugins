@@ -114,10 +114,10 @@ class Grid extends Extended
             'options' => $this->deviceFactory->create()->toOptionCountryHash(),
         ]);
 
-        $this->addColumn('created_time', [
+        $this->addColumn('created_at', [
             'type' => 'datetime',
             'header' => __('Created Date'),
-            'index' => 'created_time',
+            'index' => 'created_at',
         ]);
 
         $this->addColumn(
@@ -153,7 +153,7 @@ class Grid extends Extended
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/edit', [
-            'device_id' => $row->getId()
+            'agent_id' => $row->getId()
         ]);
     }
 

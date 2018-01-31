@@ -29,7 +29,8 @@ class Register extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $data = $this->getRequest()->getRawBody();
+        $this->zendRequest = $this->_objectManager->get('Simi\Simiconnector\Helper\RequestHttp');
+        $data            = $this->zendRequest->getRawBody();
         $data = (array)json_decode($data);
         $agent = $this->_objectManager->get('Simi\Simipwa\Model\Device');
         if (!$data['endpoint'])
@@ -43,16 +44,16 @@ class Register extends \Magento\Framework\App\Action\Action
                 }
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
-
+                $date = date('Y-m-d H:i:s');
                 $endpoint = $data['endpoint'];
                 $number = strrpos($data['endpoint'], '/');
                 $endpoint_key = substr($data['endpoint'], $number + 1);
                 $agent->setUserAgent($user_agent)
                     ->setEndpoint($endpoint)
                     ->setEndpointKey($endpoint_key)
-                    ->setP256dhKey($data['keys']->p256dh)
+                    ->setData('p256dh_key',$data['keys']->p256dh)
                     ->setAuthKey($data['keys']->auth)
-                    ->setCreatedAt(now())
+                    ->setCreatedAt($date)
                     ->setCity($details->city)
                     ->setCountry($details->country)
                     ->save();

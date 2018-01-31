@@ -99,7 +99,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         $data = $model->getData();
 
         if (isset($data['device_id'])) {
-            $data['device_type'] = $data['device_id'];
+            $data['devices_pushed'] = $data['device_id'];
         }
 
         $fieldset->addField(

@@ -12,7 +12,7 @@ use Magento\CatalogUrlRewrite\Model\CategoryUrlRewriteGenerator;
 use Magento\Sitemap\Model\ResourceModel\Catalog\Category;
 use Magento\Framework\DataObject;
 
-class CatMap extends Category
+class Catmap extends Category
 {
     public function getCollection($storeId)
     {

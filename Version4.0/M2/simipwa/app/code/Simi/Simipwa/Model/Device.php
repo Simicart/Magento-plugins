@@ -111,7 +111,6 @@ class Device extends AbstractModel
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 
         $result = curl_exec($ch);
-
         curl_close($ch);
         $result = json_decode($result, true);
         if ($result['success']) {
