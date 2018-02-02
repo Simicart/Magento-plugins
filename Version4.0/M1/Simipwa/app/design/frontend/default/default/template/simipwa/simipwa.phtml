@@ -2,7 +2,7 @@
 <script>
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         console.log('Service Worker and Push is supported');
-        let sw = "<?php echo $this->getUrl('',array('_secure' => true)); ?>" + "sw.js";
+        var sw = "<?php echo $this->getUrl('',array('_secure' => true)); ?>" + "sw.js";
         navigator.serviceWorker.register(sw)
             .then(function(swReg) {
                 console.log('Service Worker is registered', '');
