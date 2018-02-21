@@ -8,7 +8,6 @@
 
 namespace Simi\Simipwa\Block\Adminhtml\Notification;
 
-
 class Edit extends \Magento\Backend\Block\Widget\Form\Container
 {
     /**
@@ -27,8 +26,8 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
         \Magento\Backend\Block\Widget\Context $context,
         \Magento\Framework\Registry $registry,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->coreRegistry = $registry;
         parent::__construct($context, $data);
     }

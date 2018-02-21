@@ -12,7 +12,6 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-
 class SyncButton extends Field
 {
 
@@ -24,8 +23,8 @@ class SyncButton extends Field
     public function __construct(
         Context $context,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->_template = 'Simi_Simipwa::system/config/syncbutton.phtml';
         parent::__construct($context, $data);
     }

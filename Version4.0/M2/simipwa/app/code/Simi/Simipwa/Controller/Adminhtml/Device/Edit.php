@@ -28,8 +28,8 @@ class Edit extends \Magento\Backend\App\Action
         Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\Registry $registry
-    )
-    {
+    ) {
+    
 
         $this->resultPageFactory = $resultPageFactory;
         $this->coreRegistry = $registry;
@@ -101,5 +101,9 @@ class Edit extends \Magento\Backend\App\Action
         $resultPage->getConfig()->getTitle()
             ->prepend($model->getId() ? $model->getId() : __('New Device'));
         return $resultPage;
+    }
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Simi_Simipwa::device_manager');
     }
 }

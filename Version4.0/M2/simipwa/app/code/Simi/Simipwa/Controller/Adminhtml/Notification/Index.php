@@ -26,8 +26,8 @@ class Index extends Action
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory
-    )
-    {
+    ) {
+    
 
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
@@ -51,5 +51,10 @@ class Index extends Action
         );
         $resultPage->getConfig()->getTitle()->prepend(__('Notification'));
         return $resultPage;
+    }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Simi_Simipwa::notification_manager');
     }
 }

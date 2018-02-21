@@ -8,7 +8,6 @@
 
 namespace Simi\Simipwa\Controller\Index;
 
-
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 
@@ -33,8 +32,9 @@ class Register extends \Magento\Framework\App\Action\Action
         $data            = $this->zendRequest->getRawBody();
         $data = (array)json_decode($data);
         $agent = $this->_objectManager->get('Simi\Simipwa\Model\Device');
-        if (!$data['endpoint'])
+        if (!$data['endpoint']) {
             throw new \Exception(__('No Endpoint Sent'), 4);
+        }
 
         try {
             if (!$agent->load($data['endpoint'], 'endpoint')->getId()) {
@@ -51,7 +51,7 @@ class Register extends \Magento\Framework\App\Action\Action
                 $agent->setUserAgent($user_agent)
                     ->setEndpoint($endpoint)
                     ->setEndpointKey($endpoint_key)
-                    ->setData('p256dh_key',$data['keys']->p256dh)
+                    ->setData('p256dh_key', $data['keys']->p256dh)
                     ->setAuthKey($data['keys']->auth)
                     ->setCreatedAt($date)
                     ->setCity($details->city)
@@ -68,7 +68,7 @@ class Register extends \Magento\Framework\App\Action\Action
     public function getMediaUrl($media_path)
     {
         return $this->storeManager->getStore()->getBaseUrl(
-                \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-            ) . $media_path;
+            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+        ) . $media_path;
     }
 }

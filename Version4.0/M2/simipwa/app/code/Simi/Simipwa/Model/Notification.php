@@ -36,12 +36,13 @@ class Notification extends AbstractModel
     public function __construct(
         Context $context,
         ObjectManagerInterface $simiObjectManager,
-        Registry $registry,/**/
+        Registry $registry,
+        /**/
         NotificationRM $resource,
         Collection $resourceCollection,
         Website $websiteHelper
-    )
-    {
+    ) {
+    
 
         $this->simiObjectManager = $simiObjectManager;
         $this->websiteHelper = $websiteHelper;

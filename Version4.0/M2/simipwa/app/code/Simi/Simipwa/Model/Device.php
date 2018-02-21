@@ -42,8 +42,8 @@ class Device extends AbstractModel
         DeviceRM $resource,
         Collection $resourceCollection,
         Website $websiteHelper
-    )
-    {
+    ) {
+    
 
         $this->simiObjectManager = $simiObjectManager;
         $this->websiteHelper = $websiteHelper;
@@ -118,5 +118,4 @@ class Device extends AbstractModel
         }
         return false;
     }
-
 }
