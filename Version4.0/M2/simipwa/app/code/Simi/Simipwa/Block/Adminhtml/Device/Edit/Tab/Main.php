@@ -55,8 +55,8 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         \Magento\Framework\Json\EncoderInterface $jsonEncoder,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         array $data = []
-    )
-    {
+    ) {
+    
 
         $this->deviceFactory = $deviceFactory;
         $this->websiteHelper = $websiteHelper;

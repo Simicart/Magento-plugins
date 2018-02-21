@@ -15,4 +15,8 @@ class Grid extends \Magento\Customer\Controller\Adminhtml\Index
         $this->_view->loadLayout(false);
         $this->_view->renderLayout();
     }
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Simi_Simipwa::device_manager');
+    }
 }

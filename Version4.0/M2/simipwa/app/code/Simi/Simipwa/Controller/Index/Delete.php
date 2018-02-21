@@ -8,7 +8,6 @@
 
 namespace Simi\Simipwa\Controller\Index;
 
-
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 
@@ -33,9 +32,10 @@ class Delete extends \Magento\Framework\App\Action\Action
     {
         $data = $this->zendRequest->getRawBody();
         $dataAgent = (array)json_decode($data);
-        $result = array();
-        if (!$dataAgent['endpoint'])
+        $result = [];
+        if (!$dataAgent['endpoint']) {
             throw new Exception(__('No Endpoint Sent'), 4);
+        }
         $agent = $this->_objectManager->get('Simi\Simipwa\Model\Device')->load($dataAgent['endpoint'], 'endpoint');
         if ($agent->getId()) {
             try {
@@ -52,9 +52,8 @@ class Delete extends \Magento\Framework\App\Action\Action
             }
         }
         $this->getResponse()->setHeader('Content-type', 'application/json', true);
-        $this->getResponse()->setBody(json_encode(array(
+        $this->getResponse()->setBody(json_encode([
             "message" => $result
-        )));
+        ]));
     }
-
 }

@@ -48,4 +48,9 @@ class MassDelete extends \Magento\Backend\App\Action
     {
         $deviceModel->delete();
     }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Simi_Simipwa::device_manager');
+    }
 }

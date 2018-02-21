@@ -8,7 +8,6 @@
 
 namespace Simi\Simipwa\Controller\Index;
 
-
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 
@@ -46,9 +45,9 @@ class Message extends \Magento\Framework\App\Action\Action
             $img = $this->getMediaUrl($message_info['image_url']);
             $message_info['image_url'] = $img;
         }
-        $result = array(
+        $result = [
             "notification" => $message_info
-        );
+        ];
         $this->getResponse()->setHeader('Content-type', 'application/json', true);
         $this->getResponse()->setBody(json_encode($result));
     }
@@ -56,7 +55,7 @@ class Message extends \Magento\Framework\App\Action\Action
     public function getMediaUrl($media_path)
     {
         return $this->storeManager->getStore()->getBaseUrl(
-                \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-            ) . $media_path;
+            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+        ) . $media_path;
     }
 }

@@ -8,7 +8,6 @@
 
 namespace Simi\Simipwa\Model\Api;
 
-
 class Simipwas extends \Simi\Simiconnector\Model\Api\Apiabstract
 {
 
@@ -59,9 +58,9 @@ class Simipwas extends \Simi\Simiconnector\Model\Api\Apiabstract
             $img = $this->getMediaUrl($message_info['image_url']);
             $message_info['image_url'] = $img;
         }
-        return array(
+        return [
             "notification" => $message_info
-        );
+        ];
     }
 
     public function store()
@@ -69,8 +68,9 @@ class Simipwas extends \Simi\Simiconnector\Model\Api\Apiabstract
         $data = $this->getData();
         $dataAgent = (array)$data['contents'];
         $agent = $this->simiObjectManager->get('Simi\Simipwa\Model\Device');
-        if (!$dataAgent['endpoint'])
+        if (!$dataAgent['endpoint']) {
             throw new \Exception(__('No Endpoint Sent'), 4);
+        }
 
 
         if (!$agent->load($dataAgent['endpoint'], 'endpoint')->getId()) {
@@ -90,16 +90,16 @@ class Simipwas extends \Simi\Simiconnector\Model\Api\Apiabstract
                 ->save();
         }
         return $this->show();
-
     }
 
     public function destroy()
     {
         $data = $this->getData();
-        $result = array();
+        $result = [];
         $dataAgent = (array)$data['contents'];
-        if (!$dataAgent['endpoint'])
+        if (!$dataAgent['endpoint']) {
             throw new \Exception(__('No Endpoint Sent'), 4);
+        }
         $agent = $this->simiObjectManager->get('Simi\Simipwa\Model\Device')->load($dataAgent['endpoint'], 'endpoint');
         if ($agent->getId()) {
             try {
@@ -115,16 +115,16 @@ class Simipwas extends \Simi\Simiconnector\Model\Api\Apiabstract
                 throw new \Exception($error, 4);
             }
         }
-        return array(
+        return [
             "message" => $result
-        );
+        ];
     }
 
     public function getMediaUrl($media_path)
     {
 
         return $this->storeManager->getStore()->getBaseUrl(
-                \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-            ) . $media_path;
+            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+        ) . $media_path;
     }
 }

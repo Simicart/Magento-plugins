@@ -48,10 +48,8 @@ class InstallSchema implements InstallSchemaInterface
                             `status` smallint(5) unsigned,
                             PRIMARY KEY (`message_id`)
                         )ENGINE=InnoDB DEFAULT CHARSET=utf8");
-
         }
 
         $installer->endSetup();
-
     }
 }

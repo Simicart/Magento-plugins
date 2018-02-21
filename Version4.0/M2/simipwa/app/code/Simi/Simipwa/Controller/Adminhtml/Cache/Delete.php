@@ -13,6 +13,10 @@ use Magento\Backend\App\Action;
 class Delete extends Action
 {
 
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Simi_Simipwa::simipwa_settings');
+    }
     public function execute()
     {
         $result = $this->_objectManager->get('Simi\Simipwa\Helper\Data')->clearAppCaches();

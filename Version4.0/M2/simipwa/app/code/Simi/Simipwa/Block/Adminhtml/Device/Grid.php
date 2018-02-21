@@ -52,8 +52,8 @@ class Grid extends Extended
         \Magento\Framework\App\ResourceConnection $resourceConnection,
         \Simi\Simiconnector\Helper\Website $websiteHelper,
         array $data = []
-    )
-    {
+    ) {
+    
 
         $this->collectionFactory = $collectionFactory;
         $this->moduleManager = $moduleManager;
