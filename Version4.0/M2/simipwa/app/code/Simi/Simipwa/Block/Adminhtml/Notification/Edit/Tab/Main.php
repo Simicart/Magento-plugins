@@ -58,8 +58,8 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Framework\ObjectManagerInterface $simiObjectManager,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->simiObjectManager = $simiObjectManager;
         $this->siminotificationFactory = $notificationFactory;
         $this->websiteHelper = $websiteHelper;

@@ -57,8 +57,8 @@ class Devicegrid extends \Magento\Backend\Block\Widget\Grid\Extended
         \Simi\Simiconnector\Helper\Website $websiteHelper,
         \Magento\Framework\ObjectManagerInterface $simiObjectManager,
         array $data = []
-    )
-    {
+    ) {
+    
 
         $this->simiObjectManager = $simiObjectManager;
         $this->collectionFactory = $collectionFactory;

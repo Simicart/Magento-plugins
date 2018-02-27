@@ -43,8 +43,8 @@ class Productgrid extends \Magento\Backend\Block\Widget\Grid\Extended
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\ObjectManagerInterface $simiObjectManager,
         array $data = []
-    )
-    {
+    ) {
+    
         $this->simiObjectManager = $simiObjectManager;
         $this->productFactory = $productFactory;
         $this->siminotificationFactory = $siminotificationFactory;

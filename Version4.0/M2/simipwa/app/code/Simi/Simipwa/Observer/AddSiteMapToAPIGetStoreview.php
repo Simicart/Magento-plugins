@@ -36,8 +36,9 @@ class AddSiteMapToAPIGetStoreview implements ObserverInterface
             $obj = $observer['object'];
             $info = $obj->storeviewInfo;
             $siteMap = $this->simiObjectManager->get('\Simi\Simipwa\Helper\Data')->getSiteMaps($data['resourceid']);
-            if ($siteMap && isset($siteMap['sitemaps']))
+            if ($siteMap && isset($siteMap['sitemaps'])) {
                 $info['urls'] = $siteMap['sitemaps'];
+            }
             $obj->storeviewInfo = $info;
         }
     }

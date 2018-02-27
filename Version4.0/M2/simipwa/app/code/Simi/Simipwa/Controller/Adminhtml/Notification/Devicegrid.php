@@ -10,4 +10,9 @@ class Devicegrid extends \Simi\Simipwa\Controller\Adminhtml\Device\Grid
         $this->_view->loadLayout(false);
         $this->_view->renderLayout();
     }
+
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Simi_Simipwa::notification_manager');
+    }
 }

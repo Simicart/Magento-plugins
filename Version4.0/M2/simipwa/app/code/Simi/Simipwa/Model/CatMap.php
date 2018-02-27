@@ -92,5 +92,4 @@ class Catmap extends Category
         // $category->setCategoryName($categoryRow['category_name']);
         return $category;
     }
-
 }
