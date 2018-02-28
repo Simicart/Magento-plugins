@@ -63,7 +63,7 @@ class SyncButton extends Field
         )->setData(
             [
                 'id' => 'clear_mobile_cache',
-                'label' => __('Clear Cache'),
+                'label' => __('Sync Sitemaps'),
             ]
         );
 

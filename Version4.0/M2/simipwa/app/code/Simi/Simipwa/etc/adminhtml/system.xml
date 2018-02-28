@@ -11,13 +11,37 @@
             <resource>Simi_Simipwa::simipwa_settings</resource>
             <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General Configuration</label>
+                <field id="pwa_enable" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Contact support@simicart.com for PWA building</comment>
+                </field>
+                <field id="pwa_url" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>PWA Page URL</label>
+                    <depends>
+                        <field id="*/*/pwa_enable">1</field>
+                    </depends>
+                </field>
+                <field id="pwa_excluded_paths" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>PWA Excluded Paths</label>
+                    <comment>Separated by comma, urls that contain any of the keys above would be excluded from Web App. Eg: checkout/onepage</comment>
+                    <depends>
+                        <field id="*/*/pwa_enable">1</field>
+                    </depends>
+                </field>
+                <field id="clear_cache" translate="label" type="text" sortOrder="399" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sync Sitemap Url</label>
+                    <depends>
+                        <field id="*/*/pwa_enable">1</field>
+                    </depends>
+                    <frontend_model>Simi\Simipwa\Block\System\Config\Form\SyncButton</frontend_model>
+                </field>
+            </group>
+            <group id="notification" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
                 <field id="enable" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="clear_cache" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <frontend_model>Simi\Simipwa\Block\System\Config\Form\SyncButton</frontend_model>
-                    <comment>Clear the mobile and webapp caches</comment>
                 </field>
             </group>
         </section>
