@@ -90,7 +90,7 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             $uri = '/'.str_replace($baseUrl, '', $currentUrl);
         }
         
-        $excludedUrls = array('admin', 'simiconnector', 'simicustompayment', 'payfort', 'simipwa', 'rest/v2');
+        $excludedUrls = array('admin', 'simiconnector', 'simicustompayment', 'payfort', 'simipwa', 'rest/v2', 'checkout');
         
         $excludedPaths = str_replace(' ', '', $scopeConfigInterface->getValue('simipwa/general/pwa_excluded_paths'));
         $excludedPaths = explode(',', $excludedPaths);
