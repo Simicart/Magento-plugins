@@ -16,6 +16,7 @@ class Catmap extends Category
 {
     public function getCollection($storeId)
     {
+
         $categories = [];
 
         /* @var $store \Magento\Store\Model\Store */
