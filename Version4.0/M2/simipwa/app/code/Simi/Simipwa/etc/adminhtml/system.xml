@@ -38,9 +38,9 @@
                 </field>
             </group>
             <group id="notification" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>General Configuration</label>
+                <label>Notification Configuration</label>
                 <field id="enable" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable</label>
+                    <label>Enable Chrome Notification for Website</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>

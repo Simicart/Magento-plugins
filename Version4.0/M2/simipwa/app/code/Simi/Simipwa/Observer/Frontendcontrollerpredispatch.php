@@ -51,7 +51,7 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             $mobile_browser++;
         }
 
-        if ((strpos(strtolower($_SERVER['HTTP_ACCEPT']),'application/vnd.wap.xhtml+xml') > 0) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE'])))) {
+        if ((strpos(strtolower($_SERVER['HTTP_ACCEPT']),'application/vnd.wap.xhtml+xml') !== false) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE'])))) {
             $mobile_browser++;
         }
 
@@ -71,7 +71,7 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             $mobile_browser++;
         }
 
-        if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']),'opera mini') > 0) {
+        if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']),'opera mini') !== false) {
             $mobile_browser++;
             //Check for tablets on opera mini alternative headers
             $stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])?$_SERVER['HTTP_X_OPERAMINI_PHONE_UA']:(isset($_SERVER['HTTP_DEVICE_STOCK_UA'])?$_SERVER['HTTP_DEVICE_STOCK_UA']:''));
@@ -90,7 +90,7 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             $uri = '/'.str_replace($baseUrl, '', $currentUrl);
         }
         
-        $excludedUrls = array('admin', 'simiconnector', 'simicustompayment', 'payfort', 'simipwa', 'rest/v2', 'checkout');
+        $excludedUrls = array('admin', 'simiconnector', 'simicustompayment', 'payfort', 'simipwa', 'rest/v2');
         
         $excludedPaths = str_replace(' ', '', $scopeConfigInterface->getValue('simipwa/general/pwa_excluded_paths'));
         $excludedPaths = explode(',', $excludedPaths);
@@ -107,7 +107,6 @@ class Frontendcontrollerpredispatch implements ObserverInterface
         if (!$isExcludedCase) {
             $url = $pwa_url.$uri;
             header("Location: ".$url);
-            die();
         }
     }
 }

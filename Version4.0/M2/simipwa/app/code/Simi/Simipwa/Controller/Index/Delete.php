@@ -34,7 +34,7 @@ class Delete extends \Magento\Framework\App\Action\Action
         $dataAgent = (array)json_decode($data);
         $result = [];
         if (!$dataAgent['endpoint']) {
-            throw new Exception(__('No Endpoint Sent'), 4);
+            throw new \Exception(__('No Endpoint Sent'), 4);
         }
         $agent = $this->_objectManager->get('Simi\Simipwa\Model\Device')->load($dataAgent['endpoint'], 'endpoint');
         if ($agent->getId()) {

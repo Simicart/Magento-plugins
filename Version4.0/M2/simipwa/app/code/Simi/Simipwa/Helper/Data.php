@@ -63,7 +63,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         if (!is_dir($filePath)) {
             try {
                 mkdir($filePath, 0777, true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
         }
         $filePath .= 'sitemaps.json';
