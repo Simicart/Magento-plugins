@@ -149,7 +149,7 @@ class Grid extends Extended
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/edit', [
-            'device_id' => $row->getId()
+            'message_id' => $row->getId()
         ]);
     }
 

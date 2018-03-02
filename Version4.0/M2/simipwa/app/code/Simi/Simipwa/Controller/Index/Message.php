@@ -28,18 +28,17 @@ class Message extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $data = $this->getRequest()->getParams();
-        $endpoint = $data['endpoint'];
-        $message = $this->_objectManager->get('Simi\Simipwa\Model\Notification')->getMessage($endpoint);
-
+        $message = $this->_objectManager->get('Simi\Simipwa\Model\Notification')->getMessage();
         $message_info = $message->getData();
         $img = null;
         if ($message_info['type'] == 1) {
             $product = $this->_objectManager->get('Magento\Catalog\Model\Product')->load($message->getProductId());
-            $message_info['notice_url'] = $product->getUrlPath() . "?id=" . $message_info["product_id"];
-        }
-        if ($message_info['type'] == 2) {
-            $cate = $this->_objectManager->get('Magento\Catalog\Model\Category')->load($message->getCategoryId());
-            $message_info['notice_url'] = $cate->getUrlPath() . "?cat=" . $message_info["category_id"];
+            $message_info['notice_url'] = $product->getProductUrl();
+        } else if ($message_info['type'] == 2) {
+            $message_info['notice_url'] = $this->_objectManager
+            ->get('\Magento\Catalog\Model\CategoryRepository')
+            ->get($message->getCategoryId())
+            ->getUrl();
         }
         if ($message_info['image_url']) {
             $img = $this->getMediaUrl($message_info['image_url']);

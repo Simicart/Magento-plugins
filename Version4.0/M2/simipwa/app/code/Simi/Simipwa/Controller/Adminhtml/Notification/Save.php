@@ -24,7 +24,10 @@ class Save extends Action
         $is_delete_siminotification = isset($data['image_url']['delete']) ? $data['image_url']['delete'] : false;
         $data['image_url'] = isset($data['image_url']['value']) ? $data['image_url']['value'] : '';
         $data['created_time'] = time();
-        $data['device_id']= $data['devices_pushed'];
+        $data['device_id']= (isset($data['devices_pushed']) &&
+            $data['devices_pushed'] &&
+            ($data['devices_pushed']  !== '')
+        )?$data['devices_pushed']:'';
         $model->addData($data);
         try {
             $imageHelper = $simiObjectManager->get('Simi\Simiconnector\Helper\Data');
@@ -36,10 +39,7 @@ class Save extends Action
                     $model->setImageUrl($imageFile);
                 }
             }
-
-            $data['device_id'] = $data['devices_pushed'];
-            $device_ids = explode(',', $data['device_id']);
-            if (count($device_ids) > 1) {
+            if ($data['device_id'] && ($data['device_id']!= '')) {
                 $data['notice_type'] = 2;
             } else {
                 $data['notice_type'] = 1;
@@ -48,18 +48,16 @@ class Save extends Action
             if (!$data['type'] && $data['product_id']) {
                 $data['type'] = 1;
             }
-            $model->setData($data);
-            $mess = $simiObjectManager->get('Simi\Simipwa\Model\Notification')->getCollection()
-                ->addFieldToFilter('status', 1);
+            $model->setData($data)->setStatus(1);
+
+            $mess = $simiObjectManager->get('Simi\Simipwa\Model\Notification')->getCollection();
             foreach ($mess as $item) {
-                $item['status'] = 2;
+                $item->setStatus(2);
                 $item->save();
             }
             if ($id) {
                 $model->setId($id);
             }
-
-            
 
             if ($this->getRequest()->getParam('back')) {
                 $model->save();
@@ -68,17 +66,24 @@ class Save extends Action
                 $this->_redirect('*/*/edit', ['message_id' => $model->getId(), '_current' => true]);
                 return;
             } else {
-                foreach ($device_ids as $key => $id) {
-                    $send = $simiObjectManager->get('Simi\Simipwa\Model\Device')->send($id);
+                $device_ids = [];
+                if ($data['device_id'] && ($data['device_id']!= '')) {
+                    $device_ids = explode(',', $data['device_id']);
+                }
+                foreach ($simiObjectManager->get('Simi\Simipwa\Model\Device')->getCollection() as $device) {
+                    if ($device_ids && count($device_ids) && !in_array($device->getId(), $device_ids))
+                        continue;
+                    $send = $simiObjectManager->get('Simi\Simipwa\Model\Device')->send($device->getId());
                     if (!$send) {
-                        $simiObjectManager->get('Simi\Simipwa\Model\Device')->load($id)->delete();
+                        $device->delete();
                         unset($device_ids[$key]);
                     }
                 }
-                $ids = implode(',', $device_ids);
+                if ($device_ids && count($device_ids)) {
+                    $model->setData('device_id', implode(',', $device_ids));
+                } 
                 $model->setCreatedTime(date('Y-m-d H:i:s'))
-                        ->setStatus(1)
-                        ->setDeviceId($ids);
+                        ->setStatus(1);
                 $model->save();
             }
             $this->_redirect('*/*/');

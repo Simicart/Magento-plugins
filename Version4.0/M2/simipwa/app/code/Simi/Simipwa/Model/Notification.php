@@ -65,17 +65,10 @@ class Notification extends AbstractModel
         return $platform;
     }
 
-    public function getMessage($endpoint)
+    public function getMessage()
     {
-        $device = $this->simiObjectManager->create('Simi\Simipwa\Model\Device')->load($endpoint, 'endpoint');
-        $message = $this->getCollection()->addFieldToFilter('device_id', $device->getId())
-            ->getLastItem();
-        if (!$message->getId() || $message->getStatus() == 2) {
-            $message = $this->getCollection()
-                ->addFieldToFilter('notice_type', 2)
-                ->addFieldToFilter('status', 1)
-                ->getLastItem();
-        }
+        $message = $this->getCollection()
+                    ->getLastItem();
         return $message;
     }
 }

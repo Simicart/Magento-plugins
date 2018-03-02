@@ -115,18 +115,6 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         );
 
         $fieldset->addField(
-            'image_url',
-            'image',
-            [
-                'name' => 'image_url',
-                'label' => __('Image'),
-                'title' => __('Image'),
-                'required' => false,
-                'disabled' => $isElementDisabled
-            ]
-        );
-
-        $fieldset->addField(
             'notice_content',
             'textarea',
             [
@@ -199,7 +187,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'name' => 'devices_pushed',
                 'label' => __('Device IDs'),
                 'title' => __('Device IDs'),
-                'required' => true,
+                'note'     => __('Leave this empty to push to All devices'),
                 'disabled' => $isElementDisabled,
                 'after_element_html' => '<a href="#" title="Show Device Grid" onclick="toogleDevice();return false;">'
                     . '<img id="show_device_grid" src="'
