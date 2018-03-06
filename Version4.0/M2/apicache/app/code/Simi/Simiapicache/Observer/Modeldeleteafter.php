@@ -40,6 +40,10 @@ class Modeldeleteafter implements ObserverInterface
             'Magento\Cms\Model\Page',
             'Magento\Reports\Model\Flag',
             'Magento\Widget\Model\Widget\Instance',
+            'Simi\Simiconnector\Model\Device',
+            'Simi\Simiconnector\Model\Siminotification',
+            'Simi\Simipwa\Model\Device',
+            'Simi\Simipwa\Model\Notification',
         ];
         if (!$observer->getObject())
             return $this;
