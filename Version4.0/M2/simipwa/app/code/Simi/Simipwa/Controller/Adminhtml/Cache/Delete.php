@@ -19,9 +19,14 @@ class Delete extends Action
     }
     public function execute()
     {
-        $result = $this->_objectManager->get('Simi\Simipwa\Helper\Data')->clearAppCaches();
-        return $this->getResponse()
-            ->setHeader('Content-Type', 'application/json')
-            ->setBody(json_encode($result));
+        $this->_objectManager->get('Simi\Simipwa\Helper\Data')->clearAppCaches();
+        $this->messageManager->addSuccess(__('Site map Synchronization completed.'));
+        $resultRedirect = $this->resultRedirectFactory->create();
+        return $resultRedirect->setPath(
+            'adminhtml/system_config/edit',
+            [
+                'section' => 'simipwa'
+            ]
+        );
     }
 }
