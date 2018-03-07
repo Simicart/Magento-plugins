@@ -4,14 +4,29 @@
             console.log('Service Worker and Push is supported');
             var sw = "<?php echo $block->getBaseUrl() ?>" + "sw.js";
             navigator.serviceWorker.register(sw)
-                .then(function(swReg) {
+                .then(function (swReg) {
                     console.log('Service Worker is registered', '');
 
                     swRegistration = swReg;
                     initializeUI();
+                    if (navigator.onLine) {
+                        swReg.update();
+                    }
+                    swRegistration.onupdatefound = function () {
+                        const installingWorker = swRegistration.installing;
+                        installingWorker.onstatechange = function (){
+                            if (installingWorker.state === 'installed') {
+                                if (navigator.serviceWorker.controller) {
+                                    swReg.update();
+                                } else {
+                                    console.log('Content is cached for offline use.');
+                                }
+                            }
+                        };
+                    };
 
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error('Service Worker Error', error);
                 });
         } else {
