@@ -30,7 +30,7 @@ class Save extends Action
         )?$data['devices_pushed']:'';
         $model->addData($data);
         try {
-            $imageHelper = $simiObjectManager->get('Simi\Simiconnector\Helper\Data');
+            $imageHelper = $simiObjectManager->get('Simi\Simipwa\Helper\Data');
             if ($is_delete_siminotification && $model->getImageUrl()) {
                 $model->setImageUrl('');
             } else {
