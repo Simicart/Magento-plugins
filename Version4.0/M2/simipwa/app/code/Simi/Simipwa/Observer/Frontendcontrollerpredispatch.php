@@ -30,6 +30,14 @@ class Frontendcontrollerpredispatch implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        if ($this->simiObjectManager
+            ->get('\Magento\Framework\Registry')
+            ->registry('simipwa_checked_redirecting_once'))
+            return;
+        $this->simiObjectManager
+            ->get('\Magento\Framework\Registry')
+            ->register('simipwa_checked_redirecting_once', true);
+        
         $scopeConfigInterface = $this->simiObjectManager
                 ->get('\Magento\Framework\App\Config\ScopeConfigInterface');
         $storeManager = $this->simiObjectManager->get('\Magento\Store\Model\StoreManagerInterface');
