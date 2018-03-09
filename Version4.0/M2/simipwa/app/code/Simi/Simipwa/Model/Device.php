@@ -8,6 +8,7 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Registry;
 use Simi\Simipwa\Model\ResourceModel\Device as DeviceRM;
 use Simi\Simipwa\Model\ResourceModel\Device\Collection;
+use Simi\Simiconnector\Helper\Website;
 
 /**
  * Simipwa Model
@@ -32,17 +33,21 @@ class Device extends AbstractModel
      * @param Registry $registry
      * @param DeviceRM $resource
      * @param Collection $resourceCollection
+     * @param Website $websiteHelper
      */
     public function __construct(
         Context $context,
         ObjectManagerInterface $simiObjectManager,
         Registry $registry,
         DeviceRM $resource,
-        Collection $resourceCollection
-    )
-    {
+        Collection $resourceCollection,
+        Website $websiteHelper
+    ) {
+
 
         $this->simiObjectManager = $simiObjectManager;
+        $this->websiteHelper = $websiteHelper;
+
         parent::__construct(
             $context,
             $registry,
@@ -63,9 +68,9 @@ class Device extends AbstractModel
 
     public function toOptionCountryHash()
     {
-        $country_collection = $this->simiObjectManager->get('Simi\Simipwa\Helper\Data')->getCountryCollection();
+        $country_collection = $this->websiteHelper->getCountryCollection();
         $list = [];
-        if ($this->simiObjectManager->get('Simi\Simipwa\Helper\Data')->countArray($country_collection) > 0) {
+        if ($this->simiObjectManager->get('Simi\Simiconnector\Helper\Data')->countArray($country_collection) > 0) {
             foreach ($country_collection as $country) {
                 $list[$country->getId()] = $country->getName();
             }
@@ -79,7 +84,11 @@ class Device extends AbstractModel
         $public_key = 'BFn4qEo_D1R50vPl58oOPfkQgbTgaqmstMhIzWyVgfgbMQPtFk94X-ThjG0hfOTSAQUBcCBXpPHeRMN7cqDDPaE';
         $private_key = 'r2nph41fesUhfHitp1wbldZvIu_I51Aiy-S8w7fpv-U';
         //$api_key = 'AAAAwdkoDtM:APA91bGOxLHjmDeyzCj7Eix-8M1vHOkvhBUxFBUC_XWcUIksOrVtdI2vFYae-d1AlNRAmmb_RFHTCZw9CStzc-z2qJ50B1cCNhlpouO8Wkt_bBxzTq4HYq3IbxTqtolTMGJFBi4DPatv';
-        $device = $this->load($device_id)->getData();
+        $device = $this->load($device_id);
+        if(!$device->getId()){
+            return false;
+        }
+        $device =$device->getData();
         $data['subscription'] = [
             "endpoint" => $device['endpoint'],
             "expirationTime" => null,
@@ -113,5 +122,4 @@ class Device extends AbstractModel
         }
         return false;
     }
-
 }
