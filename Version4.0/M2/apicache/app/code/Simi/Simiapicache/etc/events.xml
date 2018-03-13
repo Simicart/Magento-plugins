@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="model_save_after">
+        <observer name="simi_simiapicache_model_save_after"
+                  instance="Simi\Simiapicache\Observer\Modelsaveafter" />
+    </event>
+    <event name="model_delete_after">
+        <observer name="simi_simiapicache_model_delete_after"
+                  instance="Simi\Simiapicache\Observer\Modeldeleteafter" />
+    </event>
+</config>

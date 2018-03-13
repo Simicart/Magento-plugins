@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="simiapicache" translate="label" sortOrder="1000">
+            <label>Simi Api Cache</label>
+        </tab>
+        <section id="simiapicache" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>General Settings</label>
+            <tab>simiapicache</tab>
+            <resource>Simi_Simiapicache::simiapicache_settings</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced PWA Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+                <field id="excluded_paths" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Excluded Paths</label>
+                    <comment>Separated by comma</comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+
+
+                <field id="flush_cache" translate="label" type="text" sortOrder="399" showInDefault="1">
+                    <label>Flush Api Cache</label>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                    <frontend_model>Simi\Simiapicache\Block\System\Config\Form\Flushbutton</frontend_model>
+                </field>
+                
+            </group>
+        </section>
+    </system>
+</config>
