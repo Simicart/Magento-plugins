@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <simiapicache translate="label" module="simiapicache">
+            <class>separator-top</class>
+            <label>Simicart API Cache</label>
+            <tab>simiconnector</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>299</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <apicache translate="label">
+                    <label>API Cache Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1299</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable API Cache</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+						<excluded_paths translate="label">
+							<label>API Excluded Paths</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Separated by comma</comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+						</excluded_paths>
+						<flush_cache translate="label">
+							<label>Flush Api Cache</label>
+							<frontend_type>button</frontend_type>
+							<frontend_model>simiapicache/adminhtml_system_config_form_flushcache</frontend_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment></comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+						</flush_cache>
+                    </fields>
+                </apicache>
+            </groups>
+        </simiapicache>
+    </sections>
+</config>
