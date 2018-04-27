@@ -23,6 +23,22 @@
             </updates>
         </layout>
         <events>
+            <controller_action_predispatch>
+                <observers>
+                    <simi_simiapicache_controller_action_predispatch>
+                        <class>simiapicache/observer</class>
+                        <method>controllerActionPredispatch</method>
+                    </simi_simiapicache_controller_action_predispatch>
+                </observers>
+            </controller_action_predispatch>
+            <simiconnector_rest_v2>
+                <observers>
+                    <simi_simiapicache_simiconnector_rest_v2>
+                        <class>simiapicache/observer</class>
+                        <method>apijsonencoding</method>
+                    </simi_simiapicache_simiconnector_rest_v2>
+                </observers>
+            </simiconnector_rest_v2>
         </events>
     </frontend>
     <admin>
@@ -112,7 +128,22 @@
             </simiapicache>
         </helpers>
         <events>
-            
+            <model_save_after>
+                <observers>
+                    <simi_simiapicache_model_save_after>
+                        <class>simiapicache/observer</class>
+                        <method>flushcache</method>
+                    </simi_simiapicache_model_save_after>
+                </observers>
+            </model_save_after>
+            <model_delete_after>
+                <observers>
+                    <simi_simiapicache_model_delete_after>
+                        <class>simiapicache/observer</class>
+                        <method>flushcache</method>
+                    </simi_simiapicache_model_delete_after>
+                </observers>
+            </model_delete_after>
         </events>
     </global>
     <default>

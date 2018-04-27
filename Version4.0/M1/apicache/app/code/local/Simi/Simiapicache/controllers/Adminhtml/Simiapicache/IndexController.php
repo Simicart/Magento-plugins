@@ -13,7 +13,11 @@ class Simi_Simiapicache_Adminhtml_Simiapicache_IndexController extends Mage_Admi
     }
     
     public function flushAction() {
-        die('a');
+        Mage::helper('simiapicache')->flushCache();
+        Mage::getSingleton('adminhtml/session')
+            ->addSuccess(Mage::helper('simiapicache')->__('Api Cache has been Flushed.'));
+        $this->_redirect('adminhtml/system_config/edit/section/simiapicache');
+        return;
     }
 
 }
