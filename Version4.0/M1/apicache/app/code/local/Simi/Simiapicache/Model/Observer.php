@@ -12,7 +12,7 @@ class Simi_Simiapicache_Model_Observer
             return;
 
         $uri = $_SERVER['REQUEST_URI'];
-        $filePath = Mage::getBaseDir('var') . DS . 'cache' . DS . 'simiapi_json' . DS . md5($uri) . ".json";
+        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($uri) . ".json";
         if (file_exists($filePath)) {
             $apiResult = file_get_contents($filePath);
             if ($apiResult) {
@@ -23,18 +23,18 @@ class Simi_Simiapicache_Model_Observer
             }
         }
     }
-    
+
     public function apijsonencoding($observer) {
         if (!$observer->getObject())
             return;
 
         if (!Mage::getStoreConfig('simiapicache/apicache/enable'))
             return;
-       
+
         $result = $observer->getObject()->getData();
         if (!$result || (isset($result['errors'])))
             return;
-        
+
         $uri = $_SERVER['REQUEST_URI'];
         $whitelistApis = [
             'quoteitems',
@@ -43,12 +43,12 @@ class Simi_Simiapicache_Model_Observer
             'customizepayments',
             'addresses',
         ];
-        
+
         if ($excludedPaths = Mage::getStoreConfig('simiapicache/general/excluded_paths')) {
             $excludedPaths = explode(',', str_replace(' ', '', $excludedPaths));
             $whitelistApis = array_merge($whitelistApis, $excludedPaths);
         }
-        
+
         foreach ($whitelistApis as $whitelistApi) {
             if (($whitelistApi != '') && (strpos($uri, $whitelistApi) !== false))
                 return $this;
@@ -57,20 +57,20 @@ class Simi_Simiapicache_Model_Observer
         if ((strpos($uri, 'storeviews') !== false) && (strpos($uri, 'storeviews/default') === false))
             return $this;
 
-        $path =  Mage::getBaseDir('var') . DS . 'cache' . DS . 'simiapi_json';
+        $path =  Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json';
         if (!is_dir($path)) {
             try {
                 mkdir($path, 0777, true);
             } catch (\Exception $e) {
             }
         }
-        
-        $filePath = Mage::getBaseDir('var') . DS . 'cache' . DS . 'simiapi_json' . DS . md5($uri) . ".json";
-        
+
+        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($uri) . ".json";
+
         $data_json = json_encode($result);
         file_put_contents($filePath, $data_json);
     }
-    
+
     public function flushcache($observer) {
         $passedModels = [
             'Mage_Log_Model_Visitor',
