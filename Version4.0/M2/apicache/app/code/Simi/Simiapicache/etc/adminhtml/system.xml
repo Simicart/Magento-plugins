@@ -1,13 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="simiapicache" translate="label" sortOrder="1000">
-            <label>Simi Api Cache</label>
-        </tab>
-        <section id="simiapicache" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="simiapicache" translate="label" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label>General Settings</label>
-            <tab>simiapicache</tab>
+            <label>Api Cache Configuration</label>
+            <tab>simi</tab>
             <resource>Simi_Simiapicache::simiapicache_settings</resource>
 
             <group id="general" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
