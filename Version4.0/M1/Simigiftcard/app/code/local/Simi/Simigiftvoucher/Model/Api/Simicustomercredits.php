@@ -69,6 +69,7 @@ class Simi_Simigiftvoucher_Model_Api_Simicustomercredits extends Simi_Simiconnec
             $item['currency_symbol'] = Mage::app()->getLocale()->currency($item['currency'])->getSymbol();
             $info['history'][] = $item;
         }
+        $info['history'] = array_reverse($info['history']);
         return $this->getDetail($info);
     }
 

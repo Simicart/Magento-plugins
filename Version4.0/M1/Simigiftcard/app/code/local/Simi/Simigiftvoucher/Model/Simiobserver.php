@@ -235,7 +235,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
             if ($this->_getSession()->getNotShipping()){
                 $shipping = [];
                 $detail_onepage['order']['shipping_address'] = (object) $shipping;
-                $detail_onepage['order']['shipping'] = (object) $shipping;
+                $detail_onepage['order']['shipping'] = $shipping;
             }
         }
         $onepageApi->detail_onepage = $detail_onepage;
@@ -263,7 +263,7 @@ class Simi_Simigiftvoucher_Model_Simiobserver {
         if ($giftcodes){
             foreach ($giftcodes as $key => $code){
                 if ($code){
-                    $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__($code),9,$codediscount[$key]);
+                    $orderTotalHelper->addCustomRow(Mage::helper('simigiftvoucher')->__("Gift Code ($code)"),9,$codediscount[$key]);
                 }
             }
         }

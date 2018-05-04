@@ -34,7 +34,7 @@
         <add id="Simi_Simirewardpoints::settings"
              title="Settings" module="Simi_Simirewardpoints"
              parent="Simi_Simirewardpoints::Reward_Points"
-             action="adminhtml/system_config/edit/section/rewardpoints"
+             action="adminhtml/system_config/edit/section/simirewardpoints"
              resource="Simi_Simirewardpoints::settings" sortOrder="100"/>
     </menu>
 </config>

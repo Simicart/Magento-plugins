@@ -6,14 +6,13 @@ class Simi_Simitracking_Model_Api_Bestsellers extends Simi_Simiconnector_Model_A
         $data = $this->getData();
         $this->_helperProduct = Mage::helper('simiconnector/products');
         $this->_helperProduct->setData($data);
-
         Mage::helper('simitracking')->isAllowed(Simi_Simitracking_Helper_Data::PRODUCT_LIST);
-        $this->builderQuery = $collection = Mage::getResourceModel('reports/product_collection')
-                        ->addAttributeToSelect('*')
-                        ->addOrderedQty()->addMinimalPrice()
-                        ->addTaxPercents()
-                        ->addStoreFilter()
-                        ->setOrder('ordered_qty', 'desc');
+        $collection = Mage::getResourceModel('sales/report_bestsellers_collection')
+            ->setModel('catalog/product')
+            ;
+
+        $this->builderQuery  = Mage::getResourceModel('sales/report_bestsellers_collection')
+            ->setModel('catalog/product');
         if (isset($data['params']['store_id']) && $data['params']['store_id'] != '0' && $data['params']['store_id'] != '') {
             $this->builderQuery->addStoreFilter($data['params']['store_id']);
         }
@@ -21,7 +20,6 @@ class Simi_Simitracking_Model_Api_Bestsellers extends Simi_Simiconnector_Model_A
 
     public function index() {
         $collection = $this->builderQuery;
-        $this->filter();
         $data = $this->getData();
         $parameters = $data['params'];
         $page = 1;
@@ -38,11 +36,10 @@ class Simi_Simitracking_Model_Api_Bestsellers extends Simi_Simiconnector_Model_A
         if (isset($parameters[self::OFFSET]) && $parameters[self::OFFSET]) {
             $offset = $parameters[self::OFFSET];
         }
-        $collection->setPageSize($offset + $limit);
 
         $all_ids = array();
         $info = array();
-        $total = $collection->getSize();
+        $total = count($collection);
 
         if ($offset > $total)
             throw new Exception($this->_helper->__('Invalid method.'), 4);
@@ -61,12 +58,20 @@ class Simi_Simitracking_Model_Api_Bestsellers extends Simi_Simiconnector_Model_A
             }
             if (++$check_limit > $limit)
                 break;
-            
-            if (!$entity->getName()) {
-                $entity = Mage::getModel('catalog/product')->load($entity->getId());
+
+            $product_report = array(
+                'ordered_qty'=> $entity->getData('qty_ordered'),
+                'name'=> $entity->getData('product_name')
+            );
+            if (!$entity->getData('product_name')) {
+                $id = $entity->getData('product_id');
+                $entity = Mage::getModel('catalog/product')->load($id);
+                if(!$entity->getId())
+                    throw new Exception($this->_helper->__('Please update your Admin product report'), 4);
             }
-            $info_detail = $entity->toArray($fields);
-            $all_ids[] = $entity->getId();            
+            $info_detail = array_merge($product_report, $entity->getData());
+            $info_detail['entity_id'] = $entity->getData('product_id')?$entity->getData('product_id'):$entity->getId();
+            $all_ids[] = $info_detail['entity_id'];            
             $info[] = $info_detail;
         }
         return $this->getList($info, $all_ids, $total, $limit, $offset);
