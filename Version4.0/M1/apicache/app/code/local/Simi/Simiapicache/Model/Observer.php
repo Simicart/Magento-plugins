@@ -12,7 +12,8 @@ class Simi_Simiapicache_Model_Observer
             return;
 
         $uri = $_SERVER['REQUEST_URI'];
-        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($uri) . ".json";
+        $fileName = $uri.Mage::app()->getStore()->getCurrentCurrencyCode().Mage::app()->getStore()->getId();
+        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($fileName) . ".json";
         if (file_exists($filePath)) {
             $apiResult = file_get_contents($filePath);
             if ($apiResult) {
@@ -54,7 +55,9 @@ class Simi_Simiapicache_Model_Observer
                 return $this;
         }
 
-        if ((strpos($uri, 'storeviews') !== false) && (strpos($uri, 'storeviews/default') === false))
+        if ((strpos($uri, 'storeviews') !== false) && 
+            (strpos($uri, 'storeviews/default') === false) &&
+                (strpos($uri, 'storeviews/'.Mage::app()->getStore()->getId()) === false))
             return $this;
 
         $path =  Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json';
@@ -64,8 +67,8 @@ class Simi_Simiapicache_Model_Observer
             } catch (\Exception $e) {
             }
         }
-
-        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($uri) . ".json";
+        $fileName = $uri.Mage::app()->getStore()->getCurrentCurrencyCode().Mage::app()->getStore()->getId();
+        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($fileName) . ".json";
 
         $data_json = json_encode($result);
         file_put_contents($filePath, $data_json);
@@ -75,9 +78,35 @@ class Simi_Simiapicache_Model_Observer
         $passedModels = [
             'Mage_Log_Model_Visitor',
             'Mage_Sales_Model_Quote',
+            'Mage_Sales_Model_Quote_Item_Option',
+            'Mage_Sales_Model_Quote_Item',
             'Mage_Sales_Model_Quote_Address',
             'Mage_Sales_Model_Quote_Address_Rate',
             'Mage_Sales_Model_Quote_Payment',
+            'Idev_OneStepCheckout_Model_Sales_Quote',
+            'Mage_CatalogInventory_Model_Stock_Item',
+            'Mage_Index_Model_Event',
+            'Mage_Reports_Model_Product_Index_Viewed',
+            'Mage_Reports_Model_Event',
+            'Mage_Eav_Model_Entity_Store',
+            'Mage_Customer_Model_Address',
+            'Mage_Customer_Model_Customer',
+            'Mage_Sales_Model_Order_Address',
+            'Mage_Sales_Model_Order_Item',
+            'Mage_Sales_Model_Order_Payment',
+            'AdjustWare_Notification_Model_Rewrite_Sales_Order',
+            'Mage_Tax_Model_Sales_Order_Tax',
+            'Simtech_Searchanise_Model_Queue',
+            'Mage_SalesRule_Model_Coupon',
+            'Mage_SalesRule_Model_Rule',
+            'Mage_SalesRule_Model_Rule_Customer',
+            'Mage_Sales_Model_Order_Status_History',
+            'Mage_Sales_Model_Order_Payment_Transaction',
+            'Mage_Sales_Model_Order_Invoice',
+            'Mage_Sales_Model_Order_Invoice_Item',
+            'Mage_CatalogSearch_Model_Query',
+            'Ebizmarts_MailChimp_Model_Subscriber',
+            'Mage_Tax_Model_Sales_Order_Tax_Item'
         ];
         if (!$observer->getObject())
             return $this;
@@ -87,6 +116,9 @@ class Simi_Simiapicache_Model_Observer
                 return $this;
             }
         }
+
+
+        Mage::log('Saved Model '.$modelClass, null, 'savedmodels.log');
         Mage::helper('simiapicache')->flushCache();
     }
 }
