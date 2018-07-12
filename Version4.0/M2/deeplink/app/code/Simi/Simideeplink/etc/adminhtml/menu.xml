@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Simi_Simideeplink::deeplink"
+             title="Simi Deeplink"
+             resource="Simi_Simideeplink::deeplink"
+             module="Simi_Simideeplink"
+             sortOrder="800"
+             parent="Simi_Simiconnector::simiconnector"/>
+        <add id="Simi_Simideeplink::settings"
+             title="Settings"
+             module="Simi_Simideeplink"
+             parent="Simi_Simideeplink::deeplink"
+             action="adminhtml/system_config/edit/section/simideeplink"
+             resource="Simi_Simideeplink::settings"
+             sortOrder="20"/>
+    </menu>
+</config>
