@@ -104,6 +104,7 @@ class Storelocations extends Api
             $distance = 0;
             $item = $this->simiObjectManager->create('\Simi\Simistorelocator\Model\Store')
                 ->load($storeReturn['simistorelocator_id']);
+            $storeReturn = $item->toArray();
             $latitude = $item->getLatitude();
             $longtitude = $item->getLongtitude();
 
