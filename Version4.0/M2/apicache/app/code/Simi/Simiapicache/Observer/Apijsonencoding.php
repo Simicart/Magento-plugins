@@ -50,8 +50,14 @@ class Apijsonencoding implements ObserverInterface
             if (($whitelistApi != '') && (strpos($uri, $whitelistApi) !== false))
                 return $this;
         }
+
+        $this->storeManager = $this->simiObjectManager->get('\Magento\Store\Model\StoreManagerInterface');
+        $storeId = $this->storeManager->getStore()->getId();
         
-        if ((strpos($uri, 'storeviews') !== false) && (strpos($uri, 'storeviews/default') === false))
+        if ((strpos($uri, 'storeviews') !== false) &&
+            (strpos($uri, 'storeviews/default') === false) &&
+            (strpos($uri, 'storeviews/'.$storeId) === false)
+        )
             return $this;
         
         $dirList = $this->simiObjectManager->get('Magento\Framework\App\Filesystem\DirectoryList');
@@ -63,8 +69,11 @@ class Apijsonencoding implements ObserverInterface
             } catch (\Exception $e) {
             }
         }
+        $currencyCode   = $this->storeManager->getStore()->getCurrentCurrencyCode();
+        $fileName = $uri.$currencyCode.$storeId;
+
         $filePath = $dirList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'Simiapicache'
-            . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . md5($uri) .".json";
+            . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . md5($fileName) .".json";
         
         $data_json = json_encode($result);
         file_put_contents($filePath, $data_json);

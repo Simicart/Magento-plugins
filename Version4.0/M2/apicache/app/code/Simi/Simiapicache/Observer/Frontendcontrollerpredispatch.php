@@ -33,10 +33,20 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             ->getValue('simiapicache/general/enable'))
             return;
         
+        $customerSession = $this->simiObjectManager->get('Magento\Customer\Model\Session');
+        if($customerSession->isLoggedIn())
+            return;
+        
         $uri = $_SERVER['REQUEST_URI'];
         $dirList = $this->simiObjectManager->get('Magento\Framework\App\Filesystem\DirectoryList');
+        
+        $this->storeManager = $this->simiObjectManager->get('\Magento\Store\Model\StoreManagerInterface');
+        $storeId = $this->storeManager->getStore()->getId();
+        $currencyCode   = $this->storeManager->getStore()->getCurrentCurrencyCode();
+        $fileName = $uri.$currencyCode.$storeId;
+        
         $filePath = $dirList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'Simiapicache'
-            . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . md5($uri) .".json";
+            . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . md5($fileName) .".json";
         if (file_exists($filePath)) {
             $apiResult = file_get_contents($filePath);
             if ($apiResult) {

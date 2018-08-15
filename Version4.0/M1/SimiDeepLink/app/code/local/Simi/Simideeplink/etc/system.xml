@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<config>
+    <sections>
+        <simideeplink translate="label" module="simideeplink">
+            <class>separator-top</class>
+            <label>Simi Deeplink</label>
+            <tab>simiconnector</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>299</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable>
+                        <firebase_web_api_key translate="label">
+                            <label>Firebase Web API Key</label>
+                            <sort_order>2</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </firebase_web_api_key>
+                        <firebase_base_dynamic_link translate="label">
+                            <label>Firebase Base Dynamic Link</label>
+                            <sort_order>3</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </firebase_base_dynamic_link>
+                    </fields>
+                </general>
+
+                <app_parameters translate="label">
+                    <label>App parameter</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <android_package_name translate="label">
+                            <label>Android package name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The package name of the Android app to use to open the link</comment>
+                        </android_package_name>
+                        <ios_bundle_id translate="label">
+                            <label>IOS Bundle ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The bundle ID of the iOS app to use to open the link</comment>
+                        </ios_bundle_id>
+                        <ios_store_id translate="label">
+                            <label>Apple Store ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Your app's App Store ID, used to send users to the App Store when the app isn't
+                                installed
+                            </comment>
+                        </ios_store_id>
+                    </fields>
+                </app_parameters>
+
+            </groups>
+        </simideeplink>
+    </sections>
+</config>
