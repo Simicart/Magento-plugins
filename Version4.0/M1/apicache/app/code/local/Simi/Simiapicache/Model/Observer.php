@@ -11,6 +11,9 @@ class Simi_Simiapicache_Model_Observer
         if (!Mage::getStoreConfig('simiapicache/apicache/enable'))
             return;
 
+        if (Mage::getSingleton('customer/session')->isLoggedIn())
+            return;
+        
         $uri = $_SERVER['REQUEST_URI'];
         $fileName = $uri.Mage::app()->getStore()->getCurrentCurrencyCode().Mage::app()->getStore()->getId();
         $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($fileName) . ".json";

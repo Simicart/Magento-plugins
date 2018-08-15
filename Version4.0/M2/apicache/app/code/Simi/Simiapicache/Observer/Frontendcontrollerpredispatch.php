@@ -33,6 +33,10 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             ->getValue('simiapicache/general/enable'))
             return;
         
+        $customerSession = $this->simiObjectManager->get('Magento\Customer\Model\Session');
+        if($customerSession->isLoggedIn())
+            return;
+        
         $uri = $_SERVER['REQUEST_URI'];
         $dirList = $this->simiObjectManager->get('Magento\Framework\App\Filesystem\DirectoryList');
         
