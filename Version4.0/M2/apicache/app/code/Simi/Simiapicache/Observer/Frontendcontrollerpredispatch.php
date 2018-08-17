@@ -52,6 +52,7 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             if ($apiResult) {
                 header('Simi-Api-Cache: HIT');
                 header('Content-Type: application/json');
+                ob_start('ob_gzhandler');
                 echo $apiResult;
                 exit();
                 //return $observer->getData('controller_action')->getResponse()->setBody($apiResult);
