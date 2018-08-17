@@ -20,6 +20,7 @@ class Simi_Simiapicache_Model_Observer
         if (file_exists($filePath)) {
             $apiResult = file_get_contents($filePath);
             if ($apiResult) {
+                ob_start('ob_gzhandler');
                 header('Simi-Api-Cache: HIT');
                 header('Content-Type: application/json');
                 echo $apiResult;
