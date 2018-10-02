@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="simi_simiconnector_model_server_initialize">
+        <observer name="simi_simibraintree_change_resource" instance="Simi\Simibraintree\Observer\SimiSimiconnectorModelServerInitialize"/>
+    </event>
+
+    <event name="payment_method_is_active">
+        <observer name="simi_simibraintree_payment_method_is_active" 
+                  instance="Simi\Simibraintree\Observer\PaymentMethodIsActive" />
+    </event>
+
+    <event name="simiconnector_add_payment_method">
+        <observer name="simi_simibraintree_add_payment_method" 
+                  instance="Simi\Simibraintree\Observer\SimiconnectorAddPaymentMethod" />
+    </event>
+</config>
