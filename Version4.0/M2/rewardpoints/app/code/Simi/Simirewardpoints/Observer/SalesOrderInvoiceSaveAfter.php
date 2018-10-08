@@ -43,7 +43,7 @@ class SalesOrderInvoiceSaveAfter implements ObserverInterface
     {
         $invoice = $observer['invoice'];
         $order = $invoice->getOrder();
-        if ($order->getCustomerIsGuest() || !$order->getCustomerId() || $invoice->getState() != \Magento\Sales\Model\Order\Invoice::STATE_PAID || !$order->getRewardpointsEarn()
+        if ($order->getCustomerIsGuest() || !$order->getCustomerId() || $invoice->getState() != \Magento\Sales\Model\Order\Invoice::STATE_PAID || !$order->getSimirewardpointsEarn()
         ) {
             return $this;
         }

@@ -20,13 +20,13 @@ class RewardpointsToOrderItem
     ) {
         /** @var $orderItem Item */
         $orderItem = $proceed($item, $additional);
-        if ($item->getSimiRewardpointsEarn()) {
-            $orderItem->setSimiRewardpointsEarn($item->getSimiRewardpointsEarn());
+        if ($item->getSimirewardpointsEarn()) {
+            $orderItem->setSimirewardpointsEarn($item->getSimirewardpointsEarn());
         }
-        if ($item->getSimiRewardpointsSpent()) {
-            $orderItem->setSimiRewardpointsSpent($item->getSimiRewardpointsSpent());
-            $orderItem->setSimiRewardpointsBaseDiscount($item->getSimiRewardpointsBaseDiscount());
-            $orderItem->setSimiRewardpointsDiscount($item->getSimiRewardpointsDiscount());
+        if ($item->getSimirewardpointsSpent()) {
+            $orderItem->setSimirewardpointsSpent($item->getSimirewardpointsSpent());
+            $orderItem->setSimirewardpointsBaseDiscount($item->getSimirewardpointsBaseDiscount());
+            $orderItem->setSimirewardpointsDiscount($item->getSimirewardpointsDiscount());
         }
 
         return $orderItem;

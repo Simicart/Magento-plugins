@@ -119,8 +119,8 @@ class Creditmemo extends \Simi\Simirewardpoints\Model\Action\AbstractAction impl
             'order_increment_id' => $order->getIncrementId(),
             'order_base_amount' => $order->getBaseGrandTotal(),
             'order_amount' => $order->getGrandTotal(),
-            'base_discount' => $creditmemo->getSimiRewardpointsBaseDiscount(),
-            'discount' => $creditmemo->getSimiRewardpointsDiscount(),
+            'base_discount' => $creditmemo->getSimirewardpointsBaseDiscount(),
+            'discount' => $creditmemo->getSimirewardpointsDiscount(),
             'store_id' => $order->getStoreId(),
             'extra_content' => $creditmemo->getIncrementId(),
             'creditmemo_transaction' => true

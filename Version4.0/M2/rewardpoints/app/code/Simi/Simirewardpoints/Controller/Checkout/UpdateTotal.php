@@ -28,7 +28,7 @@ class UpdateTotal extends \Simi\Simirewardpoints\Controller\AbstractAction
             $this->checkUseDefault();
         }
         $this->_checkoutSession->getQuote()->collectTotals()->save();
-        $amount = $this->_checkoutCart->getQuote()->getSimiRewardpointsBaseDiscount();
+        $amount = $this->_checkoutCart->getQuote()->getSimirewardpointsBaseDiscount();
         $result = [
             'earning' => $this->_helperPoint->format($this->_checkoutForm->getSimiEarningPoint()),
             'spending' => $this->_helperPoint->format($this->_checkoutForm->getSimiSpendingPoint()),

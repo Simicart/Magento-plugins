@@ -66,7 +66,7 @@ class SalesOrderSaveAfter implements ObserverInterface
         }
 
         // Add earning point for customer
-        if ($order->getState() == \Magento\Sales\Model\Order::STATE_COMPLETE && $order->getSimiRewardpointsEarn()
+        if ($order->getState() == \Magento\Sales\Model\Order::STATE_COMPLETE && $order->getSimirewardpointsEarn()
         ) {
             $customer = $this->_customer->load($order->getCustomerId());
             if (!$customer->getId()) {
@@ -93,7 +93,7 @@ class SalesOrderSaveAfter implements ObserverInterface
         );
         $refundStatus = explode(',', $refundStatus);
         if ($order->getStatus() && in_array($order->getStatus(), $refundStatus)) {
-            $maxPoint = $order->getSimiRewardpointsSpent();
+            $maxPoint = $order->getSimirewardpointsSpent();
             $maxPoint -= (int) $this->_transaction->create()->getCollection()
                             ->addFieldToFilter('action', 'spending_cancel')
                             ->addFieldToFilter('order_id', $order->getId())
@@ -125,7 +125,7 @@ class SalesOrderSaveAfter implements ObserverInterface
         );
         $refundStatus = explode(',', $refundStatus);
         if ($order->getStatus() && in_array($order->getStatus(), $refundStatus)) {
-            if ($order->getRewardpointsEarn() <= 0) {
+            if ($order->getSimirewardpointsEarn() <= 0) {
                 return $this;
             }
             /*  */
@@ -144,8 +144,8 @@ class SalesOrderSaveAfter implements ObserverInterface
             if ($maxEarnedRefund <= 0) {
                 return $this;
             }
-            if ($maxEarnedRefund > $order->getSimiRewardpointsEarn()) {
-                $maxEarnedRefund = $order->getSimiRewardpointsEarn();
+            if ($maxEarnedRefund > $order->getSimirewardpointsEarn()) {
+                $maxEarnedRefund = $order->getSimirewardpointsEarn();
             }
             if ($maxEarnedRefund > 0) {
                 $order->setSimiRefundEarnedPoints($maxEarnedRefund);

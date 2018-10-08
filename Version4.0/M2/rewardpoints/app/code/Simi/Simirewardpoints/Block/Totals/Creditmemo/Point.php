@@ -43,30 +43,30 @@ class Point extends \Magento\Sales\Block\Order\Totals
         $totalsBlock = $this->getParentBlock();
         $creditmemo = $totalsBlock->getCreditmemo();
 
-        if ($creditmemo->getSimiRewardpointsEarn()) {
+        if ($creditmemo->getSimirewardpointsEarn()) {
             $totalsBlock->addTotal(new \Magento\Framework\DataObject([
                 'code' => 'simirewardpoints_earn_label',
                 'label' => __('Earn Points'),
-                'value' => $this->_helperPoint->format($creditmemo->getSimiRewardpointsEarn()),
+                'value' => $this->_helperPoint->format($creditmemo->getSimirewardpointsEarn()),
                 'is_formated' => true,
                     ]), 'subtotal');
         }
 
-        if ($creditmemo->getSimiRewardpointsSpent()) {
+        if ($creditmemo->getSimirewardpointsSpent()) {
             $totalsBlock->addTotal(new \Magento\Framework\DataObject([
                 'code' => 'simirewardpoints_spent_label',
                 'label' => __('Spend Points'),
-                'value' => $this->_helperPoint->format($creditmemo->getSimiRewardpointsSpent()),
+                'value' => $this->_helperPoint->format($creditmemo->getSimirewardpointsSpent()),
                 'is_formated' => true,
                     ]), 'simirewardpoints_earn_label');
         }
 
-        if ($creditmemo->getSimiRewardpointsDiscount() >= 0.0001) {
+        if ($creditmemo->getSimirewardpointsDiscount() >= 0.0001) {
             $totalsBlock->addTotal(new \Magento\Framework\DataObject([
                 'code' => 'simirewardpoints',
                 'label' => __('Use points on spend'),
-                'value' => -$creditmemo->getSimiRewardpointsDiscount(),
-                'base_value' => -$creditmemo->getSimiRewardpointsBaseDiscount(),
+                'value' => -$creditmemo->getSimirewardpointsDiscount(),
+                'base_value' => -$creditmemo->getSimirewardpointsBaseDiscount(),
                     ]), 'simirewardpoints_spent_label');
         }
     }

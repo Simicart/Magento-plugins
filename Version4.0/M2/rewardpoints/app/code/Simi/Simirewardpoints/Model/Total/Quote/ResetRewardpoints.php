@@ -16,42 +16,42 @@ class ResetRewardpoints implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $quote = $observer->getEvent()->getQuote();
-        $quote->setSimiRewardpointsSpent(0);
-        $quote->setSimiRewardpointsBaseDiscount(0);
-        $quote->setSimiRewardpointsDiscount(0);
-        $quote->setSimiRewardpointsEarn(0);
+        $quote->setSimirewardpointsSpent(0);
+        $quote->setSimirewardpointsBaseDiscount(0);
+        $quote->setSimirewardpointsDiscount(0);
+        $quote->setSimirewardpointsEarn(0);
         $quote->setSimiBaseDiscount(0);
-        $quote->setSimiRewardpointsBaseAmount(0);
-        $quote->setSimiRewardpointsAmount(0);
+        $quote->setSimirewardpointsBaseAmount(0);
+        $quote->setSimirewardpointsAmount(0);
         $quote->setSimiBaseDiscountForShipping(0);
         $quote->setSimiBaseDiscount(0);
         foreach ($quote->getAllAddresses() as $address) {
-            $address->setSimiRewardpointsSpent(0);
-            $address->setSimiRewardpointsBaseDiscount(0);
-            $address->setSimiRewardpointsDiscount(0);
-            $address->setSimiRewardpointsBaseAmount(0);
-            $address->setSimiRewardpointsAmount(0);
+            $address->setSimirewardpointsSpent(0);
+            $address->setSimirewardpointsBaseDiscount(0);
+            $address->setSimirewardpointsDiscount(0);
+            $address->setSimirewardpointsBaseAmount(0);
+            $address->setSimirewardpointsAmount(0);
             $address->setSimiBaseDiscountForShipping(0);
             $address->setSimiBaseDiscount(0);
-            $address->setSimiRewardpointsEarn(0);
+            $address->setSimirewardpointsEarn(0);
             foreach ($address->getAllItems() as $item) {
                 if ($item->getParentItemId()) {
                     continue;
                 }
                 if ($item->getHasChildren() && $item->isChildrenCalculated()) {
                     foreach ($item->getChildren() as $child) {
-                        $child->setSimiRewardpointsBaseDiscount(0)
-                                ->setSimiRewardpointsDiscount(0)
+                        $child->setSimirewardpointsBaseDiscount(0)
+                                ->setSimirewardpointsDiscount(0)
                                 ->setSimiBaseDiscount(0)
-                                ->setSimiRewardpointsEarn(0)
-                                ->setSimiRewardpointsSpent(0);
+                                ->setSimirewardpointsEarn(0)
+                                ->setSimirewardpointsSpent(0);
                     }
                 } elseif ($item->getProduct()) {
-                    $item->setSimiRewardpointsBaseDiscount(0)
-                            ->setSimiRewardpointsDiscount(0)
+                    $item->setSimirewardpointsBaseDiscount(0)
+                            ->setSimirewardpointsDiscount(0)
                             ->setSimiBaseDiscount(0)
-                            ->setSimiRewardpointsEarn(0)
-                            ->setSimiRewardpointsSpent(0);
+                            ->setSimirewardpointsEarn(0)
+                            ->setSimirewardpointsSpent(0);
                 }
             }
         }

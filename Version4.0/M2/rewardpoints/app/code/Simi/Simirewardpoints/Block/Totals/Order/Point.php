@@ -43,30 +43,30 @@ class Point extends \Magento\Sales\Block\Order\Totals
         $totalsBlock = $this->getParentBlock();
         $order = $totalsBlock->getOrder();
 
-        if ($order->getSimiRewardpointsEarn()) {
+        if ($order->getSimirewardpointsEarn()) {
             $totalsBlock->addTotal(new \Magento\Framework\DataObject([
                 'code' => 'simirewardpoints_earn_label',
                 'label' => __('Earn Points'),
-                'value' => $this->_helperPoint->format($order->getSimiRewardpointsEarn()),
+                'value' => $this->_helperPoint->format($order->getSimirewardpointsEarn()),
                 'is_formated' => true,
                     ]), 'subtotal');
         }
 
-        if ($order->getSimiRewardpointsSpent()) {
+        if ($order->getSimirewardpointsSpent()) {
             $totalsBlock->addTotal(new \Magento\Framework\DataObject([
                 'code' => 'Simirewardpoints_spent_label',
                 'label' => __('Spend Points'),
-                'value' => $this->_helperPoint->format($order->getSimiRewardpointsSpent()),
+                'value' => $this->_helperPoint->format($order->getSimirewardpointsSpent()),
                 'is_formated' => true,
                     ]), 'Simirewardpoints_earn_label');
         }
 
-        if ($order->getSimiRewardpointsDiscount() >= 0.0001) {
+        if ($order->getSimirewardpointsDiscount() >= 0.0001) {
             $totalsBlock->addTotal(new \Magento\Framework\DataObject([
                 'code' => 'simirewardpoints',
                 'label' => __('Use points on spend'),
-                'value' => -$order->getSimiRewardpointsDiscount(),
-                'base_value' => -$order->getSimiRewardpointsBaseDiscount(),
+                'value' => -$order->getSimirewardpointsDiscount(),
+                'base_value' => -$order->getSimirewardpointsBaseDiscount(),
                     ]), 'simirewardpoints_spent_label');
         }
     }

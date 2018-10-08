@@ -256,14 +256,14 @@ class PointAfterTax extends \Magento\Quote\Model\Quote\Address\Total\AbstractTot
         $total->addBaseTotalAmount('simirewardpoints', -$baseDiscount);
         $total->setBaseGrandTotal($address->getBaseGrandTotal() - $baseDiscount);
         $total->setGrandTotal($address->getGrandTotal() - $discount);
-        $total->setSimiRewardpointsSpent($address->getSimiRewardpointsSpent() + $pointUsed);
-        $total->setSimiRewardpointsBaseDiscount($address->getSimiRewardpointsBaseDiscount() + $baseDiscount);
-        $total->setSimiRewardpointsDiscount($address->getSimiRewardpointsDiscount() + $discount);
-        $quote->setSimiRewardpointsSpent($total->getSimiRewardpointsSpent());
-        $quote->setSimiRewardpointsBaseDiscount($total->getSimiRewardpointsBaseDiscount());
-        $quote->setSimiRewardpointsDiscount($total->getSimiRewardpointsDiscount());
+        $total->setSimirewardpointsSpent($address->getSimirewardpointsSpent() + $pointUsed);
+        $total->setSimirewardpointsBaseDiscount($address->getSimirewardpointsBaseDiscount() + $baseDiscount);
+        $total->setSimirewardpointsDiscount($address->getSimirewardpointsDiscount() + $discount);
+        $quote->setSimirewardpointsSpent($total->getSimirewardpointsSpent());
+        $quote->setSimirewardpointsBaseDiscount($total->getSimirewardpointsBaseDiscount());
+        $quote->setSimirewardpointsDiscount($total->getSimirewardpointsDiscount());
         $address->setSimiBaseDiscount($address->getSimiBaseDiscount() + $baseDiscount);
-        $quote->setSimiBaseDiscount($quote->getSimiRewardpointsBaseDiscount() + $baseDiscount);
+        $quote->setSimiBaseDiscount($quote->getSimirewardpointsBaseDiscount() + $baseDiscount);
     }
 
     /**
@@ -336,10 +336,10 @@ class PointAfterTax extends \Magento\Quote\Model\Quote\Address\Total\AbstractTot
                     $parentItemBaseDiscount -= $itemBaseDiscount;
                     $itemDiscount = $this->_priceCurrency->convert($itemBaseDiscount);
                     $pointSpent = round($points * $baseItemPrice / $baseItemsPrice, 0, PHP_ROUND_HALF_DOWN);
-                    $child->setSimiRewardpointsBaseDiscount($child->getSimiRewardpointsBaseDiscount() + $itemBaseDiscount)
-                            ->setSimiRewardpointsDiscount($child->getSimiRewardpointsDiscount() + $itemDiscount)
+                    $child->setSimirewardpointsBaseDiscount($child->getSimirewardpointsBaseDiscount() + $itemBaseDiscount)
+                            ->setSimirewardpointsDiscount($child->getSimirewardpointsDiscount() + $itemDiscount)
                             ->setSimiBaseDiscount($child->getSimiBaseDiscount() + $itemBaseDiscount)
-                            ->setSimiRewardpointsSpent($child->getSimiRewardpointsSpent() + $pointSpent);
+                            ->setSimirewardpointsSpent($child->getSimirewardpointsSpent() + $pointSpent);
                 }
             } elseif ($item->getProduct()) {
                 if ($rule !== null && !$rule->getActions()->validate($item)) {
@@ -349,10 +349,10 @@ class PointAfterTax extends \Magento\Quote\Model\Quote\Address\Total\AbstractTot
                 $itemBaseDiscount = $baseDiscount * $baseItemPrice / $baseItemsPrice;
                 $itemDiscount = $this->_priceCurrency->convert($itemBaseDiscount);
                 $pointSpent = round($points * $baseItemPrice / $baseItemsPrice, 0, PHP_ROUND_HALF_DOWN);
-                $item->setSimiRewardpointsBaseDiscount($item->getSimiRewardpointsBaseDiscount() + $itemBaseDiscount)
-                        ->setSimiRewardpointsDiscount($item->getSimiRewardpointsDiscount() + $itemDiscount)
+                $item->setSimirewardpointsBaseDiscount($item->getSimirewardpointsBaseDiscount() + $itemBaseDiscount)
+                        ->setSimirewardpointsDiscount($item->getSimirewardpointsDiscount() + $itemDiscount)
                         ->setSimiDiscount($item->getSimiBaseDiscount() + $itemBaseDiscount)
-                        ->setSimiRewardpointsSpent($item->getSimiRewardpointsSpent() + $pointSpent);
+                        ->setSimirewardpointsSpent($item->getSimirewardpointsSpent() + $pointSpent);
             }
         }
         if ($baseDiscountForShipping) {
@@ -376,8 +376,8 @@ class PointAfterTax extends \Magento\Quote\Model\Quote\Address\Total\AbstractTot
         $baseShipping = $baseShippingAmount - $address->getBaseShippingDiscountAmount() - $address->getSimiBaseDiscountForShipping();
         $itemBaseDiscount = ($baseDiscountForShipping <= $baseShipping) ? $baseDiscountForShipping : $baseShipping; //$baseDiscount * $address->getBaseShippingAmount() / $baseItemsPrice;
         $itemDiscount = $this->_priceCurrency->convert($itemBaseDiscount);
-        $address->setSimiRewardpointsBaseAmount($address->getSimiRewardpointsBaseAmount() + $itemBaseDiscount)
-                ->setSimiRewardpointsAmount($address->getSimiRewardpointsAmount() + $itemDiscount)
+        $address->setSimirewardpointsBaseAmount($address->getSimirewardpointsBaseAmount() + $itemBaseDiscount)
+                ->setSimirewardpointsAmount($address->getSimirewardpointsAmount() + $itemDiscount)
                 ->setSimiBaseDiscountForShipping($address->getSimiBaseDiscountForShipping() + $itemBaseDiscount);
     }
 
@@ -389,23 +389,23 @@ class PointAfterTax extends \Magento\Quote\Model\Quote\Address\Total\AbstractTot
             }
             if ($item->getHasChildren() && $item->isChildrenCalculated()) {
                 foreach ($item->getChildren() as $child) {
-                    $child->setHiddenTaxAmount($child->getHiddenTaxAmount() + $child->getSimiRewardpointsHiddenTaxAmount());
-                    $child->setBaseHiddenTaxAmount($child->getBaseHiddenTaxAmount() + $child->getSimiRewardpointsBaseHiddenTaxAmount());
+                    $child->setHiddenTaxAmount($child->getHiddenTaxAmount() + $child->getSimirewardpointsHiddenTaxAmount());
+                    $child->setBaseHiddenTaxAmount($child->getBaseHiddenTaxAmount() + $child->getSimirewardpointsBaseHiddenTaxAmount());
 
-                    $address->addTotalAmount('hidden_tax', $child->getSimiRewardpointsHiddenTaxAmount());
-                    $address->addBaseTotalAmount('hidden_tax', $child->getSimiRewardpointsBaseHiddenTaxAmount());
+                    $address->addTotalAmount('hidden_tax', $child->getSimirewardpointsHiddenTaxAmount());
+                    $address->addBaseTotalAmount('hidden_tax', $child->getSimirewardpointsBaseHiddenTaxAmount());
                 }
             } elseif ($item->getProduct()) {
-                $item->setHiddenTaxAmount($item->getHiddenTaxAmount() + $item->getSimiRewardpointsHiddenTaxAmount());
-                $item->setBaseHiddenTaxAmount($item->getBaseHiddenTaxAmount() + $item->getSimiRewardpointsBaseHiddenTaxAmount());
+                $item->setHiddenTaxAmount($item->getHiddenTaxAmount() + $item->getSimirewardpointsHiddenTaxAmount());
+                $item->setBaseHiddenTaxAmount($item->getBaseHiddenTaxAmount() + $item->getSimirewardpointsBaseHiddenTaxAmount());
 
-                $address->addTotalAmount('hidden_tax', $item->getSimiRewardpointsHiddenTaxAmount());
-                $address->addBaseTotalAmount('hidden_tax', $item->getSimiRewardpointsBaseHiddenTaxAmount());
+                $address->addTotalAmount('hidden_tax', $item->getSimirewardpointsHiddenTaxAmount());
+                $address->addBaseTotalAmount('hidden_tax', $item->getSimirewardpointsBaseHiddenTaxAmount());
             }
         }
-        if ($address->getSimiRewardpointsShippingHiddenTaxAmount()) {
-            $address->addTotalAmount('shipping_hidden_tax', $address->getSimiRewardpointsShippingHiddenTaxAmount());
-            $address->addBaseTotalAmount('shipping_hidden_tax', $address->getSimiRewardpointsBaseShippingHiddenTaxAmount());
+        if ($address->getSimirewardpointsShippingHiddenTaxAmount()) {
+            $address->addTotalAmount('shipping_hidden_tax', $address->getSimirewardpointsShippingHiddenTaxAmount());
+            $address->addBaseTotalAmount('shipping_hidden_tax', $address->getSimirewardpointsBaseShippingHiddenTaxAmount());
         }
     }
 }

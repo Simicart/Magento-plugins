@@ -134,7 +134,6 @@ class InstallData implements InstallDataInterface
     </div>
     <div class="rewardpoints-dashboard-list">
         <strong class="rewardpoints-title rewardpoints-title-upercase">BENEFITS OF {{block class="Simi\Simirewardpoints\Block\Welcome\Name"}} FOR REGISTERED CUSTOMERS</strong>
-        <p class="rewardpoints-title-content"><img src="{{media url="rewardpoints/default/welcome.png"}}" alt="{{block class="Simi\Simirewardpoints\Block\Welcome\Name"}} Welcome" /></p>
 
         <p class="rewardpoints-title-content">
             Once you register you will be able to earn and accrue {{block class="Simi\Simirewardpoints\Block\Welcome\Name"}}, which are then redeemable at time of purchase towards the cost of your order. Rewards are an added bonus to your shopping experience on the site and just one of the ways we thank you for being a loyal customer. You can easily earn points for certain actions you take on the site, such as making purchases.

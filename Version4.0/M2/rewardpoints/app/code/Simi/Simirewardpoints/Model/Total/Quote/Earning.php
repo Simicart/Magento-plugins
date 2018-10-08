@@ -83,12 +83,12 @@ class Earning implements ObserverInterface
             return $this;
         }
         if ($this->_helperSpending->getTotalPointSpent() && !$this->_helper->getEarningConfig('earn_when_spend', $address->getStoreId())) {
-            $address->setSimiRewardpointsEarn(0);
+            $address->setSimirewardpointsEarn(0);
             return $this;
         }
 //         get points that customer can earned by Rates
         $this->_eventManager->dispatch('rewardpoints_collect_earning_total_points_before', ['address' => $address]);
-        if (!$address->getSimiRewardpointsEarn()) {
+        if (!$address->getSimirewardpointsEarn()) {
             $baseGrandTotal = $address->getBaseGrandTotal();
             if (!$this->_helper->getEarningConfig('by_shipping', $address->getStoreId())) {
                 $baseGrandTotal -= $address->getBaseShippingAmount();
@@ -105,8 +105,8 @@ class Earning implements ObserverInterface
                 $address->getStoreId()
             );
             if ($earningPoints > 0) {
-                $address->setSimiRewardpointsEarn($earningPoints);
-                $quote->setSimiRewardpointsEarn($quote->getSimiRewardpointsEarn() + $earningPoints);
+                $address->setSimirewardpointsEarn($earningPoints);
+                $quote->setSimirewardpointsEarn($quote->getSimirewardpointsEarn() + $earningPoints);
             }
 
             // Update earning point for each items
@@ -125,7 +125,7 @@ class Earning implements ObserverInterface
     protected function _updateEarningPoints($address)
     {
         $items = $address->getAllItems();
-        $earningPoints = $address->getSimiRewardpointsEarn();
+        $earningPoints = $address->getSimirewardpointsEarn();
         if (!count($items) || $earningPoints <= 0) {
             return $this;
         }
@@ -173,7 +173,7 @@ class Earning implements ObserverInterface
                     }
                     $itemEarning = $this->_helperCalculator->round($realItemEarning);
                     $deltaRound = $realItemEarning - $itemEarning;
-                    $child->setRewardpointsEarn($itemEarning);
+                    $child->setSimirewardpointsEarn($itemEarning);
                 }
             } elseif ($item->getProduct()) {
                 $baseItemPrice = $item->getQty() * $item->getBasePriceInclTax() - $item->getBaseDiscountAmount() - $item->getSimiBaseDiscount();
@@ -185,7 +185,7 @@ class Earning implements ObserverInterface
                 }
                 $itemEarning = $this->_helperCalculator->round($realItemEarning);
                 $deltaRound = $realItemEarning - $itemEarning;
-                $item->setSimiRewardpointsEarn($itemEarning);
+                $item->setSimirewardpointsEarn($itemEarning);
             }
         }
 

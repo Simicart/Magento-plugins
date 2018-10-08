@@ -22,7 +22,7 @@ class Order extends \Simi\Simirewardpoints\Model\Action\AbstractAction implement
     public function getPointAmount()
     {
         $order = $this->getData('action_object');
-        return -(int) $order->getSimiRewardpointsSpent();
+        return -(int) $order->getSimirewardpointsSpent();
     }
 
     /**
@@ -93,8 +93,8 @@ class Order extends \Simi\Simirewardpoints\Model\Action\AbstractAction implement
             'order_increment_id' => $order->getIncrementId(),
             'order_base_amount' => $order->getBaseGrandTotal(),
             'order_amount' => $order->getGrandTotal(),
-            'base_discount' => $order->getSimiRewardpointsBaseDiscount(),
-            'discount' => $order->getSimiRewardpointsDiscount(),
+            'base_discount' => $order->getSimirewardpointsBaseDiscount(),
+            'discount' => $order->getSimirewardpointsDiscount(),
             'store_id' => $order->getStoreId(),
         ];
 

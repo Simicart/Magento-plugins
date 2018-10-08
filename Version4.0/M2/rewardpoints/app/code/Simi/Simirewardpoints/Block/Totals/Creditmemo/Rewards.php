@@ -97,13 +97,13 @@ class Rewards extends \Magento\Framework\View\Element\Template
         if ($creditmemo = $this->getCreditmemo()) {
             $order = $creditmemo->getOrder();
 
-            $maxPoint = $order->getRewardpointsSpent();
+            $maxPoint = $order->getSimirewardpointsSpent();
             $maxPointRefund = $maxPoint - (int) $this->_transaction->create()->getCollection()
                             ->addFieldToFilter('action', 'spending_creditmemo')
                             ->addFieldToFilter('order_id', $order->getId())
                             ->getFieldTotal();
-            if ($creditmemo->getRewardpointsDiscount()) {
-                $currentPoint = ceil($maxPoint * $creditmemo->getSimiRewardpointsDiscount() / $order->getSimiRewardpointsDiscount());
+            if ($creditmemo->getSimirewardpointsDiscount()) {
+                $currentPoint = ceil($maxPoint * $creditmemo->getSimirewardpointsDiscount() / $order->getSimirewardpointsDiscount());
             } else {
                 $currentPoint = 0;
             }
@@ -161,15 +161,15 @@ class Rewards extends \Magento\Framework\View\Element\Template
                                 ->addFieldToFilter('action', 'earning_invoice')
                                 ->addFieldToFilter('order_id', $order->getId())
                                 ->getFieldTotal();
-                if ($maxEarnedRefund > $order->getSimiRewardpointsEarn()) {
-                    $maxEarnedRefund = $order->getSimiRewardpointsEarn();
+                if ($maxEarnedRefund > $order->getSimirewardpointsEarn()) {
+                    $maxEarnedRefund = $order->getSimirewardpointsEarn();
                 }
                 $maxEarnedRefund += (int) $this->_transaction->create()->getCollection()
                                 ->addFieldToFilter('action', 'earning_creditmemo')
                                 ->addFieldToFilter('order_id', $order->getId())
                                 ->getFieldTotal();
-                if ($maxEarnedRefund > $order->getSimiRewardpointsEarn()) {
-                    $maxEarnedRefund = $order->getSimiRewardpointsEarn();
+                if ($maxEarnedRefund > $order->getSimirewardpointsEarn()) {
+                    $maxEarnedRefund = $order->getSimirewardpointsEarn();
                 }
 
                 foreach ($creditmemo->getAllItems() as $item) {
@@ -177,7 +177,7 @@ class Rewards extends \Magento\Framework\View\Element\Template
                     if ($orderItem->isDummy()) {
                         continue;
                     }
-                    $itemPoint = (int) $orderItem->getSimiRewardpointsEarn();
+                    $itemPoint = (int) $orderItem->getSimirewardpointsEarn();
                     $itemPoint = $itemPoint * $item->getQty() / $orderItem->getQtyOrdered();
                     $earnPoint += floor($itemPoint);
                 }

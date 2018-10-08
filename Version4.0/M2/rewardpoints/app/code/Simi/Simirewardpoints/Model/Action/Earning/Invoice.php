@@ -30,11 +30,11 @@ class Invoice extends \Simi\Simirewardpoints\Model\Action\AbstractAction impleme
             $isInvoice = false;
         }
 
-        $maxEarn = $order->getSimiRewardpointsEarn();
+        $maxEarn = $order->getSimirewardpointsEarn();
 
         $cancelPoint = 0;
         foreach ($order->getAllItems() as $item) {
-            $itemPoint = (int) $item->getSimiRewardpointsEarn();
+            $itemPoint = (int) $item->getSimirewardpointsEarn();
             $cancelPoint += $itemPoint * ($item->getQtyCanceled() + $item->getQtyRefunded()) / $item->getQtyOrdered();
         }
         $maxEarn = $maxEarn - floor($cancelPoint);
@@ -50,7 +50,7 @@ class Invoice extends \Simi\Simirewardpoints\Model\Action\AbstractAction impleme
         if (!$isInvoice) {
             return (int) $maxEarn;
         }
-        return $invoice->getSimiRewardpointsEarn();
+        return $invoice->getSimirewardpointsEarn();
     }
 
     /**
@@ -131,8 +131,8 @@ class Invoice extends \Simi\Simirewardpoints\Model\Action\AbstractAction impleme
             'order_increment_id' => $order->getIncrementId(),
             'order_base_amount' => $order->getBaseGrandTotal(),
             'order_amount' => $order->getGrandTotal(),
-            'base_discount' => $invoice->getSimiRewardpointsBaseDiscount(),
-            'discount' => $invoice->getSimiRewardpointsDiscount(),
+            'base_discount' => $invoice->getSimirewardpointsBaseDiscount(),
+            'discount' => $invoice->getSimirewardpointsDiscount(),
             'store_id' => $order->getStoreId(),
         ];
 

@@ -47,7 +47,7 @@ class SalesModelServiceQuoteSubmitSuccess implements ObserverInterface
         }
 
         // Process spending points for order
-        if ($order->getSimiRewardpointsSpent() > 0) {
+        if ($order->getSimirewardpointsSpent() > 0) {
             $this->_action->addTransaction('spending_order', $quote->getCustomer(), $order);
         }
 
