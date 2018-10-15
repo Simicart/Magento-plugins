@@ -1,0 +1,31 @@
+<?php 
+$helper = $this->getHelper();
+$registry = $this->simiObjectManager->get('\Magento\Framework\Registry');
+
+if($helper->getStoreConfig("simifbconnect/general/enable")): ?>
+    <?php $_category = $registry->registry('current_category'); ?>
+    <?php if($_category): ?>
+        <?php
+            $hasChild = $helper->checkIfHasChild($_category);
+            $androidIdentifyKey = $helper->getStoreConfig("simifbconnect/general/android_identify_key");
+            $iOSIdentifyKey = $helper->getStoreConfig("simifbconnect/general/ios_identify_key");
+            $urlAndroid = str_replace(".", "", $androidIdentifyKey).'://category_id='.$_category->getId().'&has_child='.$hasChild;
+            $urliOS = str_replace(".", "", $iOSIdentifyKey).'://category_id='.$_category->getId().'&has_child='.$hasChild;
+        ?>
+        
+        <meta property="al:ios:url" content="<?php echo $urliOS ?>" />
+        <meta property="al:ios:app_store_id" content="<?php echo $helper->getStoreConfig("simifbconnect/general/ios_app_id") ?>" />
+        <meta property="al:ios:app_name" content="<?php echo $helper->getStoreConfig("simifbconnect/general/ios_appname") ?>" />
+
+        <meta property="al:android:url" content="<?php echo $urlAndroid ?>" />
+        <meta property="al:android:package" content="<?php echo $helper->getStoreConfig("simifbconnect/general/identify_key") ?>" />
+        <meta property="al:android:app_name" content="<?php echo $helper->getStoreConfig("simifbconnect/general/android_appname") ?>" />
+
+        <meta property="og:title" content="<?php echo $_category->getName() ?>" />
+        <meta property="og:type" content="website" />
+        <meta property="al:web:should_fallback" content="false" />
+        <meta property="fb_category_id" content="<?php echo $_category->getId() ?>" />
+        <meta property="fb_is_has_child" content="<?php echo $hasChild ?>" />
+    <?php endif; ?>
+        
+<?php endif;?>
