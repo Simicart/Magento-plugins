@@ -15,8 +15,18 @@ class Simi_Simiapicache_Model_Observer
             return;
         
         $uri = $_SERVER['REQUEST_URI'];
+//        zend_debug::dump($uri);
         $fileName = $uri.Mage::app()->getStore()->getCurrentCurrencyCode().Mage::app()->getStore()->getId();
-        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($fileName) . ".json";
+        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json';
+        if(strpos($uri,'/home') !== false){
+            $filePath = $filePath . DS . 'home_api';
+        }elseif (strpos($uri,'/products')){
+            $filePath = $filePath . DS . 'products_api';
+        }
+        else{
+            $filePath = $filePath . DS . 'another_api';
+        }
+        $filePath = $filePath . DS . md5($fileName) . ".json";
         if (file_exists($filePath)) {
             $apiResult = file_get_contents($filePath);
             if ($apiResult) {
@@ -37,6 +47,7 @@ class Simi_Simiapicache_Model_Observer
             return;
 
         $result = $observer->getObject()->getData();
+//        zend_debug::dump($result);die;
         if (!$result || (isset($result['errors'])))
             return;
 
@@ -71,8 +82,34 @@ class Simi_Simiapicache_Model_Observer
             } catch (\Exception $e) {
             }
         }
+        if(strpos($uri,'/home') !== false){
+            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'home_api';
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }elseif (strpos($uri,'/products')){
+            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'products_api';
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }
+        else{
+            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'another_api';
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }
         $fileName = $uri.Mage::app()->getStore()->getCurrentCurrencyCode().Mage::app()->getStore()->getId();
-        $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . md5($fileName) . ".json";
+        $filePath = $path . DS . md5($fileName) . ".json";
 
         $data_json = json_encode($result);
         file_put_contents($filePath, $data_json);
@@ -115,6 +152,7 @@ class Simi_Simiapicache_Model_Observer
         if (!$observer->getObject())
             return $this;
         $modelClass = get_class($observer->getObject());
+        if($modelClass == 'Mage_Core_Model_Config_Data') return $this;
         foreach ($passedModels as $passedModel) {
             if ($passedModel == $modelClass){
                 return $this;

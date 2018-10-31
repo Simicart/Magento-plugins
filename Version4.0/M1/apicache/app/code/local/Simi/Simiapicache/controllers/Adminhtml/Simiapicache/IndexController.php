@@ -13,9 +13,23 @@ class Simi_Simiapicache_Adminhtml_Simiapicache_IndexController extends Mage_Admi
     }
     
     public function flushAction() {
-        Mage::helper('simiapicache')->flushCache();
-        Mage::getSingleton('adminhtml/session')
-            ->addSuccess(Mage::helper('simiapicache')->__('Api Cache has been Flushed.'));
+        try{
+            $api_cache = Mage::getStoreConfig('simiapicache/apicache/model_api');
+            if(!$api_cache || $api_cache == ''){
+                throw new Exception(Mage::helper('simiapicache')->__('Please select api cache to flush cache !'));
+            }
+            $api_cache = explode(',',$api_cache);
+            foreach ($api_cache as $api){
+                $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . $api;
+//                print_r($path);
+                Mage::helper('simiapicache')->flushCache($path);
+            }
+            Mage::getSingleton('adminhtml/session')
+                ->addSuccess(Mage::helper('simiapicache')->__('Api Cache has been Flushed.'));
+
+        }catch (Exception $e){
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
         $this->_redirect('adminhtml/system_config/edit/section/simiapicache');
         return;
     }
