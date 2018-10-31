@@ -21,7 +21,6 @@ class Simi_Simiapicache_Adminhtml_Simiapicache_IndexController extends Mage_Admi
             $api_cache = explode(',',$api_cache);
             foreach ($api_cache as $api){
                 $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . $api;
-//                print_r($path);
                 Mage::helper('simiapicache')->flushCache($path);
             }
             Mage::getSingleton('adminhtml/session')

@@ -24,7 +24,7 @@ class Simi_Simiapicache_Model_Observer
             $filePath = $filePath . DS . 'products_api';
         }
         else{
-            $filePath = $filePath . DS . 'another_api';
+            $filePath = $filePath . DS . 'other_api';
         }
         $filePath = $filePath . DS . md5($fileName) . ".json";
         if (file_exists($filePath)) {
@@ -47,7 +47,6 @@ class Simi_Simiapicache_Model_Observer
             return;
 
         $result = $observer->getObject()->getData();
-//        zend_debug::dump($result);die;
         if (!$result || (isset($result['errors'])))
             return;
 
@@ -100,7 +99,7 @@ class Simi_Simiapicache_Model_Observer
             }
         }
         else{
-            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'another_api';
+            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'other_api';
             if (!is_dir($path)) {
                 try {
                     mkdir($path, 0777, true);
