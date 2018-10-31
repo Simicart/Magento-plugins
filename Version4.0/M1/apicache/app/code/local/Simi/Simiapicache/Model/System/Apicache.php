@@ -10,20 +10,16 @@ class Simi_Simiapicache_Model_System_Apicache
     public function toOptionArray(){
         return array(
             array(
-                'value' => '',
-                'label' => 'None'
-            ),
-            array(
                 'value' => 'home_api',
-                'label' => 'Home Api'
+                'label' => 'Home APIs'
             ),
             array(
                 'value' => 'products_api',
-                'label' => 'Products ,Category Api'
+                'label' => 'Products ,Category APIs'
             ),
             array(
-                'value' => 'another_api',
-                'label' => 'Another Api'
+                'value' => 'other_api',
+                'label' => 'Other APIs'
             )
         );
     }
