@@ -38,6 +38,10 @@ class Frontendcontrollerpredispatch implements ObserverInterface
             return;
         
         $uri = $_SERVER['REQUEST_URI'];
+
+        if (strpos($uri, 'simiconnector') === false)
+            return;
+
         $dirList = $this->simiObjectManager->get('Magento\Framework\App\Filesystem\DirectoryList');
         
         $this->storeManager = $this->simiObjectManager->get('\Magento\Store\Model\StoreManagerInterface');
