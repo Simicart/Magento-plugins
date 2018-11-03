@@ -2,8 +2,10 @@
 
 class Simi_Simiapicache_Helper_Data extends Mage_Core_Helper_Data
 {
-    public function flushCache() {
-        $path =  Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json';
+    public function flushCache($path = null) {
+        if(!$path){
+            $path =  Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json';
+        }
         if (is_dir($path)) {
             $this->_removeFolder($path);
         }

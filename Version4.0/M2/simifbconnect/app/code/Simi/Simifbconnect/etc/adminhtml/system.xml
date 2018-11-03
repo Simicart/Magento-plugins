@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="simifbconnect" translate="label" sortOrder="1000">
+            <label>Simi Facebook Connect</label>
+        </tab>
+        <section id="simifbconnect" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Facebook Connect Settings</label>
+            <tab>simi</tab>
+            <resource>Simi_Simi::config_simifbconnect</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="android_identify_key" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Android Identify Key</label>
+                </field>
+                <field id="android_appname" translate="label" type="text" sortOrder="249" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Android App Name</label>
+                </field>
+                <field id="ios_app_id" translate="label" type="text" sortOrder="299" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>iOS App ID</label>
+                </field>
+                <field id="ios_appname" translate="label" type="select" sortOrder="399" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>iOS App Name</label>
+                </field>
+            </group>
+            <group id="fbappinvite" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Facebook App Invite Configuration</label>
+                <field id="invite_link" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invite Link</label>
+                </field>
+                <field id="image_description_link" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Description Link</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -38,11 +38,11 @@ class SimiconnectorHelperTotalSetTotalAfter implements ObserverInterface{
         $pointDiscount = 0.00;
         $pointEarning = 0;
         $quote = $this->spendHelper->getQuote();
-        if ($quote->getSimiRewardpointsSpent()) {
-            $pointSpending = (int) $quote->getSimiRewardpointsSpent();
-            $pointDiscount = $quote->getSimiRewardpointsDiscount();
+        if ($quote->getSimirewardpointsSpent()) {
+            $pointSpending = (int) $quote->getSimirewardpointsSpent();
+            $pointDiscount = $quote->getSimirewardpointsDiscount();
         }
-        if ($quote->getSimiRewardpointsEarn()) {
+        if ($quote->getSimirewardpointsEarn()) {
             $pointEarning = (int) $quote->getSimirewardpointsEarn();
         }
 

@@ -64,7 +64,7 @@ class Earning extends \Simi\Simirewardpoints\Block\RewardpointTemplate
             'container' => $container,
         ]);
 
-        if ($container->getEnableDisplay() && !$this->hasEarningRate() || $this->_coreRegistry->registry('product')->getSimiRewardpointsSpend()) {
+        if ($container->getEnableDisplay() && !$this->hasEarningRate() || $this->_coreRegistry->registry('product')->getSimirewardpointsSpend()) {
             return false;
         }
         return $container->getEnableDisplay();

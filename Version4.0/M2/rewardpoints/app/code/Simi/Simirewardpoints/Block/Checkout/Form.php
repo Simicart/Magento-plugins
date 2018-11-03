@@ -146,7 +146,7 @@ class Form extends \Magento\Payment\Block\Form
             }
         }
         $this->_checkoutSession->getQuote()->setTotalsCollectedFlag(false)->collectTotals()->save();
-        $rewardPointDiscount = strip_tags($this->_helperData->convertAndFormat(-$this->_checkoutSession->getQuote()->getRewardpointsBaseDiscount()));
+        $rewardPointDiscount = strip_tags($this->_helperData->convertAndFormat(-$this->_checkoutSession->getQuote()->getSimirewardpointsBaseDiscount()));
 
         $result = [];
         $result['enableReward'] = $this->_blockSpend->enableReward();
@@ -154,7 +154,7 @@ class Form extends \Magento\Payment\Block\Form
         $result['rewardpointsEarning'] = $this->_helperPoint->format($this->getEarningPoint());
         $result['displaySpending'] = $this->getSpendingPoint() > 0;
         $result['rewardpointsSpending'] = $this->_helperPoint->format($this->getSpendingPoint());
-        $result['displayUsePoint'] = $this->_checkoutSession->getQuote()->getRewardpointsBaseDiscount() ? $this->_checkoutSession->getQuote()->getRewardpointsBaseDiscount() : 0;
+        $result['displayUsePoint'] = $this->_checkoutSession->getQuote()->getSimirewardpointsBaseDiscount() ? $this->_checkoutSession->getQuote()->getSimirewardpointsBaseDiscount() : 0;
         $result['rewardpointsUsePoint'] = $rewardPointDiscount;
         $result['earningLabel'] = $earningLabel;
         $result['spendingLabel'] = $spendingLabel;

@@ -37,6 +37,6 @@ class Pointearn extends \Magento\Sales\Model\Order\Pdf\Total\DefaultTotal
      */
     public function getAmount()
     {
-        return $this->getSource()->getSimiRewardpointsEarn();
+        return $this->getSource()->getSimirewardpointsEarn();
     }
 }

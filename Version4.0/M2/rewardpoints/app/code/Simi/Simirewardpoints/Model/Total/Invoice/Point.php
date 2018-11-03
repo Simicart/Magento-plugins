@@ -50,7 +50,7 @@ class Point extends \Magento\Sales\Model\Order\Invoice\Total\AbstractTotal
         $invoiceCollection = $order->getInvoiceCollection();
         /** Earning point * */
         $earnPoint = 0;
-        $maxEarn = $order->getSimiRewardpointsEarn();
+        $maxEarn = $order->getSimirewardpointsEarn();
         $maxEarn -= (int) $this->_transaction->create()->getCollection()
                         ->addFieldToFilter('action', 'earning_invoice')
                         ->addFieldToFilter('order_id', $order->getId())
@@ -61,7 +61,7 @@ class Point extends \Magento\Sales\Model\Order\Invoice\Total\AbstractTotal
                 if ($orderItem->isDummy()) {
                     continue;
                 }
-                $earnPoint += floor((int) $orderItem->getSimiRewardpointsEarn() * $item->getQty() / $orderItem->getQtyOrdered());
+                $earnPoint += floor((int) $orderItem->getSimirewardpointsEarn() * $item->getQty() / $orderItem->getQtyOrdered());
             }
             if ($invoiceCollection->getSize() == 0) {
                 $earnPoint += $this->_helperEarning->getShippingEarningPoints($order);
@@ -71,11 +71,11 @@ class Point extends \Magento\Sales\Model\Order\Invoice\Total\AbstractTotal
             }
         }
         if ($earnPoint > 0) {
-            $invoice->setSimiRewardpointsEarn($earnPoint);
+            $invoice->setSimirewardpointsEarn($earnPoint);
         }
         /** End earningn point * */
         /** Spending point * */
-        if ($order->getSimiRewardpointsDiscount() < 0.0001) {
+        if ($order->getSimirewardpointsDiscount() < 0.0001) {
             return;
         }
 
@@ -91,19 +91,19 @@ class Point extends \Magento\Sales\Model\Order\Invoice\Total\AbstractTotal
          */
         $addShippingDicount = true;
         foreach ($invoiceCollection as $previusInvoice) {
-            if ($previusInvoice->getSimiRewardpointsDiscount()) {
+            if ($previusInvoice->getSimirewardpointsDiscount()) {
                 $addShippingDicount = false;
-                $totalDiscountInvoiced += $previusInvoice->getSimiRewardpointsDiscount();
-                $baseTotalDiscountInvoiced += $previusInvoice->getSimiRewardpointsBaseDiscount();
+                $totalDiscountInvoiced += $previusInvoice->getSimirewardpointsDiscount();
+                $baseTotalDiscountInvoiced += $previusInvoice->getSimirewardpointsBaseDiscount();
             }
         }
         if ($addShippingDicount) {
-            $totalDiscountAmount = $order->getSimiRewardpointsAmount();
-            $baseTotalDiscountAmount = $order->getSimiRewardpointsBaseAmount();
+            $totalDiscountAmount = $order->getSimirewardpointsAmount();
+            $baseTotalDiscountAmount = $order->getSimirewardpointsBaseAmount();
         }
         if ($this->isLast($invoice)) {
-            $totalDiscountAmount = $order->getSimiRewardpointsDiscount() - $totalDiscountInvoiced;
-            $baseTotalDiscountAmount = $order->getSimiRewardpointsBaseDiscount() - $baseTotalDiscountInvoiced;
+            $totalDiscountAmount = $order->getSimirewardpointsDiscount() - $totalDiscountInvoiced;
+            $baseTotalDiscountAmount = $order->getSimirewardpointsBaseDiscount() - $baseTotalDiscountInvoiced;
         } else {
             /** @var $item Mage_Sales_Model_Order_Invoice_Item */
             foreach ($invoice->getAllItems() as $item) {
@@ -111,8 +111,8 @@ class Point extends \Magento\Sales\Model\Order\Invoice\Total\AbstractTotal
                 if ($orderItem->isDummy()) {
                     continue;
                 }
-                $orderItemDiscount = (float) $orderItem->getSimiRewardpointsDiscount();
-                $baseOrderItemDiscount = (float) $orderItem->getSimiRewardpointsBaseDiscount();
+                $orderItemDiscount = (float) $orderItem->getSimirewardpointsDiscount();
+                $baseOrderItemDiscount = (float) $orderItem->getSimirewardpointsBaseDiscount();
                 $orderItemQty = $orderItem->getQtyOrdered();
                 if ($orderItemDiscount && $orderItemQty) {
                     $totalDiscountAmount += $invoice->roundPrice($orderItemDiscount / $orderItemQty * $item->getQty(), 'regular', true);
@@ -121,8 +121,8 @@ class Point extends \Magento\Sales\Model\Order\Invoice\Total\AbstractTotal
             }
         }
 
-        $invoice->setSimiRewardpointsDiscount($totalDiscountAmount);
-        $invoice->setSimiRewardpointsBaseDiscount($baseTotalDiscountAmount);
+        $invoice->setSimirewardpointsDiscount($totalDiscountAmount);
+        $invoice->setSimirewardpointsBaseDiscount($baseTotalDiscountAmount);
 
         $invoice->setGrandTotal($invoice->getGrandTotal() - $totalDiscountAmount);
         $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal() - $baseTotalDiscountAmount);

@@ -159,10 +159,10 @@ class Spending extends \Simi\Simirewardpoints\Helper\Calculation\AbstractCalcula
             }
             if ($item->getHasChildren() && $item->isChildrenCalculated()) {
                 foreach ($item->getChildren() as $child) {
-                    $baseTotal += $item->getQty() * ($child->getQty() * $this->_getItemBasePrice($child)) - $child->getBaseDiscountAmount() + $child->getSimiRewardpointsBaseDiscount();
+                    $baseTotal += $item->getQty() * ($child->getQty() * $this->_getItemBasePrice($child)) - $child->getBaseDiscountAmount() + $child->getSimirewardpointsBaseDiscount();
                 }
             } elseif ($item->getProduct()) {
-                $baseTotal += $item->getQty() * $this->_getItemBasePrice($item) - $item->getBaseDiscountAmount() + $item->getSimiRewardpointsBaseDiscount();
+                $baseTotal += $item->getQty() * $this->_getItemBasePrice($item) - $item->getBaseDiscountAmount() + $item->getSimirewardpointsBaseDiscount();
             }
         }
 
@@ -175,7 +175,7 @@ class Spending extends \Simi\Simirewardpoints\Helper\Calculation\AbstractCalcula
                 $baseShippingAmount = $address->getBaseShippingAmount();
             }
 
-            $baseTotal += $baseShippingAmount - $address->getBaseShippingDiscountAmount() + $address->getSimiRewardpointsBaseAmount();
+            $baseTotal += $baseShippingAmount - $address->getBaseShippingDiscountAmount() + $address->getSimirewardpointsBaseAmount();
         }
         $this->saveCache($cacheKey, $baseTotal);
         return $baseTotal;

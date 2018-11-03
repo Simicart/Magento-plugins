@@ -271,20 +271,20 @@ class Point extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
         $total->addBaseTotalAmount('simirewardpoints', -$baseDiscount);
         $total->setBaseGrandTotal($total->getBaseGrandTotal() - $baseDiscount);
         $total->setGrandTotal($total->getGrandTotal() - $discount);
-        $total->setSimiRewardpointsSpent($total->getSimiRewardpointsSpent() + $pointUsed);
-        $total->setSimiRewardpointsBaseDiscount($total->getSimiRewardpointsBaseDiscount() + $baseDiscount);
-        $total->setSimiRewardpointsDiscount($total->getSimiRewardpointsDiscount() + $discount);
-        $quote->setSimiRewardpointsSpent($total->getSimiRewardpointsSpent());
-        $quote->setSimiRewardpointsBaseDiscount($total->getSimiRewardpointsBaseDiscount());
-        $quote->setSimiRewardpointsDiscount($total->getSimiRewardpointsDiscount());
-        $quote->setSimiBaseDiscount($quote->getSimiRewardpointsBaseDiscount() + $baseDiscount);
+        $total->setSimirewardpointsSpent($total->getSimirewardpointsSpent() + $pointUsed);
+        $total->setSimirewardpointsBaseDiscount($total->getSimirewardpointsBaseDiscount() + $baseDiscount);
+        $total->setSimirewardpointsDiscount($total->getSimirewardpointsDiscount() + $discount);
+        $quote->setSimirewardpointsSpent($total->getSimirewardpointsSpent());
+        $quote->setSimirewardpointsBaseDiscount($total->getSimirewardpointsBaseDiscount());
+        $quote->setSimirewardpointsDiscount($total->getSimirewardpointsDiscount());
+        $quote->setSimiBaseDiscount($quote->getSimirewardpointsBaseDiscount() + $baseDiscount);
     }
 
     public function fetch(
         \Magento\Quote\Model\Quote $quote,
         \Magento\Quote\Model\Quote\Address\Total $total
     ) {
-        $amount = $quote->getSimiRewardpointsDiscount();
+        $amount = $quote->getSimirewardpointsDiscount();
         if (strip_tags($amount)) {
             return [
                 [
@@ -397,10 +397,10 @@ class Point extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
             $parentItemBaseDiscount -= $itemBaseDiscount;
             $itemDiscount = $this->_priceCurrency->convert($itemBaseDiscount);
             $pointSpent = round($points * $baseItemPrice / $baseItemsPrice, 0, PHP_ROUND_HALF_DOWN);
-            $child->setSimiRewardpointsBaseDiscount($child->getSimiRewardpointsBaseDiscount() + $itemBaseDiscount)
-                    ->setSimiRewardpointsDiscount($child->getSimiRewardpointsDiscount() + $itemDiscount)
+            $child->setSimirewardpointsBaseDiscount($child->getSimirewardpointsBaseDiscount() + $itemBaseDiscount)
+                    ->setSimirewardpointsDiscount($child->getSimirewardpointsDiscount() + $itemDiscount)
                     ->setSimiBaseDiscount($child->getSimiBaseDiscount() + $itemBaseDiscount)
-                    ->setSimiRewardpointsSpent($child->getSimiRewardpointsSpent() + $pointSpent);
+                    ->setSimirewardpointsSpent($child->getSimirewardpointsSpent() + $pointSpent);
             $child->setDiscountAmount(max(0, $child->getDiscountAmount() + $itemDiscount));
             $child->setBaseDiscountAmount(max(0, $child->getBaseDiscountAmount() + $itemBaseDiscount));
             $baseTaxableAmount = $child->getBaseTaxableAmount();
@@ -408,8 +408,8 @@ class Point extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
             if ($this->_taxHelperData->priceIncludesTax()) {
                 $rate = $this->getItemRateOnQuote($address, $child->getProduct(), $store);
                 if ($rate > 0) {
-                    $child->setSimiRewardpointsBaseHiddenTaxAmount($this->calTax($baseTaxableAmount, $rate) - $this->calTax($item->getBaseTaxableAmount(), $rate) + $child->getSimiRewardpointsBaseHiddenTaxAmount());
-                    $child->setSimiRewardpointsHiddenTaxAmount($this->calTax($taxableAmount, $rate) - $this->calTax($item->getTaxableAmount(), $rate) + $child->getSimiRewardpointsHiddenTaxAmount());
+                    $child->setSimirewardpointsBaseHiddenTaxAmount($this->calTax($baseTaxableAmount, $rate) - $this->calTax($item->getBaseTaxableAmount(), $rate) + $child->getSimirewardpointsBaseHiddenTaxAmount());
+                    $child->setSimirewardpointsHiddenTaxAmount($this->calTax($taxableAmount, $rate) - $this->calTax($item->getTaxableAmount(), $rate) + $child->getSimirewardpointsHiddenTaxAmount());
                 }
             }
         }
@@ -432,10 +432,10 @@ class Point extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
         $itemBaseDiscount = $baseDiscount * $baseItemPrice / $baseItemsPrice;
         $itemDiscount = $this->_priceCurrency->convert($itemBaseDiscount);
         $pointSpent = round($points * $baseItemPrice / $baseItemsPrice, 0, PHP_ROUND_HALF_DOWN);
-        $item->setSimiRewardpointsBaseDiscount($item->getSimiRewardpointsBaseDiscount() + $itemBaseDiscount)
-                ->setSimiRewardpointsDiscount($item->getSimiRewardpointsDiscount() + $itemDiscount)
+        $item->setSimirewardpointsBaseDiscount($item->getSimirewardpointsBaseDiscount() + $itemBaseDiscount)
+                ->setSimirewardpointsDiscount($item->getSimirewardpointsDiscount() + $itemDiscount)
                 ->setSimiBaseDiscount($item->getSimiBaseDiscount() + $itemBaseDiscount)
-                ->setSimiRewardpointsSpent($item->getSimiRewardpointsSpent() + $pointSpent);
+                ->setSimirewardpointsSpent($item->getSimirewardpointsSpent() + $pointSpent);
         $item->setDiscountAmount(max(0, $item->getDiscountAmount() + $itemDiscount));
         $item->setBaseDiscountAmount(max(0, $item->getBaseDiscountAmount() + $itemBaseDiscount));
     }
@@ -459,8 +459,8 @@ class Point extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
         $baseShipping = $baseShippingAmount - $address->getBaseShippingDiscountAmount() - $address->getSimiBaseDiscountForShipping();
         $itemBaseDiscount = ($baseDiscountForShipping <= $baseShipping) ? $baseDiscountForShipping : $baseShipping;
         $itemDiscount = $this->_priceCurrency->convert($itemBaseDiscount);
-        $address->getQuote()->setSimiRewardpointsBaseAmount($address->getQuote()->getSimiRewardpointsBaseAmount() + $itemBaseDiscount)
-                ->setSimiRewardpointsAmount($address->getQuote()->getSimiRewardpointsAmount() + $itemDiscount)
+        $address->getQuote()->setSimirewardpointsBaseAmount($address->getQuote()->getSimirewardpointsBaseAmount() + $itemBaseDiscount)
+                ->setSimirewardpointsAmount($address->getQuote()->getSimirewardpointsAmount() + $itemDiscount)
                 ->setSimiBaseDiscountForShipping($address->getQuote()->getSimiBaseDiscountForShipping() + $itemBaseDiscount);
         $total->setBaseShippingDiscountAmount(max(0, $total->getBaseShippingDiscountAmount() + $itemBaseDiscount));
         $total->setShippingDiscountAmount(max(0, $total->getShippingDiscountAmount() + $itemDiscount));

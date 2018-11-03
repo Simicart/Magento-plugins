@@ -93,8 +93,8 @@ class Cancel extends \Simi\Simirewardpoints\Model\Action\AbstractAction implemen
             'order_increment_id' => $order->getIncrementId(),
             'order_base_amount' => $order->getBaseGrandTotal(),
             'order_amount' => $order->getGrandTotal(),
-            'base_discount' => $order->getSimiRewardpointsBaseDiscount(),
-            'discount' => $order->getSimiRewardpointsDiscount(),
+            'base_discount' => $order->getSimirewardpointsBaseDiscount(),
+            'discount' => $order->getSimirewardpointsDiscount(),
             'store_id' => $order->getStoreId(),
         ];
 

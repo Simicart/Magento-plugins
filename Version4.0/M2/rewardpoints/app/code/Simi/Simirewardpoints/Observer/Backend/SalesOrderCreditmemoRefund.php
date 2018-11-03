@@ -17,7 +17,7 @@ class SalesOrderCreditmemoRefund implements ObserverInterface
     {
         $creditmemo = $observer['creditmemo'];
         $order = $creditmemo->getOrder();
-        if ($order->getSimiRewardpointsSpent() && $order->getForcedCanCreditmemo()) {
+        if ($order->getSimirewardpointsSpent() && $order->getForcedCanCreditmemo()) {
             $order->setForcedCanCreditmemo(false);
         }
     }

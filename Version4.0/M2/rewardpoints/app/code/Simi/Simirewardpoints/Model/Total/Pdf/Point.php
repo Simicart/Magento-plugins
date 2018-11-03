@@ -12,6 +12,6 @@ class Point extends \Magento\Sales\Model\Order\Pdf\Total\DefaultTotal
      */
     public function getAmount()
     {
-        return -$this->getSource()->getSimiRewardpointsDiscount();
+        return -$this->getSource()->getSimirewardpointsDiscount();
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Simi. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Simi_Simiconnector::simibraintree_settings" title="Simi Braintree Payment" module="Simi_Simibraintree" sortOrder="99" parent="Simi_Simiconnector::payment" resource="Simi_Simibraintree::configuration" action="adminhtml/system_config/edit/section/payment"/>
+    </menu>
+</config>

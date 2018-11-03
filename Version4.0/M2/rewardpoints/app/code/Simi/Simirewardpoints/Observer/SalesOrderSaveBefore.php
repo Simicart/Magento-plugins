@@ -16,17 +16,17 @@ class SalesOrderSaveBefore implements ObserverInterface
     {
         $order = $observer->getEvent()->getOrder();
         if ($order->getCustomerIsGuest() || !$order->getCustomerId()) {
-            $order->setSimiRewardpointsEarn(0);
+            $order->setSimirewardpointsEarn(0);
             foreach ($order->getAllItems() as $item) {
                 if ($item->getParentItemId()) {
                     continue;
                 }
                 if ($item->getHasChildren() && $item->isChildrenCalculated()) {
                     foreach ($item->getChildrenItems() as $child) {
-                        $child->setSimiRewardpointsEarn(0);
+                        $child->setSimirewardpointsEarn(0);
                     }
                 } elseif ($item->getProduct()) {
-                    $item->setSimiRewardpointsEarn(0);
+                    $item->setSimirewardpointsEarn(0);
                 }
             }
             return $this;

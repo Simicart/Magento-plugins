@@ -61,7 +61,7 @@ class SalesOrderCreditmemoRegisterBefore implements ObserverInterface
         if (isset($input['refund_points']) && $input['refund_points'] > 0) {
             $refundPoints = (int) $input['refund_points'];
 
-            $maxPoint = $order->getSimiRewardpointsSpent();
+            $maxPoint = $order->getSimirewardpointsSpent();
             $maxPoint -= (int) $this->_transaction->create()->getCollection()
                             ->addFieldToFilter('action', 'spending_creditmemo')
                             ->addFieldToFilter('order_id', $order->getId())
@@ -79,22 +79,22 @@ class SalesOrderCreditmemoRegisterBefore implements ObserverInterface
                             ->addFieldToFilter('action', 'earning_invoice')
                             ->addFieldToFilter('order_id', $order->getId())
                             ->getFieldTotal();
-            if ($maxEarnedRefund > $order->getSimiRewardpointsEarn()) {
-                $maxEarnedRefund = $order->getSimiRewardpointsEarn();
+            if ($maxEarnedRefund > $order->getSimirewardpointsEarn()) {
+                $maxEarnedRefund = $order->getSimirewardpointsEarn();
             }
             $maxEarnedRefund += (int) $this->_transaction->create()->getCollection()
                             ->addFieldToFilter('action', 'earning_creditmemo')
                             ->addFieldToFilter('order_id', $order->getId())
                             ->getFieldTotal();
-            if ($maxEarnedRefund > $order->getSimiRewardpointsEarn()) {
-                $maxEarnedRefund = $order->getSimiRewardpointsEarn();
+            if ($maxEarnedRefund > $order->getSimirewardpointsEarn()) {
+                $maxEarnedRefund = $order->getSimirewardpointsEarn();
             }
             $refundPoints = min($refundPoints, $maxEarnedRefund);
             $creditmemo->setSimiRefundEarnedPoints(max($refundPoints, 0));
-            $creditmemo->setSimiRewardpointsEarn($creditmemo->getSimiRefundEarnedPoints()); //Hai.Tran
+            $creditmemo->setSimirewardpointsEarn($creditmemo->getSimiRefundEarnedPoints()); //Hai.Tran
         }
         //Brian allow creditmemo when creditmemo total equal zero
-        if ($order->getSimiRewardpointsSpent() > 0 && $this->_priceCurrency->round($creditmemo->getGrandTotal()) <= 0
+        if ($order->getSimirewardpointsSpent() > 0 && $this->_priceCurrency->round($creditmemo->getGrandTotal()) <= 0
         ) {
             $creditmemo->setAllowZeroGrandTotal(true);
         }

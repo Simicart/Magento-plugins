@@ -19,12 +19,12 @@ class Point extends \Magento\Sales\Model\Order\Creditmemo\Total\AbstractTotal
      */
     public function collect(\Magento\Sales\Model\Order\Creditmemo $creditmemo)
     {
-        $creditmemo->setSimiRewardpointsDiscount(0);
-        $creditmemo->setSimiRewardpointsBaseDiscount(0);
+        $creditmemo->setSimirewardpointsDiscount(0);
+        $creditmemo->setSimirewardpointsBaseDiscount(0);
 
         $order = $creditmemo->getOrder();
 
-        if ($order->getSimiRewardpointsDiscount() < 0.0001) {
+        if ($order->getSimirewardpointsDiscount() < 0.0001) {
             return;
         }
 
@@ -33,9 +33,9 @@ class Point extends \Magento\Sales\Model\Order\Creditmemo\Total\AbstractTotal
         $baseTotalDiscountRefunded = 0;
         $totalDiscountRefunded = 0;
         foreach ($order->getCreditmemosCollection() as $existedCreditmemo) {
-            if ($existedCreditmemo->getSimiRewardpointsDiscount()) {
-                $totalDiscountRefunded += $existedCreditmemo->getSimiRewardpointsDiscount();
-                $baseTotalDiscountRefunded += $existedCreditmemo->getSimiRewardpointsBaseDiscount();
+            if ($existedCreditmemo->getSimirewardpointsDiscount()) {
+                $totalDiscountRefunded += $existedCreditmemo->getSimirewardpointsDiscount();
+                $baseTotalDiscountRefunded += $existedCreditmemo->getSimirewardpointsBaseDiscount();
             }
         }
 
@@ -45,13 +45,13 @@ class Point extends \Magento\Sales\Model\Order\Creditmemo\Total\AbstractTotal
          */
         $baseShippingAmount = $creditmemo->getBaseShippingAmount();
         if ($baseShippingAmount) {
-            $baseTotalDiscountAmount = $baseShippingAmount * $order->getSimiRewardpointsBaseAmount() / $order->getBaseShippingAmount();
+            $baseTotalDiscountAmount = $baseShippingAmount * $order->getSimirewardpointsBaseAmount() / $order->getBaseShippingAmount();
             $totalDiscountAmount = $order->getShippingAmount() * $baseTotalDiscountAmount / $order->getBaseShippingAmount();
         }
 
         if ($this->isLast($creditmemo)) {
-            $baseTotalDiscountAmount = $order->getSimiRewardpointsBaseDiscount() - $baseTotalDiscountRefunded;
-            $totalDiscountAmount = $order->getSimiRewardpointsDiscount() - $totalDiscountRefunded;
+            $baseTotalDiscountAmount = $order->getSimirewardpointsBaseDiscount() - $baseTotalDiscountRefunded;
+            $totalDiscountAmount = $order->getSimirewardpointsDiscount() - $totalDiscountRefunded;
         } else {
             /** @var $item Mage_Sales_Model_Order_Invoice_Item */
             foreach ($creditmemo->getAllItems() as $item) {
@@ -59,8 +59,8 @@ class Point extends \Magento\Sales\Model\Order\Creditmemo\Total\AbstractTotal
                 if ($orderItem->isDummy()) {
                     continue;
                 }
-                $orderItemDiscount = (float) $orderItem->getSimiRewardpointsDiscount() * $orderItem->getQtyInvoiced() / $orderItem->getQtyOrdered();
-                $baseOrderItemDiscount = (float) $orderItem->getSimiRewardpointsBaseDiscount() * $orderItem->getQtyInvoiced() / $orderItem->getQtyOrdered();
+                $orderItemDiscount = (float) $orderItem->getSimirewardpointsDiscount() * $orderItem->getQtyInvoiced() / $orderItem->getQtyOrdered();
+                $baseOrderItemDiscount = (float) $orderItem->getSimirewardpointsBaseDiscount() * $orderItem->getQtyInvoiced() / $orderItem->getQtyOrdered();
 
                 $orderItemQty = $orderItem->getQtyInvoiced();
 
@@ -71,8 +71,8 @@ class Point extends \Magento\Sales\Model\Order\Creditmemo\Total\AbstractTotal
             }
         }
 
-        $creditmemo->setSimiRewardpointsDiscount($totalDiscountAmount);
-        $creditmemo->setSimiRewardpointsBaseDiscount($baseTotalDiscountAmount);
+        $creditmemo->setSimirewardpointsDiscount($totalDiscountAmount);
+        $creditmemo->setSimirewardpointsBaseDiscount($baseTotalDiscountAmount);
 
         $creditmemo->setGrandTotal($creditmemo->getGrandTotal() - $totalDiscountAmount); // + $totalHiddenTax);
         $creditmemo->setBaseGrandTotal($creditmemo->getBaseGrandTotal() - $baseTotalDiscountAmount); // + $baseTotalHiddenTax);

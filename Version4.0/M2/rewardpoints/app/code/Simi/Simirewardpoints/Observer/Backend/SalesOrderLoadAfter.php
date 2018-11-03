@@ -16,7 +16,7 @@ class SalesOrderLoadAfter implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $order = $observer['order'];
-        if ($order->getRewardpointsSpent() < 0.0001 || $order->getState() === \Magento\Sales\Model\Order::STATE_CLOSED || $order->isCanceled() || $order->canUnhold()
+        if ($order->getSimirewardpointsSpent() < 0.0001 || $order->getState() === \Magento\Sales\Model\Order::STATE_CLOSED || $order->isCanceled() || $order->canUnhold()
         ) {
             return $this;
         }
@@ -31,7 +31,7 @@ class SalesOrderLoadAfter implements ObserverInterface
                         return $this;
                     }
                 }
-            } elseif ($item->getRewardpointsSpent()) {
+            } elseif ($item->getSimirewardpointsSpent()) {
                 if (($item->getQtyInvoiced() - $item->getQtyRefunded() - $item->getQtyCanceled()) > 0) {
                     $order->setForcedCanCreditmemo(true);
                     return $this;

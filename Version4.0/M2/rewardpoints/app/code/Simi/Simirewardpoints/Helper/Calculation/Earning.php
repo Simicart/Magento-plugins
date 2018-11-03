@@ -81,11 +81,11 @@ class Earning extends \Simi\Simirewardpoints\Helper\Calculation\AbstractCalculat
         } else {
             $address = $quote->getShippingAddress();
         }
-        if (!$address->getSimiRewardpointsEarn()) {
+        if (!$address->getSimirewardpointsEarn()) {
             $quote->collectTotals();
         }
 
-        return $address->getSimiRewardpointsEarn();
+        return $address->getSimirewardpointsEarn();
     }
 
     /**
@@ -109,7 +109,7 @@ class Earning extends \Simi\Simirewardpoints\Helper\Calculation\AbstractCalculat
         } else {
             $address = $quote->getShippingAddress();
         }
-        return $address->getSimiRewardpointsPointsByDiscount();
+        return $address->getSimirewardpointsPointsByDiscount();
     }
 
     /**
@@ -196,17 +196,17 @@ class Earning extends \Simi\Simirewardpoints\Helper\Calculation\AbstractCalculat
         if (!$order instanceof \Magento\Sales\Model\Order) {
             return 0;
         }
-        $shippingEarningPoints = $order->getSimiRewardpointsEarn();
+        $shippingEarningPoints = $order->getSimirewardpointsEarn();
         foreach ($order->getAllItems() as $item) {
             if ($item->getParentItemId()) {
                 continue;
             }
             if ($item->getHasChildren() && $item->isChildrenCalculated()) {
                 foreach ($item->getChildrenItems() as $child) {
-                    $shippingEarningPoints -= $child->getSimiRewardpointsEarn();
+                    $shippingEarningPoints -= $child->getSimirewardpointsEarn();
                 }
             } elseif ($item->getProduct()) {
-                $shippingEarningPoints -= $item->getSimiRewardpointsEarn();
+                $shippingEarningPoints -= $item->getSimirewardpointsEarn();
             }
         }
         return $shippingEarningPoints;

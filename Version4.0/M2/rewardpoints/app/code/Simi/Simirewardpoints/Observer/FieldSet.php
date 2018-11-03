@@ -10,6 +10,7 @@ class FieldSet implements ObserverInterface
     public $_helperPoint;
     public $_helperCustomer;
     public $_helperSpending;
+    public $simiObjectManager;
 
     /**
      * FieldSet constructor.
@@ -20,13 +21,24 @@ class FieldSet implements ObserverInterface
     public function __construct(
         \Simi\Simirewardpoints\Helper\Point $helperPoint,
         \Simi\Simirewardpoints\Helper\Customer $helperCustomer,
-        \Simi\Simirewardpoints\Helper\Calculation\Spending $helperSpending
+        \Simi\Simirewardpoints\Helper\Calculation\Spending $helperSpending,
+        \Magento\Framework\ObjectManagerInterface $simiObjectManager
     ) {
         $this->_helperPoint = $helperPoint;
         $this->_helperCustomer = $helperCustomer;
         $this->_helperSpending = $helperSpending;
+        $this->simiObjectManager = $simiObjectManager;
     }
 
+    public function _getCart()
+    {
+        return $this->simiObjectManager->create('Magento\Checkout\Model\Cart');
+    }
+
+    public function _getQuote()
+    {
+        return $this->_getCart()->getQuote();
+    }
     /**
      * @param \Magento\Framework\Event\Observer $observer
      *
@@ -36,18 +48,18 @@ class FieldSet implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $order = $observer->getEvent()->getOrder();
-        $quote = $observer->getEvent()->getQuote();
-
+        $quote = $this->_getQuote();
+        
         if ($order->getCustomerIsGuest()) {
             return $this;
         }
 
-        $order->setSimiRewardpointsEarn($quote->getSimiRewardpointsEarn())
-                ->setSimiRewardpointsSpent($quote->getSimiRewardpointsSpent())
-                ->setSimiRewardpointsBaseDiscount($quote->getSimiRewardpointsBaseDiscount())
-                ->setSimiRewardpointsDiscount($quote->getSimiRewardpointsDiscount())
-                ->setSimiRewardpointsBaseAmount($quote->getSimiRewardpointsBaseAmount())
-                ->setSimiRewardpointsAmount($quote->getSimiRewardpointsAmount());
+        $order->setSimirewardpointsEarn($quote->getSimirewardpointsEarn())
+                ->setSimirewardpointsSpent($quote->getSimirewardpointsSpent())
+                ->setSimirewardpointsBaseDiscount($quote->getSimirewardpointsBaseDiscount())
+                ->setSimirewardpointsDiscount($quote->getSimirewardpointsDiscount())
+                ->setSimirewardpointsBaseAmount($quote->getSimirewardpointsBaseAmount())
+                ->setSimirewardpointsAmount($quote->getSimirewardpointsAmount());
 
         // Validate point amount before place order
         $totalPointSpent = $this->_helperSpending->getTotalPointSpent();
@@ -82,28 +94,28 @@ class FieldSet implements ObserverInterface
                 }
                 if ($item->getHasChildren() && $item->isChildrenCalculated()) {
                     foreach ($item->getChildren() as $child) {
-                        $child->setDiscountAmount($child->getDiscountAmount() - $child->getSimiRewardpointsDiscount());
-                        $child->setBaseDiscountAmount($child->getBaseDiscountAmount() - $child->getSimiRewardpointsBaseDiscount());
+                        $child->setDiscountAmount($child->getDiscountAmount() - $child->getSimirewardpointsDiscount());
+                        $child->setBaseDiscountAmount($child->getBaseDiscountAmount() - $child->getSimirewardpointsBaseDiscount());
                     }
                 } elseif ($item->getProduct()) {
-                    $item->setDiscountAmount($item->getDiscountAmount() - $item->getSimiRewardpointsDiscount());
-                    $item->setBaseDiscountAmount($item->getBaseDiscountAmount() - $item->getSimiRewardpointsBaseDiscount());
+                    $item->setDiscountAmount($item->getDiscountAmount() - $item->getSimirewardpointsDiscount());
+                    $item->setBaseDiscountAmount($item->getBaseDiscountAmount() - $item->getSimirewardpointsBaseDiscount());
                 }
             }
-            $order->setBaseShippingDiscountAmount($order->getBaseShippingDiscountAmount() - $quote->getSimiRewardpointsBaseAmount());
-            $order->setShippingDiscountAmount($order->getShippingDiscountAmount() - $quote->getSimiRewardpointsAmount());
+            $order->setBaseShippingDiscountAmount($order->getBaseShippingDiscountAmount() - $quote->getSimirewardpointsBaseAmount());
+            $order->setShippingDiscountAmount($order->getShippingDiscountAmount() - $quote->getSimirewardpointsAmount());
             foreach ($order->getAllItems() as $item) {
                 if ($item->getParentItemId()) {
                     continue;
                 }
                 if ($item->getHasChildren() && $item->isChildrenCalculated()) {
                     foreach ($item->getChildrenItems() as $child) {
-                        $child->setDiscountAmount($child->getDiscountAmount() - $child->getSimiRewardpointsDiscount());
-                        $child->setBaseDiscountAmount($child->getBaseDiscountAmount() - $child->getSimiRewardpointsBaseDiscount());
+                        $child->setDiscountAmount($child->getDiscountAmount() - $child->getSimirewardpointsDiscount());
+                        $child->setBaseDiscountAmount($child->getBaseDiscountAmount() - $child->getSimirewardpointsBaseDiscount());
                     }
                 } elseif ($item->getProduct() && !$item->getParentItem()) {
-                    $item->setDiscountAmount($item->getDiscountAmount() - $item->getSimiRewardpointsDiscount());
-                    $item->setBaseDiscountAmount($item->getBaseDiscountAmount() - $item->getSimiRewardpointsBaseDiscount());
+                    $item->setDiscountAmount($item->getDiscountAmount() - $item->getSimirewardpointsDiscount());
+                    $item->setBaseDiscountAmount($item->getBaseDiscountAmount() - $item->getSimirewardpointsBaseDiscount());
                 }
             }
         }
