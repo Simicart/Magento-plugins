@@ -11,15 +11,19 @@ class Simi_Simiapicache_Model_System_Apicache
         return array(
             array(
                 'value' => 'home_api',
-                'label' => 'Home APIs'
+                'label' => 'Home Page'
             ),
             array(
-                'value' => 'products_api',
-                'label' => 'Products ,Category APIs'
+                'value' => 'products_detail',
+                'label' => 'Product Detail'
+            ),
+            array(
+                'value' => 'products_list',
+                'label' => 'Products List'
             ),
             array(
                 'value' => 'other_api',
-                'label' => 'Other APIs'
+                'label' => 'Other Page'
             )
         );
     }
