@@ -32,4 +32,40 @@ class Simi_Simiapicache_Helper_Data extends Mage_Core_Helper_Data
         rmdir($folder);
         return true;
     }
+
+    public function removeFileCache($fileName, $path){
+        $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . $path;
+        $filePath = $path . DS . md5($fileName) . ".json";
+        if (is_dir($path)) {
+            $dir_handle = opendir($path);
+        }
+        if ($dir_handle && file_exists($filePath)) {
+            try{
+                unlink($filePath);
+            }catch(Exception $e){
+
+            }
+        }
+    }
+
+    public function removeOnList($id,$folderList = 'products_list',$type=true){
+        $string = '"entity_id":"'.$id.'"';
+        $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . $folderList;
+        if(is_dir($path)){
+            $dir = new DirectoryIterator($path);
+            foreach ($dir as $file) {
+                $content = file_get_contents($file->getPathname());
+                if (strpos($content, $string) !== false) {
+                    // Bingo
+                    try{
+                        unlink($file->getPathname());
+                        if(!$type) break;
+                    }catch(Exception $e){
+
+                    }
+                }
+            }
+        }
+
+    }
 }
