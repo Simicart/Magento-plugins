@@ -45,12 +45,31 @@ class Frontendcontrollerpredispatch implements ObserverInterface
         $dirList = $this->simiObjectManager->get('Magento\Framework\App\Filesystem\DirectoryList');
         
         $this->storeManager = $this->simiObjectManager->get('\Magento\Store\Model\StoreManagerInterface');
+
+        $filePath = $dirList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'Simiapicache'
+            . DIRECTORY_SEPARATOR . 'json';
+
+        if(strpos($uri,'/home') !== false){
+            $filePath = $filePath . DIRECTORY_SEPARATOR . 'home_api';
+        }elseif (strpos($uri,'/products') !== false){
+            $params = $observer->getEvent()->getRequest()->getParams();
+//            \Zend_Debug::dump($params);die;
+            if(isset($params['products']) && $params['products']){
+                $filePath = $filePath . DIRECTORY_SEPARATOR . 'products_detail';
+            }else{
+                $filePath = $filePath . DIRECTORY_SEPARATOR . 'products_list';
+            }
+        }elseif (strpos($uri,'/urldicts/detail') !== false){
+            $filePath = $filePath . DIRECTORY_SEPARATOR . 'urldicts';
+        }
+        else{
+            $filePath = $filePath . DIRECTORY_SEPARATOR . 'other_api';
+        }
+
         $storeId = $this->storeManager->getStore()->getId();
         $currencyCode   = $this->storeManager->getStore()->getCurrentCurrencyCode();
         $fileName = $uri.$currencyCode.$storeId;
-        
-        $filePath = $dirList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'Simiapicache'
-            . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . md5($fileName) .".json";
+        $filePath = $filePath . DIRECTORY_SEPARATOR . md5($fileName) .".json";
         if (file_exists($filePath)) {
             $apiResult = file_get_contents($filePath);
             if ($apiResult) {

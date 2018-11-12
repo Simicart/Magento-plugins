@@ -69,11 +69,50 @@ class Apijsonencoding implements ObserverInterface
             } catch (\Exception $e) {
             }
         }
+        if(strpos($uri,'/home') !== false){
+            $path = $path . DIRECTORY_SEPARATOR . 'home_api';
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }elseif (strpos($uri,'/products') !== false){
+            // if(strpos($uri, '/products/'))
+            $params = $observer->getObject()->getRequest()->getParams();
+            if(isset($params['products']) && $params['products']){
+                $path = $path . DIRECTORY_SEPARATOR . 'products_detail';
+            }else{
+                $path = $path . DIRECTORY_SEPARATOR . 'products_list';
+            }
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }elseif (strpos($uri,'/urldicts/detail') !== false){
+            $path = $path . DIRECTORY_SEPARATOR . 'urldicts';
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }
+        else{
+            $path = $path . DIRECTORY_SEPARATOR . 'other_api';
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }
         $currencyCode   = $this->storeManager->getStore()->getCurrentCurrencyCode();
         $fileName = $uri.$currencyCode.$storeId;
 
-        $filePath = $dirList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'Simiapicache'
-            . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . md5($fileName) .".json";
+        $filePath = $path . DIRECTORY_SEPARATOR . md5($fileName) .".json";
         
         $data_json = json_encode($result);
         file_put_contents($filePath, $data_json);

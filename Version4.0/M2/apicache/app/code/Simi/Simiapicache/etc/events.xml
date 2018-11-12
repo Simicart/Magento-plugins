@@ -8,4 +8,8 @@
         <observer name="simi_simiapicache_model_delete_after"
                   instance="Simi\Simiapicache\Observer\Modeldeleteafter" />
     </event>
+    <event name="catalog_product_save_after">
+        <observer name="simiapiche_product_model_save_after"
+                  instance="Simi\Simiapicache\Observer\ProductSaveAfter" />
+    </event>
 </config>
