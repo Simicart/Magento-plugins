@@ -22,6 +22,25 @@
                     </depends>
                 </field>
 
+                <field id="auto_flush"
+                       translate="label"
+                       type="select" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto Flush All Api Cache</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="model_api"
+                       translate="label"
+                       type="multiselect" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Api Cache</label>
+                    <source_model>Simi\Simiapicache\Model\Config\Apicache</source_model>
+                    <depends>
+                        <field id="*/*/auto_flush">0</field>
+                    </depends>
+                </field>
 
                 <field id="flush_cache" translate="label" type="text" sortOrder="399" showInDefault="1">
                     <label>Flush Api Cache</label>

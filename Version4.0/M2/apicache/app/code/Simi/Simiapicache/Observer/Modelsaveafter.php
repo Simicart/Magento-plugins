@@ -24,6 +24,8 @@ class Modelsaveafter implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        $helper = $this->simiObjectManager->get('Simi\Simiapicache\Helper\Data');
+        if(!$helper->getStoreConfig('simiapicache/general/auto_flush')) return $this;
         $passedModels = [
             'Magento\Reports\Model\Event',
             'Magento\Customer\Model\Visitor',

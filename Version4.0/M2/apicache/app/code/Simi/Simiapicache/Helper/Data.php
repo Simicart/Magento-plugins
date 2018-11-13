@@ -53,10 +53,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /*
      * Flush cache
      */
-    public function flushCache()
+    public function flushCache($folder = null)
     {
         $path = $this->directionList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'Simiapicache'
             . DIRECTORY_SEPARATOR . 'json';
+        if($folder){
+            $path = $this->directionList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'Simiapicache'
+                . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . $folder;
+        }
         if (is_dir($path)) {
             $this->_removeFolder($path);
         }
@@ -82,5 +86,43 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         closedir($dir_handle);
         rmdir($folder);
         return true;
+    }
+
+    public function removeFileCache($fileName, $folder){
+        $path = $this->directionList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'simiapicache' . DIRECTORY_SEPARATOR . 'json' . DS . $folder;
+        $filePath = $path . DIRECTORY_SEPARATOR . md5($fileName) . ".json";
+        if (is_dir($path)) {
+            $dir_handle = opendir($path);
+        }
+        if ($dir_handle && file_exists($filePath)) {
+            try{
+                unlink($filePath);
+            }catch(Exception $e){
+
+            }
+        }
+    }
+
+    public function removeOnList($id,$folderList = 'products_list',$type=true){
+        $string = '"entity_id":"'.$id.'"';
+        $path = $this->directionList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'simiapicache' . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . $folderList;
+        if(is_dir($path) && opendir($path)){
+            $dir = opendir($path);
+            while ($file = readdir($dir)) {
+                if ($file != "." && $file != "..") {
+                    $content = file_get_contents($path.'/'.$file);
+                    if (strpos($content, $string) !== false) {
+                        // Bingo
+                        try{
+                            unlink($path.'/'.$file);
+                            if(!$type) break;
+                        }catch(Exception $e){
+
+                        }
+                    }
+                }
+
+            }
+        }
     }
 }

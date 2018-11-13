@@ -20,8 +20,15 @@ class Simi_Simiapicache_Model_Observer
         $filePath = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json';
         if(strpos($uri,'/home') !== false){
             $filePath = $filePath . DS . 'home_api';
-        }elseif (strpos($uri,'/products')){
-            $filePath = $filePath . DS . 'products_api';
+        }elseif (strpos($uri,'/products') !== false){
+            $params = $observer->getControllerAction()->getRequest()->getParams();
+            if(isset($params['products']) && $params['products']){
+                $filePath = $filePath . DS . 'products_detail';
+            }else{
+                $filePath = $filePath . DS . 'products_list';
+            }
+        }elseif (strpos($uri,'/urldicts/detail') !== false){
+            $filePath = $filePath . DS . 'urldicts';
         }
         else{
             $filePath = $filePath . DS . 'other_api';
@@ -89,8 +96,21 @@ class Simi_Simiapicache_Model_Observer
                 } catch (\Exception $e) {
                 }
             }
-        }elseif (strpos($uri,'/products')){
-            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'products_api';
+        }elseif (strpos($uri,'/products') !== false){
+            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'products_list';
+            // if(strpos($uri, '/products/'))
+            $params = $observer->getObject()->getRequest()->getParams();
+            if(isset($params['products']) && $params['products']){
+                $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'products_detail';
+            }
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path, 0777, true);
+                } catch (\Exception $e) {
+                }
+            }
+        }elseif (strpos($uri,'/urldicts/detail') !== false){
+            $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . 'urldicts';
             if (!is_dir($path)) {
                 try {
                     mkdir($path, 0777, true);
@@ -115,6 +135,9 @@ class Simi_Simiapicache_Model_Observer
     }
 
     public function flushcache($observer) {
+        if(!Mage::getStoreConfig('simiapicache/apicache/auto_flush')){
+            return $this;
+        }
         $passedModels = [
             'Mage_Log_Model_Visitor',
             'Mage_Sales_Model_Quote',
@@ -161,5 +184,13 @@ class Simi_Simiapicache_Model_Observer
 
         Mage::log('Saved Model '.$modelClass, null, 'savedmodels.log');
         Mage::helper('simiapicache')->flushCache();
+    }
+
+    public function ProductSaveAfter($observer){
+        $product = $observer->getProduct();
+        $id = $product->getId();
+        Mage::helper('simiapicache')->removeOnList($id,'urldicts',false);
+        Mage::helper('simiapicache')->removeOnList($id,'products_detail',false);
+        Mage::helper('simiapicache')->removeOnList($id,'products_list');
     }
 }

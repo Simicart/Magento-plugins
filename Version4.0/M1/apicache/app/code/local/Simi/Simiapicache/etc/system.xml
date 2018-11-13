@@ -38,6 +38,19 @@
                                 <enable>1</enable>
                             </depends>
 						</excluded_paths>
+                        <auto_flush>
+                            <label>Auto Flush All Api Cache</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </auto_flush>
                         <model_api translate="label">
                             <label>Api Cache</label>
                             <frontend_type>multiselect</frontend_type>
@@ -48,7 +61,7 @@
                             <show_in_store>1</show_in_store>
                             <comment></comment>
                             <depends>
-                                <enable>1</enable>
+                                <auto_flush>0</auto_flush>
                             </depends>
                         </model_api>
 						<flush_cache translate="label">

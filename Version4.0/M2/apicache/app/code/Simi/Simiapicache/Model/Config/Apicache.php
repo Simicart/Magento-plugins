@@ -2,29 +2,33 @@
 /**
  * Created by PhpStorm.
  * User: macos
- * Date: 10/31/18
- * Time: 9:57 AM
+ * Date: 11/12/18
+ * Time: 10:01 AM
  */
-class Simi_Simiapicache_Model_System_Apicache
+
+namespace Simi\Simiapicache\Model\Config;
+
+class Apicache implements \Magento\Framework\Option\ArrayInterface
 {
-    public function toOptionArray(){
-        return array(
-            array(
+    public function toOptionArray()
+    {
+        return [
+            [
                 'value' => 'home_api',
                 'label' => 'Home Page'
-            ),
-            array(
+            ],
+            [
                 'value' => 'products_detail',
                 'label' => 'Product Detail'
-            ),
-            array(
+            ],
+            [
                 'value' => 'products_list',
                 'label' => 'Products List'
-            ),
-            array(
+            ],
+            [
                 'value' => 'other_api',
                 'label' => 'Other Page'
-            )
-        );
+            ]
+        ];
     }
 }
