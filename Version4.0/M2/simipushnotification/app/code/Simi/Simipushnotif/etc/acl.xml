@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2017 www.tigren.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Simi_Simipushnotif::general" title="SimiCart Push Notification" sortOrder="52">
+                    <resource id="Simi_Simipushnotif::device_manager" title="Manager Devices" sortOrder="10"/>
+                    <resource id="Simi_Simipushnotif::notification_manager" title="Manager Notification" sortOrder="20"/>
+                    <resource id="Simi_Simipushnotif::simipushnotif_settings" title="SimiCart Push Notification Settings" sortOrder="30"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

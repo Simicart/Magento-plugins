@@ -1,0 +1,51 @@
+<?php if ($block->IsEnableForWebsite()) : ?>
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+            console.log('Service Worker and Push is supported');
+            var sw = "<?php echo $block->getBaseUrl() ?>" + "simipush-sw.js";
+            navigator.serviceWorker.register(sw)
+                .then(function (swReg) {
+                    console.log('Service Worker is registered', '');
+
+                    swRegistration = swReg;
+                    initializeUI();
+                    if (navigator.onLine) {
+                        swReg.update();
+                    }
+                    swRegistration.onupdatefound = function () {
+                        var installingWorker = swRegistration.installing;
+                        installingWorker.onstatechange = function (){
+                            if (installingWorker.state === 'installed') {
+                                if (navigator.serviceWorker.controller) {
+                                    swReg.update();
+                                } else {
+                                    console.log('Content is cached for offline use.');
+                                }
+                            }
+                        };
+                    };
+
+                })
+                .catch(function (error) {
+                    console.error('Service Worker Error', error);
+                });
+        } else {
+
+            console.warn('Push messaging is not supported');
+            console.log('Push Not Supported');
+        }
+    </script>
+<?php else:?>
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(var sw of registrations) {
+                    if(sw.active.scriptURL.indexOf('/simipush-sw.js') > -1){
+                        console.log('Simi Service Worker has been deleted');
+                        sw.unregister();
+                    }
+                }
+            })
+        }
+    </script>
+<?php endif ?>
