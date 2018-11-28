@@ -40,6 +40,9 @@ class Simi_Paypalexpress_Model_Api_Ppexpressapis extends Simi_Simiconnector_Mode
                 $this->_initCheckout();
                 $this->_checkout->returnFromPaypal($this->_initToken());
                 $result['ppexpressapi'] = array();
+                // $url = Mage::getUrl('paypal/express/review', array('_secure' => true));
+                // Mage::app()->getFrontController()->getResponse()->setRedirect($url)->sendResponse();
+                // return;
             } else if ($data['resourceid'] == 'checkout_address') {
                 $this->_initCheckout();
                 $this->_checkout->returnFromPaypal($this->_initToken());
