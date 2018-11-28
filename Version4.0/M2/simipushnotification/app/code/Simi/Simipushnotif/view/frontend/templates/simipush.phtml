@@ -1,8 +1,9 @@
 <?php if ($block->IsEnableForWebsite()) : ?>
     <script type="text/javascript">
+        var base_url = '<?php echo $block->getBaseUrl() ?>';
         if ('serviceWorker' in navigator && 'PushManager' in window) {
             console.log('Service Worker and Push is supported');
-            var sw = "<?php echo $block->getBaseUrl() ?>" + "simipush-sw.js";
+            var sw = base_url + "simipush-sw.js";
             navigator.serviceWorker.register(sw)
                 .then(function (swReg) {
                     console.log('Service Worker is registered', '');

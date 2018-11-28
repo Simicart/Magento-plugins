@@ -270,7 +270,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 }
             }
 
-            function changeType(){
+            function changeType(a){
                 var banner_type = document.getElementById('type').value;
                 switch (banner_type) {
                     case '1':
@@ -325,6 +325,16 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                     device_grid.style.display = 'none';
                     device_choose_img.src = '$arrow_down_img';
                 }
+            }
+            
+            function changeTitle(text){
+                var el = document.getElementById('preview-title');
+                el.innerText = text;
+            }
+            
+            function changeMsg(msg){
+                var el = document.getElementById('preview-msg');
+                    el.innerText = msg;
             }
         ";
         return parent::_prepareLayout();

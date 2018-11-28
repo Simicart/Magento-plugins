@@ -56,13 +56,15 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Framework\ObjectManagerInterface $simiObjectManager,
         array $data = []
-    ) {
-    
+    )
+    {
+
         $this->simiObjectManager = $simiObjectManager;
         $this->siminotificationFactory = $notificationFactory;
         $this->systemStore = $systemStore;
         $this->jsonEncoder = $jsonEncoder;
         $this->categoryFactory = $categoryFactory;
+
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -98,6 +100,11 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         if (isset($data['device_id'])) {
             $data['devices_pushed'] = $data['device_id'];
         }
+        $helper = $this->simiObjectManager->get('Simi\Simipushnotif\Helper\Data');
+
+        if(!isset($data['image_url']) || !$data['image_url']){
+            $data['image_url'] = $helper->getStoreConfig('simipushnotif/notification/icon_url');
+        }
 
         $fieldset->addField(
             'notice_title',
@@ -107,20 +114,21 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'label' => __('Title'),
                 'title' => __('Title'),
                 'required' => true,
-                'disabled' => $isElementDisabled
+                'disabled' => $isElementDisabled,
+                'onkeyup' => 'changeTitle(this.value)'
             ]
         );
 
-//        $fieldset->addField(
-//            'image_url',
-//            'image',
-//            [
-//                'name' => 'image_url',
-//                'label' => __('Image'),
-//                'title' => __('Image'),
-//                'required' => false,
-//            ]
-//        );
+        $fieldset->addField(
+            'image_url',
+            'image',
+            [
+                'name' => 'image_url',
+                'label' => __('Image'),
+                'title' => __('Image'),
+                'required' => false,
+            ]
+        );
         $fieldset->addField(
             'notice_content',
             'textarea',
@@ -129,7 +137,8 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'label' => __('Message'),
                 'title' => __('Message'),
                 'required' => false,
-                'disabled' => $isElementDisabled
+                'disabled' => $isElementDisabled,
+                'onkeyup' => 'changeMsg(this.value)'
             ]
         );
 
@@ -184,6 +193,26 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'disabled' => $isElementDisabled,
             ]
         );
+        $default_img = $data['image_url'] === $helper->getStoreConfig('simipushnotif/notification/icon_url');
+        $img = $default_img ? $data['image_url'] :$helper->getMediaUrl($data['image_url']);
+        $title = isset($data['notice_title']) && $data['notice_title'] ? $data['notice_title']:__('Title');
+        $msg = isset($data['notice_content']) && $data['notice_content'] ? $data['notice_content']:__('Message');
+        $fieldset->addField(
+            'label',
+            'label',
+            [
+                'label' => __('Preview'),
+                'title' => __('Preview'),
+                'after_element_html' => '<div id="preview-notice">
+                        <div class="notice-img"><img src="'.$img.'" alt=""></div>
+                        <div class="notice-content">
+                            <div id="preview-title">'.$title.'</div>
+                            <div id="preview-msg">'.$msg.'</div>
+                            <div class="notice-base-url">'.$this->getBaseUrl().'</div>
+                        </div>
+                     </div>'
+            ]
+        );
 
         $_fieldset = $form->addFieldset('device_location', ['legend' => __('Notification Device Select')]);
 
@@ -195,7 +224,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'label' => __('Device IDs'),
                 'title' => __('Device IDs'),
                 'required' => true,
-                'note'     => __('Leave this empty to push to All devices'),
+                'note' => __('Leave this empty to push to All devices'),
                 'disabled' => $isElementDisabled,
                 'after_element_html' => '<a href="#" title="Show Device Grid" onclick="toogleDevice();return false;">'
                     . '<img id="show_device_grid" src="'

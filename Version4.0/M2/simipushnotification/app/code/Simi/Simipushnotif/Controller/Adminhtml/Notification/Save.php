@@ -21,13 +21,26 @@ class Save extends Action
         if ($id) {
             $model->load($id);
         }
-
+        $is_delete_siminotification = isset($data['image_url']['delete']) ? $data['image_url']['delete'] : false;
+        $data['image_url'] = isset($data['image_url']['value']) ? $data['image_url']['value'] : '';
         $data['created_time'] = time();
         $data['device_id'] = (isset($data['devices_pushed']) &&
             $data['devices_pushed'] && ($data['devices_pushed'] !== '')
         ) ? $data['devices_pushed'] : '';
         $model->addData($data);
         try {
+
+            $imageHelper = $simiObjectManager->get('Simi\Simipushnotif\Helper\Data');
+            if ($is_delete_siminotification && $model->getImageUrl()) {
+                $model->setImageUrl('');
+            } else {
+                $imageFile = $imageHelper->uploadImage('image_url', 'notification');
+                if ($imageFile) {
+                    $model->setImageUrl($imageFile);
+                    $data['image_url'] = $imageFile;
+                }
+            }
+
             if ($data['device_id'] && ($data['device_id'] != '')) {
                 $data['notice_type'] = 2;
             } else {

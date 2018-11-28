@@ -30,3 +30,39 @@
 #edit_form .mage-suggest:after{
     content: '\e013';
 }
+#preview-notice {
+    display: flex;
+    height: 80px;
+
+}
+.notice-img {
+    width: 80px;
+}
+.notice-img img {
+    width: 80px;
+    height: 80px;
+}
+.notice-content {
+    width: calc(100% - 80px);
+    padding: 0 10px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-flow: column;
+}
+#preview-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#preview-msg {
+    font-size: 1.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.notice-base-url {
+    font-size: 1.1rem;
+    color: #adadad;
+    margin-top: auto;
+}
