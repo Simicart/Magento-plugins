@@ -42,11 +42,12 @@ class Message extends \Magento\Framework\App\Action\Action
                 ->get($message->getCategoryId())
                 ->getUrl();
         }
-        if ($message_info['image_url']) {
-            $img = $this->getMediaUrl($message_info['image_url']);
-            $message_info['image_url'] = $img;
-        }
+
         $message_info['logo_icon'] = $this->scopeConfigInterface->getValue('simipushnotif/notification/icon_url');
+        if ($message_info['image_url']) {
+            $img = $message_info['image_url'] === $message_info['logo_icon'] ? $message_info['image_url']: $this->getMediaUrl($message_info['image_url']);
+            $message_info['logo_icon'] = $img;
+        }
         $result = [
             "notification" => $message_info
         ];

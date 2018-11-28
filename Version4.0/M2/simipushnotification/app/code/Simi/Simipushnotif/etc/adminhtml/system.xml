@@ -20,6 +20,7 @@
                 </field>
                 <field id="icon_url" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1">
                     <label>Notification Icon Url (png)</label>
+                    <comment>Default Icon Url</comment>
                     <depends>
                         <field id="*/*/enable">1</field>
                     </depends>

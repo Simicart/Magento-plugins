@@ -62,10 +62,10 @@ function subscribeUser() {
 
 function updateSubscriptionOnServer(subscription,type = 1) {
     // TODO: Send subscription to application server
-    var api = "./simipush/index/register";
+    var api = base_url+"simipush/index/register";
     var method = 'POST';
     if (type === 2) {
-        api = './simipush/index/delete';
+        api = base_url+'simipush/index/delete';
     }
     ConnectionApi(api,method,subscription);
 }
