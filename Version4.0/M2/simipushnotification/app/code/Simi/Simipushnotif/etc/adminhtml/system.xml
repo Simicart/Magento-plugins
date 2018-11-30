@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="simipushnotif" translate="label" sortOrder="1000">
+            <label>Simi Push Notification</label>
+        </tab>
+        <section id="simipushnotif" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>General Settings</label>
+            <tab>simipushnotif</tab>
+            <resource>Simi_Simipushnotif::simipushnotif_settings</resource>
+
+            <group id="notification" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1">
+                <label>Push Notification</label>
+                <field id="enable" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select "Yes" will enable both Push Notification for Website</comment>
+                </field>
+                <field id="icon_url" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1">
+                    <label>Notification Icon Url (png)</label>
+                    <comment>Default Icon Url</comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

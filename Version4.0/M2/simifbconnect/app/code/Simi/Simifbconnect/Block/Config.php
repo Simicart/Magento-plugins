@@ -12,7 +12,7 @@ class Config extends \Magento\Framework\View\Element\Template
 
 	public function __construct(
 		\Magento\Framework\View\Element\Template\Context $context,
-		\Simi\Simifbconnect\helper\Data $helper,
+		\Simi\Simifbconnect\Helper\Data $helper,
 		\Magento\Framework\ObjectManagerInterface $simiObjectManager
 	)
     {

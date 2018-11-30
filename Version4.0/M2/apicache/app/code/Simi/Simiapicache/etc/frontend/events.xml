@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
-    <event name="controller_action_predispatch">
+    <event name="controller_front_send_response_before">
         <observer name="simi_simiapicache_controller_action_predispatch"
                   instance="Simi\Simiapicache\Observer\Frontendcontrollerpredispatch" />
     </event>
-    <event name="simi_rest_v2">
+    <event name="SimiconnectorRestV2">
         <observer name="simi_simiapicache_simiconnector_rest_v2"
-                  instance="Simi\Simiapicache\Observer\Apijsonencoding" />
+                      instance="Simi\Simiapicache\Observer\Apijsonencoding" />
     </event>
 </config>
