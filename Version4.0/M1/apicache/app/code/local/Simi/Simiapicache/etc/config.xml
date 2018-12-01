@@ -158,6 +158,7 @@
         <simiconnector>
             <apicache>
                 <enable>0</enable>
+                <auto_flush>0</auto_flush>
             </apicache>
         </simiconnector>
     </default>
