@@ -1,0 +1,11 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Simi_Instantsearch::instantsearch" title="Simi Instant Search &amp; Autocomplete" module="Simi_Instantsearch"
+             sortOrder="20" resource="Simi_Instantsearch::instantsearch"/>
+        <add id="Simi_Instantsearch::setting"
+             resource="Simi_Instantsearch::setting"
+             module="Simi_Instantsearch" title="Setting" sortOrder="2"
+             action="adminhtml/system_config/edit/section/simi_instantsearch"
+             parent="Simi_Instantsearch::instantsearch"/>
+    </menu>
+</config>
