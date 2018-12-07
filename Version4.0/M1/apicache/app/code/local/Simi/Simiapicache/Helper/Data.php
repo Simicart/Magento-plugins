@@ -66,6 +66,38 @@ class Simi_Simiapicache_Helper_Data extends Mage_Core_Helper_Data
                 }
             }
         }
+    }
 
+    public function refreshApiCacheProductDetail($folderList='products_detail'){
+        $path = Mage::getBaseDir('media') . DS . 'simiapicache' . DS . 'simiapi_json' . DS . $folderList;
+        if(is_dir($path)){
+            $dir = new DirectoryIterator($path);
+            $productsModel = Mage::getModel('simiconnector/api_products');
+            $data = array(
+                'resource'       => 'products',
+                'params'         => array('image_height'=>1206, 'image_width'=>750),
+                'contents_array' => array(),
+                'is_method'      => 1, //GET
+                'module'         => 'simiconnector',
+                'controller'     => Mage::app()->getRequest()->getControllerName(),
+            );
+            $productsModel->setSingularKey('products');
+            $productsModel->setPluralKey('products');
+            // zend_debug::dump($dir);die;
+            foreach ($dir as $file) {
+                if($file->getFilename() == '..' || $file->getFilename() == '.') continue;
+                $content = file_get_contents($file->getPathname());
+                $content = json_decode($content);
+                try{
+                    $data['resourceid'] = $content->product->entity_id;
+                    $productsModel->setData($data);
+                    $productsModel->setBuilderQuery();
+                    $productsApi = json_encode($productsModel->show());
+                    file_put_contents($file->getPathname(), $productsApi);
+                }catch(Exception $e){
+
+                }
+            }
+        }
     }
 }

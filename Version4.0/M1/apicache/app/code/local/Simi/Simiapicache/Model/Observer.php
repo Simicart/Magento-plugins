@@ -53,7 +53,10 @@ class Simi_Simiapicache_Model_Observer
         if (!Mage::getStoreConfig('simiapicache/apicache/enable'))
             return;
 
+//        zend_debug::dump($observer->getObject());die;
         $result = $observer->getObject()->getData();
+        $current_api = Mage::helper('core/url')->getCurrentUrl();
+        $result['api_cache'] = $current_api;
         if (!$result || (isset($result['errors'])))
             return;
 

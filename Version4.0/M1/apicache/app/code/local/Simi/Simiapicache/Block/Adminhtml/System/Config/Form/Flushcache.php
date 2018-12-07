@@ -15,15 +15,28 @@ class Simi_Simiapicache_Block_Adminhtml_System_Config_Form_Flushcache extends Ma
     
     public function getButtonHtml()
     {
+        $actionHtml = '';
         $buildButton = $this->getLayout()->createBlock('adminhtml/widget_button')
             ->setData(
                 array(
                     'id' => 'flush_api_cache',
                     'label' => __('Flush'),
-                    'onclick' => 'setLocation(\'' . Mage::helper('adminhtml')->getUrl('adminhtml/simiapicache_index/flush') . '\')',
+                    'onclick' => 'flushApi()',
                     'style' => 'margin-left : 10px'
                 )
             );
-        return $buildButton->toHtml();
+        $actionHtml .= $buildButton->toHtml();
+
+        $actionHtml .= '<script type="text/javascript">
+                function flushApi(){
+                    var select_api_cache = document.getElementById("simiapicache_apicache_model_api");
+                    var val = select_api_cache.getValue().join();
+                    var url = "'.Mage::helper('adminhtml')->getUrl('adminhtml/simiapicache_index/flush').'"
+                    url = url + "?api="+val
+                    setLocation(url)
+                }
+                
+            </script>';
+        return $actionHtml;
     }
 }
