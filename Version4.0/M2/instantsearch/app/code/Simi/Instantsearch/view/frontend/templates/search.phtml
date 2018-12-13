@@ -37,6 +37,7 @@ $title_background_color = $helperSearch->getTitleBackgroundColor();
 $background_color = $helperSearch->getBackgroundColor();
 $font_color = $helperSearch->getFontColor();
 $border_color = $helperSearch->getBorderColor();
+$addToCartButtonColor = $helperSearch->getAddToCartButtonColor();
 ?>
 <div class="block block-search">
     <div class="block block-title"><strong><?php /* @escapeNotVerified */ echo __('Search'); ?></strong></div>
@@ -216,7 +217,7 @@ require(['jquery'],function($){
                                                 form = '';
                                                 form+="<form style='float:right; margin-right:20px' data-role='tocart-form' action='"+response.instant_search.products[i].add_to_cart_url+"' method='post'>";
                                                 form+='<?php echo $block->getBlockHtml("formkey") ?>';
-                                                form+="<button type='submit' title='Add to Cart' class='action tocart primary'><span>Add to Cart</span></button>";
+                                                form+="<button type='submit' title='Add to Cart' class='action tocart primary' style='background:<?=$addToCartButtonColor?>'><span>Add to Cart</span></button>";
                                                 
                                                 form+="</form>";
                                                 htmlProduct += form;
