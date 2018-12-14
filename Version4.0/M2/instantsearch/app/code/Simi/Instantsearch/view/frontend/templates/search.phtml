@@ -13,7 +13,7 @@ $url = $url."/simiconnector/rest/v2/simiinstantsearchs";
 $minimumSearch = $helperSearch->getMinimumCharacterSearch();
 if($minimumSearch == '') $minimumSearch = 0;
 $isActive = $helperSearch->isActive();
-$limit = $helperSearch->getSearchResult();
+// $limit = $helperSearch->getSearchResult();
 $popUp = $helperSearch->getSearchPopupAsArray();
 $resultTitle = $helperSearch->getResultTitle();
 $suggestTitle = $helperSearch->getSuggestTitle();
@@ -37,7 +37,7 @@ $title_background_color = $helperSearch->getTitleBackgroundColor();
 $background_color = $helperSearch->getBackgroundColor();
 $font_color = $helperSearch->getFontColor();
 $border_color = $helperSearch->getBorderColor();
-$addToCartButtonColor = $helperSearch->getAddToCartButtonColor();
+$cartButtonColor = $helperSearch->getAddToCartButtonColor();
 ?>
 <div class="block block-search">
     <div class="block block-title"><strong><?php /* @escapeNotVerified */ echo __('Search'); ?></strong></div>
@@ -117,11 +117,21 @@ require(['jquery'],function($){
             } 
         );
     <?php } ?>
+    var defaultButtonSearch = '';
+    defaultButtonSearch = "<button type='submit' title='"+"<?php echo $block->escapeHtml(__('Search')) ?>"+"' class='action search' id='searchButton'><span><?php echo __('Search'); ?></span></button>";
+    var loadingButton = " <img style='position:absolute; top:5px; right:5px; width:20px; height:20px' src='<?php echo $gif ?>'>";
+    var loadingButtonTablet = " <img style='position:absolute; bottom:20px; right:20px; width:20px; height:20px' src='<?php echo $gif ?>'>";
     
     function ajaxSearch(){
 
         if (instantseaching)
             return;
+
+        // in case of getting ERR_CONNECTION RESET
+        setTimeout(function(){ 
+            $('#actions').empty().html(defaultButtonSearch);
+            instantseaching = false;
+        }, 5000);
 
         //lastQuerySearch
         lastQuerySearch = $('#search').val();
@@ -132,7 +142,7 @@ require(['jquery'],function($){
             method: "GET",
             async: true,
             
-            data: {q:$('#search').val(), backUrl: "<?php echo $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]); ?>", limit: "<?php echo $limit; ?>", hasSuggestion: "<?php echo $hasSuggestion; ?>", hasProduct: "<?php echo $hasProduct; ?>"},
+            data: {q:$('#search').val(), backUrl: "<?php echo $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]); ?>", hasSuggestion: "<?php echo $hasSuggestion; ?>", hasProduct: "<?php echo $hasProduct; ?>"},
             beforeSend : function(){           
                 if(currentRequest != null) {
                     
@@ -141,11 +151,11 @@ require(['jquery'],function($){
 
                 // responsive button gif
                 if(window.outerWidth > 1000) {
-                    var loadingButton = " <img style='position:absolute; top:5px; right:5px; width:20px; height:20px' src='<?php echo $gif ?>'>";
+                    
                     $('#actions').empty().html(loadingButton);
                 } else {
-                    var loadingButton = " <img style='position:absolute; bottom:20px; right:20px; width:20px; height:20px' src='<?php echo $gif ?>'>";
-                    $('#actions').empty().html(loadingButton);
+                    
+                    $('#actions').empty().html(loadingButtonTablet);
                 }
                 
                 instantseaching = true;
@@ -154,11 +164,10 @@ require(['jquery'],function($){
             
             success: function(response){ 
                 instantseaching = false;
-                // console.log(response);
+                console.log(response);
 
                 // Restore button search after get response Ajax
-                var defaultButtonSearch = '';
-                defaultButtonSearch = "<button type='submit' title='"+"<?php echo $block->escapeHtml(__('Search')) ?>"+"' class='action search' id='searchButton'><span><?php echo __('Search'); ?></span></button>";
+                
                 $('#actions').empty().html(defaultButtonSearch);
 
                 
@@ -216,8 +225,8 @@ require(['jquery'],function($){
                                             if(response.instant_search.products[i].add_to_cart_url) {
                                                 form = '';
                                                 form+="<form style='float:right; margin-right:20px' data-role='tocart-form' action='"+response.instant_search.products[i].add_to_cart_url+"' method='post'>";
-                                                form+='<?php echo $block->getBlockHtml("formkey") ?>';
-                                                form+="<button type='submit' title='Add to Cart' class='action tocart primary' style='background:<?=$addToCartButtonColor?>'><span>Add to Cart</span></button>";
+                                                form+="<input name='form_key' type='hidden' value='"+response.instant_search.form_key+"'>";
+                                                form+="<button type='submit' title='Add to Cart' class='action tocart primary' style='border:none;background-color:<?=$cartButtonColor?>'><span>Add to Cart</span></button>";
                                                 
                                                 form+="</form>";
                                                 htmlProduct += form;
