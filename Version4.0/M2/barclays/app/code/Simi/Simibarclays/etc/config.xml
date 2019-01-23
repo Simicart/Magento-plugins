@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <simibarclays>
+                <active>0</active>
+                <title>Barclays payment</title>
+                <order_status>pending_payment</order_status>
+                <payment_action>true</payment_action>
+                <model>Simi\Simibarclays\Model\Method</model>
+                <sandbox_url>https://mdepayments.epdq.co.uk/ncol/test/orderstandard.asp</sandbox_url>
+                <live_url>https://payments.epdq.co.uk/ncol/prod/orderstandard.asp</live_url>
+            </simibarclays>
+        </payment>
+    </default>
+</config>
