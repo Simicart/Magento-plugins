@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: trueplus
- * Date: 4/19/16
- * Time: 08:52
- */
 
 namespace Simi\Simibarclays\Observer;
 

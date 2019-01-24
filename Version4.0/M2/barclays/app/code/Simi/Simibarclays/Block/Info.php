@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: scott
- * Date: 9/26/18
- * Time: 2:34 PM
- */
 
 namespace Simi\Simibarclays\Block;
 

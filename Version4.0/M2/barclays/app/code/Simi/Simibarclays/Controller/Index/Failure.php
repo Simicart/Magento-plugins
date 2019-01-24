@@ -7,6 +7,8 @@
 
 namespace Simi\Simibarclays\Controller\Index;
 
+use \Magento\Sales\Model\Order;
+
 class Failure extends \Magento\Framework\App\Action\Action
 {
 
@@ -32,9 +34,8 @@ class Failure extends \Magento\Framework\App\Action\Action
             $orderModel->save();
         }
         $resultRedirect = $this->resultRedirectFactory->create();
-        return $resultRedirect->setPath('/', array(
-            '_secure' => true,
-            'warning_message' => urlencode(__('Sorry, payment failure'))
+        return $resultRedirect->setPath('checkout/onepage/failure?warning_message='.urlencode(__('Sorry, payment failure')), array(
+            '_secure' => true
         ));
     }
 }

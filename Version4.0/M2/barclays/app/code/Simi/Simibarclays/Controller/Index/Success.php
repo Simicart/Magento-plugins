@@ -24,7 +24,7 @@ class Success extends \Magento\Framework\App\Action\Action
             ->addFieldToFilter('order_id', $orderId)
             ->addFieldToFilter('token', $token)
             ->getFirstItem();
-        if ($transaction->getId()){
+        if ($transaction->getId() && $transaction->getData('status') == 'pending'){
             $transaction->setData('status', 'completed');
             $transaction->save();
             $orderState = Order::STATE_PROCESSING;
@@ -32,9 +32,8 @@ class Success extends \Magento\Framework\App\Action\Action
             $orderModel->save();
         }
         $resultRedirect = $this->resultRedirectFactory->create();
-        return $resultRedirect->setPath('checkout/onepage/success', array(
-                '_secure' => true,
-                'orderId' => $orderId
+        return $resultRedirect->setPath('checkout/onepage/success?orderId='.$orderId, array(
+                '_secure' => true
             )
         );
     }

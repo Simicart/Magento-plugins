@@ -20,8 +20,24 @@ class SimiconnectorAfterPlaceOrder implements ObserverInterface {
         if (isset($data['payment_method']) && $data['payment_method'] == "simibarclays") {
             $orderObject = $observer->getObject();
             $data = $orderObject->order_placed_info;
-            $data['url_action'] = $this->getOrderPlaceRedirectUrl($data['invoice_number']);
-            $orderObject->order_placed_info = $data;
+            $orderId = $data['invoice_number'];
+            $orderModel = $this->simiObjectManager->get('\Magento\Sales\Model\Order')->getCollection()
+                ->addAttributeToFilter('increment_id', $orderId)
+                ->getFirstItem();
+            if ($orderModel->getId()) {
+                $helper = $this->simiObjectManager->get('Simi\Simibarclays\Helper\Data');
+                $newOrderStatus = $helper->getStoreConfig('payment/simibarclays/order_status');
+                try {
+                    if ($orderModel->getStatus() != $newOrderStatus) {
+                        //$orderModel->setState($newOrderStatus)->setStatus($newOrderStatus);
+                        //$orderModel->save();
+                    }
+                } catch (\Exception $e) {
+
+                }
+                $data['url_action'] = $this->getOrderPlaceRedirectUrl($data['invoice_number']);
+                $orderObject->order_placed_info = $data;
+            }
         }
     }
 

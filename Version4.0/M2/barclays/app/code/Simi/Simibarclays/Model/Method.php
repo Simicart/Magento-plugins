@@ -9,4 +9,13 @@ class Method extends AbstractMethod
     protected $_code = 'simibarclays';
 
     protected $_infoBlockType = \Simi\Simibarclays\Block\Info::class;
+
+    public function isInitializeNeeded()
+    {
+        return false;
+    }
+
+    public function getConfigPaymentAction() {
+        return false;
+    }
 }
