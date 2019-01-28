@@ -121,7 +121,6 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Grid extends Mage_Adminhtml_Bloc
             )
         );
 
-<<<<<<< HEAD
         $this->addColumn('overall',
             array(
                 'header'=> $this->__('Overall'),
@@ -133,8 +132,6 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Grid extends Mage_Adminhtml_Bloc
             )
         );
 
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
         $this->addColumn('requirements',
             array(
                 'header'=> $this->__('Requirements'),
@@ -168,7 +165,6 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Grid extends Mage_Adminhtml_Bloc
             )
         );
 
-<<<<<<< HEAD
         $this->addColumn('overall_vn',
             array(
                 'header'=> $this->__('Tóm tắt công việc'),
@@ -180,8 +176,6 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Grid extends Mage_Adminhtml_Bloc
             )
         );
 
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
         $this->addColumn('requirements_vn',
             array(
                 'header'=> $this->__('Yêu cầu'),

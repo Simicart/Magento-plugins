@@ -8,7 +8,6 @@ class Simicart_Simihr_Block_Department extends Mage_Core_Block_Template
 		return parent::_prepareLayout();
 	}
 	public function getListDepartment() {
-<<<<<<< HEAD
         $collection = Mage::getResourceModel('simihr/department_collection')->addFieldToFilter('status', 1)->setOrder('sort_order', 'DESC')->getData();
         return $collection;
     }
@@ -34,17 +33,4 @@ class Simicart_Simihr_Block_Department extends Mage_Core_Block_Template
         return $title;
     }
    
-=======
-        $collection = Mage::getResourceModel('simihr/department_collection')->addFieldToFilter('status', 1)->setOrder('sort_order', 'DESC')->setPageSize(4)->getData();
-
-        return $collection;
-    }
-    public function countAlljobs() {
-        $jobs = Mage::getResourceModel('simihr/jobOffers_collection')->addFieldToFilter('status', 1)->getData();
-        foreach ($jobs as $job) {
-            $allJobs[] = $job['id'];
-        }
-        return count($allJobs);
-    }
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 }

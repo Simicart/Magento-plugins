@@ -11,7 +11,6 @@ class Simicart_Simihr_Block_Detail extends Mage_Core_Block_Template
         $collection = Mage::getResourceModel('simihr/jobOffers_collection')->addFieldToFilter('status', 1)->addFieldToFilter('name', $job)->addFieldToFilter('job_type', $jobType)->getData();
         return $collection;
     }
-<<<<<<< HEAD
     public function getTitle(){
         $title = Mage::getResourceModel('simihr/content_collection')->addFieldToFilter('name', 'detail_title')->getData();
         if (isset($title[0])) {
@@ -19,6 +18,4 @@ class Simicart_Simihr_Block_Detail extends Mage_Core_Block_Template
         } else $title = '';
         return $title;
     }
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 }

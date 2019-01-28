@@ -94,10 +94,7 @@ class Simicart_Simihr_Adminhtml_JobOffersController extends Mage_Adminhtml_Contr
                 $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
                 return;
             }
-<<<<<<< HEAD
 
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
             $model = Mage::getSingleton('simihr/jobOffers');
             $model->setData($postData);
             try {

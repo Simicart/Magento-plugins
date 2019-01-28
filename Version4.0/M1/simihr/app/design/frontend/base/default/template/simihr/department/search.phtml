@@ -59,7 +59,6 @@
                     <div style=" width:60%;height: 90%; margin-left: 5%;padding-top: 5px" class="input-custom">
                         <input type="text" id="searchJob" value="<?=$_GET['q']?>" style="border-radius:30px;width:100%;border: none; height: 100%; background-color: white;outline: none " placeholder="Search for job offers">
                     </div>
-<<<<<<< HEAD
                     <div style="position: absolute;right: 140px;margin-left: -20px;white-space: nowrap;" class="select-job-type-custom">
                         <div style="height: 100%;padding: 15px;margin-left: 1%;cursor: pointer;" class="select-job-type">
                             <span id="current-option-custom" style="white-space: nowrap;color: #f69435;margin-right: -10px">Type</span>
@@ -105,11 +104,6 @@
 </g>
 </svg>
 
-=======
-                    <div style="position: absolute;right: 160px;margin-left: -20px;" class="select-job-type-custom">
-                        <div style="height: 100%;padding: 15px;margin-left: 1%" class="select-job-type">
-                            <div id="current-option-custom" style="white-space: nowrap;margin-right: 5px">Type</div><span id="sort-by-custom"></span>
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
                             <select id="selectJobType" style=" border: none;top: 2px;right: 0px;color:#f69435;margin-top: -3px;background-color: white;display: none ">
                                 <option>Type</option>
                                 <option value="full-time">Full-time</option>
@@ -412,11 +406,7 @@
     window.onload = function() {
         var hideOption = document.getElementById('nice-select');
         document.onclick = function(e) {
-<<<<<<< HEAD
             if(e.target.id !== 'nice-select' && e.target.id !== 'select-job-type' && e.target.id !== 'current-option-custom' && e.target.id !== 'drop_down'){
-=======
-            if(e.target.id !== 'nice-select' && e.target.id !== 'select-job-type' && e.target.id !== 'current-option-custom'){
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
                 hideOption.style.display = 'none';
             } 
             

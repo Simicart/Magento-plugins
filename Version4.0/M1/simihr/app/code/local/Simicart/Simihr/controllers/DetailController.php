@@ -30,11 +30,8 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
                         mkdir($path, 0777, true);
                     }
                     $uploader->save($path . DS . 'simihr' . DS . 'submissions' . DS, $fileName );
-<<<<<<< HEAD
                     $path1 = $path . DS . 'simihr' . DS . 'submissions' . DS. $fileName;
                     $filename1 = $fileName;
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 
                 } catch (Exception $e) {
                     $error = true;
@@ -58,12 +55,8 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
                         mkdir($path, 0777, true);
                     }
                     $uploader->save($path . DS . 'simihr' . DS . 'submissions' . DS, $fileName );
-<<<<<<< HEAD
                     $path2 = $path . DS . 'simihr' . DS . 'submissions' . DS. $fileName;
                     $filename2 = $fileName;
-=======
-
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
                 } catch (Exception $e) {
                     $error = true;
                 }
@@ -95,11 +88,7 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
                 'resume_cv_path' => $resume_cv_path,
                 'cover_letter_path'  => $cover_letter_path
             );
-<<<<<<< HEAD
             $email_applied = $_POST['email'];
-=======
-
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
             $model = Mage::getModel('simihr/submissions');
 
             try {
@@ -108,7 +97,6 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
-<<<<<<< HEAD
 
             $data = [];
             if (isset($_POST['job_name'])) {
@@ -121,8 +109,6 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
             }
        
             self::sendMail($data,$title,$path1,$path2,$filename1,$filename2);
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
             echo "<script>alert('Your submisstion has been send.')</script>";
 
         }
@@ -152,7 +138,6 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
         return $str;
     }
 
-<<<<<<< HEAD
     public function sendMail($data, $title,$path1 = null,$path2 = null,$filename1,$filename2) {
          // Mage::log("Run cron to send mail!");
         $templateId = 179;
@@ -214,8 +199,6 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
         Mage::log("Simihr sent mail to hr@simicart.com and max@simicart.com");
     }
 
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 
 	
 }

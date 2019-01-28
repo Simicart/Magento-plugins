@@ -84,10 +84,7 @@ class Simicart_Simihr_DepartmentController extends Mage_Core_Controller_Front_Ac
         $setup->getConnection()->dropTable( $setup->getTable('simihr_department'));
         $setup->getConnection()->dropTable( $setup->getTable('simihr_jobOffers'));
         $setup->getConnection()->dropTable( $setup->getTable('simihr_submissions'));
-<<<<<<< HEAD
         $setup->getConnection()->dropTable( $setup->getTable('simihr_content'));
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 
         $table = $installer->getConnection()
             ->newTable($installer->getTable('simihr/department'))
@@ -146,22 +143,16 @@ class Simicart_Simihr_DepartmentController extends Mage_Core_Controller_Front_Ac
             ->addColumn('job_type', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
                 'nullable'  => false,
             ), 'job_type')
-<<<<<<< HEAD
             ->addColumn('overall', Varien_Db_Ddl_Table::TYPE_TEXT, 1000000000, array(
             ), 'overall')
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
             ->addColumn('requirements', Varien_Db_Ddl_Table::TYPE_TEXT, 1000000000, array(
             ), 'requirements')
             ->addColumn('work_related', Varien_Db_Ddl_Table::TYPE_TEXT, 1000000000, array(
             ), 'work_related')
             ->addColumn('benifits', Varien_Db_Ddl_Table::TYPE_TEXT, 1000000000, array(
             ), 'benifits')
-<<<<<<< HEAD
             ->addColumn('overall_vn', Varien_Db_Ddl_Table::TYPE_TEXT, 1000000000, array(
             ), 'overall_vn')
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
             ->addColumn('requirements_vn', Varien_Db_Ddl_Table::TYPE_TEXT, 1000000000, array(
             ), 'requirements_vn')
             ->addColumn('work_related_vn', Varien_Db_Ddl_Table::TYPE_TEXT, 1000000000, array(
@@ -226,7 +217,6 @@ class Simicart_Simihr_DepartmentController extends Mage_Core_Controller_Front_Ac
 
             ->setComment('Submissions Table');
         $installer->getConnection()->createTable($table);
-<<<<<<< HEAD
 
         $table = $installer->getConnection()
             ->newTable($installer->getTable('simihr/content'))
@@ -256,8 +246,6 @@ class Simicart_Simihr_DepartmentController extends Mage_Core_Controller_Front_Ac
 
             ->setComment('Content Table');
         $installer->getConnection()->createTable($table);
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
         $installer->endSetup();
         echo "success";
     }

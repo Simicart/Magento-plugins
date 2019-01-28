@@ -38,7 +38,6 @@
             <block type="simihr/adminhtml_submissions" name="simihr_submissions" />
         </reference>
     </adminhtml_submissions_index>
-<<<<<<< HEAD
 
     <adminhtml_content_index>
         <reference name="content">
@@ -55,6 +54,4 @@
         </reference>
     </adminhtml_content_edit>
 
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 </layout>

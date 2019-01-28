@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 $title = $this->getTitle();
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
     if(!isset($_GET['job'])) {
         $_GET['job'] = '';
     }
@@ -30,7 +27,6 @@ $title = $this->getTitle();
             <div class="row">
                 <div class="col-md-12">
                     <div class="content-en">
-<<<<<<< HEAD
                         <?php
                             if ($collection[0]['deadline'] == '') {
                         ?>
@@ -58,14 +54,6 @@ $title = $this->getTitle();
                             }
                         ?>
                         
-=======
-                        <h1 style="font-family: inherit;font-size: 40px;font-weight: bold; color: white;">Call for <?=$quatity?> <?=$_GET['job_type'].' '.$_GET['job'] ?></h1>
-                        <a href="#form"><button  style="color: white;border-radius: 30px; border: none; background-color: #f69435;padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px;margin-top: 15px">Submit Your Application</button></a>
-                    </div>
-                    <div class="content-vn">
-                        <h1 style="font-family: inherit;font-size: 40px;font-weight: bold; color: white;">Tuyển dụng <?=$quatity?> vị trí <?=$_GET['job_type'].' '.$_GET['job'] ?></h1>
-                        <a href="#form"><button  style="color: white;border-radius: 30px; border: none; background-color: #f69435;padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px;margin-top: 15px">Nộp đơn ngay</button></a>
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
                     </div>
                     <div class=" row " style="margin-top: 20px">
                         <div class="col-lg-6 col-md-6 col-xs-6" style="width: 50%;">
@@ -81,22 +69,14 @@ $title = $this->getTitle();
 	</div>
 	<div align="center" style="margin-top: -5px; background-color: white;padding-bottom: 30px;padding-top: 30px">
 		<div class="content-en">
-<<<<<<< HEAD
             <h2 style="color: #333;font-weight: bold">ABOUT JOB</h2>
         </div>
         <div class="content-vn">
             <h2 style="color: #333;font-weight: bold">Về công việc</h2>
-=======
-            <h2 style="color: #333;font-weight: bold">ABOUT US</h2>
-        </div>
-        <div class="content-vn">
-            <h2 style="color: #333;font-weight: bold">Về chúng tôi</h2>
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
         </div>
 
 		<hr width="8%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
         <div style="width: 80%" class="content-vn">
-<<<<<<< HEAD
             <?php
                 if ($collection[0]['overall_vn'] != '') {
                     echo $collection[0]['overall_vn'];
@@ -124,17 +104,6 @@ $title = $this->getTitle();
                 }
             ?>
 			
-=======
-            <p>Bạn có muốn gia nhập binh đoàn những chiến binh đang sẵn sàng thay đổi cách con người mua bán trực tuyến? Hãy tham gia cùng chúng tôi ngay! SimiCart hiện đang tìm kiếm chuyên viên viết nội dung có kinh nghiệm, người có khả năng biến hóa với ngôn từ và sử dụng cây bút như một vũ khí để đánh bại người khác (hay nói một cách đơn giản là "chém gió thành thần").</p>
-            <p>SimiCart là một giải pháp tự động giúp mọi người có thể tạo các ứng dụng mua bán mà không cần biết kiến thức lập trình. Chúng tôi đã lọt vào top 50 startup tiềm năng nhất Đông Nam Á được chọn tham gia vào chương trình Vườn Ươm Khởi Nghiệp của chính phủ Malaysia.</p>
-
-        </div>
-		<div style="width: 80%" class="content-en">
-			<p>Do you want to be on the same rocket ship with those changing the way people shop online? We've got 1
-                seat available!
-            SimiCart is looking for a solid content writer, who can use his/her creativity and wording skill to write about anything. Of course, he/she should be willing to go fast because we are about on a spaceship!
-            <p>SimiCart is a mobile platform that allows everyone to build mobile apps for their online shops without any coding skill. We are in the top 50 most potential ASEAN startups to join the accelerator program sponsored by Malaysian government.</p>
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 		</div>
 	</div>
 	<div  style="background-color: #f2f2f2;padding-bottom: 30px">
@@ -182,17 +151,10 @@ $title = $this->getTitle();
         </div>
 	</div>
 	<div style="background-color: white">
-<<<<<<< HEAD
 		<div align="center" class="content-en" style="padding: 5px;padding-top: 30px;padding-bottom: 10px">
             <h2 style="font-family: Arial;color:#f69435;">This job is for you if you have:</h2>
 		</div>
         <div align="center" class="content-vn" style="padding: 5px;padding-top: 30px;padding-bottom: 10px">
-=======
-		<div align="center" class="content-en" style="padding-top: 30px;padding-bottom: 10px">
-            <h2 style="font-family: Arial;color:#f69435;">This job is for you if you have:</h2>
-		</div>
-        <div align="center" class="content-vn" style="padding-top: 30px;padding-bottom: 10px">
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
             <h2 style="font-family: Arial;color:#f69435;">Công việc này là cho bạn nếu bạn có:</h2>
         </div>
         <div class="container" style="margin-top: 20px;padding-bottom: 30px">
@@ -394,7 +356,6 @@ $title = $this->getTitle();
                         <input type="text" name="first_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('First Name')?>" class="input-text required-entry">
                     </div>
                     <div style="margin-top: 15px;" >
-<<<<<<< HEAD
                         <input type="text"  name="last_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Last Name')?>" class="input-text required-entry">
                     </div>
                     <div style="margin-top: 15px;">
@@ -430,32 +391,6 @@ $title = $this->getTitle();
                     <?php
                         }
                     ?>
-=======
-                        <input type="text" cols="50" name="last_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Last Name')?>" class="input-text required-entry">
-                    </div>
-                    <div style="margin-top: 15px;">
-                        <input type="email" cols="50" name="email" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Email')?>" class="input-text required-entry">
-                    </div>
-                    <div style="margin-top: 15px;" >
-                        <input type="text" cols="50" name="phone" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Phone')?>" class="input-text required-entry">
-                    </div>
-                    <div style="margin-top: 15px">
-                        <textarea rows="4" cols="45" name="sourceinfo" style="border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('How do you know about us? (Facebook, ITViec, HRC,...)');?>" class="input-text required-entry"></textarea>
-                    </div>
-                    <div style="margin-top: 15px;margin-left: -120px;">
-
-                        <!-- check if file extension invalid -->
-                        <span style="margin-left: -190px"><?php echo __('Resume/CV')?></span><br>
-                        <input style="margin-left: 30px" type="file" name="resume_cv" required>
-                    </div>
-                    <div style="margin-top: 15px;margin-left: -120px;">
-                        <span style="margin-left: -190px"><?php echo __('Cover Letter')?></span><br>
-                        <input style="margin-left: 30px" type="file" name="cover_letter">
-                    </div>
-                    <div style="margin-top: 35px" align="center" class="content-en">
-                        <button type="submit" name="submit" title="<?php echo __('Submit Your Application')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Submit Your Application</button>
-                    </div>
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
                     
                 </form>
             </div>
@@ -463,17 +398,12 @@ $title = $this->getTitle();
         </div>
         <div class="container content-vn" style="margin-top: 10px" align="center">
 
-<<<<<<< HEAD
             <div id="form1">
-=======
-            <div id="form">
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
                 <form  method="POST" enctype="multipart/form-data">
                     <div style="margin-top: 25px;">
                         <input type="text" name="first_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Tên')?>" class="input-text required-entry">
                     </div>
                     <div style="margin-top: 15px;" >
-<<<<<<< HEAD
                         <input type="text"  name="last_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Họ và tên đệm')?>" class="input-text required-entry">
                     </div>
                     <div style="margin-top: 15px;">
@@ -509,33 +439,6 @@ $title = $this->getTitle();
                     <?php
                         }
                     ?>
-=======
-                        <input type="text" cols="50" name="last_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Họ và tên đệm')?>" class="input-text required-entry">
-                    </div>
-                    <div style="margin-top: 15px;">
-                        <input type="email" cols="50" name="email" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Email')?>" class="input-text required-entry">
-                    </div>
-                    <div style="margin-top: 15px;" >
-                        <input type="text" cols="50" name="phone" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Số điện thoại')?>" class="input-text required-entry">
-                    </div>
-                    <div style="margin-top: 15px">
-                        <textarea rows="4" cols="45" name="sourceinfo" style="border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Bạn biết đến Simicart từ? (Facebook, ITViec, HRC,...)');?>" class="input-text required-entry"></textarea>
-                    </div>
-                    <div style="margin-top: 15px;margin-left: -120px;">
-
-                        <!-- check if file extension invalid -->
-                        <span style="margin-left: -190px"><?php echo __('Resume/CV')?></span><br>
-                        <input style="margin-left: 30px" type="file" name="resume_cv" required>
-                    </div>
-                    <div style="margin-top: 15px;margin-left: -120px;">
-                        <span style="margin-left: -190px"><?php echo __('Cover Letter')?></span><br>
-                        <input style="margin-left: 30px" type="file" name="cover_letter">
-                    </div>
-                    
-                    <div style="margin-top: 35px" align="center" class="content-vn">
-                        <button type="submit" name="submit" title="<?php echo __('Nộp đơn ngay')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Nộp đơn ngay</button>
-                    </div>
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
                 </form>
             </div>
 

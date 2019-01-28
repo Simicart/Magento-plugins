@@ -103,7 +103,6 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Edit_Form extends Mage_Adminhtml
             'after_element_html' => '<p>date/month/year</p>',
         ));
 
-<<<<<<< HEAD
         $fieldset->addField('overall', 'editor', array(
             'name'      => 'overall',
             'label'     => $this->__('Overall'),
@@ -119,8 +118,6 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Edit_Form extends Mage_Adminhtml
             'wysiwyg'   => true,
         ));
 
-=======
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
         $fieldset->addField('requirements', 'editor', array(
             'name'      => 'requirements',
             'label'     => $this->__('Requirements'),

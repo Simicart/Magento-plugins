@@ -70,13 +70,8 @@ class Simicart_Simihr_Model_Observer {
             'email' => 'havenoescape@gmail.com',
         );
 
-<<<<<<< HEAD
         $recipient_email = 'max@simicart.com';
         $recipient_name = 'hr';
-=======
-        $recipient_email = 'havenoescape@gmail.com';
-        $recipient_name = 'hieu';
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
 
         // add variable
         $vars = array('store' => $store);
@@ -92,11 +87,7 @@ class Simicart_Simihr_Model_Observer {
 
         $storeId = Mage::app()->getStore()->getId();
 
-<<<<<<< HEAD
         $add_cc=array("hr@simicart.com");
-=======
-        $add_cc=array("hieu@simicart.com","hr@simicart.com");
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
         $mail = Mage::getModel('core/email_template');
         $mail->getMail()->addCc($add_cc);
          $mail->setDesignConfig($config)
@@ -105,8 +96,4 @@ class Simicart_Simihr_Model_Observer {
         Mage::log("Simihr sent mail to hr@simicart.com and max@simicart.com");
     }
 }
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
