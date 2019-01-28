@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	
+
+    <simihr_department_index>
+        <!-- <update handle="page_one_column"/> -->
+    	<reference name="head">
+            <!--&lt;!&ndash; For CSS in the skin folder &ndash;&gt;-->
+            <!--<action method="removeItem"><type>skin_css</type><name>css/styles.css</name></action>-->
+            <!--&lt;!&ndash; For CSS in the js folder &ndash;&gt;-->
+            <!--<action method="removeItem"><type>js_css</type><name>local.css</name></action>-->
+			<action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+            <!-- <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
+		</reference>
+
+        <reference name="content">
+             <block type="simihr/department" name="department" template="simihr/department.phtml" />
+        </reference>
+    </simihr_department_index>
+
+    <simihr_department_list>
+        <!-- <update handle="page_one_column"/> -->
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+           <!--  <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
+        </reference>
+
+        <reference name="content">
+            <block type="simihr/department_list" name="department_list" template="simihr/department/list.phtml" />
+        </reference>
+    </simihr_department_list>
+
+    <simihr_department_search>
+        <update handle="page_one_column"/>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+            <!-- <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
+        </reference>
+
+        <reference name="content">
+            <block type="simihr/department_list" name="department_search" template="simihr/department/search.phtml" />
+        </reference>
+    </simihr_department_search>
+
+    <simihr_detail_index>
+       <!--  <update handle="page_one_column"/> -->
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+           <!--  <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
+        </reference>
+        <reference name="content">
+             <block  type="simihr/detail" name="detail" template="simihr/detail.phtml" />
+        </reference>
+    </simihr_detail_index>
+</layout>

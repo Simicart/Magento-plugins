@@ -1,0 +1,425 @@
+<?php
+    $url =Mage::getBaseUrl();
+?>
+<div style="font-size:14px;color: #636363" class="main-content">
+    <div class="about-1" style="padding-top: 20px;padding-bottom: 100px">
+        <div align="center" style="position: relative">
+            <h1 style="font-size: 34px; font-weight: bold;color: white;text-transform: uppercase;" id="department-title">
+                <?php
+
+                    if(isset($_GET['department'])) echo __($_GET['department']);
+                    else {
+                        $department = 'all';
+                        echo __('All  jobs');
+                    }
+                ?>
+            </h1>
+        </div>
+        <div align="center" style="position: relative;top: 30px">
+                <div class="input-box" style="width:40%;position: relative;padding-top: 0;border-radius: 30px; height: 53px; display: flex; background-color: white;min-width: 150px">
+                    <!-- <img class="search-button" src="<?=$url.'media/simihr/searchicon.png'?>" style="top: 10px;width: 30px;position: absolute;left: 10px;"> -->
+                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="20px" margin-top="15px">
+<path class="search-icon-custom" d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+    s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+    c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+    s-17-7.626-17-17S14.61,6,23.984,6z"/>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                    <div style=" width:60%;height: 90%; margin-left: 5%;padding-top: 5px" class="input-custom">
+                        <input type="text" id="searchJob" value="<?=$_GET['q']?>" style="border-radius:30px;width:100%;border: none; height: 100%; background-color: white;outline: none " placeholder="Search for job offers">
+                    </div>
+<<<<<<< HEAD
+                    <div style="position: absolute;right: 140px;margin-left: -20px;white-space: nowrap;" class="select-job-type-custom">
+                        <div style="height: 100%;padding: 15px;margin-left: 1%;cursor: pointer;" class="select-job-type">
+                            <span id="current-option-custom" style="white-space: nowrap;color: #f69435;margin-right: -10px">Type</span>
+                            <!-- <span id="sort-by-custom"></span> -->
+
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="292.362px" height="292.362px" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 292.362 292.362;width: 10px;height: 10px;fill: #f69435"
+     xml:space="preserve" onclick>
+<g>
+    <path id="drop_down" d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424
+        C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428
+        s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+=======
+                    <div style="position: absolute;right: 160px;margin-left: -20px;" class="select-job-type-custom">
+                        <div style="height: 100%;padding: 15px;margin-left: 1%" class="select-job-type">
+                            <div id="current-option-custom" style="white-space: nowrap;margin-right: 5px">Type</div><span id="sort-by-custom"></span>
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+                            <select id="selectJobType" style=" border: none;top: 2px;right: 0px;color:#f69435;margin-top: -3px;background-color: white;display: none ">
+                                <option>Type</option>
+                                <option value="full-time">Full-time</option>
+                                <option value="part-time">Part-time</option>
+                            </select>
+                        </div>
+                        <div class="nice-select-custom" style="display: none;margin-left: 10px" id="nice-select" >
+                            
+                            <ul style="background-color: white;border-radius: 5px;padding-top: 2px;padding-bottom: 10px;text-align: left;position: absolute;z-index: 9999;margin-top: 10px;cursor: pointer;width: 180px" >
+                               
+                                    <li value="part-time" style="height: 40px;padding: 8px;margin-top: 5px" class="option" onclick="hideOption('part-time')">&nbsp;&nbsp;&nbsp;Part-time/Internship</li>
+                                
+                                    <li value="full-time" style="height: 40px;padding: 8px;margin-top: 0px" class="option" onclick="hideOption('full-time')">&nbsp;&nbsp;&nbsp;Full-time</li>
+                            </ul>                            
+                        </div>
+                    </div>
+
+                    <div  class="button-search">
+                        <button class="button-search-1" type="submit" name="submit" title="Search" value="true" style="right: 0;position: absolute;border-radius: 30px;border: 2px solid white; width: 149px;height: 100%;background-color: #f69435">
+                            <span style="font-weight: bold;color: white">Search</span>
+                        </button>
+                    </div>
+
+                </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="container list-all-job active" id="dev-list-job" style="margin-top: 0px">
+        <?php
+        $jobCollection = $this->searchList();
+        if(isset($_GET['full-time']) || (!isset($_GET['full-time']) && !isset($_GET['part-time']))) {
+        ?>
+                <div>
+                    <?php
+                        if (count($jobCollection['full-time'][0]) == 0) {
+                            # code...
+                        } else {
+                    ?>
+                        <h2 style="font-weight: bold;text-transform: uppercase;color: black;font-size: 22px;">Full-time jobs</h2>
+                        <hr width="10%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
+                    <?php
+                        }
+                    ?>
+                </div>
+                <div>
+                    <div class="row" id="dev-full-time">
+                        <?php
+
+                            foreach ($jobCollection['full-time'] as $job) {
+                                if($job['deadline'] == '') $job['deadline'] = "Coming soon";
+                                else $job['deadline'] = "Deadline: ". $job['deadline'];
+                                if($job['img_url'] == '') $job['img_url'] = "simihr/default.png";
+                                ?>
+                                <div class="col-md-4" >
+                                    <a href="../detail?job=<?=$job['name']?>&job_type=full-time">
+                                        <div style="%">
+                                            <img class='job-image' src="<?=$url.'media/'.$job['img_url']?>" style="width: 100%; border-radius: 5px;max-width: 100%;height: 230px;box-shadow: 2px 2px 2px grey;">
+                                        </div>
+                                        <div align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px"><span><?=$job['quatity']?></span></div>
+                                        <div class="job-name" align="center" style="width: 90%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;">
+                                            <p><?=substr($job['name'], 0,15)?></p>
+                                        </div>
+                                    </a>
+                                    <div class="deadline" align="center" style="bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;">
+                                        <span><?=$job['deadline']?></span>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+
+                        ?>
+                    </div>
+                </div>
+        <?php
+            }
+        ?>
+        <?php
+            if(isset($_GET['part-time']) || (!isset($_GET['full-time']) && !isset($_GET['part-time']))) {
+        ?>
+            <div>
+                <?php
+                    if (count($jobCollection['part-time'][0]) == 0) {
+                        # code...
+                    } else {
+                ?>
+                   <h2 style="font-weight: bold;text-transform: uppercase;color: black;font-size: 22px;">Part-time/Internship</h2>
+                    <hr width="10%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
+                <?php
+                    }
+                ?>
+            </div>
+            <div>
+                <div class="row" id="dev-part-time">
+                    <?php
+                        foreach ($jobCollection['part-time'] as $job) {
+                            if($job['deadline'] == '') $job['deadline'] = "Coming soon";
+                            else $job['deadline'] = "Deadline: ". $job['deadline'];
+                            if($job['img_url'] == '') $job['img_url'] = "simihr/default.png";
+                            ?>
+                            <div class="col-md-4" >
+                                <a href="../detail?job=<?=$job['name']?>&job_type=part-time">
+                                    <div style="%">
+                                        <img class='job-image' src="<?=$url.'media/'.$job['img_url']?>" style="width: 100%; border-radius: 5px;max-width: 100%;height: 230px;box-shadow: 2px 2px 2px grey;">
+                                    </div>
+                                    <div align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px"><span><?=$job['quatity']?></span></div>
+                                    <div align="center" style="width: 100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;">
+                                        <p><?=substr($job['name'], 0,20)?></p>
+                                    </div>
+                                </a>
+                                <div class="deadline" align="center" style="bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;">
+                                    <span><?=$job['deadline']?></span>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                </div>
+            </div>
+        <?php
+            }
+        ?>
+    </div>
+
+    <div class="container list-search-job" id="list-search-job" style="margin-top: 0px">
+
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script></script>
+<script>
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+    var $j = jQuery.noConflict();
+    jQuery(function($){
+
+        $j('#searchJob').on('keyup',function(e) {
+            if($j('#searchJob').val() == '') {
+                $j("#dev-list-job").css("display","block");
+                $j("#list-search-job").css("display","none");
+            } else {
+                if($j('#searchJob').val().trim() != '') {
+                    $j("#dev-list-job").css("display","none");
+                    $j("#list-search-job").css("display","block");
+                    ajaxSearch();
+                }
+            }
+        });
+
+        $j('.button-search-1').on('click',function(e) {
+            if($j('#searchJob').val() == '') {
+                $j("#dev-list-job").css("display","block");
+                $j("#list-search-job").css("display","none");
+            } else {
+                if($j('#searchJob').val().trim() != '') {
+                    $j("#dev-list-job").css("display","none");
+                    $j("#list-search-job").css("display","block");
+                    ajaxSearch();
+                }
+            }
+        });
+
+        $j('#selectJobType').on('change', function() {
+            if($j('#searchJob').val() != '') {
+                ajaxSearch();
+            }
+        });
+
+
+    });
+    function ajaxSearch(){
+        var type = document.getElementById("selectJobType");
+        var jobType = type.options[type.selectedIndex].value;
+        var department = getQueryVariable('department');
+        if(department == false) department = 'all';
+        var htmlData = '';
+        $j.ajax({
+            url: "searchAjax",
+            method: "GET",
+            async: true,
+
+            data: {q:$j('#searchJob').val(), department: department},
+            success: function(response){
+
+                if(jobType == 'part-time') {
+
+                    htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;font-size: 22px;'>Part-time/Internship Jobs for '"+$j('#searchJob').val()+"' :</h2></div>";
+                    htmlData += "<hr width='10%' style='border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px'>";
+                    htmlData += "<div class='row'>";
+                    if(response.part_time.length != 0) {
+                        $j.each(response.part_time, function (i) {
+                            if(response.part_time[i].deadline == null) response.part_time[i].deadline = "Coming soon";
+                            else response.part_time[i].deadline = "Deadline: "+response.part_time[i].deadline;
+                            if(response.part_time[i].img_url == '') response.part_time[i].img_url = "simihr/default.png";
+                            htmlData += "<div class='col-md-4'><a href='../detail?job="+response.part_time[i].name+"&job_type=part-time'><div>";
+                            htmlData += "<img class='job-image' src='<?=$url?>media/"+response.part_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                            htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.part_time[i].quatity+"</span></div>";
+                            htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.part_time[i].name.substring(0, 20)+"</p></div></a>";
+                            htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.part_time[i].deadline+"</span></div>";
+                            htmlData += "</div>";
+                        });
+                    }
+                    htmlData +="</div>";
+                    $j('#list-search-job').empty().html(htmlData);
+                } else {
+                    if(jobType == 'full-time') {
+                        htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;font-size: 22px;'>Full-time Jobs for '"+$j('#searchJob').val()+"' :</h2></div>";
+                        htmlData += "<hr width='10%' style='border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px'>";
+                        htmlData += "<div class='row'>";
+                        if(response.full_time.length != 0) {
+                            $j.each(response.full_time, function (i) {
+                                if(response.full_time[i].deadline == null) response.full_time[i].deadline = "Coming soon";
+                                else response.full_time[i].deadline = "Deadline: "+response.full_time[i].deadline;
+                                if(response.full_time[i].img_url == '') response.full_time[i].img_url = "simihr/default.png";
+                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.full_time[i].name+"&job_type=full-time'><div>";
+                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.full_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                                htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.full_time[i].quatity+"</span></div>";
+                                htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.full_time[i].name.substring(0, 20)+"</p></div></a>";
+                                htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.full_time[i].deadline+"</span></div>";
+                                htmlData += "</div>";
+                            });
+                        }
+                        htmlData +="</div>";
+                        $j('#list-search-job').empty().html(htmlData);
+
+                    } else {
+
+                        htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;font-size: 22px;'>All Jobs for '"+$j('#searchJob').val()+"' :</h2></div>";
+                        htmlData += "<hr width='10%' style='border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px'>";
+                        htmlData += "<div class='row'>";
+
+                        if(response.full_time.length != 0) {
+                            $j.each(response.full_time, function (i) {
+                                if(response.full_time[i].deadline == null) response.full_time[i].deadline = "Coming soon";
+                                else response.full_time[i].deadline = "Deadline: "+response.full_time[i].deadline;
+                                if(response.full_time[i].img_url == '') response.full_time[i].img_url = "simihr/default.png";
+                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.full_time[i].name+"&job_type=full-time'><div>";
+                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.full_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                                htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.full_time[i].quatity+"</span></div>";
+                                htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.full_time[i].name.substring(0, 20)+"</p></div></a>";
+                                htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.full_time[i].deadline+"</span></div>";
+                                htmlData += "</div>";
+                            });
+                        }
+                        if(response.part_time.length != 0) {
+                            $j.each(response.part_time, function (i) {
+                                if(response.part_time[i].deadline == null) response.part_time[i].deadline = "Coming soon";
+                                else response.part_time[i].deadline = "Deadline: "+response.part_time[i].deadline;
+                                if(response.part_time[i].img_url == '') response.part_time[i].img_url = "simihr/default.png";
+                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.part_time[i].name+"&job_type=part-time'><div>";
+                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.part_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                                htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.part_time[i].quatity+"</span></div>";
+                                htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.part_time[i].name.substring(0, 20)+"</p></div></a>";
+                                htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.part_time[i].deadline+"</span></div>";
+                                htmlData += "</div>";
+                            });
+                        }
+                        htmlData +="</div>";
+
+
+                        $j('#list-search-job').empty().html(htmlData);
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    jQuery(function($){
+        $j(".select-job-type").click(function(){
+            showOption();
+        });
+    });
+
+    function showOption() {
+       if ( $j("#nice-select").css("display") == "block") {
+            $j("#nice-select").css("display","none");
+       } else $j("#nice-select").css("display","block");
+    }
+
+    function hideOption(val) {
+        $j("#nice-select").css("display","block");
+        if(val == 'full-time') {
+            document.getElementById("current-option-custom").innerHTML = "Full-time";
+        } else {
+            document.getElementById("current-option-custom").innerHTML = "Part-time/Internship";
+        }
+        document.getElementById("selectJobType").value = val;
+    }
+
+    window.onload = function() {
+        var hideOption = document.getElementById('nice-select');
+        document.onclick = function(e) {
+<<<<<<< HEAD
+            if(e.target.id !== 'nice-select' && e.target.id !== 'select-job-type' && e.target.id !== 'current-option-custom' && e.target.id !== 'drop_down'){
+=======
+            if(e.target.id !== 'nice-select' && e.target.id !== 'select-job-type' && e.target.id !== 'current-option-custom'){
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+                hideOption.style.display = 'none';
+            } 
+            
+        };
+    };
+</script>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_department_index>
+        <reference name="content">
+            <block type="simihr/adminhtml_department" name="simihr_department" />
+        </reference> 
+    </adminhtml_department_index>
+    <adminhtml_department_edit>
+         <reference name="head">
+             <action method="addJs">
+                 <script>simicart/simihr/jobList.js</script>
+             </action>
+        </reference>
+        <reference name="left">
+            <block type="simihr/adminhtml_department_edit_tabs" name="department_tabs"></block>
+        </reference>  
+    </adminhtml_department_edit>
+
+
+    <adminhtml_joboffers_index>
+        <reference name="content">
+            <block type="simihr/adminhtml_jobOffers" name="simihr_jobOffers" />
+        </reference>
+    </adminhtml_joboffers_index>
+    <adminhtml_jobOffers_edit>
+        <update handle="editor" />
+        <reference name="head">
+            <action method="setCanLoadTinyMce"><load>1</load></action>
+        </reference>
+        <reference name="content">
+            <block type="simihr/adminhtml_jobOffers_edit" name="simihr_jobOffers_edit" />
+        </reference>
+    </adminhtml_jobOffers_edit>
+
+
+    <adminhtml_submissions_index>
+        <reference name="content">
+            <block type="simihr/adminhtml_submissions" name="simihr_submissions" />
+        </reference>
+    </adminhtml_submissions_index>
+<<<<<<< HEAD
+
+    <adminhtml_content_index>
+        <reference name="content">
+            <block type="simihr/adminhtml_content" name="simihr_content" />
+        </reference>
+    </adminhtml_content_index>
+    <adminhtml_content_edit>
+        <update handle="editor" />
+        <reference name="head">
+            <action method="setCanLoadTinyMce"><load>1</load></action>
+        </reference>
+        <reference name="content">
+            <block type="simihr/adminhtml_content_edit" name="simihr_content_edit" />
+        </reference>
+    </adminhtml_content_edit>
+
+=======
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+</layout>

@@ -1,0 +1,540 @@
+/*.main-container .col1-layout{*/  /* for full-width layout , need to remove styles.css
+	/*position: inherit;*/
+/*}*/
+/*.main {*/
+	/*width: 100%;*/
+	/*position: absolute;*/
+	/*left: 0;*/
+/*}*/
+.input-text-simihr::-webkit-input-placeholder {
+  color: white;
+  font-style:normal;
+}
+#searchJob::-webkit-input-placeholder {
+  color: #63636;
+  font-style:normal;
+}
+.about-1 {
+	background: url("https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/banner-slider-first.jpg") no-repeat;
+	padding: 60px 0 63px;
+}
+.img-icon {
+	/*background: url("https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png") no-repeat;*/
+	color: red;
+}
+.job-slide07 {
+	background: url("https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/bg-formcontact.png") no-repeat center 204px #d7d7d7;
+	padding: 60px 0 70px;
+}
+
+.content-vn {
+	display:none;
+	width: 100%;
+}
+.content-en {
+	display: block;
+	width: 100%;
+}
+.list-job {
+	border-radius: 8px;
+	border: 1px solid green;
+}
+#department-list {
+	border-radius: 8px;
+}
+.title-icon {
+	display: block;
+}
+
+@media only screen and (max-width: 1024px) {
+<<<<<<< HEAD
+	.container {
+		padding-left: 25px !important;
+	}
+	/*#container-department {
+		margin-top: -100px !important;
+	}*/
+=======
+	#container-department {
+		margin-top: -100px !important;
+	}
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+	.dep-button {
+		min-width: 250px;
+		min-height: 70px;
+		left: 35%;
+	}
+	.deadline {
+		height: unset !important;
+	}
+	.job-name {
+		margin-left: -10px !important;
+		font-size: 16px !important;
+
+	}
+	.search-button {
+		display: none !important;
+	}
+	.select-department {
+		left: -160px;
+		top: 55px !important;
+		right: 20px !important;
+	}
+	#sort-by {
+		position: absolute !important;
+		top: 25px !important;
+	}
+	.job-type {
+		top: 100px !important;
+	}
+	.nice-select {
+		margin-left: 38% !important;
+	}
+	.select-job-type-custom {
+		right: unset !important;
+		top:50px !important;
+		left: 20% !important;
+
+	}
+	#current-option {
+		color: white !important;
+	}
+<<<<<<< HEAD
+	
+	/*#current-option-custom {
+		color: white !important;
+	}*/
+	.department-img {
+		height: 450px !important;
+	}
+	#banner {
+		min-height: 360px !important;
+	}
+=======
+	#sort-by-custom:after {
+		border-top-color: white !important;
+	}
+	#current-option-custom {
+		color: white !important;
+	}
+	.department-img {
+		height: 450px !important;
+	}
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+}
+@media only screen and (max-width: 1024px) {
+	.job-image {
+		height: 350px !important;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.select-department {
+		
+		left: -250px !important;
+	}
+	.button-search {
+		width: 100px;
+	}
+	.about-1 {
+		padding: unset;
+		height: 220px;
+	}
+	
+	.container {
+		margin-top: -100px;
+		/*min-width: 480px;*/
+	}
+	.search-button-icon {
+		display: none;
+	}
+	.button-search-1 {
+		width: 30% !important;
+	}
+	.input-text-hr {
+		margin-left: unset !important;
+	}
+	.department-img {
+		height: 350px !important;
+	}
+	.view-job-button {
+		font-size: 12px !important;
+		left: 20% !important;
+		min-width: 60% !important;
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+		padding: 2px !important;
+		min-height: 10% !important;
+	}
+<<<<<<< HEAD
+	/*#container-department {
+		margin-top: -80px !important;
+	}*/
+=======
+	#container-department {
+		margin-top: -80px !important;
+	}
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+	.job-type {
+		left: 0 !important;
+		top: 100px !important;
+	}
+	.total-job {
+		padding: 3px !important;
+		right: 30px !important;
+		width: 30px !important;
+		height: 30px !important;
+	}
+	.deadline {
+		padding: 5px !important;
+	}
+	.main-content {
+		margin-bottom: 250px !important;
+	}
+	#current-option {
+		margin-right: -140px !important;
+	}
+	
+	#sort-by {
+		right: 100px !important;
+	}
+	.nice-select {
+		margin-left: 55% !important;
+	}
+<<<<<<< HEAD
+	
+=======
+	#sort-by-custom {
+
+	}
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+	#current-option-custom {
+
+	}
+	.select-job-type-custom {
+		
+		left: 10% !important;
+
+	}
+	.search-icon {
+		display: none !important;
+	}
+	.search-icon-custom {
+		display: none !important;
+	}
+	.input-custom {
+		margin-left: unset !important;
+	}
+<<<<<<< HEAD
+	#container-department {
+		margin-top: unset !important;
+	}
+	#banner {
+		min-height: 380px !important;
+	}
+	.capa_1 {
+		position: absolute;
+		right: 22%;
+		top: 43%;
+	}
+=======
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+
+}
+
+@media only screen and (max-width: 640px) {
+	.input-text-hr {
+		position: absolute !important;
+		right: 0px !important;
+	}
+<<<<<<< HEAD
+	/*#container-department {
+		margin-top: -40px !important;
+	}*/
+=======
+	#container-department {
+		margin-top: -40px !important;
+	}
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+	[type="checkbox"]:not(:checked) + label,
+	[type="checkbox"]:checked + label {
+	  padding-left: 1.5em !important;
+	}
+	#banner {
+<<<<<<< HEAD
+		min-height: 470px !important;
+=======
+		min-height: 510px !important;
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+	}
+	#select-department {
+
+	}
+	.job-type {
+		width: 200px !important;
+	}
+	#label-full-time {
+		position: absolute;
+		top: 10px;
+		left: 0;
+	}
+	#label-part-time {
+		position: absolute;
+		left: 0;
+		top: 50px;
+	}
+	#sort-by {
+		right: 70px !important;
+	}
+<<<<<<< HEAD
+	.about-1 {
+		height: 250px !important;
+	}
+	.capa_1 {
+		right: 17% !important;
+		top: 43%;
+	}
+=======
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+}
+
+@media only screen and (max-width: 460px) {
+	.button-search {
+		font-size: 8px !important;
+	}
+<<<<<<< HEAD
+	/*#container-department {
+		min-height: 550px !important;
+	}*/
+=======
+	#container-department {
+		min-height: 550px !important;
+	}
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+	.input-box {
+		height: 35px !important;
+		font-size: 14px !important;
+	}
+	.input-text-simihr::-webkit-input-placeholder {
+	  padding-left: 5px !important;
+	}
+	.select-department {
+		left: -200px !important;
+		top: 30px !important;
+	}
+	#sort-by {
+		right: -5px !important;
+	}
+	.button-search-1 {
+		width: 40% !important;
+	}
+	.job-type {
+		top: 70px !important;
+	}
+	#banner {
+<<<<<<< HEAD
+		min-height: 490px !important;
+=======
+		min-height: 550px !important;
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+	}
+	.job-image {
+		height: 250px !important;
+	}
+<<<<<<< HEAD
+	.input-text {
+		width: 250px !important;
+	}
+	.import-file {
+		margin-left: 25px !important;
+	}
+	.about-1 {
+		height: 250px !important;
+	}
+	#input-box-department {
+		margin-left: 45px !important;
+	}
+	#job-type-department {
+		left: -40px !important;
+	}
+	.capa_1 {
+		right: 8% !important;
+		top: 60% !important;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	/*.import-file {
+		margin-left: -10px !important;
+	}*/
+	.about-1 {
+		height: 310px !important;
+	}
+	#banner {
+		min-height: 510px !important;
+	}
+}
+
+@media only screen and (max-width: 325px) {
+	/*.import-file {
+		margin-left: -10px !important;
+	}*/
+	#banner {
+		min-height: 600px !important;
+	}
+	.capa_1 {
+		right: 5% !important;
+	}
+=======
+}
+
+@media only screen and (max-width: 360px) {
+
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+}
+
+li {
+	margin-top: 10px;
+}
+.main-content {
+	margin-bottom: 50px;
+}
+.option:hover {
+	background-color: #f7a555c2;
+}
+
+.container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+<<<<<<< HEAD
+.container-department{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+=======
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+/*@media (min-width:576px){.container{max-width:540px}}
+@media (min-width:768px){.container{max-width:720px}}
+@media (min-width:992px){.container{max-width:960px}}
+@media (min-width:1200px){.container{max-width:1140px}}*/
+
+<<<<<<< HEAD
+#sort-by {
+	
+}
+
+
+#sort-by-custom {
+	
+}
+
+=======
+#sort-by:after {
+	border: 6px solid transparent;
+	content: "";
+	display: block;
+	height: 0;
+	right: 5px;
+	top: 48%;
+	width: 0;
+	position: absolute;
+}
+
+#sort-by:after {
+	border-top-color: white;
+	margin-top: 1px;
+}
+
+#sort-by-custom:after {
+	border: 6px solid transparent;
+	content: "";
+	display: block;
+	height: 0;
+	top: 45%;
+	width: 0;
+	position: absolute;
+	right: 0;
+}
+
+#sort-by-custom:after {
+	border-top-color: black;
+}
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 1.95em;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 1.25em; height: 1.25em;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '\2713\0020';
+  position: absolute;
+  top: .15em; left: .22em; 
+  line-height: 1;
+  color: #f69435;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+.search-icon-custom {
+	fill: black;
+	width:20px;
+	margin-left: 15px;
+}
+svg {
+	margin-left: 15px;
+}
+.search-icon {
+	fill: white;
+	width:20px;
+	margin-left: 15px;
+}
+<<<<<<< HEAD
+.department-row {
+	margin-right: unset !important;
+}
+.title {
+	margin-top: 30px;
+}
+.content-vn p {
+	margin-top: -8px !important;
+}
+.content-en p {
+	margin-top: -8px !important;
+}
+.custom-margin p {
+	margin-top: -8px !important;
+}
+=======
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+
+
+

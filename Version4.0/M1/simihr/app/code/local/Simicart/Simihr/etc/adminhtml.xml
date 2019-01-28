@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <simihr translate="title" module="simihr">
+            <title>Simihr</title>
+            <sort_order>9999</sort_order>
+            <depends>
+                <module>Simicart_Simihr</module>
+            </depends>
+            <children>
+                <simihr_department translate="title" >
+                    <title>Department</title>
+                    <action>adminhtml/department</action>
+                    <sort_order>0</sort_order>
+                </simihr_department>
+
+                <simihr_jobOffers translate="title" >
+                    <title>Job Offers</title>
+                    <action>adminhtml/jobOffers</action>
+<<<<<<< HEAD
+                    <sort_order>1</sort_order>
+=======
+                    <sort_order>0</sort_order>
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+                </simihr_jobOffers>
+
+                <simihr_submissions translate="title" >
+                    <title>Submissions</title>
+                    <action>adminhtml/submissions</action>
+<<<<<<< HEAD
+                    <sort_order>2</sort_order>
+                </simihr_submissions>
+
+                <simihr_content translate="title" >
+                    <title>Content</title>
+                    <action>adminhtml/content</action>
+                    <sort_order>3</sort_order>
+                </simihr_content>
+=======
+                    <sort_order>0</sort_order>
+                </simihr_submissions>
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+            </children>
+        </simihr>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <simihr translate="title">
+                                        <title>Simihr</title>
+                                        <sort_order>500</sort_order>
+                                    </simihr>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <simihr module="simihr">
+                        <title>Simihr</title>
+                        <sort_order>1000</sort_order>
+                        <children>
+                            <simihr_department module="simihr">
+                                <title>Department</title>
+                                <sort_order>1</sort_order>
+                            </simihr_department>
+                            <simihr_jobOffers module="simihr">
+                                <title>Job Offers</title>
+<<<<<<< HEAD
+                                <sort_order>2</sort_order>
+                            </simihr_jobOffers>
+                            <simihr_submissions module="simihr">
+                                <title>Submissions</title>
+                                <sort_order>3</sort_order>
+                            </simihr_submissions>
+                            <simihr_content module="simihr">
+                                <title>Content</title>
+                                <sort_order>4</sort_order>
+                            </simihr_content>
+=======
+                                <sort_order>1</sort_order>
+                            </simihr_jobOffers>
+                            <simihr_submissions module="simihr">
+                                <title>Submissions</title>
+                                <sort_order>100</sort_order>
+                            </simihr_submissions>
+>>>>>>> 285bf9b53deaeb11971b0ee3c14850d633380d58
+                        </children>
+                    </simihr>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
