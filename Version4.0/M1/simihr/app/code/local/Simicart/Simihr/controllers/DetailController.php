@@ -155,7 +155,7 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
         $sender = array(
             'name' => 'Simihr Notice',
-            'email' => 'simihrhr@simicart.com',
+            'email' => 'simihr@simicart.com',
         );
 
         $recipient_email = 'hr@simicart.com';
@@ -175,9 +175,9 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
         $storeId = Mage::app()->getStore()->getId();
 
-        $add_cc=array("hieu@simicart.com");
+        // $add_cc=array("hieu@simicart.com");
         $mail = Mage::getModel('core/email_template');
-        $mail->getMail()->addCc($add_cc);
+        // $mail->getMail()->addCc($add_cc);
         if (file_exists($path1)) {
             $mail->getMail()
                 ->createAttachment(
