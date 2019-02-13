@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Simicart_Simihr>
+            <version>1.0.1</version>
+        </Simicart_Simihr>
+    </modules>
+     
+    <global>
+        <blocks>
+            <simihr>
+                <!-- Set a block definition and lookup directory -->
+                <class>Simicart_Simihr_Block</class>
+            </simihr>
+        </blocks>
+         
+        <models>
+            <simihr>
+                <!-- This is where we define our model directory -->
+                <class>Simicart_Simihr_Model</class>
+                <!-- Define a resource to create a custom table -->
+                <resourceModel>simihr_mysql4</resourceModel>
+            </simihr>
+
+            <!-- Here's our resource model we'll use to create a database table -->
+            <simihr_mysql4>
+                <class>Simicart_Simihr_Model_Mysql4</class>
+                <entities>
+                    <department>
+                        <table>simihr_department</table>
+                    </department>
+                    <jobOffers>
+                        <table>simihr_jobOffers</table>
+                    </jobOffers>
+                    <submissions>
+                        <table>simihr_submissions</table>
+                    </submissions>
+                    <content>
+                        <table>simihr_content</table>
+                    </content>
+                </entities>
+            </simihr_mysql4>
+        </models>
+
+        <!-- And finally we define our resource setup script -->
+        <resources>
+            <simihr_setup>
+                <setup>
+                    <module>Simicart_Simihr</module>
+                </setup>
+            </simihr_setup>
+        </resources>
+
+        <helpers>
+            <simihr>
+                <class>Simicart_Simihr_Helper</class>
+            </simihr>
+        </helpers>
+
+    </global>
+
+    <crontab>
+        <jobs>
+            <simihr>
+                <schedule>
+                    <cron_expr>0 8 * * *</cron_expr>
+                </schedule>
+                <run><model>simihr/observer::sendMail</model></run>
+            </simihr>
+        </jobs>
+    </crontab>
+     
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <!-- This is how we load our Adminhtml controllers -->
+                    <modules>
+                        <Simicart_Simihr before="Mage_Adminhtml">Simicart_Simihr_Adminhtml</Simicart_Simihr>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+     
+    <adminhtml>
+        <layout>
+            <updates>
+                <simihr>
+                    <file>simicart/simihr.xml</file>
+                </simihr>
+            </updates>
+        </layout>
+    </adminhtml>
+
+     <frontend>
+        <routers>
+            <!-- the <helloworld> tagname appears to be arbitrary, but by
+            convention is should match the frontName tag below-->
+            <simihr>
+                <use>standard</use>
+                <args>
+                    <module>Simicart_Simihr</module>
+                    <frontName>simihr</frontName>
+                </args>
+            </simihr>
+        </routers>
+        <layout>
+            <updates>
+                <simihr>
+                    <file>simicart/simihr.xml</file>
+                </simihr>
+            </updates>
+        </layout>
+    </frontend>
+</config>

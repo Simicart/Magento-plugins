@@ -4,7 +4,7 @@ namespace Simi\Instantsearch\Model\Api;
 class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
 {
 
-	public function setBuilderQuery()
+    public function setBuilderQuery()
     {
 
         $data                 = $this->getData();
@@ -35,9 +35,11 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
         return null;
     }
 
-	public function index()
-	{
-		$collection = $this->builderQuery;
+    public function index()
+    {
+        $collection = $this->builderQuery;
+        
+
 
         $this->filter();
 
@@ -48,16 +50,20 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
             $page = $parameters[self::PAGE];
         }
 
-        $limit = self::DEFAULT_LIMIT;
-        if (isset($parameters[self::LIMIT]) && $parameters[self::LIMIT]) {
-            $limit = $parameters[self::LIMIT];
+        if (!isset($parameters['backUrl'])) {
+            $limit = self::DEFAULT_LIMIT;
+            if (isset($parameters[self::LIMIT]) && $parameters[self::LIMIT]) {
+                $limit = $parameters[self::LIMIT];
+            }
+        } else {
+            $limit = $this->searchHelper->getSearchResult();
         }
 
         $offset = $limit * ($page - 1);
         if (isset($parameters[self::OFFSET]) && $parameters[self::OFFSET]) {
             $offset = $parameters[self::OFFSET];
         }
-        $collection->setPageSize($offset + $limit);
+        
 
         $all_ids = [];
         $info    = [];
@@ -201,9 +207,9 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
         }
         $suggestion = $this->getSuggestProductSearch();
         return $this->getListResultSearch($suggestion, $info, $all_ids, $total, $limit, $offset);
-	}
+    }
 
-	public function show()
+    public function show()
     {
         $entity     = $this->builderQuery;
         $data       = $this->getData();
@@ -251,8 +257,8 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
         return $this->detail_info;
     }
 
-	public function setFilterByQuery()
-	{
+    public function setFilterByQuery()
+    {
         $data       = $this->getData();
         $parameters = $data['params'];
         //check search type config
@@ -271,9 +277,11 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
                 }
                 $this->sortOrders  = $this->searchHelper->getStoreQrders();
             } else {
+
                 $searchterm = $this->simiObjectManager->get('\Simi\Instantsearch\Model\ResourceModel\Searchterm');
 
-                $this->builderQuery = $searchterm->getProductCollection($parameters['q'], $parameters['limit']);
+                $this->builderQuery = $searchterm->getProductCollection($parameters['q']);
+                // print_r($this->builderQuery->getData());die();
                 $this->layer = [];
                 $this->sortOrders  = $this->searchHelper->getStoreQrders();
             }
@@ -286,7 +294,7 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
             $this->sortOrders  = $this->searchHelper->getStoreQrders();
         }
         
-	}
+    }
 
     /**
      * @param $info
@@ -301,6 +309,10 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
     {
         $data                 = $this->getData();
         $parameters           = $data['params'];
+        // gen form_key to avoid shopping cart empty
+        $genKey = $this->simiObjectManager->get('\Magento\Framework\Data\Form\FormKey');
+        $formKey = $genKey->getFormKey();
+
         $simiinstantsearchs = [];
         if(isset($parameters['hasSuggestion']) && $parameters['hasSuggestion'] == 1) {
             $simiinstantsearchs['suggestion'] = $suggestion;
@@ -317,6 +329,7 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
                 'total'               => $total,
                 'page_size'           => $page_size,
                 'from'                => $from,
+                'form_key'            =>$formKey,
             ];
         } elseif(isset($parameters['hasProduct']) && $parameters['hasProduct'] == 0) {
 
@@ -339,7 +352,7 @@ class Simiinstantsearchs extends \Simi\Simiconnector\Model\Api\Apiabstract
     {
 
         $dataHelper = $this->simiObjectManager->create('Magento\Search\Helper\Data');
-        $resultSuggest = $this->searchHelper->getSearchResult();
+        $resultSuggest = $this->searchHelper->getSearchSuggest();
         $autocomplete = $this->simiObjectManager->create('Magento\Search\Model\AutocompleteInterface')->getItems();
 
         if(count($autocomplete) > 0) {

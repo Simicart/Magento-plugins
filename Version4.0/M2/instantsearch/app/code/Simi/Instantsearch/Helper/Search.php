@@ -62,10 +62,12 @@ class Search extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_FONT_COLOR = 'simi_instantsearch/simi_instsantsearch_main/font_color';
 
     const XML_PATH_BORDER_COLOR = 'simi_instantsearch/simi_instsantsearch_main/border_color';
+    const XML_PATH_ADD_TO_CART_COLOR = 'simi_instantsearch/simi_instsantsearch_main/add_to_cart_button_color';
 
     const XML_PATH_SUGGEST_FIELD_TITLE = 'simi_instantsearch/simi_instsantsearch_main/suggest_field_title';
 
     const XML_PATH_RESULT_FIELD_TITLE = 'simi_instantsearch/simi_instsantsearch_main/result_field_title';
+
 
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -749,9 +751,18 @@ class Search extends \Magento\Framework\App\Helper\AbstractHelper
         );
     }
 
+    public function getAddToCartButtonColor($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_ADD_TO_CART_COLOR,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
     public function getSuggestTitle($storeId = null) {
         return $this->scopeConfig->getValue(
-            self::XML_PATH_RESULT_FIELD_TITLE,
+            self::XML_PATH_SUGGEST_FIELD_TITLE,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
@@ -759,7 +770,7 @@ class Search extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getResultTitle($storeId = null) {
         return $this->scopeConfig->getValue(
-            self::XML_PATH_SUGGEST_FIELD_TITLE,
+            self::XML_PATH_RESULT_FIELD_TITLE,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );

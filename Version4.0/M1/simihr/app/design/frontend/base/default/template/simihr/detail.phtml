@@ -1,0 +1,493 @@
+<?php
+$title = $this->getTitle();
+    if(!isset($_GET['job'])) {
+        $_GET['job'] = '';
+    }
+    $collection = $this->getJobInfo($_GET['job'], $_GET['job_type']);
+    if(isset($collection[0]['requirements'])) {
+        $requirements = $collection[0]['requirements'];
+        $requirements_vn = $collection[0]['requirements_vn'];
+        $workRelated = $collection[0]['work_related'];
+        $workRelated_vn = $collection[0]['work_related_vn'];
+        $benifits = $collection[0]['benifits'];
+        $benifits_vn = $collection[0]['benifits_vn'];
+        $quatity = $collection[0]['quatity'];
+    } else {
+        $requirements = '';
+        $requirements_vn = '';
+        $workRelated = '';
+        $workRelated_vn = '';
+        $benifits = '';
+        $benifits_vn = '';
+    }
+?>
+<div style="margin: 0;padding: 0;color: #333; font-family: Arial; font-size:16px;">
+	<div align="center">
+		<div class="about-1">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content-en">
+                        <?php
+                            if ($collection[0]['deadline'] == '') {
+                        ?>
+                            <h1 style="font-family: inherit;font-size: 40px;font-weight: bold; color: white;">Coming soon</h1>
+                        <?php
+                            } else {
+                        ?>
+                            <h1 style="font-family: inherit;font-size: 40px;font-weight: bold; color: white;">Call for <?=$quatity?> <?=$_GET['job_type'].' '.$_GET['job'] ?></h1>
+                            <a href="#form"><button  style="color: white;border-radius: 30px; border: none; background-color: #f69435;padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px;margin-top: 15px">Submit Your Application</button></a>
+                        <?php
+                            }
+                        ?>
+                    </div>
+                    <div class="content-vn">
+                        <?php
+                            if ($collection[0]['deadline'] == '') {
+                        ?>
+                            <h1 style="font-family: inherit;font-size: 40px;font-weight: bold; color: white;">Sắp tuyển</h1>
+                        <?php
+                            } else {
+                        ?>
+                            <h1 style="font-family: inherit;font-size: 40px;font-weight: bold; color: white;">Tuyển dụng <?=$quatity?> vị trí <?=$_GET['job_type'].' '.$_GET['job'] ?></h1>
+                            <a href="#form1"><button  style="color: white;border-radius: 30px; border: none; background-color: #f69435;padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px;margin-top: 15px">Nộp đơn ngay</button></a>
+                        <?php
+                            }
+                        ?>
+                        
+                    </div>
+                    <div class=" row " style="margin-top: 20px">
+                        <div class="col-lg-6 col-md-6 col-xs-6" style="width: 50%;">
+                            <span  id="vn-language" style="text-align: right;float: right;display: block;background: url('https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png') no-repeat;text-indent: 999em;overflow: hidden;width: 30px;height: 20px;cursor: pointer;background-position: 0 0;">Vietnamese</span>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-6" style="width: 50%;">
+                            <span id="en-language" style="text-align: left;float: left;display: block;background: url('https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png') no-repeat;text-indent: 999em;overflow: hidden;width: 30px;height: 20px;cursor: pointer;background-position: -180px 0;">English</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div align="center" style="margin-top: -5px; background-color: white;padding-bottom: 30px;padding-top: 30px">
+		<div class="content-en">
+            <h2 style="color: #333;font-weight: bold">ABOUT JOB</h2>
+        </div>
+        <div class="content-vn">
+            <h2 style="color: #333;font-weight: bold">Về công việc</h2>
+        </div>
+
+		<hr width="8%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
+        <div style="width: 80%" class="content-vn">
+            <?php
+                if ($collection[0]['overall_vn'] != '') {
+                    echo $collection[0]['overall_vn'];
+                } else {
+            ?>
+                <p>Bạn có muốn gia nhập binh đoàn những chiến binh đang sẵn sàng thay đổi cách con người mua bán trực tuyến? Hãy tham gia cùng chúng tôi ngay! SimiCart hiện đang tìm kiếm chuyên viên viết nội dung có kinh nghiệm, người có khả năng biến hóa với ngôn từ và sử dụng cây bút như một vũ khí để đánh bại người khác (hay nói một cách đơn giản là "chém gió thành thần").</p>
+                <p>SimiCart là một giải pháp tự động giúp mọi người có thể tạo các ứng dụng mua bán mà không cần biết kiến thức lập trình. Chúng tôi đã lọt vào top 50 startup tiềm năng nhất Đông Nam Á được chọn tham gia vào chương trình Vườn Ươm Khởi Nghiệp của chính phủ Malaysia.</p>
+            <?php        
+                }
+            ?>
+            
+
+        </div>
+		<div style="width: 80%" class="content-en">
+            <?php
+                if ($collection[0]['overall'] != '') {
+                    echo $collection[0]['overall'];
+                } else {
+            ?>
+                <p>Do you want to be on the same rocket ship with those changing the way people shop online? We've got 1
+                seat available!
+                SimiCart is looking for a solid content writer, who can use his/her creativity and wording skill to write about anything. Of course, he/she should be willing to go fast because we are about on a spaceship!
+                <p>SimiCart is a mobile platform that allows everyone to build mobile apps for their online shops without any coding skill. We are in the top 50 most potential ASEAN startups to join the accelerator program sponsored by Malaysian government.</p>
+            <?php        
+                }
+            ?>
+			
+		</div>
+	</div>
+	<div  style="background-color: #f2f2f2;padding-bottom: 30px">
+		<div align="center" class="content-en" style="padding-top: 30px;padding-bottom: 10px">
+            <h2 style="color:#f69435;font-family: Arial">What you’ll do on a daily basis</h2>
+		</div>
+        <div align="center" class="content-vn" style="padding-top: 30px;padding-bottom: 10px">
+            <h2 style="color:#f69435;font-family: Arial">Bạn sẽ làm gì khi gia nhập?</h2>
+        </div>
+		<div class="container" style="margin-top: 20px">
+            <div class="content-en">
+                <?php
+                $workRelated = preg_split ('/$\R?^/m', $workRelated);
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                    	<ul style="list-style-position: outside;list-style-type: disc">
+	                        <?php
+	                        for($i=1; $i<count($workRelated); $i++) {
+	                            echo $workRelated[$i];
+	                            if($i == (count($workRelated)-2)/2 || ($i-0.5) == (count($workRelated)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc'>";
+	                        }
+	                        ?>
+	                    </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="content-vn">
+                <?php
+                $workRelated_vn = preg_split ('/$\R?^/m', $workRelated_vn);
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                    	<ul style="list-style-position: outside;list-style-type: disc">
+	                        <?php
+	                        for($i=1; $i<count($workRelated_vn); $i++) {
+	                            echo $workRelated_vn[$i];
+	                            if($i == (count($workRelated_vn)-2)/2 || ($i-0.5) == (count($workRelated_vn)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc'>";
+	                        }
+	                        ?>
+	                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div style="background-color: white">
+		<div align="center" class="content-en" style="padding: 5px;padding-top: 30px;padding-bottom: 10px">
+            <h2 style="font-family: Arial;color:#f69435;">This job is for you if you have:</h2>
+		</div>
+        <div align="center" class="content-vn" style="padding: 5px;padding-top: 30px;padding-bottom: 10px">
+            <h2 style="font-family: Arial;color:#f69435;">Công việc này là cho bạn nếu bạn có:</h2>
+        </div>
+        <div class="container" style="margin-top: 20px;padding-bottom: 30px">
+                    <div class="content-en">
+                        <?php
+                        $requirements = preg_split ('/$\R?^/m', $requirements);
+                        ?>
+                        <div class="row">
+                            <div class="col-md-6">
+								<ul style="list-style-position: outside;list-style-type: disc;">
+	                                <?php
+	                                    for($i=1; $i<count($requirements); $i++) {
+	                                        echo $requirements[$i];
+	                                        if($i == (count($requirements)-2)/2 || ($i-0.5) == (count($requirements)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position: outside;list-style-type: disc;'>";
+	                                    }
+	                                ?>
+	                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-vn">
+                        <?php
+                        $requirements_vn = preg_split ('/$\R?^/m', $requirements_vn);
+                        ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                            	<ul style="list-style-position: outside;list-style-type: disc;">
+	                                <?php
+	                                for($i=1; $i<count($requirements_vn); $i++) {
+	                                    echo $requirements_vn[$i];
+	                                    if($i == (count($requirements_vn)-2)/2 || ($i-0.5) == (count($requirements_vn)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc;'>";
+	                                }
+	                                ?>
+	                            </ul>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+	</div>
+	<div style="">
+		<img src="https://www.simicart.com/media/wysiwyg/images.jpg" width="100%">
+	</div>
+	<div  style="margin-top: 40px" align="center" class="container">
+		<div class="content-en">
+            <h2 style="font-family: Arial;color:#f69435;font-size: 35px;font-weight: bold">Benefits</h2>
+                <span style="font-family: Arial;font-size: 20px">You will love our culture like we do</span>
+        </div>
+        <div class="content-vn">
+                <h2 style="font-family: Arial;color:#f69435;font-size: 35px">Lợi ích khi làm việc tại SimiCart</h2>
+                <span style="font-family: Arial;font-size: 20px">Văn hóa độc đáo mà mỗi chúng tôi luôn tự hào</span>
+        </div>
+		<div>
+			<div class="row row-one">
+				<div class=" col-md-3  col-sm-3">
+                    <div class="img-icon" style="text-align: center;"><span class="icon-one" style="background: url('https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png') no-repeat;background-position: 0 -166px;width: 59px;height: 65px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Lương thưởng hấp dẫn</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Lương thưởng hấp dẫn</div>
+                        <div class="text" style="margin-top: 20px">
+                            <?php
+                                if($benifits_vn != '') echo $benifits_vn;
+                                else echo "Lương cạnh tranh, tháng lương thứ 13, thưởng lễ Tết, quà sinh nhật...";
+                            ?>
+                        </div>
+                    </div>
+                    <div class="content-en">
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Fine remuneration package</div>
+                        <div class="text" style="margin-top: 20px">
+                            <?php
+                            if($benifits != '') echo $benifits;
+                            else echo "Negotiable salary, holiday bonus and birthday presents";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3">
+                    <div class="img-icon" style="text-align: center"><span class="icon-one" style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: 0 -309px;width: 63px; height: 65px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Chế độ bảo hiểm</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Chế độ bảo hiểm</div>
+                        <div class="text" style="margin-top: 20px">Chế độ bảo hiểm y tế và bảo hiểm xã hội theo luật Lao động.</div>
+                    </div>
+                    <div class="content-en" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Insurance package</div>
+                        <div class="text" style="margin-top: 50px">Full package of insurances regulated by the Labor Code.</div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3">
+                    <div class="img-icon"><span class="icon-one" style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat;background-position: -185px -309px;width: 25px;height: 65px;    display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Tinh thần startup</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold" >Tinh thần startup</div>
+                        <div class="text" style="margin-top: 20px">Tham gia vào SimiCart, tức là bạn đã sẵn sàng tham gia một team luôn hừng hực sức chiến đấu.</div>
+                    </div>
+                    <div class="content-en" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Startup spirit</div>
+                        <div class="text" style="margin-top: 50px">No entrenched structures here. We are energetic warriors in a growing startup!</div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3">
+                    <div class="img-icon"><span class="icon-one" style="    background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat;background-position: -143px -169px;width: 66px;height: 65px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Trang phục tự do</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold" >Trang phục tự do</div>
+                        <div class="text" style="margin-top: 20px"> Ở SimiCart, bạn có thể mặc bất cứ trang phục nào mà bạn thích, miễn là bạn làm việc thoải mái!</div>
+                    </div>
+                    <div class="content-en" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Casual wearing</div>
+                        <div class="text" style="margin-top: 50px">No dresscode here. Just wear whatever you like. FYI, our marketing manager's favorite is shorts.</div>
+                    </div>
+                </div>
+
+			</div>
+            <div class="row row-two">
+                <div class=" col-md-3  col-sm-3">
+                    <div class="img-icon"><span class="icon-one" style="    background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat;background-position: 0 -423px;width: 64px;height: 69px;display: block;text-indent: -999em;overflow: hidden; margin: 70px auto 10px;">Môi trường làm việc quốc tế</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Môi trường làm việc<br> quốc tế</div>
+                        <div class="text" style="margin-top: 20px">SimiCart có khách hàng trên khắp thế giới, nên môi trường làm việc cũng vô cùng năng động và quốc tế.</div>
+                    </div>
+                    <div class="content-en" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">International environment</div>
+                        <div class="text" style="margin-top: 20px">We got customers all around the world. Talk with our customers from Kuwait, Lebanon to USA, France,... everyday.</div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3" style="margin-top: 15px">
+                    <div class="img-icon"><span class="icon-one" style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat;background-position: 0 -539px;width: 54px;height: 55px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Đào tạo và tư vấn</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Đào tạo và tư vấn</div>
+                        <div class="text" style="margin-top: 50px">SimiCart luôn đặt con người lên hàng đầu. Hàng năm chúng tôi đều trích quỹ để đào tạo và nâng cao năng lực cho nhân viên.</div>
+                    </div>
+                    <div class="content-en" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Training & Coaching</div>
+                        <div class="text" style="margin-top: 20px">Focusing on human resources, every year we spend a part of our fund for training and improving skills for all of our staff.</div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3">
+                    <div class="img-icon"><span class="icon-one" style="    background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -144px -66px;width: 66px;height: 69px;    display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Làm hết mình, chơi tới bến</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Làm hết mình,<br> chơi tới bến</div>
+                        <div class="text" style="margin-top: 20px"> SimiCart thường xuyên tổ chức các buổi liên hoan vào cuối tháng, dịp lễ, ngày sinh nhật...
+                            Cafe, trà</div>
+                    </div>
+                    <div class="content-en">
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Work hard, play hard</div>
+                        <div class="text" style="margin-top: 20px">At SimiCart, we host parties and birthday celebrations on a regular basis. Are you a big eater?</div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3">
+                    <div class="img-icon"><span class="icon-one" style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat;background-position: -93px -308px;width: 52px;height: 69px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Cafe, trà</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Cafe, trà</div>
+                        <div class="text" style="margin-top: 50px"> Thoải mái sử dụng cafe, trà tại khu vực chung của SimiCart. Chúng tôi cũng thường xuyên có các bữa tiệc ngọt nhỏ.</div>
+                    </div>
+                    <div class="content-en">
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Coffee, tea</div>
+                        <div class="text" style="margin-top: 20px">We've got a lot of kinds of drinks like coffee, ice tea, Olong tea, milo, ... for you to enjoy!</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row row-three" style="margin-top: 30px">
+            	<div class=" col-md-3  col-sm-3"></div>
+				<div class=" col-md-3  col-sm-3">
+                    <div class="img-icon" style="text-align: center;"><span class="icon-one" style="background: url('https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png') no-repeat;background-position: -150px -420px;width: 60px;height: 69px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Sách miễn phí</span></div>
+                    <div class="content-vn" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Sách miễn phí</div>
+                        <div class="text" style="margin-top: 20px">Bạn có thể mượn sách miễn phí từ thư viện chung của chúng tôi hoặc yêu cầu đặt mua sách hàng tháng.</div>
+                    </div>
+                    <div class="content-en">
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Free books</div>
+                        <div class="text" style="margin-top: 20px">You can always borrow books from our library or order your favorite monthly. We love books here!</div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3">
+                    <div class="img-icon" style="text-align: center"><span class="icon-one" style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -143px -522px;width: 66px; height: 55px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Các hội thảo quốc tế</span></div>
+                    <div class="content-vn" style="margin-top: 25px">
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold">Các hội thảo quốc tế</div>
+                        <div class="text" style="margin-top: 20px">SimiCart thường xuyên tham gia các hội nghị và triển lãm công nghệ trên thế giới và khu vực.</div>
+                    </div>
+                    <div class="content-en" >
+                        <div class="title-icon" style="font-size: 20px;font-weight: bold;margin-top: 22px">International conferences</div>
+                        <div class="text" style="margin-top: 20px">We join regional and international e-commerce/ technology conferences or exhibition regularly.</div>
+                    </div>
+                </div>
+                <div class=" col-md-3  col-sm-3"></div>
+
+			</div>
+		</div>
+	</div>
+	<div  id="job-slide07" class="job-slide07" style="margin-top: 30px" align="center">
+        <div class="content-vn" align="center" style="margin-top: -20px;">
+            <span style="font-family: Arial;color:#f69435;font-size: 30px;font-weight: bold;">Bạn đã sẵn sàng chưa?</span>
+        </div>
+        <div class="content-en" align="center" style="margin-top: -20px;">
+            <span style="font-family: Arial;color:#f69435;font-size: 30px;font-weight: bold">Are you ready for the rocket journey?</span>
+        </div>
+        <div class="container content-en" style="margin-top: 10px" align="center">
+
+            <div id="form">
+                <form  method="POST" enctype="multipart/form-data">
+                    <div style="margin-top: 25px;">
+                        <input type="text" name="first_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('First Name')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px;" >
+                        <input type="text"  name="last_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Last Name')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <input type="email"  name="email" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Email')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px;" >
+                        <input type="text"  name="phone" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Phone')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px">
+                        <textarea rows="4"  name="sourceinfo" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('How do you know about us? (Facebook, ITViec, HRC,...)');?>" class="input-text required-entry"></textarea>
+                    </div>
+                    <div style="margin-top: 15px;margin-left: -120px;"  class="import-file">
+
+                        <!-- check if file extension invalid -->
+                        <span style="margin-left: -185px"><?php echo __('Resume/CV')?></span><br>
+                        <input style="margin-left: 30px" type="file" name="resume_cv" required>
+                    </div>
+                    <div style="margin-top: 15px;margin-left: -120px;" class="import-file">
+                        <span style="margin-left: -185px"><?php echo __('Cover Letter')?></span><br>
+                        <input style="margin-left: 30px" type="file" name="cover_letter">
+                    </div>
+
+                    <div style="margin-top: 15px;margin-left: -120px;">
+                        <input style="margin-left: 30px" type="hidden" name="job_name" value="<?=$_GET['job']?>">
+                    </div>
+                    
+                    <?php
+                            if ($collection[0]['deadline'] != '') {
+                    ?>
+                    <div style="margin-top: 35px" align="center" class="content-en">
+                        <button type="submit" name="submit" title="<?php echo __('Submit Your Application')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Submit Your Application</button>
+                    </div>
+                    <?php
+                        }
+                    ?>
+                    
+                </form>
+            </div>
+
+        </div>
+        <div class="container content-vn" style="margin-top: 10px" align="center">
+
+            <div id="form1">
+                <form  method="POST" enctype="multipart/form-data">
+                    <div style="margin-top: 25px;">
+                        <input type="text" name="first_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Tên')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px;" >
+                        <input type="text"  name="last_name" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Họ và tên đệm')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <input type="email"  name="email" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Email')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px;" >
+                        <input type="text"  name="phone" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Số điện thoại')?>" class="input-text required-entry">
+                    </div>
+                    <div style="margin-top: 15px">
+                        <textarea rows="4"  name="sourceinfo" style="width: 400px;border: 1px solid #d0d5d8;padding: 10px;" placeholder="<?php echo __('Bạn biết đến Simicart từ? (Facebook, ITViec, HRC,...)');?>" class="input-text required-entry"></textarea>
+                    </div>
+                    <div style="margin-top: 15px;margin-left: -120px;" class="import-file">
+
+                        <!-- check if file extension invalid -->
+                        <span style="margin-left: -185px"><?php echo __('Resume/CV')?></span><br>
+                        <input style="margin-left: 30px" type="file" name="resume_cv" required>
+                    </div>
+                    <div style="margin-top: 15px;margin-left: -120px;" class="import-file">
+                        <span style="margin-left: -185px"><?php echo __('Cover Letter')?></span><br>
+                        <input style="margin-left: 30px" type="file" name="cover_letter">
+                    </div>
+
+                    <div style="margin-top: 15px;margin-left: -120px;">
+                        <input style="margin-left: 30px" type="hidden" name="job_name" value="<?=$_GET['job']?>">
+                    </div>
+
+                    <?php
+                            if ($collection[0]['deadline'] != '') {
+                    ?>
+                    <div style="margin-top: 35px" align="center" class="content-vn">
+                        <button type="submit" name="submit" title="<?php echo __('Nộp đơn ngay')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Nộp đơn ngay</button>
+                    </div>
+                    <?php
+                        }
+                    ?>
+                </form>
+            </div>
+
+        </div>
+        <br>
+        <div class="content-vn" style="color: #8f8f8f" align="center">
+            <div class="address" style="text-align: center" >
+            	<p class="area-address" style="margin-bottom: 0px"><span style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -92px -98px;width: 11px; height: 14px;text-indent: -999em;overflow: hidden;margin-right: 7px;display: inline-block;"></span><span>Simicart</span></p>
+                <span>Tầng 7</span><br>
+                <span>204 De La Thanh nho, Tho Quan Ward, Dong Da Dist, Ha Noi, Viet Nam.</span><br>
+                <span>Điện thoại: 02466517968 | Email: hr@simicart.com</span>
+            </div>
+        </div>
+
+        <div class="content-en" style="color: #8f8f8f" align="center">
+            <div class="address" style="text-align: center">
+            	<p class="area-address" style="margin-bottom: 0px"><span style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -92px -98px;width: 11px; height: 14px;text-indent: -999em;overflow: hidden;margin-right: 7px;display: inline-block;"></span><span>SimiCart</span></p>
+                <span>7th floor</span><br>
+                <span>204 De La Thanh nho, Tho Quan Ward, Dong Da Dist, Ha Noi, Viet Nam.</span><br>
+                <span>Phone: 0246 651 7968 | Email: hr@simicart.com</span>
+            </div>
+        </div>
+	</div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var $j = jQuery.noConflict();
+    jQuery(function($){
+        $j("#en-language").click(function(){
+            $j(".content-vn").css('display','none');
+            $j(".content-en").css('display','block');
+        });
+        $j("#vn-language").click(function(){
+            $j(".content-en").css('display','none');
+            $j(".content-vn").css('display','block');
+        });
+    });
+</script>
+<script>
+    jQuery(function($){
+        $j('input[type=file]').change(function () {
+            var val = $j(this).val().toLowerCase(),
+                regex = new RegExp("(.*?)\.(docx|doc|pdf)$");
+
+            if (!(regex.test(val))) {
+                $j(this).val('');
+                alert('Please select correct file format(.pdf; .doc; .docx)');
+            }
+        });
+    });
+</script>

@@ -44,6 +44,13 @@
           <frontend_model>Simi\Instantsearch\Block\Color</frontend_model>
         </field>
 
+        <field id="add_to_cart_button_color" translate="label" sortOrder="4" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Add to Cart Button Color</label>
+          <validate>required-entry</validate>
+          <comment>Default: #1979c3</comment>
+          <frontend_model>Simi\Instantsearch\Block\Color</frontend_model>
+        </field>
+
         <field id="suggest_field_title" translate="label" sortOrder="5" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
           <label>Title of Suggestion Field</label>
           <validate>required-entry</validate>
