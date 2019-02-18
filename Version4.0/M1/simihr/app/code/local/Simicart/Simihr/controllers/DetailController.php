@@ -1,10 +1,22 @@
 <?php
 class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 {
-	public function indexAction()
-	{
-		$this->loadLayout();
-     	$this->getLayout()->getBlock('root')->setTemplate('page/1column.phtml');
+    public function indexAction()
+    {
+        $this->loadLayout();
+        $this->getLayout()->getBlock('root')->setTemplate('page/1column.phtml');
+        $job = 'Simicart Job';
+        $benefit = '';
+        if(isset($_GET['job']) && $_GET['job'] != '' && isset($_GET['job_type']) && $_GET['job_type'] != '') {
+            $job = $_GET['job'];
+            $collection = Mage::getResourceModel('simihr/jobOffers_collection')->addFieldToFilter('status', 1)->addFieldToFilter('name', $job)->addFieldToFilter('job_type', $_GET['job_type'])->getData();
+            if (isset($collection[0])) {
+                $benefit = $collection[0]['benifits'];
+            }
+
+        }
+        $this->getLayout()->getBlock('head')->setTitle($this->__($job));
+        $this->getLayout()->getBlock('head')->setDescription($this->__($benefit));
         $this->getLayout()->getBlock('content')->append($block);
         $this->_initLayoutMessages('core/session'); 
         $this->renderLayout();
@@ -112,12 +124,12 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
             echo "<script>alert('Your submisstion has been send.')</script>";
 
         }
-	}
+    }
 
-	public function submitAction()
-	{
-		
-	}
+    public function submitAction()
+    {
+        
+    }
 
     public function stripVN($str) {
         $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
@@ -140,12 +152,7 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
     public function sendMail($data, $title,$path1 = null,$path2 = null,$filename1,$filename2) {
          // Mage::log("Run cron to send mail!");
-        $ids = Mage::getResourceModel('simihr/content_collection')->addFieldToFilter('name', 'transactional_email_id')->getData();
-        if (isset($ids[0])) {
-            $id = (int)$ids[0]['note'];
-        } else $id = 179;
-
-        $templateId = $id;
+        $templateId = 179;
         // get store and config
         $store = Mage::app()->getStore();
         $config = array(
@@ -155,7 +162,7 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
         $sender = array(
             'name' => 'Simihr Notice',
-            'email' => 'simihr@simicart.com',
+            'email' => 'simihrhr@simicart.com',
         );
 
         $recipient_email = 'hr@simicart.com';
@@ -175,9 +182,9 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
         $storeId = Mage::app()->getStore()->getId();
 
-        // $add_cc=array("hieu@simicart.com");
+        $add_cc=array("hieu@simicart.com");
         $mail = Mage::getModel('core/email_template');
-        // $mail->getMail()->addCc($add_cc);
+        $mail->getMail()->addCc($add_cc);
         if (file_exists($path1)) {
             $mail->getMail()
                 ->createAttachment(
@@ -205,5 +212,5 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
     }
 
 
-	
+    
 }

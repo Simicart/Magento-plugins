@@ -1,57 +1,70 @@
 <?xml version="1.0"?>
-<layout>
-    <adminhtml_department_index>
-        <reference name="content">
-            <block type="simihr/adminhtml_department" name="simihr_department" />
-        </reference> 
-    </adminhtml_department_index>
-    <adminhtml_department_edit>
-         <reference name="head">
-             <action method="addJs">
-                 <script>simicart/simihr/jobList.js</script>
-             </action>
-        </reference>
-        <reference name="left">
-            <block type="simihr/adminhtml_department_edit_tabs" name="department_tabs"></block>
-        </reference>  
-    </adminhtml_department_edit>
+<layout version="0.1.0">
+    
 
-
-    <adminhtml_joboffers_index>
-        <reference name="content">
-            <block type="simihr/adminhtml_jobOffers" name="simihr_jobOffers" />
-        </reference>
-    </adminhtml_joboffers_index>
-    <adminhtml_jobOffers_edit>
-        <update handle="editor" />
+    <simihr_department_index>
+        <!-- <update handle="page_one_column"/> -->
         <reference name="head">
-            <action method="setCanLoadTinyMce"><load>1</load></action>
+            <block type="core/template" name="facebookmeta" template="simihr/metatags.phtml" />
+            <!--&lt;!&ndash; For CSS in the skin folder &ndash;&gt;-->
+            <!--<action method="removeItem"><type>skin_css</type><name>css/styles.css</name></action>-->
+            <!--&lt;!&ndash; For CSS in the js folder &ndash;&gt;-->
+            <!--<action method="removeItem"><type>js_css</type><name>local.css</name></action>-->
+            <action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+            <!-- <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
+            <action method="setText">
+            <text>
+                <![CDATA[<meta name="description" content="Hello world"/>]]>
+            </text>
+        </action>
         </reference>
-        <reference name="content">
-            <block type="simihr/adminhtml_jobOffers_edit" name="simihr_jobOffers_edit" />
-        </reference>
-    </adminhtml_jobOffers_edit>
 
-
-    <adminhtml_submissions_index>
         <reference name="content">
-            <block type="simihr/adminhtml_submissions" name="simihr_submissions" />
+             <block type="simihr/department" name="department" template="simihr/department.phtml" />
         </reference>
-    </adminhtml_submissions_index>
+    </simihr_department_index>
 
-    <adminhtml_content_index>
-        <reference name="content">
-            <block type="simihr/adminhtml_content" name="simihr_content" />
-        </reference>
-    </adminhtml_content_index>
-    <adminhtml_content_edit>
-        <update handle="editor" />
+    <simihr_department_list>
+        <!-- <update handle="page_one_column"/> -->
         <reference name="head">
-            <action method="setCanLoadTinyMce"><load>1</load></action>
+
+            <action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+           <!--  <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
+           <!--<block type="core/text" name="department_list">-->
+                <!--<action method="setText">-->
+                    <!--<text>-->
+                        <!--<![CDATA[<meta property="og:image" content="http://sandbox.simicart.com/simicart/skin/frontend/default/simicart2.0/favicon.ico"/>]]>-->
+                    <!--</text>-->
+                <!--</action>-->
+            <!--</block>-->
+        </reference>
+
+        <reference name="content">
+            <block type="simihr/department_list" name="department_list" template="simihr/department/list.phtml" />
+        </reference>
+    </simihr_department_list>
+
+    <simihr_department_search>
+        <update handle="page_one_column"/>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+            <!-- <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
+        </reference>
+
+        <reference name="content">
+            <block type="simihr/department_list" name="department_search" template="simihr/department/search.phtml" />
+        </reference>
+    </simihr_department_search>
+
+    <simihr_detail_index>
+       <!--  <update handle="page_one_column"/> -->
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/simihr/simihr.css</stylesheet></action>
+           <!--  <action method="addCss"><stylesheet>css/simihr/bootstrap4.css</stylesheet></action> -->
         </reference>
         <reference name="content">
-            <block type="simihr/adminhtml_content_edit" name="simihr_content_edit" />
+             <block  type="simihr/detail" name="detail" template="simihr/detail.phtml" />
         </reference>
-    </adminhtml_content_edit>
-
+    </simihr_detail_index>
 </layout>

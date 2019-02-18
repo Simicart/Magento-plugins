@@ -22,8 +22,8 @@ $title = $this->getTitle();
     }
 ?>
 <div style="margin: 0;padding: 0;color: #333; font-family: inherit; font-size:16px;">
-	<div align="center">
-		<div class="about-1">
+    <div align="center">
+        <div class="about-1">
             <div class="row">
                 <div class="col-md-12">
                     <div class="content-en">
@@ -66,16 +66,16 @@ $title = $this->getTitle();
                 </div>
             </div>
         </div>
-	</div>
-	<div align="center" style="margin-top: -5px; background-color: white;padding-bottom: 30px;padding-top: 30px">
-		<div class="content-en">
+    </div>
+    <div align="center" style="margin-top: -5px; background-color: white;padding-bottom: 30px;padding-top: 30px">
+        <div class="content-en">
             <h2 style="color: #333;font-weight: bold">ABOUT JOB</h2>
         </div>
         <div class="content-vn">
             <h2 style="color: #333;font-weight: bold">Về công việc</h2>
         </div>
 
-		<hr width="8%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
+        <hr width="8%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
         <div style="width: 80%" class="content-vn">
             <?php
                 if ($collection[0]['overall_vn'] != '') {
@@ -90,7 +90,7 @@ $title = $this->getTitle();
             
 
         </div>
-		<div style="width: 80%" class="content-en">
+        <div style="width: 80%" class="content-en">
             <?php
                 if ($collection[0]['overall'] != '') {
                     echo $collection[0]['overall'];
@@ -103,31 +103,31 @@ $title = $this->getTitle();
             <?php        
                 }
             ?>
-			
-		</div>
-	</div>
-	<div  style="background-color: #f2f2f2;padding-bottom: 30px">
-		<div align="center" class="content-en" style="padding-top: 30px;padding-bottom: 10px">
+            
+        </div>
+    </div>
+    <div  style="background-color: #f2f2f2;padding-bottom: 30px">
+        <div align="center" class="content-en" style="padding-top: 30px;padding-bottom: 10px">
             <h2 style="color:#f69435;font-family: inherit">What you’ll do on a daily basis</h2>
-		</div>
+        </div>
         <div align="center" class="content-vn" style="padding-top: 30px;padding-bottom: 10px">
             <h2 style="color:#f69435;font-family: inherit">Bạn sẽ làm gì khi gia nhập?</h2>
         </div>
-		<div class="container" style="margin-top: 20px">
+        <div class="container" style="margin-top: 20px">
             <div class="content-en">
                 <?php
                 $workRelated = preg_split ('/$\R?^/m', $workRelated);
                 ?>
                 <div class="row">
                     <div class="col-md-6">
-                    	<ul style="list-style-position: outside;list-style-type: disc">
-	                        <?php
-	                        for($i=1; $i<count($workRelated); $i++) {
-	                            echo $workRelated[$i];
-	                            if($i == (count($workRelated)-2)/2 || ($i-0.5) == (count($workRelated)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc'>";
-	                        }
-	                        ?>
-	                    </ul>
+                        <ul style="list-style-position: outside;list-style-type: disc">
+                            <?php
+                            for($i=1; $i<count($workRelated); $i++) {
+                                echo $workRelated[$i];
+                                if($i == (count($workRelated)-2)/2 || ($i-0.5) == (count($workRelated)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc'>";
+                            }
+                            ?>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -137,23 +137,23 @@ $title = $this->getTitle();
                 ?>
                 <div class="row">
                     <div class="col-md-6">
-                    	<ul style="list-style-position: outside;list-style-type: disc">
-	                        <?php
-	                        for($i=1; $i<count($workRelated_vn); $i++) {
-	                            echo $workRelated_vn[$i];
-	                            if($i == (count($workRelated_vn)-2)/2 || ($i-0.5) == (count($workRelated_vn)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc'>";
-	                        }
-	                        ?>
-	                    </ul>
+                        <ul style="list-style-position: outside;list-style-type: disc">
+                            <?php
+                            for($i=1; $i<count($workRelated_vn); $i++) {
+                                echo $workRelated_vn[$i];
+                                if($i == (count($workRelated_vn)-2)/2 || ($i-0.5) == (count($workRelated_vn)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc'>";
+                            }
+                            ?>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-	</div>
-	<div style="background-color: white">
-		<div align="center" class="content-en" style="padding: 5px;padding-top: 30px;padding-bottom: 10px">
+    </div>
+    <div style="background-color: white">
+        <div align="center" class="content-en" style="padding: 5px;padding-top: 30px;padding-bottom: 10px">
             <h2 style="font-family: inherit;color:#f69435;">This job is for you if you have:</h2>
-		</div>
+        </div>
         <div align="center" class="content-vn" style="padding: 5px;padding-top: 30px;padding-bottom: 10px">
             <h2 style="font-family: inherit;color:#f69435;">Công việc này là cho bạn nếu bạn có:</h2>
         </div>
@@ -164,14 +164,14 @@ $title = $this->getTitle();
                         ?>
                         <div class="row">
                             <div class="col-md-6">
-								<ul style="list-style-position: outside;list-style-type: disc;">
-	                                <?php
-	                                    for($i=1; $i<count($requirements); $i++) {
-	                                        echo $requirements[$i];
-	                                        if($i == (count($requirements)-2)/2 || ($i-0.5) == (count($requirements)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position: outside;list-style-type: disc;'>";
-	                                    }
-	                                ?>
-	                            </ul>
+                                <ul style="list-style-position: outside;list-style-type: disc;">
+                                    <?php
+                                        for($i=1; $i<count($requirements); $i++) {
+                                            echo $requirements[$i];
+                                            if($i == (count($requirements)-2)/2 || ($i-0.5) == (count($requirements)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position: outside;list-style-type: disc;'>";
+                                        }
+                                    ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -181,24 +181,24 @@ $title = $this->getTitle();
                         ?>
                         <div class="row">
                             <div class="col-md-6">
-                            	<ul style="list-style-position: outside;list-style-type: disc;">
-	                                <?php
-	                                for($i=1; $i<count($requirements_vn); $i++) {
-	                                    echo $requirements_vn[$i];
-	                                    if($i == (count($requirements_vn)-2)/2 || ($i-0.5) == (count($requirements_vn)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc;'>";
-	                                }
-	                                ?>
-	                            </ul>
+                                <ul style="list-style-position: outside;list-style-type: disc;">
+                                    <?php
+                                    for($i=1; $i<count($requirements_vn); $i++) {
+                                        echo $requirements_vn[$i];
+                                        if($i == (count($requirements_vn)-2)/2 || ($i-0.5) == (count($requirements_vn)-2)/2) echo "</ul></div><div class='col-md-6'><ul style='list-style-position:outside;list-style-type: disc;'>";
+                                    }
+                                    ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
         </div>
-	</div>
-	<div style="">
-		<img src="https://www.simicart.com/media/wysiwyg/images.jpg" width="100%">
-	</div>
-	<div  style="margin-top: 40px" align="center" class="container">
-		<div class="content-en">
+    </div>
+    <div style="">
+        <img src="https://www.simicart.com/media/wysiwyg/images.jpg" width="100%">
+    </div>
+    <div  style="margin-top: 40px" align="center" class="container">
+        <div class="content-en">
             <h2 style="font-family: inherit;color:#f69435;font-size: 35px;font-weight: bold">Benefits</h2>
                 <span style="font-family: inherit;font-size: 20px">You will love our culture like we do</span>
         </div>
@@ -206,9 +206,9 @@ $title = $this->getTitle();
                 <h2 style="font-family: inherit;color:#f69435;font-size: 35px">Lợi ích khi làm việc tại SimiCart</h2>
                 <span style="font-family: inherit;font-size: 20px">Văn hóa độc đáo mà mỗi chúng tôi luôn tự hào</span>
         </div>
-		<div>
-			<div class="row row-one">
-				<div class=" col-md-3  col-sm-3">
+        <div>
+            <div class="row row-one">
+                <div class=" col-md-3  col-sm-3">
                     <div class="img-icon" style="text-align: center;"><span class="icon-one" style="background: url('https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png') no-repeat;background-position: 0 -166px;width: 59px;height: 65px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Lương thưởng hấp dẫn</span></div>
                     <div class="content-vn" >
                         <div class="title-icon" style="font-size: 20px;font-weight: bold">Lương thưởng hấp dẫn</div>
@@ -263,7 +263,7 @@ $title = $this->getTitle();
                     </div>
                 </div>
 
-			</div>
+            </div>
             <div class="row row-two">
                 <div class=" col-md-3  col-sm-3">
                     <div class="img-icon"><span class="icon-one" style="    background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat;background-position: 0 -423px;width: 64px;height: 69px;display: block;text-indent: -999em;overflow: hidden; margin: 70px auto 10px;">Môi trường làm việc quốc tế</span></div>
@@ -313,8 +313,8 @@ $title = $this->getTitle();
 
             </div>
             <div class="row row-three" style="margin-top: 30px">
-            	<div class=" col-md-3  col-sm-3"></div>
-				<div class=" col-md-3  col-sm-3">
+                <div class=" col-md-3  col-sm-3"></div>
+                <div class=" col-md-3  col-sm-3">
                     <div class="img-icon" style="text-align: center;"><span class="icon-one" style="background: url('https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png') no-repeat;background-position: -150px -420px;width: 60px;height: 69px;display: block;text-indent: -999em;overflow: hidden;margin: 70px auto 10px;">Sách miễn phí</span></div>
                     <div class="content-vn" >
                         <div class="title-icon" style="font-size: 20px;font-weight: bold">Sách miễn phí</div>
@@ -338,10 +338,10 @@ $title = $this->getTitle();
                 </div>
                 <div class=" col-md-3  col-sm-3"></div>
 
-			</div>
-		</div>
-	</div>
-	<div  id="job-slide07" class="job-slide07" style="margin-top: 30px" align="center">
+            </div>
+        </div>
+    </div>
+    <div  id="job-slide07" class="job-slide07" style="margin-top: 30px" align="center">
         <div class="content-vn" align="center" style="margin-top: -20px;">
             <span style="font-family: inherit;color:#f69435;font-size: 30px;font-weight: bold;">Bạn đã sẵn sàng chưa?</span>
         </div>
@@ -446,7 +446,7 @@ $title = $this->getTitle();
         <br>
         <div class="content-vn" style="color: #8f8f8f" align="center">
             <div class="address" style="text-align: center" >
-            	<p class="area-address" style="margin-bottom: 0px"><span style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -92px -98px;width: 11px; height: 14px;text-indent: -999em;overflow: hidden;margin-right: 7px;display: inline-block;"></span><span>Simicart</span></p>
+                <p class="area-address" style="margin-bottom: 0px"><span style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -92px -98px;width: 11px; height: 14px;text-indent: -999em;overflow: hidden;margin-right: 7px;display: inline-block;"></span><span>Simicart</span></p>
                 <span>Tầng 7</span><br>
                 <span>204 De La Thanh nho, Tho Quan Ward, Dong Da Dist, Ha Noi, Viet Nam.</span><br>
                 <span>Điện thoại: 02466517968 | Email: hr@simicart.com</span>
@@ -455,13 +455,13 @@ $title = $this->getTitle();
 
         <div class="content-en" style="color: #8f8f8f" align="center">
             <div class="address" style="text-align: center">
-            	<p class="area-address" style="margin-bottom: 0px"><span style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -92px -98px;width: 11px; height: 14px;text-indent: -999em;overflow: hidden;margin-right: 7px;display: inline-block;"></span><span>SimiCart</span></p>
+                <p class="area-address" style="margin-bottom: 0px"><span style="background: url(https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/common.png) no-repeat; background-position: -92px -98px;width: 11px; height: 14px;text-indent: -999em;overflow: hidden;margin-right: 7px;display: inline-block;"></span><span>SimiCart</span></p>
                 <span>7th floor</span><br>
                 <span>204 De La Thanh nho, Tho Quan Ward, Dong Da Dist, Ha Noi, Viet Nam.</span><br>
                 <span>Phone: 0246 651 7968 | Email: hr@simicart.com</span>
             </div>
         </div>
-	</div>
+    </div>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

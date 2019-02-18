@@ -103,6 +103,7 @@ class Simicart_Simihr_Adminhtml_JobOffersController extends Mage_Adminhtml_Contr
                 $this->_redirect('*/*/');
                 return;
             }
+
             catch (Mage_Core_Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             }
