@@ -140,7 +140,12 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
     public function sendMail($data, $title,$path1 = null,$path2 = null,$filename1,$filename2) {
          // Mage::log("Run cron to send mail!");
-        $templateId = 179;
+        $ids = Mage::getResourceModel('simihr/content_collection')->addFieldToFilter('name', 'transactional_email_id')->getData();
+        if (isset($ids[0])) {
+            $id = (int)$ids[0]['note'];
+        } else $id = 179;
+
+        $templateId = $id;
         // get store and config
         $store = Mage::app()->getStore();
         $config = array(
@@ -150,7 +155,7 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
         $sender = array(
             'name' => 'Simihr Notice',
-            'email' => 'simihrhr@simicart.com',
+            'email' => 'simihr@simicart.com',
         );
 
         $recipient_email = 'hr@simicart.com';
@@ -170,9 +175,9 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 
         $storeId = Mage::app()->getStore()->getId();
 
-        $add_cc=array("hieu@simicart.com");
+        // $add_cc=array("hieu@simicart.com");
         $mail = Mage::getModel('core/email_template');
-        $mail->getMail()->addCc($add_cc);
+        // $mail->getMail()->addCc($add_cc);
         if (file_exists($path1)) {
             $mail->getMail()
                 ->createAttachment(
