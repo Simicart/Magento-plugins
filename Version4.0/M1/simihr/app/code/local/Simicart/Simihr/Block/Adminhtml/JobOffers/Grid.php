@@ -24,7 +24,7 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Grid extends Mage_Adminhtml_Bloc
         // Get and set our collection for the grid
         $collection = Mage::getResourceModel($this->_getCollectionClass());
         $this->setCollection($collection);
-
+        // zend_Debug::dump($collection->getData());die();
         return parent::_prepareCollection();
     }
 
@@ -100,6 +100,17 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Grid extends Mage_Adminhtml_Bloc
                 'align'=>'center'
             )
         );
+
+         $this->addColumn('sort_order_id',
+            array(
+                'header'=> $this->__('Sort Order ID'),
+                'width' => '50px',
+                'index' => 'sort_order_id',
+                'header_css_class'=>'a-center',
+                'align'=>'center'
+            )
+        );
+
 
         $this->addColumn('start_time',
             array(

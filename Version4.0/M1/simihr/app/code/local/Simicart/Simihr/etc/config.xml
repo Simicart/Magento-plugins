@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Simicart_Simihr>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </Simicart_Simihr>
     </modules>
      
@@ -56,6 +56,13 @@
                 <class>Simicart_Simihr_Helper</class>
             </simihr>
         </helpers>
+
+        <rewrite>
+            <simihr_department_index>
+                <from><![CDATA[#^/department#]]></from>
+                <to>/simihr/department/index/</to>
+            </simihr_department_index>
+        </rewrite>
 
     </global>
 

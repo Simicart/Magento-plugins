@@ -85,6 +85,8 @@ $table = $installer->getConnection()
         ), 'Status')
     ->addColumn('quatity', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array(
     ), 'quatity')
+    ->addColumn('sort_order_id', Varien_Db_Ddl_Table::TYPE_SMALLINT, null, array(
+    ), 'Sort Order ID')
     ->addColumn('start_time', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     ), 'start_time')
     ->addColumn('deadline', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
