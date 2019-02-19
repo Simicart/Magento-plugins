@@ -445,3 +445,13 @@ svg {
 .col-main {
 	background-color: white !important;
 }
+.hover-image {
+	background-color: #2d2d2d;
+}
+.hover-image:hover .department-img {
+	opacity: 0.3 !important;
+}
+.hover-image:hover .hover-image-effect{
+	background-color: #2d2d2d !important;
+	opacity: 0.3 !important;
+}

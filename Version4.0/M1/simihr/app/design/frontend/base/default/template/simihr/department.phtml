@@ -186,15 +186,15 @@
                     }
                     
             ?>
-                        <div class="col-md-4" id="<?=$i?>" onmouseenter="getElementById('dep'+this.id).style.display = 'block'" onmouseleave="getElementById('dep'+this.id).style.display = 'none'">
-                            <a href="<?=$url.'simihr/department/list?department='.$collection[$i]['name']?>" style="text-decoration: none">
-                                <div style="%" >
-                                    <img class="department-img" src="<?=$url.'media/'.$collection[$i]['dep_img']?>"  style="width: 360px; border-radius: 5px;height: 240px;box-shadow: 2px 2px 2px grey;">
+                        <div class="col-md-4" style="height: 310px;border-radius: 5px;" id="<?=$i?>" onmouseenter="getElementById('dep'+this.id).style.display = 'block'" onmouseleave="getElementById('dep'+this.id).style.display = 'none'" >
+                            <a href="<?=$url.'simihr/department/list?department='.$collection[$i]['name']?>" style="text-decoration: none" >
+                                <div class="hover-image">
+                                    <img class="department-img" src="<?=$url.'media/'.$collection[$i]['dep_img']?>"  style="border-top-left-radius: 5px;border-top-right-radius: 5px;width: 100%;height: 240px;box-shadow: 2px 2px 2px grey;">
                                 </div>
-                                <div id="<?='dep'.$i?>" style="display: none" align="center"><button class="view-job-button" style="font-weight: bold;top:35%;left:20%;border: none;background-color:white;color:#f69435;border-radius: 30px; padding: 5px; padding-left: 15px; padding-right: 15px;position: absolute;width: 180px;height: 38px"><span id="view-button-font-size" style="font-size: 15px">VIEW</span> ALL JOBS</button></div>
-                                <div class="total-job" align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 60px;height: 60px; padding: 5px; font-size: 32px"><span><?=$allJobs?></span></div>
-                                <div align="center" style=" bottom: 31px;height: 31px;position: relative; background: white;border-bottom-left-radius: 5px;box-shadow: 2px 2px 2px grey;border-bottom-right-radius: 5px;padding: 1px;border-top: none">
-                                    <h3 style="font-weight: 600;text-transform: uppercase;color: #636363;font-size: 22px"><?=$collection[$i]['name']?></h3>
+                                <div id="<?='dep'.$i?>" style="display: none" align="center"><button class="view-job-button" style="font-weight: bold;top:35%;left:27%;border: none;background-color:white;color:#f69435;border-radius: 30px; padding: 5px; padding-left: 15px; padding-right: 15px;position: absolute;width: 180px;height: 38px"><span id="view-button-font-size" style="font-size: 15px">VIEW</span> ALL JOBS</button></div>
+                                <div class="total-job " align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 60px;height: 60px; padding: 5px; font-size: 32px"><span><?=$allJobs?></span></div>
+                                <div class="hover-image-effect" align="center" style="position: relative; background: white;border-bottom-left-radius: 5px;box-shadow: 2px 2px 2px grey;border-bottom-right-radius: 5px;padding: 18px;border-top: none;height: 70px">
+                                    <h3 style="font-weight: 600;text-transform: uppercase;color: #636363;font-size: 22px;"><?=$collection[$i]['name']?></h3>
                                 </div>
                             </a>
                         </div>
