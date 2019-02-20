@@ -9,6 +9,7 @@ use Magento\UrlRewrite\Model\UrlPersistInterface;
 
 class Store extends \Magento\Framework\Model\AbstractModel
 {
+    public $storeId = null;
     const MAX_COUNT_TIME_CHECK_URL_REWRITE = 100;
 
     const MARKER_ICON_RELATIVE_PATH = 'simi/simistorelocator/images/store/marker';
