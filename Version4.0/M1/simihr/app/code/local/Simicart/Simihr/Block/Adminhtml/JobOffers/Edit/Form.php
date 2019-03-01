@@ -89,6 +89,13 @@ class Simicart_Simihr_Block_Adminhtml_JobOffers_Edit_Form extends Mage_Adminhtml
             'title'     => $this->__('Quatity'),
         ));
 
+        $fieldset->addField('sort_order_id', 'text', array(
+            'name'      => 'sort_order_id',
+            'label'     => $this->__('Sort Order ID'),
+            'title'     => $this->__('Sort Order ID'),
+        ));
+
+
         $fieldset->addField('start_time', 'text', array(
             'name'      => 'start_time',
             'label'     => $this->__('Start time'),

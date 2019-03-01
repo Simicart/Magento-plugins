@@ -1,10 +1,22 @@
 <?php
 class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
 {
-	public function indexAction()
-	{
-		$this->loadLayout();
-     	$this->getLayout()->getBlock('root')->setTemplate('page/1column.phtml');
+    public function indexAction()
+    {
+        $this->loadLayout();
+        $this->getLayout()->getBlock('root')->setTemplate('page/1column.phtml');
+        $job = 'Simicart Job';
+        $benefit = '';
+        if(isset($_GET['job']) && $_GET['job'] != '' && isset($_GET['job_type']) && $_GET['job_type'] != '') {
+            $job = $_GET['job'];
+            $collection = Mage::getResourceModel('simihr/jobOffers_collection')->addFieldToFilter('status', 1)->addFieldToFilter('name', $job)->addFieldToFilter('job_type', $_GET['job_type'])->getData();
+            if (isset($collection[0])) {
+                $benefit = $collection[0]['benifits'];
+            }
+
+        }
+        $this->getLayout()->getBlock('head')->setTitle($this->__($job));
+        $this->getLayout()->getBlock('head')->setDescription($this->__($benefit));
         $this->getLayout()->getBlock('content')->append($block);
         $this->_initLayoutMessages('core/session'); 
         $this->renderLayout();
@@ -112,12 +124,12 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
             echo "<script>alert('Your submisstion has been send.')</script>";
 
         }
-	}
+    }
 
-	public function submitAction()
-	{
-		
-	}
+    public function submitAction()
+    {
+        
+    }
 
     public function stripVN($str) {
         $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
@@ -200,5 +212,5 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
     }
 
 
-	
+    
 }
