@@ -12,23 +12,31 @@ class Simicart_Simihr_Model_Observer {
         $jobs = Mage::getResourceModel('simihr/jobOffers_collection')->addFieldToFilter('status', 1)->getData();
         $timeNow = date("Y/m/d");
         $timeNow = explode("/",$timeNow);
-        $yearNow = $timeNow[0];
-        $monthNow = $timeNow[1];
-        $dayNow = $timeNow[2];
+        $yearNow = (int)$timeNow[0];
+        $monthNow = (int)$timeNow[1];
+        $dayNow = (int)$timeNow[2];
         foreach ($jobs as $job) {
             $startTime = explode("/",$job['start_time']);
             $deadline = explode("/",$job['deadline']);
-            if(isset($startTime[0]) && isset($startTime[1]) && isset($startTime[2])) {
-                $dayStartCompare = $startTime[0];
-                $monthStartCompare = $startTime[1];
-                $yearStartCompare = $startTime[2];
 
+            if(isset($startTime[0]) && isset($startTime[1]) && isset($startTime[2])) {
+                $dayStartCompare = (int)$startTime[0];
+                $monthStartCompare = (int)$startTime[1];
+                $yearStartCompare = (int)$startTime[2];
+
+                $totaldays = self::getDaysOfMonth($monthStartCompare);
+                if ($dayStartCompare <=3 && ($dayStartCompare + $totaldays - $dayNow) == 3 && $yearStartCompare == $yearNow) {
+                    $msg = "Time to apply " . $job['name'] . " will start in 3 days at " . $job['start_time']. ".";
+                    $data = [];
+                    $data['msg'] = $msg;
+                    self::customMail($data);
+                }
                 if($yearStartCompare == $yearNow && $monthStartCompare == $monthNow) {
-                    $temp = (int)$dayStartCompare - (int)$dayNow;
+                    $temp = $dayStartCompare - $dayNow;
                     if( $temp == 3){
                         
 
-                        $msg = "Time to apply " . $job['name'] . " will start in ".$temp." days at " . $job['start_time']. ".";
+                        $msg = "Time to apply " . $job['name'] . " will start in 3 days at " . $job['start_time']. ".";
                         $data = [];
                         $data['msg'] = $msg;
                         self::customMail($data);
@@ -38,15 +46,22 @@ class Simicart_Simihr_Model_Observer {
 
             if(isset($deadline[0]) && isset($deadline[1]) && isset($deadline[2])) {
 
-                $dayDeadline = $deadline[0];
-                $monthDeadline = $deadline[1];
-                $yearDeadline = $deadline[2];
-                
+                $dayDeadline = (int)$deadline[0];
+                $monthDeadline = (int)$deadline[1];
+                $yearDeadline = (int)$deadline[2];
+
+                $totaldays = self::getDaysOfMonth($monthDeadline);
+                if ( $dayDeadline <= 3 && ($dayDeadline + $totaldays - $dayNow) == 3 && $yearDeadline == $yearNow) {
+                    $msg = "Time to apply " . $job['name'] . " will end in 3 days at " . $job['deadline'] . ".";
+                    $data = [];
+                    $data['msg'] = $msg;
+                    self::customMail($data);
+                }
                 if($yearDeadline == $yearNow && $monthDeadline == $monthNow) {
-                    $temp = (int)$dayDeadline - (int)$dayNow;
+                    $temp = $dayDeadline - $dayNow;
                     if( $temp == 3){
                         
-                        $msg = "Time to apply " . $job['name'] . " will end in ".$temp." days at " . $job['deadline'] . ".";
+                        $msg = "Time to apply " . $job['name'] . " will end in 3 days at " . $job['deadline'] . ".";
                         $data = [];
                         $data['msg'] = $msg;
                         self::customMail($data);
@@ -94,6 +109,18 @@ class Simicart_Simihr_Model_Observer {
             ->sendTransactional($templateId, $sender, $recipient_email, $recipient_name, $vars, $storeId);
         $translate->setTranslateInline(true);
         Mage::log("Simihr sent mail to hr@simicart.com and max@simicart.com");
+    }
+
+    public function getDaysOfMonth($month) {
+        $fullMonths = [1,3,5,7,8,10,12];
+        $lessmonths = [4,6,9,11];
+        if (in_array($month, $fullMonths)) {
+            return 31;
+        } elseif (in_array($month, $lessmonths)) {
+            return 30;
+        } else {
+            return 28;
+        }
     }
 }
 ?>

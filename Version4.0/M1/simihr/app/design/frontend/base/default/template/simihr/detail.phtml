@@ -28,7 +28,17 @@ $title = $this->getTitle();
                 <div class="col-md-12">
                     <div class="content-en">
                         <?php
-                            if ($collection[0]['deadline'] == '') {
+                            $timeNow = date("Y/m/d");
+                            $timeNow = explode("/",$timeNow);
+                            // $yearNow = (int)$timeNow[0];
+                            $monthNow = (int)$timeNow[1];
+                            $dayNow = (int)$timeNow[2];
+                                            
+                            $deadline = explode("/",$collection[0]['deadline']);
+                            $dayDeadline = (int)$deadline[0];
+                            $monthDeadline = (int)$deadline[1];
+                            // $yearDeadline = (int)$deadline[2];
+                            if ($collection[0]['deadline'] == '' || ($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline))) {
                         ?>
                             <h1 style="font-family: 'Open Sans';font-size: 36px;font-weight: bold; color: white;">Coming soon</h1>
                         <?php
