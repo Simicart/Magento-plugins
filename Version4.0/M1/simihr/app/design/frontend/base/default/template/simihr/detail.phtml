@@ -393,7 +393,7 @@ $title = $this->getTitle();
                     </div>
                     
                     <?php
-                            if ($collection[0]['deadline'] != '') {
+                            if ($collection[0]['deadline'] != '' || !($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline))) {
                     ?>
                     <div style="margin-top: 35px" align="center" class="content-en">
                         <button type="submit" name="submit" title="<?php echo __('Submit Your Application')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Submit Your Application</button>
@@ -441,7 +441,7 @@ $title = $this->getTitle();
                     </div>
 
                     <?php
-                            if ($collection[0]['deadline'] != '') {
+                            if ($collection[0]['deadline'] != '' || !($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline))) {
                     ?>
                     <div style="margin-top: 35px" align="center" class="content-vn">
                         <button type="submit" name="submit" title="<?php echo __('Nộp đơn ngay')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Nộp đơn ngay</button>
