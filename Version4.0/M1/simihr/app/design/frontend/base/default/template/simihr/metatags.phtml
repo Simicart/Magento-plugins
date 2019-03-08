@@ -1,3 +1,15 @@
+<?php
+	$job = $this->getLayout()->getBlock('head')->getTitle();
+	$description = $this->getLayout()->getBlock('head')->getDescription();
+	if (isset($_GET['job'])) {
+		$job = $_GET['job'];
+	}
+	$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST']."/".$_SERVER['REQUEST_URI'];
+	
+?>
+<meta property="og:title" content="<?=$job?>" />
 <meta property="og:image" content="http://sandbox.simicart.com/simicart/media/simihr/default_icon.png"/>
-<meta property="og:url" content="http://sandbox.simicart.com/simicart/simihr/department" />
-<?php echo $this->getChildHtml() ?>
+<meta property="og:url" content="<?=$url?>" />
+<meta property="og:description" content="<?=$description?>" />
+
+<!-- <?php echo $this->getChildHtml() ?> -->
