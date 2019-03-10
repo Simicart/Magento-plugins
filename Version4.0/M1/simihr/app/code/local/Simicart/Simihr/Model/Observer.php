@@ -7,7 +7,7 @@
  */
 class Simicart_Simihr_Model_Observer {
 
-    public function sendMail(){
+    public function sendMail() {
         // Mage::log("Run cronnnnnnnnnnnnnnnnnnnnnnnnn!");
         $jobs = Mage::getResourceModel('simihr/jobOffers_collection')->addFieldToFilter('status', 1)->getData();
         $timeNow = date("Y/m/d");
@@ -25,17 +25,17 @@ class Simicart_Simihr_Model_Observer {
                 $yearStartCompare = (int)$startTime[2];
 
                 $totaldays = self::getDaysOfMonth($monthStartCompare);
-                if ($dayStartCompare <=3 && ($dayStartCompare + $totaldays - $dayNow) == 3 && $yearStartCompare == $yearNow) {
-                    $msg = "Time to apply " . $job['name'] . " will start in 3 days at " . $job['start_time']. ".";
-                    $data = [];
-                    $data['msg'] = $msg;
-                    self::customMail($data);
-                }
-                if($yearStartCompare == $yearNow && $monthStartCompare == $monthNow) {
-                    $temp = $dayStartCompare - $dayNow;
-                    if( $temp == 3){
-                        
 
+                if($yearStartCompare == $yearNow) {
+                    if($monthNow == $monthStartCompare) {
+                        $temp = $dayStartCompare - $dayNow;
+                        if( $temp == 3){
+                            $msg = "Time to apply " . $job['name'] . " will start in 3 days at " . $job['start_time']. ".";
+                            $data = [];
+                            $data['msg'] = $msg;
+                            self::customMail($data);
+                        }
+                    } elseif ($monthStartCompare == ($monthNow + 1) && ($dayStartCompare <=3 && ($dayStartCompare + $totaldays - $dayNow) == 3)) {
                         $msg = "Time to apply " . $job['name'] . " will start in 3 days at " . $job['start_time']. ".";
                         $data = [];
                         $data['msg'] = $msg;
@@ -51,16 +51,17 @@ class Simicart_Simihr_Model_Observer {
                 $yearDeadline = (int)$deadline[2];
 
                 $totaldays = self::getDaysOfMonth($monthDeadline);
-                if ( $dayDeadline <= 3 && ($dayDeadline + $totaldays - $dayNow) == 3 && $yearDeadline == $yearNow) {
-                    $msg = "Time to apply " . $job['name'] . " will end in 3 days at " . $job['deadline'] . ".";
-                    $data = [];
-                    $data['msg'] = $msg;
-                    self::customMail($data);
-                }
-                if($yearDeadline == $yearNow && $monthDeadline == $monthNow) {
-                    $temp = $dayDeadline - $dayNow;
-                    if( $temp == 3){
-                        
+
+                if($yearDeadline == $yearNow ) {
+                    if ($monthNow == $monthDeadline) {
+                        $temp = $dayDeadline - $dayNow;
+                        if( $temp == 3){                            
+                            $msg = "Time to apply " . $job['name'] . " will end in 3 days at " . $job['deadline'] . ".";
+                            $data = [];
+                            $data['msg'] = $msg;
+                            self::customMail($data);
+                        }
+                    } elseif ($monthDeadline == ($monthNow + 1) && ($dayDeadline <=3 && ($dayDeadline + $totaldays - $dayNow) == 3)) {
                         $msg = "Time to apply " . $job['name'] . " will end in 3 days at " . $job['deadline'] . ".";
                         $data = [];
                         $data['msg'] = $msg;

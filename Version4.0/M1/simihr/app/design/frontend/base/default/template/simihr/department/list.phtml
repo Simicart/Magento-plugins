@@ -153,21 +153,26 @@ $jobCollection = $this->getjobList($_GET['department']);
                 <?php
                     foreach ($jobCollection['full-time'] as $jobs) {
                         foreach ($jobs as $job) {
-                            if($job['deadline'] == '') $job['deadline'] = "Coming soon";
-                            else $job['deadline'] = "Deadline: ". $job['deadline'];
-
-                            $timeNow = date("Y/m/d");
-                            $timeNow = explode("/",$timeNow);
-                            // $yearNow = (int)$timeNow[0];
-                            $monthNow = (int)$timeNow[1];
-                            $dayNow = (int)$timeNow[2];
-                            
-                            $deadline = explode("/",$job['deadline']);
-                            $dayDeadline = (int)$deadline[0];
-                            $monthDeadline = (int)$deadline[1];
-                            // $yearDeadline = (int)$deadline[2];
-                            if ($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline)) {
+                            if($job['deadline'] == '') {
                                 $job['deadline'] = "Coming soon";
+                            } else {
+                                $timeNow = date("Y/m/d");
+                                $timeNow = explode("/",$timeNow);
+                                $yearNow = (int)$timeNow[0];
+                                $monthNow = (int)$timeNow[1];
+                                $dayNow = (int)$timeNow[2];
+                                
+                                $deadline = explode("/",$job['deadline']);
+                                $dayDeadline = (int)$deadline[0];
+                                $monthDeadline = (int)$deadline[1];
+                                $yearDeadline = (int)$deadline[2];
+                                if($yearNow > $yearDeadline) {
+                                    $job['deadline'] = "Coming soon";
+                                } else {
+                                    if ($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline)) {
+                                        $job['deadline'] = "Coming soon";
+                                    } else $job['deadline'] = "Deadline: ". $job['deadline'];
+                                }
                             }
                         
                             if($job['img_url'] == '') $job['img_url'] = "simihr/default.png";
