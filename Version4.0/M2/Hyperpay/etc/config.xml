@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <simi_hyperpay>
+            <simi_hyperpay_main>
+                <active>1</active>
+                <user_id>1234567890123</user_id>
+                <password>1234567890123</password>
+                <entity_id>1234567890123</entity_id>
+                <currency>EUR</currency>
+                <payment_type>DB</payment_type>
+                <notification_url>http://github.com/</notification_url>
+            </simi_hyperpay_main>
+        </simi_hyperpay>
+    </default>
+</config>

@@ -15,6 +15,11 @@
 #searchJob::-webkit-input-placeholder {
   color: #63636;
   font-style:normal;
+  font-size: 20px;
+  opacity: 0.5;
+}
+.col-main {
+	background-color: white !important;
 }
 .about-1 {
 	background: url("https://www.simicart.com/skin/frontend/default/simicart2.0/images/jobs/banner-slider-first.jpg") no-repeat;
@@ -49,9 +54,9 @@
 }
 
 @media only screen and (max-width: 1024px) {
-	.container {
+	/*.container {
 		padding-left: 25px !important;
-	}
+	}*/
 	/*#container-department {
 		margin-top: -100px !important;
 	}*/
@@ -99,16 +104,28 @@
 	/*#current-option-custom {
 		color: white !important;
 	}*/
-	.department-img {
+	/*.department-img {
 		height: 450px !important;
-	}
-	#banner {
+	}*/
+	/*#banner {
 		min-height: 360px !important;
-	}
+	}*/
 }
 @media only screen and (max-width: 1024px) {
 	.job-image {
 		height: 350px !important;
+	}
+}
+@media only screen and (max-width: 992px) {
+	.col-md-4 {
+		margin-top: 50px !important;
+		height: unset !important;
+	}
+	.main-simihr {
+		background-color: #f69435 !important;
+	}
+	.department-img {
+		height: unset !important;
 	}
 }
 @media only screen and (max-width: 768px) {
@@ -137,9 +154,9 @@
 	.input-text-hr {
 		margin-left: unset !important;
 	}
-	.department-img {
+	/*.department-img {
 		height: 350px !important;
-	}
+	}*/
 	.view-job-button {
 		font-size: 12px !important;
 		left: 20% !important;
@@ -159,8 +176,6 @@
 	.total-job {
 		padding: 3px !important;
 		right: 30px !important;
-		width: 30px !important;
-		height: 30px !important;
 	}
 	.deadline {
 		padding: 5px !important;
@@ -197,11 +212,11 @@
 		margin-left: unset !important;
 	}
 	#container-department {
-		margin-top: unset !important;
+		margin-top: -100px !important;
 	}
-	#banner {
+	/*#banner {
 		min-height: 380px !important;
-	}
+	}*/
 	.capa_1 {
 		position: absolute;
 		right: 22%;
@@ -213,7 +228,7 @@
 @media only screen and (max-width: 640px) {
 	.input-text-hr {
 		position: absolute !important;
-		right: 0px !important;
+		right: 10px !important;
 	}
 	/*#container-department {
 		margin-top: -40px !important;
@@ -222,9 +237,9 @@
 	[type="checkbox"]:checked + label {
 	  padding-left: 1.5em !important;
 	}
-	#banner {
+	/*#banner {
 		min-height: 470px !important;
-	}
+	}*/
 	#select-department {
 
 	}
@@ -251,15 +266,18 @@
 		right: 17% !important;
 		top: 43%;
 	}
+	#container-department {
+		margin-top: -30px !important;
+	}
 }
 
 @media only screen and (max-width: 460px) {
 	.button-search {
 		font-size: 8px !important;
 	}
-	/*#container-department {
-		min-height: 550px !important;
-	}*/
+	#container-department {
+		margin-top: 30px !important;
+	}
 	.input-box {
 		height: 35px !important;
 		font-size: 14px !important;
@@ -280,9 +298,9 @@
 	.job-type {
 		top: 70px !important;
 	}
-	#banner {
+	/*#banner {
 		min-height: 490px !important;
-	}
+	}*/
 	.job-image {
 		height: 250px !important;
 	}
@@ -314,18 +332,18 @@
 	.about-1 {
 		height: 310px !important;
 	}
-	#banner {
+	/*#banner {
 		min-height: 510px !important;
-	}
+	}*/
 }
 
 @media only screen and (max-width: 325px) {
 	/*.import-file {
 		margin-left: -10px !important;
 	}*/
-	#banner {
+	/*#banner {
 		min-height: 600px !important;
-	}
+	}*/
 	.capa_1 {
 		right: 5% !important;
 	}
@@ -341,7 +359,7 @@ li {
 	background-color: #f7a555c2;
 }
 
-.container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
 .container-department{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
 /*@media (min-width:576px){.container{max-width:540px}}
 @media (min-width:768px){.container{max-width:720px}}
@@ -436,22 +454,23 @@ svg {
 	margin-top: -8px !important;
 }
 .department-img:hover:after {
+	border-radius: 5px;
 	color: #2d2d2d;
-	opacity: .3; 
+	opacity: .3;
+
 }
 .department-img {
 	box-shadow: 5px 10px 40px hsla(0, 0%, 0%, 0.14);
 }
-.col-main {
-	background-color: white !important;
-}
 .hover-image {
+	border-radius: 5px;
 	background-color: #2d2d2d;
 }
 .hover-image:hover .department-img {
 	opacity: 0.3 !important;
 }
 .hover-image:hover .hover-image-effect{
+	border-radius: 5px;
 	background-color: #2d2d2d !important;
 	opacity: 0.3 !important;
 }

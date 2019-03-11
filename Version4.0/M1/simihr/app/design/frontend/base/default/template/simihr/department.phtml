@@ -4,7 +4,7 @@
     $url =Mage::getBaseUrl();
     $title = $this->getTitle();
 ?>
-<div style="font-size: 16px;width: 100%;margin-bottom: 100px;background-color: white">
+<div class="main-simihr" style="font-size: 16px;width: 100%;padding-bottom: 50px;background-color: white">
     <div  style="padding: 40px;background-color: #f69435; min-height: 550px; width: 100%" id="banner" class="banner">
         <div align="center" style="padding-top: 20px">
             <span style="color:white;font-size: 36px; font-weight: bold;">SimiCart  Careers</span>
@@ -63,8 +63,8 @@
 </g>
 </svg>
 
-                    <div class="input-text-hr" style="height: 100%;margin-left: 5%">
-                        <input class="input-text-simihr" type="text" name="q" style="color: white;border-radius: 30px;border: none; height: 100%; background-color: #CC6600;outline: none;padding: 5px " placeholder="Search for job offers" required>
+                    <div class="input-text-hr" style="height: 100%;margin-left: 5%;width: 60%">
+                        <input class="input-text-simihr" type="text" name="q" style="color: white;border-radius: 30px;border: none; height: 100%; background-color: #CC6600;outline: none;padding: 5px;width: 100% " placeholder="Search for job offers" required>
                     </div>
 
                     <div style="position: absolute;right: 150px;height: 100%;cursor: pointer;" class="select-department" id="select-department">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="nice-select" style="display: none" id="nice-select" >
                             
-                            <ul style="background-color: white;border-radius: 5px;padding-top: 2px;padding-bottom: 10px;text-align: left;position: absolute;z-index: 9999;margin-top: 25px;cursor: pointer;min-width: 180px; min-height: 163px; font-size: 18px" >
+                            <ul style="background-color: white;border-radius: 5px;padding-top: 2px;padding-bottom: 10px;text-align: left;position: absolute;z-index: 9999;margin-top: 25px;cursor: pointer;min-width: 180px;font-size: 18px" >
                                <?php
                                     for($i = 0; $i < count($collection); $i++) {
                                         if ($i == 6) {
