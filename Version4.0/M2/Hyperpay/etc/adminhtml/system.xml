@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+  <system>
+    <tab id="Simi" translate="label" sortOrder="900">
+      <label>Hyperpay</label>
+    </tab>
+    <section id="simi_hyperpay" translate="label" sortOrder="300" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Setting</label>
+      <class>separator-top</class>
+      <tab>SimiHyperpay</tab>
+      <resource>Simi_Hyperpay::config_hyperpay</resource>
+      <group id="simi_hyperpay_main" translate="label" sortOrder="1" type="text" showInDefault="1" showInWebsite="1">
+        <label>Hyperpay Configuration</label>
+
+        <field id="active" translate="label" sortOrder="0" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Enable</label>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+
+        <field id="user_id" translate="label" sortOrder="11" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>User ID</label>
+        </field>
+
+        <field id="password" translate="label" sortOrder="11" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Password</label>
+        </field>
+
+        <field id="entity_id" translate="label" sortOrder="11" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Entity ID</label>
+        </field>
+
+        <field id="currency" translate="label" sortOrder="11" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Currency</label>
+        </field>
+
+        <field id="payment_type" translate="label" sortOrder="11" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Payment Type</label>
+        </field>
+
+        <field id="notification_url" translate="label" sortOrder="11" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Notification Url</label>
+        </field>
+
+      </group>
+    </section>
+  </system>
+</config>

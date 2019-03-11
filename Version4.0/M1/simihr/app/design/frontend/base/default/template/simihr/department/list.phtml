@@ -63,7 +63,7 @@ $jobCollection = $this->getjobList($_GET['department']);
                         <input type="text" id="searchJob" value="<?=$_GET['q']?>" style="border-radius:30px;width:100%;border: none; height: 100%; background-color: white;outline: none " placeholder="Search for job offers">
                     </div>
                     <div style="position: absolute;right: 140px;margin-left: -20px;white-space: nowrap;" class="select-job-type-custom">
-                        <div style="height: 100%;padding: 15px;cursor: pointer;margin-right: 8px" class="select-job-type">
+                        <div style="height: 100%;padding: 12px;cursor: pointer;margin-right: 8px" class="select-job-type">
                             <span id="current-option-custom" style="white-space: nowrap;margin-right: -10px;color: #f69435;font-size: 18px">Type</span>
                             <!-- <span id="sort-by-custom"></span> -->
                             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -114,7 +114,7 @@ $jobCollection = $this->getjobList($_GET['department']);
                         </div>
                         <div class="nice-select-custom" style="display: none;margin-left: 10px" id="nice-select" >
                             
-                            <ul style="background-color: white;border-radius: 5px;padding-top: 2px;padding-bottom: 10px;text-align: left;position: absolute;z-index: 9999;margin-top: 10px;cursor: pointer;width: 180px;font-size: 18px" >
+                            <ul style="background-color: white;border-radius: 5px;padding-top: 2px;padding-bottom: 10px;text-align: left;position: absolute;z-index: 9999;margin-top: 10px;cursor: pointer;min-width: 180px;font-size: 18px" >
                                
                                     <li value="part-time" style="height: 40px;padding: 8px;margin-top: 5px" class="option" onclick="hideOption('part-time')">&nbsp;&nbsp;&nbsp;Part-time/Internship</li>
                                 
@@ -140,7 +140,7 @@ $jobCollection = $this->getjobList($_GET['department']);
                     # code...
                 } else {
             ?>
-                <h2 style="font-weight: bold;text-transform: uppercase;color: black;font-size: 22px;">Full-time jobs</h2>
+                <h2 style="font-weight: bold;text-transform: uppercase;color: black;">Full-time jobs</h2>
                 <hr width="10%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
             <?php
                 }
@@ -153,8 +153,28 @@ $jobCollection = $this->getjobList($_GET['department']);
                 <?php
                     foreach ($jobCollection['full-time'] as $jobs) {
                         foreach ($jobs as $job) {
-                            if($job['deadline'] == '') $job['deadline'] = "Coming soon";
-                            else $job['deadline'] = "Deadline: ". $job['deadline'];
+                            if($job['deadline'] == '') {
+                                $job['deadline'] = "Coming soon";
+                            } else {
+                                $timeNow = date("Y/m/d");
+                                $timeNow = explode("/",$timeNow);
+                                $yearNow = (int)$timeNow[0];
+                                $monthNow = (int)$timeNow[1];
+                                $dayNow = (int)$timeNow[2];
+                                
+                                $deadline = explode("/",$job['deadline']);
+                                $dayDeadline = (int)$deadline[0];
+                                $monthDeadline = (int)$deadline[1];
+                                $yearDeadline = (int)$deadline[2];
+                                if($yearNow > $yearDeadline) {
+                                    $job['deadline'] = "Coming soon";
+                                } else {
+                                    if ($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline)) {
+                                        $job['deadline'] = "Coming soon";
+                                    } else $job['deadline'] = "Deadline: ". $job['deadline'];
+                                }
+                            }
+                        
                             if($job['img_url'] == '') $job['img_url'] = "simihr/default.png";
                             ?>
                             <div class="col-md-4" >
@@ -184,7 +204,7 @@ $jobCollection = $this->getjobList($_GET['department']);
                     # code...
                 } else {
             ?>
-               <h2 style="font-weight: bold;text-transform: uppercase;color: black;font-size: 22px;">Part-time/Internship</h2>
+               <h2 style="font-weight: bold;text-transform: uppercase;color: black;">Part-time/Internship</h2>
                 <hr width="10%" style="border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px">
             <?php
                 }
@@ -198,9 +218,22 @@ $jobCollection = $this->getjobList($_GET['department']);
                 <?php
                 foreach ($jobCollection['part-time'] as $jobs) {
                     foreach ($jobs as $job) {
-
                         if($job['deadline'] == '') $job['deadline'] = "Coming soon";
                         else $job['deadline'] = "Deadline: ". $job['deadline'];
+
+                        $timeNow = date("Y/m/d");
+                        $timeNow = explode("/",$timeNow);
+                        // $yearNow = (int)$timeNow[0];
+                        $monthNow = (int)$timeNow[1];
+                        $dayNow = (int)$timeNow[2];
+                        
+                        $deadline = explode("/",$job['deadline']);
+                        $dayDeadline = (int)$deadline[0];
+                        $monthDeadline = (int)$deadline[1];
+                        // $yearDeadline = (int)$deadline[2];
+                        if ($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline)) {
+                            $job['deadline'] = "Coming soon";
+                        }
                         if($job['img_url'] == '') $job['img_url'] = "simihr/default.png";
                         ?>
                         <div class="col-md-4" >
@@ -209,7 +242,7 @@ $jobCollection = $this->getjobList($_GET['department']);
                                     <img class="job-image" src="<?=$url.'media/'.$job['img_url']?>" style="width: 100%; border-radius: 5px;max-width: 100%;height: 230px;box-shadow: 2px 2px 2px grey;">
                                 </div>
                                 <div align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px"><span><?=$job['quatity']?></span></div>
-                                <div align="center" style="width: 100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;">
+                                <div align="center" style="width: 100%;font-size: 24px;color: white;top: 30%;position: absolute;text-transform: uppercase;font-weight: 600">
                                     <p><?=substr($job['name'], 0,20)?></p>
                                 </div>
                             </a>
@@ -284,7 +317,7 @@ $jobCollection = $this->getjobList($_GET['department']);
 
                 if(jobType == 'part-time') {
 
-                    htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;font-size: 22px;'>Part-time/Internship for '"+$j('#searchJob').val()+"' :</h2></div>";
+                    htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;'>Part-time/Internship for '"+$j('#searchJob').val()+"' :</h2></div>";
                     htmlData += "<hr width='10%' style='border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px'>";
                     htmlData += "<div class='row'>";
                     if(response.part_time.length != 0) {
@@ -304,7 +337,7 @@ $jobCollection = $this->getjobList($_GET['department']);
                     $j('#list-search-job').empty().html(htmlData);
                 } else {
                     if(jobType == 'full-time') {
-                        htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;font-size: 22px;'>Full-time Jobs for '"+$j('#searchJob').val()+"' :</h2></div>";
+                        htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;'>Full-time Jobs for '"+$j('#searchJob').val()+"' :</h2></div>";
                         htmlData += "<hr width='10%' style='border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px'>";
                         htmlData += "<div class='row'>";
                         if(response.full_time.length != 0) {
@@ -325,7 +358,7 @@ $jobCollection = $this->getjobList($_GET['department']);
 
                     } else {
 
-                        htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;font-size: 22px;'>All Jobs for '"+$j('#searchJob').val()+"' :</h2></div>";
+                        htmlData += "<div><h2 style='font-weight:bold;text-transform: uppercase;color: black;'>All Jobs for '"+$j('#searchJob').val()+"' :</h2></div>";
                         htmlData += "<hr width='10%' style='border-top: 2px solid #f69435;margin-top: 10px;margin-bottom: 30px'>";
                         htmlData += "<div class='row'>";
 

@@ -1,0 +1,11 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Simi_Hyperpay::hyperpay" title="Simi Hyperpay" module="Simi_Hyperpay"
+             sortOrder="21" resource="Simi_Hyperpay::hyperpay"/>
+        <add id="Simi_Hyperpay::setting"
+             resource="Simi_Hyperpay::setting"
+             module="Simi_Hyperpay" title="Setting" sortOrder="2"
+             action="adminhtml/system_config/edit/section/simi_hyperpay"
+             parent="Simi_Hyperpay::hyperpay"/>
+    </menu>
+</config>

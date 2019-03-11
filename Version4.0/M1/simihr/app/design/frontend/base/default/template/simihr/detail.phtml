@@ -28,7 +28,20 @@ $title = $this->getTitle();
                 <div class="col-md-12">
                     <div class="content-en">
                         <?php
-                            if ($collection[0]['deadline'] == '') {
+                            $hidenSubmitEn = false;
+                            $hidenSubmitVn = false;
+                            $timeNow = date("Y/m/d");
+                            $timeNow = explode("/",$timeNow);
+                            $yearNow = (int)$timeNow[0];
+                            $monthNow = (int)$timeNow[1];
+                            $dayNow = (int)$timeNow[2];
+                                            
+                            $deadline = explode("/",$collection[0]['deadline']);
+                            $dayDeadline = (int)$deadline[0];
+                            $monthDeadline = (int)$deadline[1];
+                            $yearDeadline = (int)$deadline[2];
+                            if ($collection[0]['deadline'] == '' || ( $yearNow > $yearDeadline || $monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline))) {
+                                $hidenSubmitEn = true;
                         ?>
                             <h1 style="font-family: 'Open Sans';font-size: 36px;font-weight: bold; color: white;">Coming soon</h1>
                         <?php
@@ -42,7 +55,8 @@ $title = $this->getTitle();
                     </div>
                     <div class="content-vn">
                         <?php
-                            if ($collection[0]['deadline'] == '') {
+                            if ($collection[0]['deadline'] == '' || ( $yearNow > $yearDeadline || $monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline))) {
+                                $hidenSubmitVn = true;
                         ?>
                             <h1 style="font-family: 'Open Sans';font-size: 36px;font-weight: bold; color: white;">Sắp tuyển</h1>
                         <?php
@@ -383,7 +397,7 @@ $title = $this->getTitle();
                     </div>
                     
                     <?php
-                            if ($collection[0]['deadline'] != '') {
+                            if ($hidenSubmitEn == false) {
                     ?>
                     <div style="margin-top: 35px" align="center" class="content-en">
                         <button type="submit" name="submit" title="<?php echo __('Submit Your Application')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Submit Your Application</button>
@@ -431,7 +445,7 @@ $title = $this->getTitle();
                     </div>
 
                     <?php
-                            if ($collection[0]['deadline'] != '') {
+                            if ($hidenSubmitVn == false) {
                     ?>
                     <div style="margin-top: 35px" align="center" class="content-vn">
                         <button type="submit" name="submit" title="<?php echo __('Nộp đơn ngay')?>" style="color: white;border-radius: 30px; border: none; background-color: #f69435; padding: 8px; font-weight: bold;padding-left: 30px;padding-right: 30px">Nộp đơn ngay</button>
