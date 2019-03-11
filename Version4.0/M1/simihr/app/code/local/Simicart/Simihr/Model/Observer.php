@@ -73,7 +73,12 @@ class Simicart_Simihr_Model_Observer {
     }
     public function customMail($data) {
         // Mage::log("Run cron to send mail!");
+
         $templateId = 183;
+        $modelContent = Mage::getResourceModel('simihr/content_collection')->addFieldToFilter('name','transaction_mail_id_cron')->getData();
+        if (isset($modelContent[0]) && isset($modelContent[0]['detail'])) {
+            $templateId = (int)$modelContent[0]['detail'];
+        }
          // get store and config
         $store = Mage::app()->getStore();
         $config = array(

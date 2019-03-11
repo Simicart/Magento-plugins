@@ -153,6 +153,11 @@ class Simicart_Simihr_DetailController extends Mage_Core_Controller_Front_Action
     public function sendMail($data, $title,$path1 = null,$path2 = null,$filename1,$filename2) {
          // Mage::log("Run cron to send mail!");
         $templateId = 182;
+
+        $modelContent = Mage::getResourceModel('simihr/content_collection')->addFieldToFilter('name','transaction_mail_id_submit')->getData();
+        if (isset($modelContent[0]) && isset($modelContent[0]['detail'])) {
+            $templateId = (int)$modelContent[0]['detail'];
+        }
         // get store and config
         $store = Mage::app()->getStore();
         $config = array(
