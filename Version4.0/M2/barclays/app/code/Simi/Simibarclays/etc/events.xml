@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="simiconnector_add_payment_method">
+        <observer name="Simibarclays_Simiconnector_Add_Payment_Method"
+                  instance="Simi\Simibarclays\Observer\SimiconnectorAddPaymentMethod" />
+    </event>
+    <event name="simi_simiconnector_model_api_orders_onepage_store_after">
+        <observer name="simibarclays_model_api_orders_onepage_store_after"
+                  instance="Simi\Simibarclays\Observer\SimiconnectorAfterPlaceOrder" />
+    </event>
+    <event name="payment_method_is_active">
+        <observer name="simibarclays_payment_method_is_active"
+                  instance="Simi\Simibarclays\Observer\PaymentMethodIsActive" />
+    </event>
+</config>

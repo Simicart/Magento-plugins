@@ -1,0 +1,8 @@
+.htmlData {
+	left: -87px;
+}
+@media only screen and (max-width: 800px)  {
+	.htmlData {
+		left: unset;
+	}
+}

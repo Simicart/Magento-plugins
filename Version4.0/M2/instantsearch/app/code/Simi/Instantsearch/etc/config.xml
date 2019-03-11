@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <simi_instantsearch>
+            <simi_instsantsearch_main>
+                <active>1</active>
+                <title_background_color>#f0f0f0</title_background_color>
+                <background_color>#ffffff</background_color>
+                <font_color>#575757</font_color>
+                <border_color>#c2c2c2</border_color>
+                <add_to_cart_button_color>#1979c3</add_to_cart_button_color>
+                <suggest_field_title>Suggestion</suggest_field_title>
+                <result_field_title>Products</result_field_title>
+                <minimum_search>3</minimum_search>
+                <searching_type>magento</searching_type>
+                <!-- <search_delay>500</search_delay> -->
+                <search_popup>suggest,product</search_popup>
+                <search_suggest>3</search_suggest>
+                <search_result>5</search_result>
+                <search_field>name,sku,image,reviews_rating,short_description,description,price, add_to_cart</search_field>
+            </simi_instsantsearch_main>
+        </simi_instantsearch>
+    </default>
+</config>

@@ -1,0 +1,282 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $helper \Magento\Search\Helper\Data */
+$helper = $this->helper('Magento\Search\Helper\Data');
+$helperSearch = $this->helper('Simi\Instantsearch\Helper\Search');
+
+$gif = $block->getViewFileUrl('Simi_Instantsearch::images/loading.gif');
+$url = $block->getBaseUrl();
+$url = $url."/simiconnector/rest/v2/simiinstantsearchs";
+
+//Check config
+// $delay = $helperSearch->getSearchDelay();
+$minimumSearch = $helperSearch->getMinimumCharacterSearch();
+if($minimumSearch == '') $minimumSearch = 0;
+$isActive = $helperSearch->isActive();
+// $limit = $helperSearch->getSearchResult();
+$popUp = $helperSearch->getSearchPopupAsArray();
+$resultTitle = $helperSearch->getResultTitle();
+$suggestTitle = $helperSearch->getSuggestTitle();
+$hasSuggestion = 0;
+$hasProduct = 0;
+foreach ($popUp as $choice) {
+    if($choice == 'suggest') {
+        $hasSuggestion = 1;
+        break;
+    } 
+}
+
+foreach ($popUp as $choice) {
+    if($choice == 'product') {
+        $hasProduct = 1;
+        break;
+    } 
+}
+// color
+$title_background_color = $helperSearch->getTitleBackgroundColor();
+$background_color = $helperSearch->getBackgroundColor();
+$font_color = $helperSearch->getFontColor();
+$border_color = $helperSearch->getBorderColor();
+$cartButtonColor = $helperSearch->getAddToCartButtonColor();
+?>
+<div class="block block-search">
+    <div class="block block-title"><strong><?php /* @escapeNotVerified */ echo __('Search'); ?></strong></div>
+    <div class="block block-content">
+        <form class="form minisearch " id="search_mini_form"  action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+            <div class="field search active">
+                <label class="label " for="search" data-role="minisearch-label">
+                    <span><?php echo __('Search'); ?></span>
+                </label>
+                <div class="control">
+                    
+                    <!-- "url":"<?php  echo $block->getUrl('search/ajax/suggest', ['_secure' => $block->getRequest()->isSecure()]); ?>", -->
+                    <input id="search"
+                           data-mage-init='{"quickSearch":{
+                                "formSelector":"#search_mini_form",
+                                
+                                "destinationSelector":"#test"}
+                           }'   
+                           type="text"
+                           name="<?php /* @escapeNotVerified */ echo $helper->getQueryParamName() ?>"
+                           value="<?php /* @escapeNotVerified */ echo $helper->getEscapedQueryText() ?>"
+                           placeholder="<?php echo __('Search entire store here...'); ?>"
+                           class="input-text"
+                           maxlength="<?php /* @escapeNotVerified */ echo $helper->getMaxQueryLength();?>"
+                           role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off"/>
+                    <?php echo $block->getChildHtml() ?>
+                </div>
+            </div>
+
+            <div class="actions" id="actions">
+                <button type="submit"
+                        title="<?php echo $block->escapeHtml(__('Search')) ?>"
+                        class="action search" id="searchButton" disabled="disabled">
+                    <span><?php echo __('Search'); ?></span>
+                </button>
+            </div>
+        </form>
+        <div class="control" id="idautosuggest">
+        
+        </div>
+        <div class="test" id="test" style="display: none; "></div>
+    </div>
+</div>
+<script>
+    var instantseaching = false;
+    var lastQuerySearch = '';
+
+
+require(['jquery'],function($){
+    
+    var currentRequest = null;   
+    // if($('#idautosuggest').val() == '') alert('h');
+    <?php if($isActive == 1) { ?>                                      
+        $('#search').on('keyup',function(e) {
+            if(($('#search').val()).length  >= <?php echo $minimumSearch?> && e.keyCode != 13 && $('#search').val() !='' ) 
+            {
+                ajaxSearch();
+            } else {
+                // $('#idautosuggest').empty();   
+            }                 
+        });
+        $('#search').click(function() {
+            if(typeof htmlData == 'undefined' && $('#search').val() !='' && ($('#search').val()).length  >= <?php echo $minimumSearch?> ) {
+                ajaxSearch();
+            }
+
+        });
+    <?php } else { ?>
+        $('#search').on('keyup',function(e) {
+                    if(e.keyCode == 13) {}
+                    else {
+                        $('#searchButton').removeAttr("disabled");
+                    }                
+            } 
+        );
+    <?php } ?>
+    var defaultButtonSearch = '';
+    defaultButtonSearch = "<button type='submit' title='"+"<?php echo $block->escapeHtml(__('Search')) ?>"+"' class='action search' id='searchButton'><span><?php echo __('Search'); ?></span></button>";
+    var loadingButton = " <img style='position:absolute; top:5px; right:5px; width:20px; height:20px' src='<?php echo $gif ?>'>";
+    var loadingButtonTablet = " <img style='position:absolute; bottom:20px; right:20px; width:20px; height:20px' src='<?php echo $gif ?>'>";
+    
+    function ajaxSearch(){
+
+        if (instantseaching)
+            return;
+
+        // in case of getting ERR_CONNECTION RESET
+        setTimeout(function(){ 
+            $('#actions').empty().html(defaultButtonSearch);
+            instantseaching = false;
+        }, 5000);
+
+        //lastQuerySearch
+        lastQuerySearch = $('#search').val();
+        
+        
+        currentRequest = $.ajax({
+            url: "<?php echo $url; ?>",
+            method: "GET",
+            async: true,
+            
+            data: {q:$('#search').val(), backUrl: "<?php echo $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]); ?>", hasSuggestion: "<?php echo $hasSuggestion; ?>", hasProduct: "<?php echo $hasProduct; ?>"},
+            beforeSend : function(){           
+                if(currentRequest != null) {
+                    
+                    currentRequest.abort();
+                }               
+
+                // responsive button gif
+                if(window.outerWidth > 1000) {
+                    
+                    $('#actions').empty().html(loadingButton);
+                } else {
+                    
+                    $('#actions').empty().html(loadingButtonTablet);
+                }
+                
+                instantseaching = true;
+            },
+
+            
+            success: function(response){ 
+                instantseaching = false;
+                console.log(response);
+
+                // Restore button search after get response Ajax
+                
+                $('#actions').empty().html(defaultButtonSearch);
+
+                
+                if($('#search').val() != ' ' && $('#search').val() != '') {
+                    //enable ENTER 
+                    $('#searchButton').removeAttr("disabled");
+
+                    var htmlData = "";
+                    var htmlSuggest = ''; 
+                    var htmlProduct = '';          
+                    
+                    if(response.suggestion) {
+                        if(response.suggestion[0] != null) {
+                            htmlSuggest+="<div style='padding:10px;background-color:"+"<?php echo $title_background_color?>"+"'><p><?=__($suggestTitle)?></p></div>";
+                            
+                            for(var i = 0; i < response.suggestion.length; i++) {    
+                                htmlSuggest+= "<a href='"+response.suggestion[i].url+"' style='color:"+"<?php echo $font_color?>"+"'><p style='padding-top:8px;padding-left:10px; padding-bottom:8px'>"+response.suggestion[i].title + "("+response.suggestion[i].num_results+")</p></a>";    
+                            }
+
+                        }
+                        
+                    }    
+                    
+                    if(response.instant_search) {
+                            if((response.instant_search.products).length != 0) {
+
+                                
+                                htmlProduct+= "<div style='padding:10px;background-color:"+"<?php echo $title_background_color?>"+"'><p><?=__($resultTitle)?></p></div>";
+
+                                $.each(response.instant_search.products, function(i, item) {
+                                    htmlProduct+=  "<div class='row' style='padding-left:10px;display:flex'>";
+                                    if(response.instant_search.products[i].images) {            
+                                                htmlProduct+="<div style='width:30%'><a href='"+response.instant_search.products[i].productUrl+"'><img src='"+response.instant_search.products[i].images[0].url+"'></a></div>";
+                                    }        
+                                            htmlProduct+="<div style='width:70%'>";
+                                            if(response.instant_search.products[i].name) htmlProduct+="<a href='"+response.instant_search.products[i].productUrl+"' style='color:"+"<?php echo $font_color?>"+"'><span><b>"+response.instant_search.products[i].name+"</b></span></a><br>";
+                                            if(response.instant_search.products[i].sku) htmlProduct+="<span><b>SKU: "+response.instant_search.products[i].sku+"</b></span><br>";       
+                                            if(response.instant_search.products[i].reviewCount && response.instant_search.products[i].reviewCount != 0) htmlProduct+=  "<div class='product-reviews-summary short'>"
+                                                        +"<div class='rating-summary'>"
+                                                            +"<div title='"+response.instant_search.products[i].ratingSummary+"%' class='rating-result'>"
+                                                                +"<span style='width:"+response.instant_search.products[i].ratingSummary+"%'><span>"+response.instant_search.products[i].ratingSummary+"%</span></span>"
+                                                            +"</div>"
+                                                        +"</div>"
+                                                        +"<a href='"+response.instant_search.products[i].productUrl+"#reviews' style='color:"+"<?php echo $font_color?>"+"'><div class='reviews-actions'> "+response.instant_search.products[i].reviewCount+" Reviews"
+                                                        +"</div></a><br>"
+                                                    +"</div>";
+                                            else {
+                                                if(response.instant_search.products[i].reviewCount && response.instant_search.products[i].reviewCount == 0) {
+                                                htmlProduct+= "<a href='"+response.instant_search.products[i].productUrl+"#review-form' style='color:"+"<?php echo $font_color?>"+"'><p>be the first to review this product</p></a>";
+                                                }
+                                            }
+                                            if(response.instant_search.products[i].description)  htmlProduct+="<p>"+response.instant_search.products[i].description+"</p>";
+                                            if(response.instant_search.products[i].short_description)  htmlProduct+="<p>"+response.instant_search.products[i].short_description+"</p>";
+                                            if(response.instant_search.products[i].app_prices.price)  htmlProduct+="<span><b>Price: $"+response.instant_search.products[i].app_prices.price+"</b></span>";
+                                            if(response.instant_search.products[i].add_to_cart_url) {
+                                                form = '';
+                                                form+="<form style='float:right; margin-right:20px' data-role='tocart-form' action='"+response.instant_search.products[i].add_to_cart_url+"' method='post'>";
+                                                form+="<input name='form_key' type='hidden' value='"+response.instant_search.form_key+"'>";
+                                                form+="<button type='submit' title='Add to Cart' class='action tocart primary' style='border:none;background-color:<?=$cartButtonColor?>'><span>Add to Cart</span></button>";
+                                                
+                                                form+="</form>";
+                                                htmlProduct += form;
+                                            } 
+                                            htmlProduct+="</div>"
+                                            +"</div>";
+                                            if( i != ((response.instant_search.products).length - 1)) htmlProduct+="<hr>"; else htmlProduct+="<br>";
+                                });
+                            } else {
+                                //no products were found
+                            }
+                    }
+                    
+                    if(htmlSuggest != '' || htmlProduct != ''){
+                        htmlData+= "<div id='htmlData' class='htmlData' style='width:350px; z-index: 9999;overflow-y: scroll;word-wrap: break-word;position:absolute; border:1px solid "+"<?php echo $border_color?>"+"; max-height:600px; background-color:"+"<?php echo $background_color?>"+"; color:"+"<?php echo $font_color?>"+"'>"+htmlSuggest + htmlProduct+"</div>";
+                        
+                        $('#idautosuggest').empty().html(htmlData);
+                    } else {
+                       htmlData = '';
+                       htmlData+= "<div style='background-color:"+"<?php echo $background_color?>"+"; font-size:20px;z-index: 9999; border:1px solid "+"<?php echo $border_color?>"+"' align='center'><p>No Results</p></div>";
+                        
+                        $('#idautosuggest').empty().html(htmlData);
+                        
+                    }
+                } else {
+                    $('#idautosuggest').css("border","none");
+                    $('#idautosuggest').empty();
+                }
+
+                if($('#search').val() != lastQuerySearch) {
+                    ajaxSearch();
+                }
+            },
+            fail: function(response){     
+                instantseaching = false;
+            }
+        });
+    }
+});
+
+
+window.onload = function() {
+    var hideSuggest = document.getElementById('idautosuggest');
+    document.onclick = function(e) {
+        if(e.target.id !== 'idautosuggest'){
+            hideSuggest.style.display = 'none';
+        } 
+        if(e.target.id == 'search') {
+            hideSuggest.style.display = 'block';
+        } 
+    };
+};
+</script>

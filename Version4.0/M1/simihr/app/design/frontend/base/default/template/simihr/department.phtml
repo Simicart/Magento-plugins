@@ -1,0 +1,246 @@
+<?php
+    $collection = $this->getListDepartment();
+    
+    $url =Mage::getBaseUrl();
+    $title = $this->getTitle();
+?>
+<div style="font-size: 16px;width: 100%;margin-bottom: 100px;background-color: white">
+    <div  style="padding: 40px;background-color: #f69435; min-height: 550px; width: 100%" id="banner" class="banner">
+        <div align="center" style="padding-top: 20px">
+            <span style="color:white;font-size: 36px; font-weight: bold;">SimiCart  Careers</span>
+        </div>
+        <div style="margin-top: 20px;" align="center">
+            <?php
+                if ($title != '') {
+                    echo "<div style='color:white;width:80%;font-size:18px;line-height:30px;padding-top:10px' class='custom-margin'>".$title['detail']."</div>";
+                } else {
+            ?>
+                <p style="color: white;width: 80%">SimiCart is a mobile platform that allows everyone to build mobile apps for their online shops without any coding skill.</p><p style="color: white;width: 80%;margin-top: -5px">We are in the top 50 most potential ASEAN startups to join the accelerator program sponsored by Malaysian government.</p>
+            <?php        
+                }
+            ?>
+        </div>
+        <div align="center" style="margin-top: 30px">
+            <form action="<?=$url.'simihr/department/search'?>" method="GET">
+                <div class="input-box" style="width:45%;position: relative;padding-top: 0;border-radius: 30px; height: 49px; display: flex; background-color: #CC6600;color: #636363;margin-left: 17px" id="input-box-department">
+                    <!-- <img class="search-button-icon" src="<?=$url.'media/simihr/searchicon.png'?>" style="top: 10px;width: 30px;position: absolute;left: 20px;"> -->
+
+                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 56.966 56.966" style="margin-left: 23px;enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="20px" margin-top="15px">
+<path class="search-icon" d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+    s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+    c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+    s-17-7.626-17-17S14.61,6,23.984,6z"/>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                    <div class="input-text-hr" style="height: 100%;margin-left: 5%">
+                        <input class="input-text-simihr" type="text" name="q" style="color: white;border-radius: 30px;border: none; height: 100%; background-color: #CC6600;outline: none;padding: 5px " placeholder="Search for job offers" required>
+                    </div>
+
+                    <div style="position: absolute;right: 150px;height: 100%;cursor: pointer;" class="select-department" id="select-department">
+                        <div style="margin-top: 11px; margin-right: 8px" >
+                            <span style="margin-right: -10px;color: white;font-size: 18px" id="current-option">Departments</span>
+                            <!-- <span id="sort-by"></span> -->
+
+                            <svg version="1.1" class="capa_1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="292.362px" height="292.362px" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 292.362 292.362;width: 10px;height: 10px;fill: white"
+     xml:space="preserve" onclick>
+<g>
+    <path id="drop_down" d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424
+        C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428
+        s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                            <select name="department" style="background-color: #CC6600;border: none;color: black;margin-top: -7px;display: none" id="department">
+                                
+                                <?php
+                                    for($i = 0; $i < count($collection); $i++) {
+                                        if ($i == 6) {
+                                ?>
+                                            <option value="all" style="background-color: white;" selected>All Departments</option>
+                                <?php
+                                            break;
+                                        } else {
+                                ?>
+                                            <option value="<?= $collection[$i]['name'] ?>" style="background-color: white;"><?= $collection[$i]['name'] ?></option>
+                                <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nice-select" style="display: none" id="nice-select" >
+                            
+                            <ul style="background-color: white;border-radius: 5px;padding-top: 2px;padding-bottom: 10px;text-align: left;position: absolute;z-index: 9999;margin-top: 25px;cursor: pointer;min-width: 180px; min-height: 163px; font-size: 18px" >
+                               <?php
+                                    for($i = 0; $i < count($collection); $i++) {
+                                        if ($i == 6) {
+                                ?>
+                                            <li value="all" style="height: 40px;padding: 8px;margin-top: 12px;white-space: nowrap;padding-right: 15px" class="option" onclick="hideOption('all')">&nbsp;&nbsp;&nbsp;All Departments</li>
+                                <?php
+                                            break;
+                                        } else {
+                                ?>
+                                            <li value="<?= $collection[$i]['name'] ?>" style="height: 40px;padding: 8px;margin-top: 12px;white-space: nowrap;padding-right: 15px" class="option" onclick="hideOption('<?=$collection[$i]['name']?>')">&nbsp;&nbsp;&nbsp;<?= $collection[$i]['name'] ?></li>
+                                <?php
+                                        }
+                                    }
+                                ?>
+                            </ul>                            
+                        </div>
+
+                    </div>
+                    <div style="position:absolute;top: 80px;left:5%;color: black" class="job-type" id="job-type-department">
+                            <input type="checkbox" id="check1" name="full-time" style="margin-top: -3px"><label for="check1" style="font-weight: unset;font-size: 14px" id="label-full-time"><span style="font-size: 18px">Full-time</span></label>&nbsp;&nbsp;
+                            <input type="checkbox" id="check2" name="part-time" style="margin-top: -3px"><label style="font-weight: unset;font-size: 14px" for="check2" id="label-part-time"><span style="font-size: 18px">Part-time/Internship</span></label>
+                    </div>
+                    <div  class="button-search">
+                        <button class="button-search-1" type="submit" name="submit" title="Search" value="true" style="right: 0;position: absolute;border-radius: 30px;border: 2px solid #CC6600; width: 149px;height: 100%;background-color: white;font-size: 20px">
+                            <span style="font-weight: bold;color: #f69435">Search</span>
+                        </button>
+                    </div>
+                    
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: -150px" id="container-department">
+
+        <div class="row" align="center" >
+
+            <?php
+                for($i = 0; $i < count($collection); $i++) {
+                    $allJobs = $this->countAllJobs($collection[$i]['name']);
+                    if($collection[$i]['job_offer_ids'] == '') {
+                        $totalJob = 0;
+                    } else {
+                        $totalJob = explode(",",$collection[$i]['job_offer_ids']);
+                        $totalJob = count($totalJob);
+                    }
+                    if($collection[$i]['dep_img'] == '') {
+                        $collection[$i]['dep_img'] = 'simihr/default.png';
+                    }
+                    
+            ?>
+                        <div class="col-md-4" style="height: 310px;border-radius: 5px;" id="<?=$i?>" onmouseenter="getElementById('dep'+this.id).style.display = 'block'" onmouseleave="getElementById('dep'+this.id).style.display = 'none'" >
+                            <a href="<?=$url.'simihr/department/list?department='.$collection[$i]['name']?>" style="text-decoration: none" >
+                                <div class="hover-image">
+                                    <img class="department-img" src="<?=$url.'media/'.$collection[$i]['dep_img']?>"  style="border-top-left-radius: 5px;border-top-right-radius: 5px;width: 100%;height: 240px;box-shadow: 2px 2px 2px grey;">
+                                </div>
+                                <div id="<?='dep'.$i?>" style="display: none" align="center"><button class="view-job-button" style="font-weight: bold;top:35%;left:27%;border: none;background-color:white;color:#f69435;border-radius: 30px; padding: 5px; padding-left: 15px; padding-right: 15px;position: absolute;width: 180px;height: 38px"><span id="view-button-font-size" style="font-size: 15px">VIEW</span> ALL JOBS</button></div>
+                                <div class="total-job " align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 60px;height: 60px; padding: 5px; font-size: 32px"><span><?=$allJobs?></span></div>
+                                <div class="hover-image-effect" align="center" style="position: relative; background: white;border-bottom-left-radius: 5px;box-shadow: 2px 2px 2px grey;border-bottom-right-radius: 5px;padding: 18px;border-top: none;height: 70px">
+                                    <h3 style="font-weight: 600;text-transform: uppercase;color: #636363;font-size: 22px;"><?=$collection[$i]['name']?></h3>
+                                </div>
+                            </a>
+                        </div>
+            <?php
+
+                    
+                }
+            ?>
+
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    document.getElementById("department").value = 'all';
+    var $j = jQuery.noConflict();
+    jQuery(function($){
+        $j(".select-department").click(function(){
+            showOption();
+        });
+    });
+
+    function showOption() {
+       if ( $j("#nice-select").css("display") == "block") {
+            $j("#nice-select").css("display","none");
+       } else $j("#nice-select").css("display","block");
+    }
+
+    function hideOption(val) {
+        $j("#nice-select").css("display","block");
+        if(val == 'all') {
+            document.getElementById("current-option").innerHTML = "All Departments";
+        } else {
+            document.getElementById("current-option").innerHTML = val;
+        }
+        document.getElementById("department").value = val;
+    }
+
+    window.onload = function() {
+        var hideOption = document.getElementById('nice-select');
+        document.onclick = function(e) {
+            if(e.target.id !== 'nice-select' && e.target.id !== 'select-department' && e.target.id !== 'current-option' && e.target.id !== 'drop_down'){
+                hideOption.style.display = 'none';
+            } 
+            
+        };
+    };
+    
+</script>

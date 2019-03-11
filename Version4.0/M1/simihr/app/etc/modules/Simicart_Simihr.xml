@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Simicart_Simihr>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Simicart_Simihr>
+    </modules>
+</config>

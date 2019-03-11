@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+  <system>
+    <tab id="Simi" translate="label" sortOrder="900">
+      <label>Instantsearch</label>
+    </tab>
+    <section id="simi_instantsearch" translate="label" sortOrder="300" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+      <label>Setting</label>
+      <class>separator-top</class>
+      <tab>Simi</tab>
+      <resource>Simi_Instantsearch::config_instantsearch</resource>
+      <group id="simi_instsantsearch_main" translate="label" sortOrder="1" type="text" showInDefault="1" showInWebsite="1">
+        <label>Search Configuration</label>
+        <field id="active" translate="label" sortOrder="0" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Enable</label>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+
+        <field id="title_background_color" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Title Background Color</label>
+          <validate>required-entry</validate>
+          <comment>Default: #f0f0f0</comment>
+          <frontend_model>Simi\Instantsearch\Block\Color</frontend_model>
+        </field>
+
+        <field id="background_color" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Background Color</label>
+          <validate>required-entry</validate>
+          <comment>Default: #ffffff</comment>
+          <frontend_model>Simi\Instantsearch\Block\Color</frontend_model>
+        </field>
+
+        <field id="font_color" translate="label" sortOrder="3" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Font Color</label>
+          <validate>required-entry</validate>
+          <comment>Default: #575757</comment>
+          <frontend_model>Simi\Instantsearch\Block\Color</frontend_model>
+        </field>
+
+        <field id="border_color" translate="label" sortOrder="4" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Border Color</label>
+          <validate>required-entry</validate>
+          <comment>Default: #c2c2c2</comment>
+          <frontend_model>Simi\Instantsearch\Block\Color</frontend_model>
+        </field>
+
+        <field id="add_to_cart_button_color" translate="label" sortOrder="4" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Add to Cart Button Color</label>
+          <validate>required-entry</validate>
+          <comment>Default: #1979c3</comment>
+          <frontend_model>Simi\Instantsearch\Block\Color</frontend_model>
+        </field>
+
+        <field id="suggest_field_title" translate="label" sortOrder="5" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Title of Suggestion Field</label>
+          <validate>required-entry</validate>
+        </field>
+
+        <field id="result_field_title" translate="label" sortOrder="6" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Title of Results Field</label>
+          <validate>required-entry</validate>
+        </field>
+
+        <field id="minimum_search" translate="label" sortOrder="7" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Minimum number of characters to search</label>
+          <validate>validate-number</validate>
+          <comment>Set the minimum number of characters which customers should enter to trigger autocomplete. Example: 3</comment>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="searching_type" translate="label" sortOrder="8" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Search Type </label>
+          <source_model>Simi\Instantsearch\Model\Config\Source\SearchingType</source_model>
+        </field>
+        <!-- <field id="search_delay" translate="label" sortOrder="9" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Query Input Delay</label>
+          <validate>validate-number</validate>
+          <comment>In milliseconds</comment>
+        </field> -->
+        <field id="search_popup" translate="label" sortOrder="10" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Fields to show</label>
+          <source_model>Simi\Instantsearch\Model\Config\Source\PopupField</source_model>
+        </field>
+        <field id="search_suggest" translate="label" sortOrder="11" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Maximum Number of Results in Suggest Field </label>
+          <validate>validate-number</validate>
+        </field>
+        <field id="search_result" translate="label" sortOrder="12" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Maximum Number of Results in Product Field</label>
+          <validate>validate-number</validate>
+        </field>
+        <field id="search_field" translate="label" sortOrder="13" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Product fields to show</label>
+          <source_model>Simi\Instantsearch\Model\Config\Source\ResultField</source_model>
+        </field>
+      </group>
+    </section>
+  </system>
+</config>
