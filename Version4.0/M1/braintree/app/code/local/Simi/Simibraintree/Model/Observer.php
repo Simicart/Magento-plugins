@@ -60,7 +60,7 @@ class Simi_Simibraintree_Model_Observer {
             }
         }
         if ($check) {
-            $data[$i]['show_type'] = 2;
+            $data[$i]['show_type'] = 3;
             $data[$i]['merchant_id'] = $helper->getMerchantId();
             $data[$i]['public_key'] = $helper->getPublicKey();
             $data[$i]['private_key'] = $helper->getPrivateKey();
