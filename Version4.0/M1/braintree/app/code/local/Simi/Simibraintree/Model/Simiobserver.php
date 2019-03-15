@@ -7,7 +7,7 @@ class Simi_Simibraintree_Model_Simiobserver {
 
     public function addPayment40($observer) {
         $object = $observer->getObject();
-        $object->addPaymentMethod('simibraintree', 2);
+        $object->addPaymentMethod('simibraintree', 3);
         return;
     }
 
@@ -25,7 +25,7 @@ class Simi_Simibraintree_Model_Simiobserver {
         $data = $payment->detail;
         if (isset($data['payment_method']) && $data['payment_method'] == "SIMIBRAINTREE") {
             $helper = Mage::helper('simibraintree');
-            $data['show_type'] = 2;
+            $data['show_type'] = 3;
             $data['merchant_id'] = $helper->getMerchantId();
             $data['public_key'] = $helper->getPublicKey();
             $data['private_key'] = $helper->getPrivateKey();

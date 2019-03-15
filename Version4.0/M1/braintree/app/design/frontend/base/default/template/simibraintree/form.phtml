@@ -1,0 +1,121 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <?php if($this->isUse3DSecure()):?>
+        <script src="https://js.braintreegateway.com/web/3.38.0/js/client.min.js"></script>
+        <script src="https://js.braintreegateway.com/web/3.38.0/js/three-d-secure.min.js"></script>
+    <?php endif;?>
+    <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
+    <style>
+        .braintree-heading {
+            text-align: center;
+            margin: 0 auto;
+            font-weight: bold;
+        }
+        #dropin-container{
+            padding-top: 100px;
+        }
+        #submit-button {
+            display: none;
+            background-color: #0070ba;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<?php
+$orderId = Mage::getSingleton('checkout/session')->getOrderid();
+if($orderId):
+
+    $order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+    if(!$order->getId())
+        $order = Mage::getModel('sales/order')->load($orderId);
+    $orderId = $order->getData('increment_id');
+    $amount = $order->getData('grand_total_incl_tax') ? $order->getData('grand_total_incl_tax') : $order->getData('grand_total');
+    $urlPay = $this->getUrl('simiconnector/rest/v2',array('_secure' => true)) .'braintreeapis';
+    $token = $this->getStoreConfig('simiconnector/general/token_key');
+    $errorUrl = $this->getUrl('checkout/onepage/failure',array('_secure' => true));
+    $failureUrl = $this->getUrl('checkout/onepage/failure',array('_secure' => true));
+    $successUrl = $this->getUrl('checkout/onepage/success',array('_secure' => true));
+    $configJson = $this->getPaymentConfigJson($order);
+    ?>
+    <body>
+    <div id="dropin-container"></div>
+    <button id="submit-button">Purchase</button>
+    <div id="loading-bar" style="display: none"><?php echo __('Prepare your transaction. Please wait...')?></div>
+    <script>
+        var button = document.querySelector('#submit-button');
+        var loading = document.querySelector('#loading-bar');
+        var amount = '<?php echo $amount ?>';
+        var jsonConfig = <?=json_encode($configJson) ?>;
+        var isUse3DSecure =  <?=$this->isUse3DSecure()?'true':'false'?>;
+        braintree.dropin.create(jsonConfig,
+            function (createErr, instance) {
+                if (createErr) {
+                    console.log('Create Error', createErr);
+                    return;
+                }
+                button.addEventListener('click', function () {
+                    instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+                        // Submit payload.nonce to your server
+                        button.style.display = "none";
+                        if(requestPaymentMethodErr){
+                            console.log(requestPaymentMethodErr);
+                            //location.href = '<?php echo $errorUrl?>'
+                        }else{
+                            var order_id = '<?php echo $orderId ?>';
+                            var param = {order_id: order_id, amount:  amount};
+                            var nonce = payload.nonce;
+                            if(isUse3DSecure =='1'){
+                                if(payload.liabilityShifted || payload.type !== 'CreditCard'){
+                                    param['nonce'] = nonce;
+                                    submitOrder(JSON.stringify(param));
+                                }else{
+                                    instance.clearSelectedPaymentMethod();
+                                }
+                            } else{
+                                param['nonce'] = nonce;
+                                submitOrder(JSON.stringify(param));
+                            }
+
+                        }
+                    });
+                });
+                button.style.display = "block";
+            },
+        );
+
+        function submitOrder(param){
+            loading.style.display="block";
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    loading.style.display="none";
+                    var obj = JSON.parse(this.responseText);
+                    if(obj.braintreeapi && obj.braintreeapi.message){
+                        //success
+                        location.href = '<?php echo $successUrl?>'
+                    }else{
+                        //error
+                        location.href = '<?php echo $failureUrl?>'
+                    }
+                }
+            };
+            xmlhttp.open("POST", "<?php echo $urlPay?>", true);
+            xmlhttp.setRequestHeader("Authorization", "<?php echo $token ?>");
+            xmlhttp.send(param);
+        }
+
+    </script>
+    </body>
+<?php else:?>
+    <body>
+    SOMETHING WENT WRONG!.
+    </body>
+<?php endif;?>
