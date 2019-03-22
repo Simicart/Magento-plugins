@@ -40,7 +40,7 @@ class Simi_Paypalexpress_Model_Api_Ppexpressapis extends Simi_Simiconnector_Mode
                 $this->_initCheckout();
                 $this->_checkout->returnFromPaypal($this->_initToken());
                 $result['ppexpressapi'] = array();
-                // $url = Mage::getUrl('paypal/express/review', array('_secure' => true));
+                // $url = '/checkout/onepage?placeOrder=paypal';
                 // Mage::app()->getFrontController()->getResponse()->setRedirect($url)->sendResponse();
                 // return;
             } else if ($data['resourceid'] == 'checkout_address') {
@@ -57,6 +57,25 @@ class Simi_Paypalexpress_Model_Api_Ppexpressapis extends Simi_Simiconnector_Mode
                 $this->_checkout->prepareOrderReview($this->_initToken());
                 $info['methods'] = Mage::helper('simiconnector/checkout_shipping')->getMethods();
                 $result['ppexpressapi'] = $info;
+            }
+            else if($data['resourceid'] == 'placeOrder'){
+                $this->_initCheckout();
+                $this->checkout->returnFromPaypal($this->_initToken());
+                // $controller = $data['controller'];
+                // $controller->getResponse()->setRedirect('/paypal/express/review/');
+                $result = array();
+                $session = $this->_getCheckoutSession();
+                $this->checkout->place($this->_initToken());
+                $order = $this->checkout->getOrder();
+                $session->clearHelperData();
+                if($order && $order->getIncrementId()){
+                    $orderId = $order->getIncrementId();
+                    $result['order'] = ['invoice_number' => $orderId];
+                }
+            }
+            else if ($data['resourceid'] == 'cancel') {
+                # code...
+                Mage::app()->getFrontController()->getResponse()->setRedirect('/checkout/cart')->sendResponse();
             }
         }
         return $result;

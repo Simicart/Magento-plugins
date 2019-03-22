@@ -9,7 +9,6 @@
 
 namespace Simi\Simicustompayment\Observer;
 
-use Magento\Framework\DataObject as Object;
 use Magento\Framework\Event\ObserverInterface;
 
 class SimiconnectorAddPaymentMethod implements ObserverInterface {

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Simi_Simicustompayment>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Simi_Simicustompayment>
+    </modules>
+</config>

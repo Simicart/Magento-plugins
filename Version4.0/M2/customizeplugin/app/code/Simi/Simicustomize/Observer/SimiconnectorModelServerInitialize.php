@@ -27,11 +27,8 @@ class SimiconnectorModelServerInitialize implements ObserverInterface {
     public function execute(\Magento\Framework\Event\Observer $observer) {
         $object = $observer->getObject();
         $data = $object->getData();
-        $customizedResources = array(
-            'simicustomizes'
-        );
-
-        if(isset($data['resource']) && in_array($data['resource'], $customizedResources)){
+        $className = 'Simi\Simicustomize\Model\Api\\' . ucfirst($data['resource']);
+        if (class_exists($className)) {
             $data['module'] = "simicustomize";
             $object->setData($data);
         }

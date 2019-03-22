@@ -42,6 +42,9 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                 $this->_initCheckout();
                 $this->checkout->returnFromPaypal($this->_initToken());
                 $result['ppexpressapi'] = array();
+//                for pwa
+//                $controller = $data['controller'];
+//                $controller->getResponse()->setRedirect('/checkout/onepage?placeOrder=paypal');
             } else if ($data['resourceid'] == 'checkout_address') {
                 $this->_initCheckout();
                 $this->checkout->returnFromPaypal($this->_initToken());
@@ -57,6 +60,26 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                 $info['methods'] = $this->simiObjectManager->get('Simi\Simiconnector\Helper\Checkout\Shipping')
                     ->getMethods();
                 $result['ppexpressapi'] = $info;
+            }
+            else if($data['resourceid'] == 'placeOrder'){
+                $this->_initCheckout();
+                $this->checkout->returnFromPaypal($this->_initToken());
+                // $controller = $data['controller'];
+                // $controller->getResponse()->setRedirect('/paypal/express/review/');
+                $result = array();
+                $session = $this->_getCheckoutSession();
+                $this->checkout->place($this->_initToken());
+                $order = $this->checkout->getOrder();
+                $session->clearHelperData();
+                if($order && $order->getIncrementId()){
+                    $orderId = $order->getIncrementId();
+                    $result['order'] = ['invoice_number' => $orderId];
+                }
+            }
+            else if ($data['resourceid'] == 'cancel') {
+                # code...
+                $controller = $data['controller'];
+                $controller->getResponse()->setRedirect('/checkout/cart');
             }
         }
         return $result;
