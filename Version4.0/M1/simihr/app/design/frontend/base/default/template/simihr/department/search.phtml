@@ -180,13 +180,14 @@
                                 ?>
                                 <div class="col-md-4" >
                                     <a href="../detail?job=<?=$job['name']?>&job_type=full-time">
-                                        <div style="%">
+                                        <div style="position: relative;">
                                             <img class='job-image' src="<?=$url.'media/'.$job['img_url']?>" style="width: 100%; border-radius: 5px;max-width: 100%;height: 230px;box-shadow: 2px 2px 2px grey;">
+                                            <div class="job-name" align="center" style="width: 100%;font-size: 24px;color: white;top: 35%;position: absolute;text-transform: uppercase;font-weight: 600">
+                                                <p><?=substr($job['name'], 0,20)?></p>
+                                            </div>
                                         </div>
                                         <div align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px"><span><?=$job['quatity']?></span></div>
-                                        <div class="job-name" align="center" style="width: 90%;font-size: 24px;color: white;top: 30%;position: absolute;text-transform: uppercase;font-weight: 600">
-                                            <p><?=substr($job['name'], 0,15)?></p>
-                                        </div>
+                                        
                                     </a>
                                     <div class="deadline" align="center" style="bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;">
                                         <span><?=$job['deadline']?></span>
@@ -220,34 +221,40 @@
                 <div class="row" id="dev-part-time">
                     <?php
                         foreach ($jobCollection['part-time'] as $job) {
-                            if($job['deadline'] == '') $job['deadline'] = "Coming soon";
-                            else $job['deadline'] = "Deadline: ". $job['deadline'];
-
-                            $timeNow = date("Y/m/d");
-                            $timeNow = explode("/",$timeNow);
-                            // $yearNow = (int)$timeNow[0];
-                            $monthNow = (int)$timeNow[1];
-                            $dayNow = (int)$timeNow[2];
-                                
-                            $deadline = explode("/",$job['deadline']);
-                            $dayDeadline = (int)$deadline[0];
-                            $monthDeadline = (int)$deadline[1];
-                            // $yearDeadline = (int)$deadline[2];
-                            if ($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline)) {
-                                $job['deadline'] = "Coming soon";
-                            }
+                            if($job['deadline'] == '') {
+                                    $job['deadline'] = "Coming soon";
+                                } else {
+                                    $timeNow = date("Y/m/d");
+                                    $timeNow = explode("/",$timeNow);
+                                    $yearNow = (int)$timeNow[0];
+                                    $monthNow = (int)$timeNow[1];
+                                    $dayNow = (int)$timeNow[2];
+                                    
+                                    $deadline = explode("/",$job['deadline']);
+                                    $dayDeadline = (int)$deadline[0];
+                                    $monthDeadline = (int)$deadline[1];
+                                    $yearDeadline = (int)$deadline[2];
+                                    if($yearNow > $yearDeadline) {
+                                        $job['deadline'] = "Coming soon";
+                                    } else {
+                                        if ($monthNow > $monthDeadline || ($monthNow == $monthDeadline && $dayNow > $dayDeadline)) {
+                                            $job['deadline'] = "Coming soon";
+                                        } else $job['deadline'] = "Deadline: ". $job['deadline'];
+                                    }
+                                }
 
                             if($job['img_url'] == '') $job['img_url'] = "simihr/default.png";
                             ?>
                             <div class="col-md-4" >
                                 <a href="../detail?job=<?=$job['name']?>&job_type=part-time">
-                                    <div style="%">
+                                    <div style="position: relative;">
                                         <img class='job-image' src="<?=$url.'media/'.$job['img_url']?>" style="width: 100%; border-radius: 5px;max-width: 100%;height: 230px;box-shadow: 2px 2px 2px grey;">
+                                        <div align="center" style="width: 100%;font-size: 30px;color: white;top: 35%;position: absolute;text-transform: uppercase;">
+                                            <p><?=substr($job['name'], 0,20)?></p>
+                                        </div>
                                     </div>
                                     <div align="center" style="border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px"><span><?=$job['quatity']?></span></div>
-                                    <div align="center" style="width: 100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;">
-                                        <p><?=substr($job['name'], 0,20)?></p>
-                                    </div>
+                                    
                                 </a>
                                 <div class="deadline" align="center" style="bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;">
                                     <span><?=$job['deadline']?></span>
@@ -341,10 +348,10 @@
                             if(response.part_time[i].deadline == null) response.part_time[i].deadline = "Coming soon";
                             else response.part_time[i].deadline = "Deadline: "+response.part_time[i].deadline;
                             if(response.part_time[i].img_url == '') response.part_time[i].img_url = "simihr/default.png";
-                            htmlData += "<div class='col-md-4'><a href='../detail?job="+response.part_time[i].name+"&job_type=part-time'><div>";
-                            htmlData += "<img class='job-image' src='<?=$url?>media/"+response.part_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                            htmlData += "<div class='col-md-4'><a href='../detail?job="+response.part_time[i].name+"&job_type=part-time'><div style='position:relative'>";
+                            htmlData += "<img class='job-image' src='<?=$url?>media/"+response.part_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'>"+"<div align='center' style='width:100%;font-size: 30px;color: white;top: 35%;position: absolute;text-transform: uppercase;'><p>"+response.part_time[i].name.substring(0, 20)+"</p></div>"+"</div>";
                             htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.part_time[i].quatity+"</span></div>";
-                            htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.part_time[i].name.substring(0, 20)+"</p></div></a>";
+                            htmlData += "</a>";
                             htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.part_time[i].deadline+"</span></div>";
                             htmlData += "</div>";
                         });
@@ -361,10 +368,10 @@
                                 if(response.full_time[i].deadline == null) response.full_time[i].deadline = "Coming soon";
                                 else response.full_time[i].deadline = "Deadline: "+response.full_time[i].deadline;
                                 if(response.full_time[i].img_url == '') response.full_time[i].img_url = "simihr/default.png";
-                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.full_time[i].name+"&job_type=full-time'><div>";
-                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.full_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.full_time[i].name+"&job_type=full-time'><div style='position:relative'>";
+                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.full_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'>"+"<div align='center' style='width:100%;font-size: 30px;color: white;top: 35%;position: absolute;text-transform: uppercase;'><p>"+response.full_time[i].name.substring(0, 20)+"</p></div>"+"</div>";
                                 htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.full_time[i].quatity+"</span></div>";
-                                htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.full_time[i].name.substring(0, 20)+"</p></div></a>";
+                                htmlData += "</a>";
                                 htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.full_time[i].deadline+"</span></div>";
                                 htmlData += "</div>";
                             });
@@ -383,10 +390,10 @@
                                 if(response.full_time[i].deadline == null) response.full_time[i].deadline = "Coming soon";
                                 else response.full_time[i].deadline = "Deadline: "+response.full_time[i].deadline;
                                 if(response.full_time[i].img_url == '') response.full_time[i].img_url = "simihr/default.png";
-                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.full_time[i].name+"&job_type=full-time'><div>";
-                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.full_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.full_time[i].name+"&job_type=full-time'><div style='position:relative'>";
+                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.full_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'>"+"<div align='center' style='width:100%;font-size: 30px;color: white;top: 35%;position: absolute;text-transform: uppercase;'><p>"+response.full_time[i].name.substring(0, 20)+"</p></div>"+"</div>";
                                 htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.full_time[i].quatity+"</span></div>";
-                                htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.full_time[i].name.substring(0, 20)+"</p></div></a>";
+                                htmlData += "</a>";
                                 htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.full_time[i].deadline+"</span></div>";
                                 htmlData += "</div>";
                             });
@@ -396,10 +403,10 @@
                                 if(response.part_time[i].deadline == null) response.part_time[i].deadline = "Coming soon";
                                 else response.part_time[i].deadline = "Deadline: "+response.part_time[i].deadline;
                                 if(response.part_time[i].img_url == '') response.part_time[i].img_url = "simihr/default.png";
-                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.part_time[i].name+"&job_type=part-time'><div>";
-                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.part_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'></div>";
+                                htmlData += "<div class='col-md-4'><a href='../detail?job="+response.part_time[i].name+"&job_type=part-time'><div style='position:relative'>";
+                                htmlData += "<img class='job-image' src='<?=$url?>media/"+response.part_time[i].img_url+"' style='width: 100%;height: 230px; border-radius: 5px;box-shadow: 2px 2px 2px grey;'>"+"<div align='center' style='width:100%;font-size: 30px;color: white;top: 35%;position: absolute;text-transform: uppercase;'><p>"+response.part_time[i].name.substring(0, 20)+"</p></div>"+"</div>";
                                 htmlData += "<div align='center' style='border-radius: 50%;position: absolute;top: 20px;color: white;right: 40px;background-color: #f69435;width: 50px;height: 50px; padding: 8px; font-size: 20px'><span>"+response.part_time[i].quatity+"</span></div>";
-                                htmlData += "<div align='center' style='width:100%;font-size: 30px;color: white;top: 30%;position: absolute;text-transform: uppercase;'><p>"+response.part_time[i].name.substring(0, 20)+"</p></div></a>";
+                                htmlData += "</a>";
                                 htmlData += "<div align='center' style='font-weight: bold;bottom: 35px;height: 45px;position: relative; background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px;font-size: 18px;font-weight: 600;box-shadow: 2px 2px 2px grey;'><span>"+response.part_time[i].deadline+"</span></div>";
                                 htmlData += "</div>";
                             });
