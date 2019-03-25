@@ -17,6 +17,12 @@ class Simi_Simicustompayment_Model_Simiobserver {
         $observerObject->setData($observerObjectData);
     }
 
+    public function simiconnectorBeforePlaceOrder($observer) {
+        if (Mage::getSingleton('checkout/type_onepage')->getQuote()->getPayment()->getMethod() && (Mage::getSingleton('checkout/type_onepage')->getQuote()->getPayment()->getMethodInstance()->getCode() == 'simibraintree')) {
+            Mage::app()->getStore()->setConfig(Mage_Sales_Model_Order::XML_PATH_EMAIL_ENABLED, "0");
+        }
+    }
+
     public function simiconnectorAfterPlaceOrder($observer) {
         $orderObject = $observer->getObject();
         $data = $orderObject->order_placed_info;

@@ -109,6 +109,14 @@
                     </simi_simicustompayment_add_payment_method>
                 </observers>
             </simiconnector_add_payment_method>
+            <simi_simiconnector_model_api_orders_onepage_store_before>
+                <observers>
+                    <simi_simicustompayment_api_orders_onepage_store_before>
+                        <class>simicustompayment/simiobserver</class>
+                        <method>simiconnectorBeforePlaceOrder</method>
+                    </simi_simicustompayment_api_orders_onepage_store_before>
+                </observers>
+            </simi_simiconnector_model_api_orders_onepage_store_before>
             <simi_simiconnector_model_api_orders_onepage_store_after>
                 <observers>
                     <simi_simicustompayment_api_orders_onepage_store_after>
