@@ -283,7 +283,13 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->addColumn(
             $installer->getTable('quote_item'),
             'simirewardpoints_base_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         /**
          * Add more column to table  'quote_address'
@@ -291,7 +297,13 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->addColumn(
             $installer->getTable('quote_address'),
             'simirewardpoints_base_amount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         /**
          * Add more column to table  'sales_order'
@@ -299,32 +311,60 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order'),
             'simirewardpoints_earn',
-            'int(11) NOT NULL default 0'
+            ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,'nullable' => false,
+                'default' => '0',
+                'COMMENT' => 'Order made from']
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order'),
             'simirewardpoints_spent',
-            'int(11) NOT NULL default 0'
+            ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,'nullable' => false,
+                'default' => '0',
+                'COMMENT' => 'Order made from']
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order'),
             'simirewardpoints_base_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order'),
             'simirewardpoints_base_amount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order'),
             'simirewardpoints_amount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order'),
             'simirewardpoints_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         /**
          * Add more column to table  'sales_order_item'
@@ -332,22 +372,38 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order_item'),
             'simirewardpoints_earn',
-            'int(11) NOT NULL default 0'
+            ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,'nullable' => false,
+                'default' => '0',
+                'COMMENT' => 'Order made from']
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order_item'),
             'simirewardpoints_spent',
-            'int(11) NOT NULL default 0'
+            ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,'nullable' => false,
+                'default' => '0',
+                'COMMENT' => 'Order made from']
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order_item'),
             'simirewardpoints_base_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_order_item'),
             'simirewardpoints_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         /**
          * Add more column to table  'sales_invoice'
@@ -355,17 +411,31 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_invoice'),
             'simirewardpoints_base_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_invoice'),
             'simirewardpoints_earn',
-            'int(11) NOT NULL default 0'
+            ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,'nullable' => false,
+                'default' => '0',
+                'COMMENT' => 'Order made from']
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_invoice'),
             'simirewardpoints_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         /**
          * Add more column to table  'sales_creditmemo'
@@ -373,17 +443,31 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_creditmemo'),
             'simirewardpoints_base_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_creditmemo'),
             'simirewardpoints_earn',
-            'int(11) NOT NULL default 0'
+            ['type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,'nullable' => false,
+                'default' => '0',
+                'COMMENT' => 'Order made from']
         );
         $installer->getConnection()->addColumn(
             $installer->getTable('sales_creditmemo'),
             'simirewardpoints_discount',
-            'decimal(12,4) NOT NULL default 0'
+            [
+                'type'      => \Magento\Framework\DB\Ddl\Table::TYPE_DECIMAL,
+                'length'    => '12,4',
+                'nullable'  => false,
+                'default'   => 0.00,
+                'comment'   => 'Item extra Weight'
+            ]
         );
         /**
          * create rewardpoints_rule table
