@@ -35,7 +35,6 @@ class Simirewardpointstransactions extends \Simi\Simiconnector\Model\Api\Apiabst
     
     public function index() {
         $result = parent::index();
-        $actions = $this->simiObjectManager->get('Simi\Simirewardpoints\Helper\Action');
         $statuses = array(
             \Simi\Simirewardpoints\Model\Transaction::STATUS_PENDING => 'pending',
             \Simi\Simirewardpoints\Model\Transaction::STATUS_ON_HOLD => 'onhold',
@@ -43,19 +42,16 @@ class Simirewardpointstransactions extends \Simi\Simiconnector\Model\Api\Apiabst
             \Simi\Simirewardpoints\Model\Transaction::STATUS_CANCELED => 'canceled',
             \Simi\Simirewardpoints\Model\Transaction::STATUS_EXPIRED => 'expired'
         );
-        $helper = $this->simiObjectManager->get('Simi\Simirewardpoints\Helper\Point');
+        $helper = $this->simiObjectManager->create('\Simi\Simirewardpoints\Helper\Point');
         foreach ($result['simirewardpointstransactions'] as $index=>$transactionInfo) {
             $transaction = $this->simiObjectManager
-                    ->get('Simi\Simirewardpoints\Model\Transaction')
+                    ->get('\Simi\Simirewardpoints\Model\Transaction')
                     ->load($transactionInfo['transaction_id']);
             $title = $transaction->getTitle();
             if ($title == '') {
-                if (isset($actions[$transaction->getData('action')])) {
-                    $title = $actions[$transaction->getData('action')];
-                } else {
-                    $title = $transaction->getData('action');
-                }
+                $title = $transaction->getData('action');
             }
+
             $transactionInfo = array_merge($transactionInfo, array(
                 'title' => $title,
                 'point_amount' => (int) $transaction->getData('point_amount'),
@@ -64,6 +60,7 @@ class Simirewardpointstransactions extends \Simi\Simiconnector\Model\Api\Apiabst
                 'expiration_date' => $transaction->getData('expiration_date') ? $transaction->getData('expiration_date') : '',
                 'status' => $statuses[$transaction->getData('status')]
             ));
+
             $result['simirewardpointstransactions'][$index] = $transactionInfo;
         }
         return $result;
