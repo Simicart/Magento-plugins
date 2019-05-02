@@ -13,7 +13,6 @@ class Grid extends \Simi\Simistorelocator\Block\Adminhtml\Widget\Grid {
         $selectedStores = $this->converter->toFlatArray(
                 $this->storelocatorHelper->getTreeSelectedStores()
         );
-
         return array_values($selectedStores);
     }
 }

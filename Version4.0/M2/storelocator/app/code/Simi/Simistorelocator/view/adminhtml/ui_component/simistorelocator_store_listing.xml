@@ -3,8 +3,12 @@
          xsi:noNamespaceSchemaLocation="../../../../../Magento/Ui/etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing_data_source</item>
-            <item name="deps" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing_data_source</item>
+            <item name="provider" xsi:type="string">
+                simistorelocator_store_listing.simistorelocator_store_listing_data_source
+            </item>
+            <item name="deps" xsi:type="string">
+                simistorelocator_store_listing.simistorelocator_store_listing_data_source
+            </item>
         </item>
         <item name="spinner" xsi:type="string">simistorelocator_store_columns</item>
         <item name="buttons" xsi:type="array">
@@ -66,7 +70,9 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="columnsData" xsi:type="array">
-                        <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns</item>
+                        <item name="provider" xsi:type="string">
+                            simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns
+                        </item>
                     </item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
                     <item name="displayArea" xsi:type="string">dataGridActions</item>
@@ -97,10 +103,16 @@
                 <item name="config" xsi:type="array">
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/search/search</item>
                     <item name="displayArea" xsi:type="string">dataGridFilters</item>
-                    <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing_data_source</item>
-                    <item name="chipsProvider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.listing_filters_chips</item>
+                    <item name="provider" xsi:type="string">
+                        simistorelocator_store_listing.simistorelocator_store_listing_data_source
+                    </item>
+                    <item name="chipsProvider" xsi:type="string">
+                        simistorelocator_store_listing.simistorelocator_store_listing.listing_top.listing_filters_chips
+                    </item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">
+                            simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks
+                        </item>
                         <item name="namespace" xsi:type="string">current.search</item>
                     </item>
                 </item>
@@ -112,13 +124,19 @@
                     <item name="displayArea" xsi:type="string">dataGridFilters</item>
                     <item name="dataScope" xsi:type="string">filters</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">
+                            simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks
+                        </item>
                         <item name="namespace" xsi:type="string">current.filters</item>
                     </item>
                     <item name="childDefaults" xsi:type="array">
-                        <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.listing_filters</item>
+                        <item name="provider" xsi:type="string">
+                            simistorelocator_store_listing.simistorelocator_store_listing.listing_top.listing_filters
+                        </item>
                         <item name="imports" xsi:type="array">
-                            <item name="visible" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.${ $.index }:visible</item>
+                            <item name="visible" xsi:type="string">
+                                simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.${ $.index }:visible
+                            </item>
                         </item>
                     </item>
                 </item>
@@ -129,7 +147,9 @@
                         <item name="dataScope" xsi:type="string">simistorelocator_id</item>
                         <item name="label" xsi:type="string" translate="true">Store ID</item>
                         <item name="childDefaults" xsi:type="array">
-                            <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.listing_filters</item>
+                            <item name="provider" xsi:type="string">
+                                simistorelocator_store_listing.simistorelocator_store_listing.listing_top.listing_filters
+                            </item>
                         </item>
                     </item>
                 </argument>
@@ -227,7 +247,9 @@
         <massaction name="listing_massaction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">
+                        simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.ids
+                    </item>
                     <item name="displayArea" xsi:type="string">bottom</item>
                     <item name="indexField" xsi:type="string">simistorelocator_id</item>
                 </item>
@@ -258,7 +280,9 @@
                         <item name="url" xsi:type="url" path="simistorelocatoradmin/store/massDelete"/>
                         <item name="confirm" xsi:type="array">
                             <item name="title" xsi:type="string" translate="true">Delete items</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete
+                                selected items?
+                            </item>
                         </item>
                     </item>
                 </argument>
@@ -269,7 +293,9 @@
                         <item name="type" xsi:type="string">edit</item>
                         <item name="label" xsi:type="string" translate="true">Edit</item>
                         <item name="callback" xsi:type="array">
-                            <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns_editor</item>
+                            <item name="provider" xsi:type="string">
+                                simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns_editor
+                            </item>
                             <item name="target" xsi:type="string">editSelected</item>
                         </item>
                     </item>
@@ -280,10 +306,14 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">
+                            simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks
+                        </item>
                         <item name="namespace" xsi:type="string">current.paging</item>
                     </item>
-                    <item name="selectProvider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">
+                        simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.ids
+                    </item>
                 </item>
             </argument>
         </paging>
@@ -292,11 +322,15 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks</item>
+                    <item name="provider" xsi:type="string">
+                        simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks
+                    </item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
                 <item name="editorConfig" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">
+                        simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns.ids
+                    </item>
                     <item name="enabled" xsi:type="boolean">true</item>
                     <item name="indexField" xsi:type="string">simistorelocator_id</item>
                     <item name="clientConfig" xsi:type="array">
@@ -306,7 +340,9 @@
                 </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
-                        <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns_editor</item>
+                        <item name="provider" xsi:type="string">
+                            simistorelocator_store_listing.simistorelocator_store_listing.simistorelocator_store_columns_editor
+                        </item>
                         <item name="target" xsi:type="string">startEdit</item>
                         <item name="params" xsi:type="array">
                             <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -314,7 +350,9 @@
                         </item>
                     </item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">
+                            simistorelocator_store_listing.simistorelocator_store_listing.listing_top.bookmarks
+                        </item>
                         <item name="root" xsi:type="string">columns.${ $.index }</item>
                         <item name="namespace" xsi:type="string">current.${ $.storageConfig.root }</item>
                     </item>
@@ -337,10 +375,24 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                     <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="sortable" xsi:type="boolean">true</item>
-                    <item name="sorting" xsi:type="string">asc</item>
+                    <!--<item name="sorting" xsi:type="string">asc</item>-->
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="align" xsi:type="string">left</item>
                     <item name="label" xsi:type="string" translate="true">Store ID</item>
+                </item>
+            </argument>
+        </column>
+        <column name="sort_order">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortable" xsi:type="boolean">true</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="label" xsi:type="string" translate="true">Sort Order</item>
                 </item>
             </argument>
         </column>
@@ -612,14 +664,17 @@
                 <item name="itemsAction" xsi:type="array">
                     <item name="edit" xsi:type="array">
                         <item name="label" xsi:type="string" translate="true">Edit</item>
-                        <item name="path"  xsi:type="string">simistorelocatoradmin/store/edit</item>
+                        <item name="path" xsi:type="string">simistorelocatoradmin/store/edit</item>
                     </item>
                     <item name="delete" xsi:type="array">
                         <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="path"  xsi:type="string">simistorelocatoradmin/store/delete</item>
+                        <item name="path" xsi:type="string">simistorelocatoradmin/store/delete</item>
                         <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete "${ $.$data.store_name }"</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you wan\'t to delete a "${ $.$data.store_name }" record?</item>
+                            <item name="title" xsi:type="string" translate="true">Delete "${ $.$data.store_name }"
+                            </item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan\'t to delete a
+                                "${ $.$data.store_name }" record?
+                            </item>
                         </item>
                     </item>
                 </item>
