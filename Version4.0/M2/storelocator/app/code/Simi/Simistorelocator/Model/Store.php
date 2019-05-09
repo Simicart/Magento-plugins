@@ -687,7 +687,6 @@ class Store extends \Magento\Framework\Model\AbstractModel
     {
         return $this->getImages()->setPageSize(1)->setCurPage(1)->getFirstItem();
     }
-
     /**
      * Get Image collection of store.
      *

@@ -115,15 +115,21 @@ class Storelocations extends Api
             $storeReturn["holiday_days"] = $item->getHolidaysDataApp();
             $storeReturn["country_name"] = $item->getCountryName();
             $storeReturn["distance"] = $distance;
-            $storeReturn["image"] =$this->storeManager->getStore()->getBaseUrl(
+//            Bug: Return first image in the list images as base image
+//            $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
+//                    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+//                ) ;
+            // Return base image
+            $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
                     \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                ) . $item->getFirstImage()->getPath();
+                ) . $storeReturn['baseimage'];
             $result['storelocations'][$index] = $storeReturn;
         }
         return $result;
     }
 
-    public function calculationByDistance($mlat, $mlng, $lat, $lng) {
+    public function calculationByDistance($mlat, $mlng, $lat, $lng)
+    {
         $latFrom = deg2rad($mlat);
         $lonFrom = deg2rad($mlng);
         $latTo = deg2rad($lat);
@@ -137,12 +143,13 @@ class Storelocations extends Api
         return $angle * $earthRadius;
     }
 
-    public function getStoreToTag($value) {
+    public function getStoreToTag($value)
+    {
         $tagIds = [];
         $tagCollection = $this->simiObjectManager
             ->create('\Simi\Simistorelocator\Model\Tag')
             ->getCollection()
-            ->addFieldToFilter('tag_name', array('eq' =>$value));
+            ->addFieldToFilter('tag_name', array('eq' => $value));
 
         foreach ($tagCollection as $item) {
             if (!in_array($item->getData("tag_id"), $tagIds)) {
