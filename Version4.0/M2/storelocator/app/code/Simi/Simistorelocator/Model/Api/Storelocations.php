@@ -115,14 +115,17 @@ class Storelocations extends Api
             $storeReturn["holiday_days"] = $item->getHolidaysDataApp();
             $storeReturn["country_name"] = $item->getCountryName();
             $storeReturn["distance"] = $distance;
-//            Bug: Return first image in the list images as base image
-//            $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
-//                    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-//                ) ;
-            // Return base image
-            $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
-                    \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                ) . $storeReturn['baseimage'];
+//            Return first image in the list images as base image if not select base image
+            if (isset($storeReturn["baseimage"])) {
+                $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
+                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                    ) . $storeReturn['baseimage'];
+            } else {
+                // select the first image as base image
+                $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
+                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                    ) . $item->getFirstImage()->getPath();
+            }
             $result['storelocations'][$index] = $storeReturn;
         }
         return $result;
