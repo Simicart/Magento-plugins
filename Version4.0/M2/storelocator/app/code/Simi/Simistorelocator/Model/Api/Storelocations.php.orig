@@ -124,7 +124,11 @@ class Storelocations extends Api
                 // select the first image as base image
                 $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
                         \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+<<<<<<< HEAD
                     ) . $item->getFirstImage()->getPath();
+=======
+                    ) . $item->getFirstImage()->getPatch();
+>>>>>>> 696a9c2c4fc47816bcb412919d3166eaa678dfc7
             }
             $result['storelocations'][$index] = $storeReturn;
         }
