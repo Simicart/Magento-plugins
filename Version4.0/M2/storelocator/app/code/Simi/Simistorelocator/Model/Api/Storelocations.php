@@ -115,16 +115,14 @@ class Storelocations extends Api
             $storeReturn["holiday_days"] = $item->getHolidaysDataApp();
             $storeReturn["country_name"] = $item->getCountryName();
             $storeReturn["distance"] = $distance;
-//            Return first image in the list images as base image if not select base image
+//           Return first image in the list images as base image if not select base image
             if (isset($storeReturn["baseimage"])) {
                 $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
                         \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
                     ) . $storeReturn['baseimage'];
             } else {
-                // select the first image as base image
-                $storeReturn["image"] = $this->storeManager->getStore()->getBaseUrl(
-                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                    ) . $item->getFirstImage()->getPath();
+//           Return default store image as base image if user not config.
+                $storeReturn["image"] = "http://localhost:81/cms/pub/static/version1557471173/adminhtml/Magento/backend/en_US/Simi_Simistorelocator/images/default_store.png";
             }
             $result['storelocations'][$index] = $storeReturn;
         }
