@@ -82,6 +82,17 @@ class Simi_Simirewardpoints_Model_Simiobserver {
         $orderAPIModel->detail_onepage = $detail_onepage;
     }
 
+
+    protected function _getCart()
+    {
+        return Mage::getSingleton('checkout/cart');
+    }
+
+    protected function _getQuote()
+    {
+        return $this->_getCart()->getQuote();
+    }
+
     public function simiSimiconnectorHelperTotalSetTotalAfter($observer) {
         $orderTotalHelper = $observer->getObject();
 
@@ -92,15 +103,14 @@ class Simi_Simirewardpoints_Model_Simiobserver {
         $pointSpending = 0;
         $pointDiscount = 0.00;
         $pointEarning = 0;
-        foreach ($helper->getQuote()->getAllAddresses() as $address) {
-            if ($address->getSimirewardpointsSpent()) {
-                $pointSpending = (int) $address->getSimirewardpointsSpent();
-                $pointDiscount = $address->getSimirewardpointsDiscount();
-            }
-            if ($address->getSimirewardpointsEarn()) {
-                $pointEarning = (int) $address->getSimirewardpointsEarn();
-            }
-        }
+
+        $pointSpending = Mage::helper('simirewardpoints/calculation_spending')->getTotalPointSpent();
+        if (Mage::helper('simirewardpoints/calculation_spending')->getTotalPointSpent() &&
+            !Mage::getStoreConfigFlag('simirewardpoints/earning/earn_when_spend',Mage::app()->getStore()->getId()))
+            $pointEarning = 0;
+        else
+            $pointEarning = Mage::helper('simirewardpoints/calculation_earning')->getTotalPointsEarning();
+        $pointDiscount = $this->_getQuote()->getSimirewardpointsDiscount();
 
         if ($pointSpending != 0)
             $orderTotalHelper->addCustomRow(Mage::helper('simirewardpoints')->__('You will spend'), 5, $pointSpending, Mage::helper('simirewardpoints/point')->format($pointSpending));
