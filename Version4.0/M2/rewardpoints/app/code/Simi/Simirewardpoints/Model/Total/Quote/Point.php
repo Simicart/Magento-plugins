@@ -269,8 +269,11 @@ class Point extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
         $discount = $this->_priceCurrency->convert($baseDiscount);
         $total->addTotalAmount('simirewardpoints', -$discount);
         $total->addBaseTotalAmount('simirewardpoints', -$baseDiscount);
-        $total->setBaseGrandTotal($total->getBaseGrandTotal() - $baseDiscount);
-        $total->setGrandTotal($total->getGrandTotal() - $discount);
+        if ($total->getBaseGrandTotal())
+            $total->setBaseGrandTotal($total->getBaseGrandTotal() - $baseDiscount);
+
+        if ($total->getGrandTotal())
+            $total->setGrandTotal($total->getGrandTotal() - $discount);
         $total->setSimirewardpointsSpent($total->getSimirewardpointsSpent() + $pointUsed);
         $total->setSimirewardpointsBaseDiscount($total->getSimirewardpointsBaseDiscount() + $baseDiscount);
         $total->setSimirewardpointsDiscount($total->getSimirewardpointsDiscount() + $discount);
