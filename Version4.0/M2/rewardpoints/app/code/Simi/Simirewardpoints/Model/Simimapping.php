@@ -223,9 +223,9 @@ class Simimapping extends \Magento\Framework\Model\AbstractModel
             $checkoutSession->unsetData('use_point');
         }
         
-        if($checkoutCart->getQuote()->getItemsCount()){
-            $checkoutCart->save();
-        }
+        //if($checkoutCart->getQuote()->getItemsCount()){
+        //    $checkoutCart->save();
+        //}
         $checkoutSession->getQuote()->collectTotals()->save();
     }
 }
