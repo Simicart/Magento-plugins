@@ -6,7 +6,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Simi\Simistorelocator\Model\Schedule\Option\WeekdayStatus;
 use Magento\UrlRewrite\Model\UrlPersistInterface;
 
-
 class Store extends \Magento\Framework\Model\AbstractModel
 {
     public $storeId = null;
@@ -32,8 +31,8 @@ class Store extends \Magento\Framework\Model\AbstractModel
      * @var array
      */
     public $methodGetters = [
-        self::METHOD_GET_TAG_ID        => 'getTagIds',
-        self::METHOD_GET_HOLIDAY_ID    => 'getHolidayIds',
+        self::METHOD_GET_TAG_ID => 'getTagIds',
+        self::METHOD_GET_HOLIDAY_ID => 'getHolidayIds',
         self::METHOD_GET_SPECIALDAY_ID => 'getSpecialdayIds',
     ];
 
@@ -114,18 +113,18 @@ class Store extends \Magento\Framework\Model\AbstractModel
     /**
      * Store constructor.
      *
-     * @param \Magento\Framework\Model\Context                             $context
-     * @param \Magento\Framework\Registry                                  $registry
-     * @param \Magento\Directory\Model\RegionFactory                       $regionFactory
-     * @param \Magento\Directory\Model\CountryFactory                      $countryFactory
-     * @param \Magento\Framework\Json\Helper\Data                          $jsonHelper
-     * @param ResourceModel\Specialday\CollectionFactory                   $specialdayCollectionFactory
-     * @param ResourceModel\Holiday\CollectionFactory                      $holidayCollectionFactory
-     * @param ResourceModel\Image\CollectionFactory                        $imageCollectionFactory
-     * @param SystemConfig                                                 $systemConfig
+     * @param \Magento\Framework\Model\Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Directory\Model\RegionFactory $regionFactory
+     * @param \Magento\Directory\Model\CountryFactory $countryFactory
+     * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     * @param ResourceModel\Specialday\CollectionFactory $specialdayCollectionFactory
+     * @param ResourceModel\Holiday\CollectionFactory $holidayCollectionFactory
+     * @param ResourceModel\Image\CollectionFactory $imageCollectionFactory
+     * @param SystemConfig $systemConfig
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|NULL $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb|NULL           $resourceCollection
-     * @param array                                                        $data
+     * @param \Magento\Framework\Data\Collection\AbstractDb|NULL $resourceCollection
+     * @param array $data
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -235,7 +234,7 @@ class Store extends \Magento\Framework\Model\AbstractModel
         $storeCollection = $this->storeCollectionFactory->create();
         $storeCollection->addFieldToFilter('simistorelocator_id', ['neq' => $this->getId()])
             ->addFieldToFilter('rewrite_request_path', $rewriteRequestPath);
-        if($storeCollection->getSize()) {
+        if ($storeCollection->getSize()) {
             return true;
         }
 
@@ -367,7 +366,7 @@ class Store extends \Magento\Framework\Model\AbstractModel
                 // the new images need to insert to database
                 $path = \Simi\Simistorelocator\Model\Image::IMAGE_GALLERY_PATH . $imageData['file'];
                 $imageItem = [
-                    'path'                  => $path,
+                    'path' => $path,
                     'locator_id' => $this->getId(),
                 ];
 
@@ -381,7 +380,7 @@ class Store extends \Magento\Framework\Model\AbstractModel
 
         return [
             'deleteImages' => $deleteImages,
-            'baseImage'    => $baseImage,
+            'baseImage' => $baseImage,
             'insertImages' => $insertImages,
         ];
     }
@@ -628,9 +627,9 @@ class Store extends \Magento\Framework\Model\AbstractModel
     public function hasBreakTime($day)
     {
         return $this->isOpenday($day)
-        && $this->getData($day . '_open') < $this->getData($day . '_open_break')
-        && $this->getData($day . '_open_break') < $this->getData($day . '_close_break')
-        && $this->getData($day . '_close_break') < $this->getData($day . '_close');
+            && $this->getData($day . '_open') < $this->getData($day . '_open_break')
+            && $this->getData($day . '_open_break') < $this->getData($day . '_close_break')
+            && $this->getData($day . '_close_break') < $this->getData($day . '_close');
     }
 
     /**
@@ -643,9 +642,9 @@ class Store extends \Magento\Framework\Model\AbstractModel
     public function isOpenday($day)
     {
         return $this->getScheduleId()
-        && $this->isEnabled()
-        && $this->getData($day . '_status') == WeekdayStatus::WEEKDAY_STATUS_OPEN
-        && $this->getData($day . '_open') < $this->getData($day . '_close');
+            && $this->isEnabled()
+            && $this->getData($day . '_status') == WeekdayStatus::WEEKDAY_STATUS_OPEN
+            && $this->getData($day . '_open') < $this->getData($day . '_close');
     }
 
     /**
@@ -763,14 +762,14 @@ class Store extends \Magento\Framework\Model\AbstractModel
         $storeName = strtolower(trim($data['store_name'], ' '));
 
         $storeName = $this->storelocatorHelperUrl->characterSpecial($storeName);
-        
+
         $stores = $this->getCollection()
             ->addFieldToFilter('rewrite_request_path', $storeName)
             ->getFirstItem();
         $storeNames = $this->getCollection()
             ->addFieldToFilter('store_name', $data['store_name']);
         if ($stores->getId()) {
-            $storeName = $storeName . '-'.count($storeNames);
+            $storeName = $storeName . '-' . count($storeNames);
         }
         $data['rewrite_request_path'] = $storeName;
 
@@ -786,16 +785,19 @@ class Store extends \Magento\Framework\Model\AbstractModel
         return $this->getId();
     }
 
-    public function setStoreId($value) {
+    public function setStoreId($value)
+    {
         $this->storeId = $value;
         return $this;
     }
 
-    public function getStoreId() {
+    public function getStoreId()
+    {
         return $this->storeId;
     }
 
-    public function loadByIdpath($idPath, $storeId) {
+    public function loadByIdpath($idPath, $storeId)
+    {
         $model = $this->urlRewriteCollectionFactory->create()
             // ->addFieldToFilter('id_path', $idPath)
             ->addFieldToFilter('store_id', $storeId)
@@ -804,7 +806,8 @@ class Store extends \Magento\Framework\Model\AbstractModel
         return $model;
     }
 
-    public function updateUrlKey($rewriteRequestPath = '') {
+    public function updateUrlKey($rewriteRequestPath = '')
+    {
         $id = $this->getId();
         $storeId = $this->storeId;
         if (!$storeId) {
@@ -820,7 +823,7 @@ class Store extends \Magento\Framework\Model\AbstractModel
         $urlrewrite = $this->loadByIdpath($url_key, $storeId);
 
         // $urlrewrite->setData('id_path', $url_key);
-        $urlrewrite->setData('request_path','simistorelocator/'. $url_key.$url_suffix);
+        $urlrewrite->setData('request_path', 'simistorelocator/' . $url_key . $url_suffix);
         $urlrewrite->setData('target_path', 'simistorelocator/index/index/viewstore/' . $id);
         $urlrewrite->setData('store_id', $storeId);
 
@@ -830,22 +833,25 @@ class Store extends \Magento\Framework\Model\AbstractModel
 
         }
     }
-    public function getHolidaysDataApp(){
-        $data  = $this->getHolidaysData();
+
+    public function getHolidaysDataApp()
+    {
+        $data = $this->getHolidaysData();
         $date = [];
-        foreach ($data as $item){
-            foreach ($item['date']  as $_date){
+        foreach ($data as $item) {
+            foreach ($item['date'] as $_date) {
                 $date[] = ['date' => $_date];
             }
         }
         return $date;
     }
 
-    public function getSpecialdaysDataApp(){
-        $data  = $this->getSpecialdaysData();
+    public function getSpecialdaysDataApp()
+    {
+        $data = $this->getSpecialdaysData();
         $date = [];
-        foreach ($data as $item){
-            foreach ($item['date']  as $_date){
+        foreach ($data as $item) {
+            foreach ($item['date'] as $_date) {
                 $date[] = [
                     'date' => $_date,
                     'time_open' => $item['time_open'],
