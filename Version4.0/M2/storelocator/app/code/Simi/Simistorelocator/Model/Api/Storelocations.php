@@ -122,7 +122,8 @@ class Storelocations extends Api
                     ) . $storeReturn['baseimage'];
             } else {
 //           Return default store image as base image if user not config.
-                $storeReturn["image"] = "http://localhost:81/cms/pub/static/version1557471173/adminhtml/Magento/backend/en_US/Simi_Simistorelocator/images/default_store.png";
+                $storeReturn["image"] =  $this->simiObjectManager->get('\Magento\Framework\View\Asset\Repository')
+                        ->getUrl('Simi_Simistorelocator::images/default_store.png');
             }
             $result['storelocations'][$index] = $storeReturn;
         }
