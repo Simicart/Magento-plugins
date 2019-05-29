@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="065d43ae-2e2d-4e48-866b-a9d9a4dc48a6" name="upload_local" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="/var/www/html/m23/app/code/Simi/Simistorelocator" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -2,14 +2,14 @@ define([
     'jquery',
     'mage/template',
     'jquery/ui',
-], function($, mageTemplate) {
+], function ($, mageTemplate) {
 
     $.widget('simi.regionUpdater', {
         options: {
             regionJson: {},
             regionTemplate: '<option value="<%- data.value %>" title="<%- data.title %>" <% if (data.isSelected) { %>selected="selected"<% } %>>' +
-            '<%- data.title %>' +
-            '</option>',
+                '<%- data.title %>' +
+                '</option>',
             currentRegion: null,
             regionListId: '',
             regionInputId: ''
@@ -38,7 +38,7 @@ define([
          * init country element
          * @private
          */
-        _initCountryElement: function() {
+        _initCountryElement: function () {
             this.element.on('change', $.proxy(function (e) {
                 this._updateRegion($(e.target).val());
             }, this));
@@ -121,7 +121,7 @@ define([
                     }).prop('selected', true);
                 }
 
-                if(regionList.find('option:selected').length == 0) {
+                if (regionList.find('option:selected').length == 0) {
                     regionList.find('option').first().prop('selected', true);
                 }
 
