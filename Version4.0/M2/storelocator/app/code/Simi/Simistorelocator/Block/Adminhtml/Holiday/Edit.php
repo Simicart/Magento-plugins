@@ -59,7 +59,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container {
                 }
             }
 
-            require([\'simi/holiday\']);
                      
                         
                     // require([

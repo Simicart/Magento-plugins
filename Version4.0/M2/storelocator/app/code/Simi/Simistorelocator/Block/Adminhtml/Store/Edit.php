@@ -65,8 +65,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container {
                     tinyMCE.execCommand(\'mceRemoveControl\', false, \'store_content\');
                 }
             }
-     
-            require([\'simi/store\']);
 
                     // require([
                     //         "jquery",
