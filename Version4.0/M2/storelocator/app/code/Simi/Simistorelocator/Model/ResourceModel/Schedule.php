@@ -71,7 +71,7 @@ class Schedule extends \Simi\Simistorelocator\Model\ResourceModel\AbstractResour
      */
     public function getStores(\Magento\Framework\Model\AbstractModel $object) {
         /** @var \Simi\Simistorelocator\Model\ResourceModel\Store\Collection $collection */
-        $collection = $this->_storeCollectionFactory->create();
+        $collection = $this->storeCollectionFactory->create();
 
         $collection->addFieldToSelect('simistorelocator_id')
                 ->addFieldToFilter($this->getIdFieldName(), (int) $object->getId());

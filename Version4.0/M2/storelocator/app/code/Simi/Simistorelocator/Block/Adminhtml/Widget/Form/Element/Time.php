@@ -60,11 +60,16 @@ class Time extends \Magento\Framework\Data\Form\Element\Time {
 
         $value_hrs = 0;
         $value_min = 0;
+        $values = array();
 
         if ($value = $this->getValue()) {
-            $values = explode(':', $value);
+
+            if ($value && is_string($value)) {
+                $values = explode(':', $value);
+            }
             if (is_array($values) && count($values) == 2) {
-                list($value_hrs, $value_min) = $values;
+                $value_hrs = $values[0];
+                $value_min = $values[1];
             }
         }
 
