@@ -80,6 +80,35 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                 # code...
                 $controller = $data['controller'];
                 $controller->getResponse()->setRedirect('/checkout/cart');
+            } else if (strpos($data['resourceid'], 'return') !== false) { //for pwa-studio
+                $controller = $data['controller'];
+                $quoteId = explode('_', $data['resourceid']);
+                $quoteId = $quoteId[1];
+                $quoteModel = $this->simiObjectManager->get('Magento\Quote\Model\Quote')->load($quoteId);
+                if ($quoteModel->getId() && $quoteModel->getData('is_active')) {
+                    $this->simiObjectManager->get('Magento\Customer\Model\Session')->setQuoteId($quoteId);
+                    $this->simiObjectManager->get('Magento\Checkout\Model\Cart')->setQuote($quoteModel);
+                    $this->simiObjectManager->get('Magento\Checkout\Model\Session')->setQuoteId($quoteId);
+                    $this->_initCheckout();
+                    $this->checkout->returnFromPaypal($this->_initToken());
+                    $session = $this->_getCheckoutSession();
+                    $this->checkout->place($this->_initToken());
+                    $order = $this->checkout->getOrder();
+                    $session->clearHelperData();
+                    if($order && $order->getIncrementId()){
+                        $orderId = $order->getIncrementId();
+                        if ($success_callback = $this->getStoreConfig('simipaypalexpress/pwa_studio/success_callback')) {
+                            $controller->getResponse()->setRedirect($success_callback . '?order_increment_id=' . $orderId);
+                        }
+                    }
+                }
+            }  else if (strpos($data['resourceid'], 'cancel')  !== false) { //for pwa-studio
+                $controller = $data['controller'];
+                $quoteId = explode('_', $data['resourceid']);
+                $quoteId = $quoteId[1];
+                if ($success_callback = $this->getStoreConfig('simipaypalexpress/pwa_studio/failure_callback')) {
+                    $controller->getResponse()->setRedirect($success_callback);
+                }
             }
         }
         return $result;
@@ -194,10 +223,18 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                 $this->simiObjectManager->get('Magento\Framework\UrlInterface')
                     ->getUrl('checkout/onepage/success')
         );
+        $returnresourceid = 'return';
+        if ($controller->getRequest()->getParam('quote_id')) { //pwa-studio
+            $returnresourceid .= ('_'.$this->_getQuote()->getId());
+        }
+        $cancelresourceid = 'cancel';
+        if ($controller->getRequest()->getParam('quote_id')) { //pwa-studio
+            $cancelresourceid .= ('_'.$this->_getQuote()->getId());
+        }
         $token = $this->checkout->start($this->simiObjectManager->get('Magento\Framework\UrlInterface')
-                    ->getUrl('*/*/v2/ppexpressapis/return'),
+                    ->getUrl('simiconnector/rest/v2/ppexpressapis/'.$returnresourceid),
                 $this->simiObjectManager->get('Magento\Framework\UrlInterface')
-                    ->getUrl('*/*/v2/ppexpressapis/cancel'));
+                    ->getUrl('simiconnector/rest/v2/ppexpressapis/'.$cancelresourceid));
         $review_address = $this->getStoreConfig('simipaypalexpress/general/enable');
         $this->_initToken($token);
         $url = $this->checkout->getRedirectUrl();
