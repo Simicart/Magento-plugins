@@ -86,20 +86,11 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                 $quoteId = $quoteId[1];
                 $quoteModel = $this->simiObjectManager->get('Magento\Quote\Model\Quote')->load($quoteId);
                 if ($quoteModel->getId() && $quoteModel->getData('is_active')) {
-                    $this->simiObjectManager->get('Magento\Customer\Model\Session')->setQuoteId($quoteId);
-                    $this->simiObjectManager->get('Magento\Checkout\Model\Cart')->setQuote($quoteModel);
-                    $this->simiObjectManager->get('Magento\Checkout\Model\Session')->setQuoteId($quoteId);
+                    $this->quote = $quoteModel;
                     $this->_initCheckout();
                     $this->checkout->returnFromPaypal($this->_initToken());
-                    $session = $this->_getCheckoutSession();
-                    $this->checkout->place($this->_initToken());
-                    $order = $this->checkout->getOrder();
-                    $session->clearHelperData();
-                    if($order && $order->getIncrementId()){
-                        $orderId = $order->getIncrementId();
-                        if ($success_callback = $this->getStoreConfig('simipaypalexpress/pwa_studio/success_callback')) {
-                            $controller->getResponse()->setRedirect($success_callback . '?order_increment_id=' . $orderId);
-                        }
+                    if ($success_callback = $this->getStoreConfig('simipaypalexpress/pwa_studio/success_callback')) {
+                        $controller->getResponse()->setRedirect($success_callback . '&token=' . $controller->getRequest()->getParam('token'));
                     }
                 }
             }  else if (strpos($data['resourceid'], 'cancel')  !== false) { //for pwa-studio
@@ -223,6 +214,7 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                 $this->simiObjectManager->get('Magento\Framework\UrlInterface')
                     ->getUrl('checkout/onepage/success')
         );
+
         $returnresourceid = 'return';
         if ($controller->getRequest()->getParam('quote_id')) { //pwa-studio
             $returnresourceid .= ('_'.$this->_getQuote()->getId());
@@ -235,6 +227,7 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                     ->getUrl('simiconnector/rest/v2/ppexpressapis/'.$returnresourceid),
                 $this->simiObjectManager->get('Magento\Framework\UrlInterface')
                     ->getUrl('simiconnector/rest/v2/ppexpressapis/'.$cancelresourceid));
+
         $review_address = $this->getStoreConfig('simipaypalexpress/general/enable');
         $this->_initToken($token);
         $url = $this->checkout->getRedirectUrl();
@@ -253,7 +246,7 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
     }
 
     private function _getCheckoutSession() {
-        return $this->simiObjectManager->get('Magento\Checkout\Model\Session');
+        return $this->simiObjectManager->get('\Magento\Checkout\Model\Session');
     }
 
     protected function _initCheckout() {
@@ -288,7 +281,7 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
         $data = $this->getData();
         $controller = $data['controller'];
         if ($setToken = $controller->getRequest()->getParam('token')) {
-            if ($setToken !== $this->_getSession()->getExpressCheckoutToken()) {
+            if ($this->_getSession()->getExpressCheckoutToken() && $setToken !== $this->_getSession()->getExpressCheckoutToken()) {
                 throw new \Simi\Simiconnector\Helper\SimiException(__('Wrong PayPal Express Checkout Token specified.'), 4);
             }
         } else {
