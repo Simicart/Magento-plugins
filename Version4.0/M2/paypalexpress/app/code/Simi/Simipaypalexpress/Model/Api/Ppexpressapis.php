@@ -74,6 +74,7 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
                 if($order && $order->getIncrementId()){
                     $orderId = $order->getIncrementId();
                     $result['order'] = ['invoice_number' => $orderId];
+                    $this->cleanCheckoutSession();
                 }
             }
             else if ($data['resourceid'] == 'cancel') {
@@ -178,6 +179,28 @@ class Ppexpressapis extends \Simi\Simiconnector\Model\Api\Apiabstract
     public function startPayment() {
         $data = $this->getData();
         $controller = $data['controller'];
+
+        $quote = $this->_getQuote();
+
+        try { //when quote total dismatch the ordertotal, paypal would throw error, need to update quote address again
+            if ($quote->isMultipleShippingAddresses()) {
+                foreach ($quote->getAllShippingAddresses() as $address) {
+                    $quote->removeAddress($address->getId());
+                }
+
+                $shippingAddress = $quote->getShippingAddress();
+                $defaultShipping = $quote->getCustomer()->getDefaultShipping();
+                if ($defaultShipping) {
+                    $defaultCustomerAddress = $this->simiObjectManager->create('\Magento\Customer\Api\AddressRepositoryInterface')->getById(
+                        $defaultShipping
+                    );
+                    $shippingAddress->importCustomerAddressData($defaultCustomerAddress);
+                }
+                $this->simiObjectManager->create('\Magento\Quote\Api\CartRepositoryInterface')->save($quote);
+            }
+        } catch (\Exception $e) {}
+
+
 
         if ((int) $this->getStoreConfig('simipaypalexpress/general/enable_app') == 0) {
             throw new \Simi\Simiconnector\Helper\SimiException(__('PayPal Express was disabled in App'), 6);
