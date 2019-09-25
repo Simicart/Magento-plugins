@@ -33,14 +33,10 @@
                     <label>Merchant ID</label>
                 </field>
                 <field id="public_key" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>API Password</label>
+                    <label>API Public Key</label>
                 </field>
                 <field id="private_key" translate="label" type="password" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>API Private Key</label>
-                </field>
-                <field id="support_methods" translate="label" type="multiselect" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0" can_be_empty="1">
-                    <label>Support Methods</label>
-                    <source_model>Simi\Simibraintree\Model\System\Config\Source\Methods</source_model>
                 </field>
                 <field id="google_account" translate="label" type="text" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Google Merchant Account</label>

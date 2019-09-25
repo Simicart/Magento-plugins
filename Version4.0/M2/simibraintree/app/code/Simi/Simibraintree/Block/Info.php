@@ -25,7 +25,7 @@ class Info extends \Magento\Payment\Block\Info
 
     protected function _prepareSpecificInformation($transport = null)
     {
-    	$order_id = $this->getRequest()->getParam('order_id');
+        $order_id = $this->getRequest()->getParam('order_id');
         $transport = parent::_prepareSpecificInformation($transport);
         $data = [];
         $transactionInfo = $this->simiObjectManager->create('Simi\Simibraintree\Model\Simibraintree')

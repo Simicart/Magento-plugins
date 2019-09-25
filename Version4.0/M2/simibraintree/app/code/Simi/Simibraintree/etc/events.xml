@@ -13,4 +13,14 @@
         <observer name="simi_simibraintree_add_payment_method" 
                   instance="Simi\Simibraintree\Observer\SimiconnectorAddPaymentMethod" />
     </event>
+
+    <event name="simiconnector_change_payment_detail">
+        <observer name="simi_simibraintree_change_payment_detail"
+                  instance="Simi\Simibraintree\Observer\SimiconnectorChangePaymentDetail" />
+    </event>
+
+    <event name="simi_simiconnector_model_api_orders_onepage_store_after">
+        <observer name="simi_simibraintree_orders_onepage_store_after"
+                  instance="Simi\Simibraintree\Observer\SimiconnectorAfterPlaceOrder" />
+    </event>
 </config>

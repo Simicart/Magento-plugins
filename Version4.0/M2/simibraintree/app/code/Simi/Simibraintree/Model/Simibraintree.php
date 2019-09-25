@@ -40,21 +40,6 @@ class Simibraintree extends \Magento\Framework\Model\AbstractModel
 	public function updateBraintreePayment($data){
 		$helper = $this->simiObjectManager->get('Simi\Simibraintree\Helper\Data');
 		$result = $helper->createTransaction($data);
-        $transaction = $result->transaction;
-            $transaction = [
-                "transaction_id" => $transaction->id,
-                "status" => $transaction->status,
-                "order_id" => $data->order_id,
-                "type" => $transaction->type,
-                "is_closed" => "0",
-                "currency_code" => $transaction->currencyIsoCode,
-                "amount" => $transaction->amount,
-                "merchant_id" => $transaction->merchantAccountId,
-                'additional_data'=>$this->_prepareAdditionalData($transaction)
-            ];
-            if ($this->_initInvoice($data->order_id, $transaction)) {
-                return __('Thank you for your purchase!');
-            }
         if (isset($result->success) && $result->success == 1) {
             $transaction = $result->transaction;
             $transaction = [
@@ -69,15 +54,17 @@ class Simibraintree extends \Magento\Framework\Model\AbstractModel
                 'additional_data'=>$this->_prepareAdditionalData($transaction)
             ];
             if ($this->_initInvoice($data->order_id, $transaction)) {
-                return __('Thank you for your purchase!');
+                return '';
             }
         }
-        else throw new \Exception($result->message, 4);
+        else {
+            return $result->message;
+        }
         return __('Update Transaction Failed');
 	}
 
 	public function _initInvoice($orderId,$transactionData){
-		$order = $this->orderRepository->get($orderId);
+		$order = $this->simiObjectManager->create('Magento\Sales\Model\Order')->loadByIncrementId($orderId);
 		$items = [];
         if (!$order)
             return false;
@@ -93,7 +80,7 @@ class Simibraintree extends \Magento\Framework\Model\AbstractModel
 		                ->setData('amount', $transactionData['amount'])
 		                ->setData('currency_code', $transactionData['currency_code'])
 		                ->setData('status', $transactionData['status'])
-		                ->setData('order_id', $transactionData['order_id'])
+		                ->setData('order_id', $order->getId())
 		                ->setData('additional_data',$transactionData['additional_data'])
 		                ->save()
         			;

@@ -1,18 +1,12 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: trueplus
- * Date: 4/19/16
- * Time: 08:52
- */
 
 namespace Simi\Simibraintree\Observer;
 
-use Magento\Framework\DataObject as Object;
+
 use Magento\Framework\Event\ObserverInterface;
 
-class SimiconnectorAddPaymentMethod implements ObserverInterface {
+class SimiconnectorChangePaymentDetail implements ObserverInterface {
 
     public $simiObjectManager;
 
@@ -25,9 +19,10 @@ class SimiconnectorAddPaymentMethod implements ObserverInterface {
      * @return $this
      */
     public function execute(\Magento\Framework\Event\Observer $observer) {
-        $object = $observer->getObject();           
-        $object->addPaymentMethod('simibraintree', 0);
-        return;
+        $object = $observer->getObject();
+        if($object->detail['payment_method'] == 'SIMIBRAINTREE' && $object->detail['p_method_selected']) {
+            $object->detail['token'] = $this->simiObjectManager->create('\Simi\Simibraintree\Helper\Data')->getTokenKey();
+        }
     }
 
 }
