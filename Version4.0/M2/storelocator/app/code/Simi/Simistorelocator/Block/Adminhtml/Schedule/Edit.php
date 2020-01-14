@@ -62,27 +62,27 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container {
           
                      
                         
-                    // require([
-                    //         "jquery",
-                    //         "underscore",
-                    //         "mage/mage",
-                    //         "mage/backend/tabs",
-                    //         "domReady!"
-                    //     ], function($) {
+                    require([
+                            "jquery",
+                            "underscore",
+                            "mage/mage",
+                            "mage/backend/tabs",
+                            "domReady!"
+                        ], function($) {
                        
-                    //         var $form = $(\'#edit_form\');
-                    //         $form.mage(\'form\', {
-                    //             handlersData: {
-                    //                 save: {},
-                    //                 saveAndNew: {
-                    //                     action: {
-                    //                         args: {back: \'new\'}
-                    //                     }
-                    //                 },
-                    //             }
-                    //         });
+                            var $form = $(\'#edit_form\');
+                            $form.mage(\'form\', {
+                                handlersData: {
+                                    save: {},
+                                    saveAndNew: {
+                                        action: {
+                                            args: {back: \'new\'}
+                                        }
+                                    },
+                                }
+                            });
 
-                    //     });
+                        });
         
          ';
     }
