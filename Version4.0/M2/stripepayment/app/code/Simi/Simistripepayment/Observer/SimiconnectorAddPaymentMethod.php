@@ -7,7 +7,7 @@
  * Time: 08:52
  */
 
-namespace Simi\Simicustompayment\Observer;
+namespace Simi\Simistripepayment\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 
@@ -28,7 +28,7 @@ class SimiconnectorAddPaymentMethod implements ObserverInterface {
      */
     public function execute(\Magento\Framework\Event\Observer $observer) {
         $object = $observer->getObject();           
-        $object->addPaymentMethod('moneris', 1);
+        $object->addPaymentMethod('pmclain_stripe', 1);
         return;
     }
 

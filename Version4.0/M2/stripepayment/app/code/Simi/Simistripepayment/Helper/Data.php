@@ -4,7 +4,7 @@
  * Connector data helper
  */
 
-namespace Simi\Simicustompayment\Helper;
+namespace Simi\Simistripepayment\Helper;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 
