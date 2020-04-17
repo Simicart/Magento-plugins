@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Simi_Simicustomize>
+      <version>0.1.0</version>
+    </Simi_Simicustomize>
+  </modules>
+  <global>
+    <helpers>
+      <simicustomize>
+        <class>Simi_Simicustomize_Helper</class>
+      </simicustomize>
+    </helpers>
+  </global>
+</config> 
