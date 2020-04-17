@@ -22,7 +22,7 @@ class Frontendcontrollerpredispatch implements ObserverInterface
         $uri = $_SERVER['REQUEST_URI'];
         $pos = strpos($uri,'paypal_express.html');
         if ($pos === false)
-            $pos = strpos($uri,'paypal_express_falure.html');
+            $pos = strpos($uri,'paypal_express_failure.html');
         $link = $this->simiObjectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')
             ->getValue('simiconnector/general/pwa_studio_url');
         if($pos && $link){
