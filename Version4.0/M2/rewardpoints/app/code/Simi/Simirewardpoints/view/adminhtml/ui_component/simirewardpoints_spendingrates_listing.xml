@@ -82,19 +82,11 @@
                 </argument>
             </action>
             <action name="change_status">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">change_status</item>
-                        <item name="label" xsi:type="string" translate="true">Change status</item>
-                    </item>
-                </argument>
-                <argument name="actions" xsi:type="configurableObject">
-                    <argument name="class" xsi:type="string">Simi\Simirewardpoints\Ui\Component\MassAction\Status\Options</argument>
-                    <argument name="data" xsi:type="array">
-                        <item name="urlPath" xsi:type="string">simirewardpoints/spendingrates/massStatus</item>
-                        <item name="paramName" xsi:type="string">status</item>
-                    </argument>
-                </argument>
+                <settings>
+                    <type>change_status</type>
+                    <label translate="true">Change Status</label>
+                    <actions class="Simi\Simirewardpoints\Ui\Component\MassAction\Status\Options"/>
+                </settings>
             </action>
         </massaction>
 
