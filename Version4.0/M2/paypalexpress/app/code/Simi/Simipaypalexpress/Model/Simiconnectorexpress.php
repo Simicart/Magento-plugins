@@ -32,7 +32,7 @@ class Simiconnectorexpress extends \Magento\Framework\Model\AbstractModel
     }
     
     public function getAddress($data) {
-        if (!count($data))
+        if (is_array($data))
             return $data;
         return $this->simiObjectManager
                     ->get('Simi\Simiconnector\Helper\Address')->getAddressDetail($data);
@@ -44,12 +44,12 @@ class Simiconnectorexpress extends \Magento\Framework\Model\AbstractModel
         $checkout->setQuote($this->quote);
         if (isset($parameters['s_address'])) {
             $this->simiObjectManager->get('Simi\Simiconnector\Helper\Address')
-                    ->saveShippingAddress($parameters['s_address']);
+                    ->saveShippingAddress((object) $parameters['s_address']);
         }
         
         if (isset($parameters['b_address'])) {
             $this->simiObjectManager->get('Simi\Simiconnector\Helper\Address')
-                    ->saveBillingAddress($parameters['b_address']);
+                    ->saveBillingAddress((object) $parameters['b_address']);
         }
         
         $this->getQuote()->setTotalsCollectedFlag(false);
@@ -66,7 +66,7 @@ class Simiconnectorexpress extends \Magento\Framework\Model\AbstractModel
         $info = array();
         $billingAddress = $this->getAddress($this->getBillingAddress());
         $shippingAddress = $this->getAddress($this->getShippingAddress());
-        if (!count($shippingAddress))
+        if (!count($shippingAddress) || !$shippingAddress['firstname'])
             $shippingAddress = $billingAddress;
         $billingAddress["address_id"] = $this->getBillingAddress()->getId();
         if (!$this->simiObjectManager->get('Magento\Customer\Model\Session')->isLoggedIn()) {
@@ -104,6 +104,10 @@ class Simiconnectorexpress extends \Magento\Framework\Model\AbstractModel
             return array();
         }
         return $this->getQuote()->getShippingAddress();
+    }
+
+    public function setQuote($quote) {
+        $this->quote = $quote;
     }
     
     public function getQuote() {

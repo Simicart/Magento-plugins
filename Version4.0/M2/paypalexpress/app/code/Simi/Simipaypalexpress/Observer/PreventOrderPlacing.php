@@ -32,8 +32,8 @@ class PreventOrderPlacing implements ObserverInterface
                     ->getQuote()->getPayment()->getCheckoutRedirectUrl();
             if ($paymentRedirect && $paymentRedirect != '') {
                 $orderApiModel->order_placed_info = array(
-                    //'payment_redirect_url' => $paymentRedirect,
-                    'payment_redirect' => 1,
+                    'payment_redirect_url' => $paymentRedirect,
+                    // 'payment_redirect' => 1,
                     'payment_method' => 'paypal_express'
                 );
             }
