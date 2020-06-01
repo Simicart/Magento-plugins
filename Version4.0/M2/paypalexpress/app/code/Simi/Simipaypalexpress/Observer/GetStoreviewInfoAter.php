@@ -28,6 +28,7 @@ class GetStoreviewInfoAter implements ObserverInterface
             $storeviewData['paypal_express_config'] = array(
                 'show_on_product_detail'=>$this->_getConfig('simipaypalexpress/general/product_detail'),
                 'show_on_cart'=>$this->_getConfig('simipaypalexpress/general/cart'),
+                'enable_webview'=>$this->_getConfig('simipaypalexpress/general/enable_webview'),
             );
         }
         $observerObject->storeviewInfo = $storeviewData;

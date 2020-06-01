@@ -32,6 +32,10 @@
                     <label>Shortcut on Shopping Cart Screen</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="enable_webview" translate="label" type="select" sortOrder="499" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Checkout Webview</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
             <!--
             <group id="pwa_studio" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
