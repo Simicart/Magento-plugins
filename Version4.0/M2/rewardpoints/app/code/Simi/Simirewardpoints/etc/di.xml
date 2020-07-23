@@ -40,5 +40,41 @@
     <type name="Magento\Sales\Block\Adminhtml\Order\Create\Items\Grid">
         <plugin name="simirewardpoints_discount_to_subtotal" type="Simi\Simirewardpoints\Model\Plugin\Quote\RewardpointsToSubtotal"/>
     </type>
+        <type name="Simi\Simirewardpoints\Ui\Component\MassAction\Status\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">simirewardpoints/earningrates/massStatus</item>
+                <item name="paramName" xsi:type="string">status</item>
+                    <item name="confirm" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Change Status</item>
+                        <item name="message" xsi:type="string" translatable="true">Are you sure?</item>
+                    </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Simi\Simirewardpoints\Ui\Component\MassAction\Status\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">simirewardpoints/spendingrates/massStatus</item>
+                <item name="paramName" xsi:type="string">status</item>
+                    <item name="confirm" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Change Status</item>
+                        <item name="message" xsi:type="string" translatable="true">Are you sure?</item>
+                    </item>
+            </argument>
+        </arguments>
+    </type>
+     <type name="Simi\Simirewardpoints\Ui\Component\MassAction\Transaction\Status\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">simirewardpoints/transaction/massStatus</item>
+                <item name="paramName" xsi:type="string">status</item>
+                    <item name="confirm" xsi:type="array">
+                        <item name="title" xsi:type="string" translatable="true">Change Status</item>
+                        <item name="message" xsi:type="string" translatable="true">Are you sure?</item>
+                    </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
 
