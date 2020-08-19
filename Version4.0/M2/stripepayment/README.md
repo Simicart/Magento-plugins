@@ -1,4 +1,4 @@
-#stripe payment for pwa
+# stripe payment for pwa
 run command below on magento root dir
 
 ```
