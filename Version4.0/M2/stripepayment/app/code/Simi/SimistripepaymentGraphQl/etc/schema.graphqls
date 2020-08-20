@@ -1,0 +1,9 @@
+
+type SimiStoreConfigDetails {
+    simi_stripe_config : SimiStripeConfig
+}
+
+type SimiStripeConfig {
+    stripe_public_key : String
+    stripe_3d_secure : String
+}
