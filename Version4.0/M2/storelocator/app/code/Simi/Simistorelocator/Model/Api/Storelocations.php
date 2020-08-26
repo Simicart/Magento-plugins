@@ -131,7 +131,7 @@ class Storelocations extends Api
 //           Return default store image as base image if user not config.
                 $fileId = 'Simi_Simistorelocator::images/default_store.png';
                 $paramAssets = [
-                    'area' => 'frontend'
+                    'area' => 'adminhtml'
                 ];
                 $storeReturn["image"] = $this->_assetRepo->getUrlWithParams($fileId, $paramAssets);
             }
