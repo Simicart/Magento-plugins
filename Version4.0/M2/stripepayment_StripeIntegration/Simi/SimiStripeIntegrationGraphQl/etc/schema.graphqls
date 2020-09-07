@@ -1,0 +1,5 @@
+input PaymentMethodInput {
+    simi_stripe_integration_cc_stripejs_token : String
+    simi_stripe_integration_cc_saved : String
+    simi_stripe_integration_cc_save : String
+}
