@@ -17,7 +17,7 @@ class SimiStripeIntegrationDataProvider implements AdditionalDataProviderInterfa
         if (isset($paymentData['simi_stripe_integration_cc_stripejs_token']))
             $additionalData['cc_stripejs_token'] = $paymentData['simi_stripe_integration_cc_stripejs_token'];
         if (isset($paymentData['simi_stripe_integration_cc_saved']))
-            $additionalData['cc_stripejs_token'] = $paymentData['simi_stripe_integration_cc_saved'];
+            $additionalData['cc_saved'] = $paymentData['simi_stripe_integration_cc_saved'];
         if (isset($paymentData['simi_stripe_integration_cc_save']))
             $additionalData['cc_save'] = $paymentData['simi_stripe_integration_cc_save'];
         return $additionalData;
