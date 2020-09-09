@@ -1,3 +1,7 @@
+type Mutation {
+    generatePaymentIntent(cartId: String!, token: String!): String! @resolver(class: "\\Simi\\SimiStripeIntegrationGraphQl\\Model\\Resolver\\GeneratePaymentIntent") @doc(description:"Retrieve the customer token")
+}
+
 input PaymentMethodInput {
     simi_stripe_integration_cc_stripejs_token : String
     simi_stripe_integration_cc_saved : String
