@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Magento\ReviewGraphQl\Model\Resolver;
+namespace Simi\Simicustomize\Model\Resolver;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException;
