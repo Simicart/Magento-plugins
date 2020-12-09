@@ -1,0 +1,3 @@
+interface CategoryInterface {
+    thumbnail_image: String  @doc(description: "Thumbnail Image") @resolver(class: "Simi\\Simicategorythumbnail\\Model\\Resolver\\Category\\ThumbnailImage")
+}
