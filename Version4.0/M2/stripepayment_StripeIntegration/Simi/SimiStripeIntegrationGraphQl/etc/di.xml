@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="\Magento\Framework\GraphQl\Query\ErrorHandler">
+        <plugin name="Simi_Stripe_integrationGraphql_Plugin" type="\Simi\SimiStripeIntegrationGraphQl\Plugin\ErrorHandler" sortOrder="10" disabled="false"  />
+    </type>
+</config>
